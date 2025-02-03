@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_append.c                                       :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 20:27:16 by sminot            #+#    #+#             */
-/*   Updated: 2025/01/22 20:42:47 by sminot           ###   ########.fr       */
+/*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
+/*   Updated: 2025/02/03 17:57:46 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
+#include "parsing.h"
 
-void	str_append(char **str1, char *str2, int free_str1)
+void	del_token(void *token)
 {
-	char	*new_str;
+	free(token);
+}
 
-	new_str = ft_strjoin(*str1, str2);
-	if (free_str1)
-		free(str1);
-	*str1 =new_str;
+void	error_exit(char *error_message)
+{
+	if (error_message)
+	{
+		putstr_fd(error_message, 2);
+		putstr_fd("\n", 2);
+	}
+	exit(EXIT_FAILURE);
+}
+
+void	error_exit_token(t_token **token, char *error_message)
+{
+	ft_lstclear(token, del_token);
+	error_exit(error_message);
 }
