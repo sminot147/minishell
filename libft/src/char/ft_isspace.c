@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 12:53:21 by sminot           ###   ########.fr       */
+/*   Created: 2025/02/05 11:29:18 by sminot            #+#    #+#             */
+/*   Updated: 2025/02/05 11:30:22 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-# include "../libft/include/libft.h"
-# include "parsing.h"
-
-/*---------------------------Exit.c------------------------------------------*/
-void	error_exit_token(t_token **token, char *input, char *error_message);
-void	error_exit(char *input, char *error_message);
-
-#endif
+int	ft_isspace(char c)
+{
+	if (c == ' ')
+		return (1);
+	if (9 <= c && c <= 13)
+		return (1);
+	return (0);
+}

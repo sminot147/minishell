@@ -6,7 +6,7 @@
 #    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/16 14:53:08 by sminot            #+#    #+#              #
-#    Updated: 2025/02/03 13:40:24 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/05 11:34:03 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CHAR = ft_isalpha.c\
 	ft_isascii.c\
 	ft_isdigit.c\
 	ft_isprint.c\
+	ft_isspace.c\
 	ft_toupper.c\
 	ft_tolower.c\
 

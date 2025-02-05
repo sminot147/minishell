@@ -6,7 +6,7 @@
 #    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/03 14:34:25 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/05 11:16:08 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,15 @@ UTILS = exit.c\
 PARSING_DIR = $(SRC_DIR)parsing/
 
 PARSING = parsing.c\
+	tokenize.c\
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\
 	$(addprefix $(PARSING_DIR), $(PARSING))\
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -MMD -lreadline -lhistory -g3
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -MMD -g3
+READ_FLAG = -lreadline -lhistory
 INCLUDE = include
 
 OBJ_DIR = obj
@@ -51,7 +53,7 @@ $(LIBFT) : force
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME) : $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
+	$(CC) $(CFLAGS) $(READ_FLAG) $(OBJ) -o $(NAME) $(LIBFT)
 
 clean :
 	$(MAKE) -C $(LIBFT_DIR) clean

@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/03 17:39:52 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:17:51 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,12 @@ typedef struct s_cmd
 	int				pipe;		// Cmd is following by a pipe '|'
 	struct s_cmd	*next;
 }	t_cmd;
+
+
+/*---------------------------Tokenize.c--------------------------------------*/
+void	tokenize(char *input, t_token **token);
+
+/*---------------------------Parsing.c---------------------------------------*/
+t_cmd	*parse_input(char *input);
 
 #endif
