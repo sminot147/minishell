@@ -6,14 +6,13 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 12:53:21 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/05 14:29:01 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../libft/include/libft.h"
 # include "parsing.h"
 
 /*---------------------------Exit.c------------------------------------------*/

@@ -6,17 +6,12 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 12:50:02 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/05 14:20:29 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
-
-void	del_token(void *token)
-{
-	free(token);
-}
 
 void	error_exit(char *input, char *error_message)
 {
@@ -31,6 +26,6 @@ void	error_exit(char *input, char *error_message)
 
 void	error_exit_token(t_token **token, char *input, char *error_message)
 {
-	ft_lstclear((t_list **)token, del_token);
+	clear_token(token);
 	error_exit(input, error_message);
 }

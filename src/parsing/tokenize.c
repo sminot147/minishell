@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 13:19:38 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/05 16:47:59 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,16 @@ static int	size_to_moove(char *input)
 			while (ft_isspace(input[++i]))
 				;
 			break ;
-		}	
+		}
 		if (input[i] == '"')
-			while(input[++i] != '"')
+			while (input[++i] != '"')
 				if (!input[i])
 					return (0);
 		if (input[i] == '\'')
-			while(input[++i] != '\'')
+			while (input[++i] != '\'')
 				if (!input[i])
 					return (0);
 	}
-	write(1, input, i);
-	write(1, "\n", 1);
 	return (i);
 }
 
@@ -52,55 +50,74 @@ static int	size_next_token(char *input)
 		if (ft_isspace(input[i]))
 			break ;
 		if (input[i] == '"' && ++have_quote)
-			while(input[++i] != '"')
+			while (input[++i] != '"')
 				if (!input[i])
 					return (0);
 		if (input[i] == '\'' && ++have_quote)
-			while(input[++i] != '\'')
+			while (input[++i] != '\'')
 				if (!input[i])
 					return (0);
 	}
 	return (i - 2 * have_quote);
 }
 
-char	*extract_next_token(char *input, t_token **token)
+static void	calloc_value(char **str, char *input, t_token **lsttoken, int size)
 {
-	char	*new_token;
+	*str = ft_calloc((size + 1), sizeof(char));
+	if (!*str)
+		error_exit_token(lsttoken, input, "Error malloc");
+}
+
+static char	*extract_next_token(char *input, t_token **lst_token)
+{
+	char	*token_value;
 	int		size_token;
+	int		quote;
 	int		i;
 	int		j;
 
 	size_token = size_next_token(input);
-	new_token = malloc((size_token + 1) * sizeof(char));
-	if (!new_token)
-		error_exit_token(token, input, "Error malloc");
+	calloc_value(&token_value, input, lst_token, size_token);
+	quote = 0;
 	i = -1;
 	j = -1;
 	while (i < size_token)
 	{
 		if (input[++j] != '\'' && input[j] != '"')
-			new_token[++i] = input[j];
+			token_value[++i] = input[j];
+		else if (!quote)
+			quote = 2 - (int)input[j] % 2;
+		else if (input[j] == '\'' && quote == 2)
+			token_value[++i] = input[j];
+		else if (input[j] == '"' && quote == 1)
+			token_value[++i] = input[j];
+		else
+			quote = 0;
 	}
-	new_token[size_token] = '\0';
-	return (new_token);
+	return (token_value);
 }
 
-void	tokenize(char *input, t_token **token)
+void	print_tokens(t_token *lst_token)
 {
-	//t_token	new_token;
-	char *str;
+	while (lst_token) // -----------------------ATTENTION FONTION A SUPP
+	{
+		ft_printf("Token: [%s]\n", lst_token->token);
+		lst_token = lst_token->next;
+	}
+}
 
-	(void)token;
+void	tokenize(char *input, t_token **lst_token)
+{
+	t_token	*next_token;
+
 	while (*input)
 	{
-		//new_token = ft_lstnew((void *)extract_next_token(input, size_next_token));
-		//if (!new_token);
-		//	error_exit_token(token, "Error during a malloc");
-		//ft_lstadd_back(new_token);
-		ft_printf("Le token suivant doit être malloc avec %i char\n", size_next_token(input));
-		str = extract_next_token(input, token);
-		ft_printf("Le token est : %s \n", str);
-		free(str);
+		next_token = new_token(extract_next_token(input, lst_token));
+		if (!next_token)
+			error_exit_token(lst_token, input, "Error malloc");
+		add_token(lst_token, next_token);
 		input += size_to_moove(input);
 	}
+	print_tokens(*lst_token);
+	clear_token(lst_token);
 }

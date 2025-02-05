@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 13:14:54 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/05 16:39:40 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ int	main(int ac, char **av)
 	{
 		input = readline(">");
 		if (!input)
-			exit(EXIT_SUCCESS);
+			break ;
 		if (*input)
 			add_history(input);
 		ft_printf("Vous avez entré : %s\n", input);
 		parse_input(input);
 		free(input);
 	}
+	rl_clear_history();
 	(void)av;
 }
