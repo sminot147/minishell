@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 15:40:39 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:05:41 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ typedef struct s_cmd
 typedef struct s_alloc
 {
 	char	*input;
-	t_cmd	*cmd;
 	t_token	**token;
+	t_cmd	*cmd;
 	t_env	*env;
 }	t_alloc;
 
 /*---------------------------Tokenize.c--------------------------------------*/
-void	tokenize(char *input, t_token **token);
+void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
 t_cmd	*parse_input(char *input);

@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 10:36:34 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:03:59 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	char	*input;
 
 	if (ac != 1)
-		error_exit(NULL, "minishell doesn't take argument");
+		free_line(NULL, "minishell doesn't take argument", 1);
 	while (1)
 	{
 		input = readline(">");
