@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 16:39:56 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:29:59 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 
 # include "../libft/include/libft.h"
 
-typedef struct token
+typedef struct s_env
+{
+	char	*name;
+	char	*value;
+}	t_env;
+
+typedef struct s_token
 {
 	char			*token;
-	struct token	*next;
+	struct s_token	*next;
 }	t_token;
 
 typedef struct s_cmd
@@ -30,6 +36,14 @@ typedef struct s_cmd
 	int				pipe;		// Cmd is following by a pipe '|'
 	struct s_cmd	*next;
 }	t_cmd;
+
+typedef struct s_alloc
+{
+	char	*input;
+	t_cmd	*cmd;
+	t_token	**token;
+	t_env	*env;
+}	t_alloc;
 
 /*---------------------------Tokenize.c--------------------------------------*/
 void	tokenize(char *input, t_token **token);

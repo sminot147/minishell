@@ -6,17 +6,12 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 16:46:08 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:28:11 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-/*
-Comment faire un parsing au petit oignons :
-	1- Sparerer par les | qui ne sont pas dans des quotes
-*/
 
 static int	quote_not_close(char *input)
 {
@@ -50,3 +45,4 @@ t_cmd	*parse_input(char *input)
 	cmd = (void *) NULL;
 	return (cmd);
 }
+
