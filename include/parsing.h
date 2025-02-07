@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 16:16:06 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:36:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ typedef struct s_cmd
 typedef struct s_alloc
 {
 	char	*input;
-	t_cmd	*cmd;
 	t_token	**token;
+	t_cmd	*cmd;
 	t_env	*env;
 }	t_alloc;
 
 /*---------------------------Tokenize.c--------------------------------------*/
-void	tokenize(char *input, t_token **token);
+void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
-t_cmd	*parse_input(char *input);
+t_cmd	*parse_input(char *input, t_alloc *all);
 
 /*---------------------------List_token.c------------------------------------*/
 void	clear_token(t_token **token);

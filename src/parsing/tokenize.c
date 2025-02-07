@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 15:41:29 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:37:26 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ static int	size_next_token(char *input)
 	return (i - 2 * have_quote);
 }
 
-static void	calloc_value(char **str, t_alloc *all, int size)
+static void	calloc_value(char **str, int size, t_alloc *all)
 {
 	*str = ft_calloc((size + 1), sizeof(char));
 	if (!*str)
-		error_exit_token(lsttoken, input, "Error malloc");
+		free_line(all, "Error malloc", 1);
 }
 
-static char	*extract_next_token(char *input, t_token **lst_token, t_alloc *all)
+static char	*extract_next_token(char *input, t_alloc *all)
 {
 	char	*token_value;
 	int		size_token;
@@ -77,7 +77,7 @@ static char	*extract_next_token(char *input, t_token **lst_token, t_alloc *all)
 	int		j;
 
 	size_token = size_next_token(input);
-	calloc_value(&token_value, input, lst_token, size_token);
+	calloc_value(&token_value, size_token, all);
 	quote = 0;
 	i = 0;
 	j = -1;
@@ -106,16 +106,18 @@ void	print_tokens(t_token *lst_token)
 	}
 }
 
-void	tokenize(char *input, t_token **lst_token)
+void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
 
 	while (*input)
 	{
-		next_token = new_token(extract_next_token(input, lst_token));
+		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
-			error_exit_token(lst_token, input, "Error malloc"); //free le bon pointeur
+			free_line(all, "Error malloc", 1);
 		add_token(lst_token, next_token);
+		if (!all->token)
+			all->token=lst_token;
 		input += size_to_moove(input);
 	}
 	print_tokens(*lst_token);
