@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 14:28:11 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:33:12 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static int	quote_not_close(char *input)
 	return (0);
 }
 
-t_cmd	*parse_input(char *input)
+t_cmd	*parse_input(char *input, t_alloc *all)
 {
 	t_token	*lst_token;
 	t_cmd	*cmd;
 
+	all->input = input;
 	if (quote_not_close(input))
 		return ((void *) NULL);
 	lst_token = NULL;
@@ -45,4 +46,3 @@ t_cmd	*parse_input(char *input)
 	cmd = (void *) NULL;
 	return (cmd);
 }
-
