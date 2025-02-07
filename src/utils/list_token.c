@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/05 16:40:11 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:28:56 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ t_token	*new_token(char *content)
 	return (token);
 }
 
-void	add_token(t_token **lst_token, t_token *new_token)
+void	add_token(t_alloc *all, t_token *new_token)
 {
-	if (!*lst_token)
-		*lst_token = new_token;
-	else if ((*lst_token)->next == NULL)
-		(*lst_token)->next = new_token;
+	if (!all || !new_token)
+		return;
+	if (!*(all->token))
+		*(all->token) = new_token;
 	else
-		add_token(&(*lst_token)->next, new_token);
+	{
+		t_token *current = *(all->token);
+		while (current->next)
+			current = current->next;
+		current->next = new_token;
+	}
 }

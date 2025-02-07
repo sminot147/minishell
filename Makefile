@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/07 15:44:28 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/07 16:57:22 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,14 @@ SRC_FILE = main.c\
 UTILS_DIR = $(SRC_DIR)utils/
 
 UTILS = exit.c\
+	list_token.c\
+	list_env.c\
 
 PARSING_DIR = $(SRC_DIR)parsing/
 
 PARSING = parsing.c\
 	tokenize.c\
-	list_token.c\
+	pars_env.c\
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\

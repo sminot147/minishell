@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 16:21:43 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:31:08 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,22 @@ static int	quote_not_close(char *input)
 	return (0);
 }
 
+void	print_tokens(t_token *lst_token);//--deLETE------------------------------------------------------
+
+
 t_cmd	*parse_input(char *input, t_alloc *all)
 {
-	t_token	*lst_token;
+	//t_token	*lst_token;
 	t_cmd	*cmd;
 
 	all->input = input;
 	if (quote_not_close(input))
-	{
-		free_line(all, NULL, 0);
 		return ((void *) NULL);
-	}
-	lst_token = NULL;
-	tokenize(input, &lst_token, all);
+	//lst_token = NULL;
+	tokenize(input, /*&lst_token, */all);
+	print_tokens(all->token);
+	ft_printf("Parsing ok\n");
+	//free_line(all);
 	cmd = (void *) NULL;
 	return (cmd);
 }

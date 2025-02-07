@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 16:06:35 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:31:09 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	calloc_value(char **str, int size, t_alloc *all)
 {
 	*str = ft_calloc((size + 1), sizeof(char));
 	if (!*str)
-		free_line(all, "Error malloc", 1);
+		exit_error(all, "Error malloc");
 }
 
 static char	*extract_next_token(char *input, t_alloc *all)
@@ -106,7 +106,7 @@ void	print_tokens(t_token *lst_token)
 	}
 }
 
-void	tokenize(char *input, t_token **lst_token, t_alloc *all)
+void	tokenize(char *input, /*t_token **lst_token,*/ t_alloc *all)
 {
 	t_token	*next_token;
 
@@ -114,12 +114,9 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 	{
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
-			free_line(all, "Error malloc", 1);
-		add_token(lst_token, next_token);
-		if (!all->token)
-			all->token=lst_token;
+			exit_error(all, "Error malloc");
+		add_token(all, next_token);
 		input += size_to_moove(input);
 	}
-	print_tokens(*lst_token);
-	clear_token(lst_token);
+	//print_tokens(all->token);
 }

@@ -6,20 +6,37 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 16:04:42 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 18:24:52 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
 
-void	free_line(t_alloc *alloced, char *error_message, int must_exit)
+void	free_line(t_alloc *alloced)
 {
-	if (error_message)
+	if (alloced)
 	{
-		putstr_fd(error_message, 2);
-		putstr_fd("\n", 2);
+		if (alloced->input)
+		{
+			free(alloced->input);
+			alloced->input = NULL;
+		}
+		if (alloced->token)
+		{
+			clear_token(alloced->token);
+			alloced->token = NULL;
+		}
+		/*if (alloced->cmd)
+		{
+			clear_cmd(alloced->cmd);
+			alloced->cmd = NULL
+		}*/
 	}
+}
+
+void	free_all(t_alloc *alloced)
+{
 	if (alloced)
 	{
 		if (alloced->input)
@@ -27,11 +44,17 @@ void	free_line(t_alloc *alloced, char *error_message, int must_exit)
 		if (alloced->token)
 			clear_token(alloced->token);
 		/*if (alloced->cmd)
-			clear_cmd(alloced->cmd);
-		if (must_exit)
-			free_var*/
+			clear_cmd(alloced->cmd);*/
+		if (alloced->env)
+			clear_env(alloced->env);
 		free(alloced);
 	}
-	if (must_exit)
-		exit(EXIT_FAILURE);
+}
+
+void	exit_error(t_alloc *all, char *error_message)
+{
+	putstr_fd(error_message, 2);
+	putstr_fd("\n", 2);
+	free_all(all);
+	exit(EXIT_FAILURE);
 }
