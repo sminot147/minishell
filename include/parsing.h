@@ -3,23 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 14:29:59 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:16:06 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "../libft/include/libft.h"
+# include "libft.h"
 
 typedef struct s_env
 {
 	char	*name;
 	char	*value;
 }	t_env;
+
+typedef struct s_here_doc
+{
+	char	here_doc;
+	char	*limiter;
+}	t_here_doc;
 
 typedef struct s_token
 {
@@ -32,8 +38,10 @@ typedef struct s_cmd
 	char			**args;		// Arguments
 	char			*infile;	// infile (if redirection '<')
 	char			*outfile;	// outfil (if redirection '>' or '>>')
+	char			*inter_file; // All inter file (> file_x > file_x >)
 	int				append;		// Flag for '>>' (append mode)
 	int				pipe;		// Cmd is following by a pipe '|'
+	t_here_doc		here_doc;	// here_doc struct
 	struct s_cmd	*next;
 }	t_cmd;
 

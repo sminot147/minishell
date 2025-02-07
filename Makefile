@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
+#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/05 14:25:14 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/07 16:02:30 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(PARSING_DIR), $(PARSING))\
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -MMD -g3
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -I$(LIBFT_DIR)/include -MMD -g3
 READ_FLAG = -lreadline -lhistory
 INCLUDE = include
 
@@ -44,16 +44,16 @@ DEPS =  $(addprefix $(OBJ_DIR)/, $(FILE:.c=.d))
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-$(OBJ_DIR)/%.o : %.c
+all : $(NAME) force
+
+$(OBJ_DIR)/%.o : %.c $(LIBFT)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-all : $(NAME) force
 
 $(LIBFT) : force
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME) : $(OBJ) $(LIBFT)
+$(NAME) : $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(READ_FLAG) $(OBJ) -o $(NAME) $(LIBFT)
 
 clean :
