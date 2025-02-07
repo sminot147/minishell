@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 16:10:10 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:21:43 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,11 @@ static int	quote_not_close(char *input)
 	return (0);
 }
 
-t_cmd	*parse_input(char *input)
+t_cmd	*parse_input(char *input, t_alloc *all)
 {
-	t_alloc	*all;
 	t_token	*lst_token;
 	t_cmd	*cmd;
 
-	all = ft_calloc(1, sizeof(t_alloc));
-	if (!all)
-	{
-		free(input);
-		free_line(NULL, "Error malloc", 1);
-	}
 	all->input = input;
 	if (quote_not_close(input))
 	{
@@ -55,4 +48,3 @@ t_cmd	*parse_input(char *input)
 	cmd = (void *) NULL;
 	return (cmd);
 }
-

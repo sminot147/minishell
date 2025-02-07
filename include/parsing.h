@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 16:05:41 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 16:21:20 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_alloc
 void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
-t_cmd	*parse_input(char *input);
+t_cmd	*parse_input(char *input, t_alloc *all);
 
 /*---------------------------List_token.c------------------------------------*/
 void	clear_token(t_token **token);
