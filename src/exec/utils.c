@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/05 14:38:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:23:31 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "libft.h"
-#include "pipex.h"
+#include "utils.h"
+#include "command_exec.h"
 
 char	*get_path(char	**envp)
 {
@@ -63,17 +64,17 @@ char	*get_cmd_path(char *cmd, char **splited_path)
 		cmd_path = join_cmd_path(splited_path, i, splited_cmd[0]);
 		if (!cmd_path)
 		{
-			ft_free_double_array(splited_cmd);
+			free_double_array((void **)splited_cmd);
 			return (NULL);
 		}
 		if (!access(cmd_path, F_OK | X_OK))
 		{
-			ft_free_double_array(splited_cmd);
+			free_double_array((void **)splited_cmd);
 			return (cmd_path);
 		}
 		free(cmd_path);
 	}
-	ft_free_double_array(splited_cmd);
+	free_double_array((void **)splited_cmd);
 	return (cmd);
 }
 

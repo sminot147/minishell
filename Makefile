@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/07 16:02:30 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/07 17:24:01 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,16 +19,26 @@ SRC_FILE = main.c\
 UTILS_DIR = $(SRC_DIR)utils/
 
 UTILS = exit.c\
+	array.c
 
 PARSING_DIR = $(SRC_DIR)parsing/
+
+EXEC_DIR = $(SRC_DIR)exec/
 
 PARSING = parsing.c\
 	tokenize.c\
 	list_token.c\
 
+EXEC = child.c \
+	command_exec.c \
+	exec.c \
+	init_child.c \
+	utils.c \
+
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\
 	$(addprefix $(PARSING_DIR), $(PARSING))\
+	$(addprefix $(EXEC_DIR), $(EXEC))\
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -I$(LIBFT_DIR)/include -MMD -g3

@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 17:16:40 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/07 17:15:12 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/07 17:16:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include <stdlib.h>
 
-# include "parsing.h"
+void free_double_array(void **array)
+{
+	int	i;
 
-/*---------------------------Exit.c------------------------------------------*/
-void	free_line(t_alloc *alloced, char *error_message, int must_exit);
-
-/*---------------------------Array.c-----------------------------------------*/
-void	free_double_array(void **array);
-
-#endif
+    if (!array)
+		return;
+	i = 0;
+    while (array[i])
+	{
+        free(array[i]);
+		i++;
+    }
+    free(array);
+}
