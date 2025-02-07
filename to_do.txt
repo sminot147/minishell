@@ -1,0 +1,3 @@
+Si un pip relire la ligne et concatener
+Gerer les variable name="HELLO"
+actuellement static devant t_env pour ne pas détruire la tête, erreur de norme?

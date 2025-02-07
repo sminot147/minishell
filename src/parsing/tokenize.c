@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:52:29 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 20:08:50 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 			all->token=lst_token;
 		input += size_to_moove(input);
 	}
+	print_tokens(*lst_token);
 }

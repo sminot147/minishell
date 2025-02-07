@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:30:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 17:31:01 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 20:06:39 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_env	*new_var_env(char *name, char *value)
 	var->value = value;
 	return (var);
 }
+
 
 void	add_env(t_env **lst_env, t_env *new_env)
 {

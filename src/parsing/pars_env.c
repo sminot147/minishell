@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 18:14:10 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 20:17:26 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,26 @@ char	*extract_value(char *str)
 	return (ft_strdup(str));
 }
 
+void	print_env(t_env *env)
+{
+	while (env)  /*SUPPRIMER LA FONCTION*/
+	{
+		ft_printf("%s=%s\n", env->name, env->value);
+		env = env->next;
+	}
+}
+
 void	pars_env(char **envp, t_alloc *all)
 {
-	int		i;
-	t_env	*lst_env;
-	t_env	*new_env;
+	int				i;
+	static t_env	*lst_env;
+	t_env			*new_env;
 
 	i = -1;
 	lst_env = NULL;
 	while (envp[++i])
 	{
-		new_env = new_var_env(extract_name(envp[i], all),\
+		new_env = new_var_env(extract_name(envp[i], all), \
 								extract_value(envp[i]));
 		if (!new_env)
 			exit_error(all, "Error malloc");
@@ -56,4 +65,5 @@ void	pars_env(char **envp, t_alloc *all)
 		if (!all->env)
 			all->env = &lst_env;
 	}
+	print_env(lst_env);
 }
