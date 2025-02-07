@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 18:24:52 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:58:05 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_line(t_alloc *alloced)
 		}
 		if (alloced->token)
 		{
-			clear_token(alloced->token);
+			clear_token(alloced->token, alloced);
 			alloced->token = NULL;
 		}
 		/*if (alloced->cmd)
@@ -42,7 +42,7 @@ void	free_all(t_alloc *alloced)
 		if (alloced->input)
 			free(alloced->input);
 		if (alloced->token)
-			clear_token(alloced->token);
+			clear_token(alloced->token, alloced);
 		/*if (alloced->cmd)
 			clear_cmd(alloced->cmd);*/
 		if (alloced->env)

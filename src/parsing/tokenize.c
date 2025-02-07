@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:31:09 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:52:29 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	print_tokens(t_token *lst_token)
 	}
 }
 
-void	tokenize(char *input, /*t_token **lst_token,*/ t_alloc *all)
+void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
 
@@ -115,8 +115,9 @@ void	tokenize(char *input, /*t_token **lst_token,*/ t_alloc *all)
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
 			exit_error(all, "Error malloc");
-		add_token(all, next_token);
+		add_token(lst_token, next_token);
+		if (!all->token)
+			all->token=lst_token;
 		input += size_to_moove(input);
 	}
-	//print_tokens(all->token);
 }

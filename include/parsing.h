@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:30:26 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:36:33 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ typedef struct s_cmd
 typedef struct s_alloc
 {
 	char	*input;
-	t_token	*token;
+	t_token	**token;
 	t_env	**env;
 	t_cmd	**cmd;
 }	t_alloc;
 
 /*---------------------------Tokenize.c--------------------------------------*/
-void	tokenize(char *input, t_alloc *all);
+void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
 t_cmd	*parse_input(char *input, t_alloc *all);

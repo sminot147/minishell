@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:31:08 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/07 20:00:59 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void	alloc_all(t_alloc **all)
 {
+	
 	*all = ft_calloc(1, sizeof(t_alloc));
 	if (!*all)
 	{
@@ -25,8 +26,6 @@ void	alloc_all(t_alloc **all)
 		exit(EXIT_FAILURE);
 	}
 }
-
-void	print_tokens(t_token *lst_token);//--deLETE------------------------------------------------------
 
 int	main(int ac, char **av, char **envp)
 {
@@ -45,12 +44,9 @@ int	main(int ac, char **av, char **envp)
 		if (*input)
 			add_history(input);
 		parse_input(input, all);
-		printf("Main :\n");
-		print_tokens(all->token);
-		printf("Heu\n");
-		//free_line(all);
+		free_line(all);
 	}
-	free_all(all);
+	//free_all(all);
 	rl_clear_history();
 	exit(EXIT_SUCCESS);
 	(void)av;
