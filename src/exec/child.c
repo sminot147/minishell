@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/07 18:11:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:45:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,24 @@ static void	dup_and_close(int fd_1, int fd_2)
 	}
 }
 
+#include <stdio.h>
+
 int	child(t_child_info child_info)
 {
 	int		fd[2];
 
-	if (child_info.first == 1)
-		fd[0] = 0;
-	else if (child_info.in_file != NULL)
+	if (child_info.in_file != NULL)
 		fd[0] = open_in_file(child_info);
-	else
+	else if (child_info.first == 0)
 		fd[0] = child_info.pipe[0];
-	if (child_info.pipe_after == 0)
-		fd[1] = 1;
-	else if (child_info.out_file != NULL)
-		fd[1] = open_out_file(child_info);
 	else
+		fd[0] = 0;
+	if (child_info.out_file != NULL)
+		fd[1] = open_out_file(child_info);
+	else if (child_info.pipe_after == 1)
 		fd[1] = child_info.pipe[1];
+	else
+		fd[1] = 1;
 	dup_and_close(fd[0], fd[1]);
 	exec(child_info);
 	exit (1);

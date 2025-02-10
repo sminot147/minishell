@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/07 18:06:29 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:50:02 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ int	exec_cmd(t_cmd *cmd_list, char **envp)
 	t_child_info	child_info;
 
 	child_info.first = 1;
+	child_info.pipe[0] = -1;
 	while (cmd_list != NULL)
 	{
 		init_child(*cmd_list, envp, &child_info);
-		if (cmd_list->next == NULL)
-			child_info.pipe_after = 0;
 		if (open_inter_file(child_info) == 0)
 			last_pid = start_child(&child_info);
 		cmd_list = cmd_list->next;
