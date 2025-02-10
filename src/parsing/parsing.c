@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 17:50:53 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:26:55 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_cmd	*parse_input(char *input, t_alloc *all)
 	}
 	lst_token = NULL;
 	tokenize(input, &lst_token, all);
-	cmd = (void *) NULL;
+	cmd = parse_cmd(lst_token);
+	clear_token(&lst_token);
 	return (cmd);
 }

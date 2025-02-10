@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/07 17:47:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:25:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ typedef struct s_child_info
 	char		pipe_after;
 	int			pipe[2];
 	char		*cmd;
+	char		**args;
 	char		*path;
 	char		**envp;
 	char		*in_file;
 	char		*out_file;
 	char		append;
-	t_here_doc	here_doc;
+	t_token		*here_doc;
 }	t_child_info;
 
 typedef struct s_parent_info

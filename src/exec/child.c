@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 14:45:34 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:12:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 static int	open_in_file(t_child_info child_info)
 {
@@ -22,7 +23,11 @@ static int	open_in_file(t_child_info child_info)
 
 	return_value = open(child_info.in_file, O_RDONLY);
 	if (return_value < 0)
-		exit(2); // add un exit handler (erreur open)
+		{
+			putstr_fd("minishell: ", 2);
+			perror(child_info.in_file);
+			exit(2);
+		}
 	return (return_value);
 }
 
@@ -35,7 +40,11 @@ static int	open_out_file(t_child_info child_info)
 	else
 		return_value = open(child_info.out_file, 01 | O_CREAT | O_TRUNC, 0777);
 	if (return_value < 0)
-		exit(3); // add un exit handler (erreur open)
+	{
+		putstr_fd("minishell: ", 2);
+		perror(child_info.out_file);
+		exit(3);
+	}
 	return (return_value);
 }
 
@@ -44,20 +53,30 @@ static void	dup_and_close(int fd_1, int fd_2)
 	if (fd_1 != 0)
 	{
 		if (dup2(fd_1, 0) == -1)
-			exit(4); // add un exit handler (erreur dup2)
+		{
+			perror(NULL);
+			exit(4);
+		}
 		if (close(fd_1) == -1)
-			exit(4); // add un exit handler (erreur close)
+		{
+			perror(NULL);
+			exit(4);
+		}
 	}
 	if (fd_2 != 1)
 	{
 		if (dup2(fd_2, 1) == -1)
-			exit(4); // add un exit handler (erreur dup2)
+		{
+			perror(NULL);
+			exit(4);
+		}
 		if (close(fd_2) == -1)
-			exit(4); // add un exit handler (erreur close)
+		{
+			perror(NULL);
+			exit(4);
+		}
 	}
 }
-
-#include <stdio.h>
 
 int	child(t_child_info child_info)
 {
