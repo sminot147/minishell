@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 21:07:54 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:46:57 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,16 @@ static int	quote_not_close(char *input)
 	return (0);
 }
 
-t_cmd	*parse_input(char *input, t_alloc *all)
+void	parse_input(char *input, t_alloc *all)
 {
 	t_token	*lst_token;
-	t_cmd	*cmd;
 
 	all->input = input;
 	if (quote_not_close(input))
-		return ((void *) NULL);
-	//replace_var(&input, all);
+		return ;
+	replace_var(&input, all);
 	lst_token = NULL;
 	tokenize(input, &lst_token, all);
-	clear_token(&lst_token, all);
-	cmd = (void *) NULL;
-	return (cmd);
+	all->cmd = parse_cmd(lst_token);
+	clear_token(&lst_token);
 }

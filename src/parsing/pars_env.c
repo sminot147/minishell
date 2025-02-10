@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 21:17:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:24:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	pars_env(char **envp, t_alloc *all)
 			exit_error(all, "Error malloc");
 		add_env(&lst_env, new_env);
 		if (!all->env)
-			all->env = &lst_env;
+			all->env = lst_env;
 	}
 	print_env(lst_env); //a enlever
 }

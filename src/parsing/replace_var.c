@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 21:15:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:47:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	add_var_value(char *input, t_token **lst_input, t_alloc *all)
 	char	*var_value;
 
 	extract_var_name(&var_name, input, all);
-	var_value = dup_value_with_quote(search_value(*(all->env), var_name));
+	var_value = dup_value_with_quote(search_value((*all).env, var_name));
 	if (!var_value)
 	{
 		free(var_name);
@@ -117,7 +117,6 @@ void	replace_var(char **input, t_alloc *all)
 	lst_input = NULL;
 	all->token = &lst_input;
 	check_var(*input, &lst_input, all);
-	print_tokens(lst_input);
+	// print_tokens(lst_input);
 	//join_input(input, lst_input); //a voir si c'est pas mieux de laisser en lst
-	clear_token(&lst_input, all);
 }

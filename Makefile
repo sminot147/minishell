@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/10 21:06:56 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/10 21:53:04 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,34 @@ SRC_DIR = src/
 
 SRC_FILE = main.c\
 
+EXEC_DIR = $(SRC_DIR)exec/
+
+EXEC = child.c\
+	command_exec.c \
+	exec.c \
+	init_child.c \
+	utils.c \
+
 UTILS_DIR = $(SRC_DIR)utils/
 
 UTILS = exit.c\
+	list_token_utils.c \
+	list_file_utils.c \
+	list_cmd_utils.c \
+	list_env_utils.c \
+	array_utils.c \
+	replace_var_utils.c \
 	cmd_parser_utils.c \
-	lst_file_utils.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 
 EXEC_DIR = $(SRC_DIR)exec/
 
-PARSING = parsing.c\
-	tokenize.c\
-	pars_env.c\
-	replace_var.c\
-	replace_var_utils.c\
+PARSING = parsing.c \
+	tokenize.c \
+	pars_env.c \
+	replace_var.c \
+	cmd_parser.c \
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\
