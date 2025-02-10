@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 17:44:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:51:09 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ typedef struct s_env
 	char	*value;
 }	t_env;
 
-typedef struct s_here_doc
-{
-	char	here_doc;
-	char	*limiter;
-}	t_here_doc;
-
 typedef struct s_token
 {
 	char			*token;
@@ -38,10 +32,11 @@ typedef struct s_cmd
 	char			**args;		// Arguments
 	char			*infile;	// infile (if redirection '<')
 	char			*outfile;	// outfil (if redirection '>' or '>>')
-	char			*inter_file; // All inter file (> file_x > file_x >)
+	t_token			*inter_file_out; // All inter file (> file_x > file_x >)
+	t_token			*inter_file_in; // All inter file (> file_x < file_x <)
 	int				append;		// Flag for '>>' (append mode)
 	int				pipe;		// Cmd is following by a pipe '|'
-	t_here_doc		here_doc;	// here_doc struct
+	t_token		*here_doc;	// here_doc struct
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -58,6 +53,18 @@ void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
 t_cmd	*parse_input(char *input, t_alloc *all);
+
+/*---------------------------List_cmd.c--------------------------------------*/
+void	clear_cmd(t_cmd **lst_cmd);
+t_cmd	*new_cmd(void);
+void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd);
+
+/*---------------------------Cmd_parser.c------------------------------------*/
+t_cmd	*parse_cmd(t_token *token_lst);
+
+/*---------------------------Cmd_parser_utils.c------------------------------*/
+int		add_infile(t_cmd *cmd, t_token **token_lst);
+int		add_outfile(t_cmd *cmd, t_token **token_lst);
 
 /*---------------------------List_token.c------------------------------------*/
 void	clear_token(t_token **token);
