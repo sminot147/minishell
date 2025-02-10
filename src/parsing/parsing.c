@@ -6,9 +6,10 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 20:34:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:07:54 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "parsing.h"
 #include "utils.h"
@@ -32,18 +33,18 @@ static int	quote_not_close(char *input)
 	return (0);
 }
 
-void	parse_input(char *input, t_alloc *all)
+t_cmd	*parse_input(char *input, t_alloc *all)
 {
 	t_token	*lst_token;
+	t_cmd	*cmd;
 
 	all->input = input;
 	if (quote_not_close(input))
-	{
-		free_line(all, NULL, 0);
-		return ;
-	}
+		return ((void *) NULL);
+	//replace_var(&input, all);
 	lst_token = NULL;
 	tokenize(input, &lst_token, all);
-	all->cmd = parse_cmd(lst_token);
-	clear_token(&lst_token);
+	clear_token(&lst_token, all);
+	cmd = (void *) NULL;
+	return (cmd);
 }

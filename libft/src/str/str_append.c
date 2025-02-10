@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array.c                                            :+:      :+:    :+:   */
+/*   str_append.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 17:15:12 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 20:17:08 by madelvin         ###   ########.fr       */
+/*   Created: 2025/01/22 20:27:16 by sminot            #+#    #+#             */
+/*   Updated: 2025/02/10 13:13:42 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	free_double_array(void **array)
+void	str_append(char **str1, char *str2, int free_str1)
 {
-	int	i;
+	char	*new_str;
 
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	new_str = ft_strjoin(*str1, str2);
+	if (free_str1)
+		free(str1);
+	*str1 = new_str;
 }

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 18:00:23 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:08:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	calloc_value(char **str, int size, t_alloc *all)
 {
 	*str = ft_calloc((size + 1), sizeof(char));
 	if (!*str)
-		free_line(all, "Error malloc", 1);
+		exit_error(all, "Error malloc");
 }
 
 static char	*extract_next_token(char *input, t_alloc *all)
@@ -97,15 +97,6 @@ static char	*extract_next_token(char *input, t_alloc *all)
 	return (token_value);
 }
 
-void	print_tokens(t_token *lst_token)
-{
-	while (lst_token) // -----------------------ATTENTION FONTION A SUPP
-	{
-		ft_printf("Token: [%s]\n", lst_token->token);
-		lst_token = lst_token->next;
-	}
-}
-
 void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
@@ -114,7 +105,7 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 	{
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
-			free_line(all, "Error malloc", 1);
+			exit_error(all, "Error malloc");
 		add_token(lst_token, next_token);
 		if (!all->token)
 			all->token=lst_token;

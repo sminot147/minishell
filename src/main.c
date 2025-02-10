@@ -6,13 +6,14 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 20:32:23 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:05:06 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
 #include "command_exec.h"
+
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -33,21 +34,22 @@ int	main(int ac, char **av, char **envp)
 	t_alloc	*all;
 
 	if (ac != 1)
-		free_line(NULL, "minishell doesn't take argument", 1);
+		exit_error((t_alloc *)NULL, "minishell doesn't take argument");
 	alloc_all(&all);
 	// pars_env(envp, all);
 	while (1)
 	{
 		input = readline(">");
 		if (!input)
-			break ;
+			break ;		//write exit\n
 		if (*input)
 			add_history(input);
 		parse_input(input, all);
 		last_cmd_value = exec_cmd(all->cmd, envp);
 		free(input);
 	}
+	free_all(all);
 	rl_clear_history();
-	(void)envp;
+	exit(EXIT_SUCCESS);
 	(void)av;
 }

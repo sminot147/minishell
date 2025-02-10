@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 20:34:39 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:08:08 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 typedef struct s_env
 {
-	char	*name;
-	char	*value;
+	char			*name;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_token
@@ -60,7 +61,7 @@ typedef struct s_alloc
 void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
-void	parse_input(char *input, t_alloc *all);
+t_cmd	*parse_input(char *input, t_alloc *all);
 
 /*---------------------------List_cmd.c--------------------------------------*/
 void	clear_cmd(t_cmd **lst_cmd);
@@ -74,15 +75,23 @@ t_cmd	*parse_cmd(t_token *token_lst);
 int		add_infile(t_cmd *cmd, t_token **token_lst);
 int		add_outfile(t_cmd *cmd, t_token **token_lst);
 
-/*---------------------------List_token.c------------------------------------*/
-void	clear_token(t_token **token);
-t_token	*new_token(char *content);
-void	add_token(t_token **token, t_token *new_token);
-
 
 /*---------------------------Lst_file_utils.c--------------------------------*/
 void	clear_file(t_file **lst_file);
 t_file	*new_file(char *conten, char append);
 void	add_file(t_file **lst_file, t_file *new_file);
+
+/*---------------------------List_token.c------------------------------------*/
+void	clear_token(t_token **lst_token, t_alloc *all);
+t_token	*new_token(char *content);
+void	add_token(t_token **token, t_token *new_token);
+
+/*---------------------------Replace_var.c-----------------------------------*/
+void	replace_var(char **input, t_alloc *all);
+
+/*---------------------------Replace_var_utils.c------------------------------*/
+void	add_input_before_var(char **input, t_token **lst_input, t_alloc *all, \
+								int quote);
+								
 
 #endif

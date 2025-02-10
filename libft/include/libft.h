@@ -58,6 +58,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
+void		str_append(char **str1, char *str2, int free_str1);
 
 //put
 
@@ -83,7 +84,7 @@ int			ft_printf(const char *format, ...);
 
 char		*get_next_line(int fd);
 int			error_handling(char **line, char *buffer);
-void		str_append(char **str, char *buffer, size_t len_buf);
+void		str_n_append(char **str, char *buffer, size_t len_buf);
 size_t		size_beffor_new_line(char *buffer);
 
 //lst

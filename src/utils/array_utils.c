@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   array_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 11:29:18 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 13:13:22 by sminot           ###   ########.fr       */
+/*   Created: 2025/02/10 21:07:40 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/10 21:07:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c)
+#include <stdlib.h>
+
+void	free_double_array(void **array)
 {
-	if (c == ' ')
-		return (1);
-	if (9 <= c && c <= 13)
-		return (1);
-	return (0);
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

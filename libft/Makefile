@@ -6,7 +6,7 @@
 #    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/16 14:53:08 by sminot            #+#    #+#              #
-#    Updated: 2025/02/05 11:34:03 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/05 12:15:14 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ STR = ft_split.c\
 	ft_strrchr.c\
 	ft_strtrim.c\
 	ft_substr.c\
+	str_append.c\
 
 GNL_DIR = src/gnl/
 
