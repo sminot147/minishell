@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 21:40:30 by sminot            #+#    #+#             */
-/*   Updated: 2025/01/21 10:51:46 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:13:42 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	error_handling(char **line, char *buffer)
 	return (-1);
 }
 
-void	str_append(char **line, char *buffer, size_t len_buf)
+void	str_n_append(char **line, char *buffer, size_t len_buf)
 {
 	char	*new_line;
 	size_t	len_str;

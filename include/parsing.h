@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:36:33 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/10 20:01:37 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_alloc
 	char	*input;
 	t_token	**token;
 	t_env	**env;
-	t_cmd	**cmd;
+	t_cmd	*cmd;
 }	t_alloc;
 
 /*---------------------------Tokenize.c--------------------------------------*/
@@ -54,5 +54,13 @@ t_cmd	*parse_input(char *input, t_alloc *all);
 
 /*---------------------------Pars_env.c--------------------------------------*/
 void	pars_env(char **envp, t_alloc *all);
+
+/*---------------------------Replace_var.c-----------------------------------*/
+void	replace_var(char **input, t_alloc *all);
+
+/*---------------------------Replace_var_utils.c------------------------------*/
+void	add_input_before_var(char **input, t_token **lst_input, t_alloc *all, \
+								int quote);
+								
 
 #endif

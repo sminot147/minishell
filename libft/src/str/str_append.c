@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   str_append.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 11:29:18 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 13:13:22 by sminot           ###   ########.fr       */
+/*   Created: 2025/01/22 20:27:16 by sminot            #+#    #+#             */
+/*   Updated: 2025/02/10 13:13:42 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c)
+#include "libft.h"
+
+void	str_append(char **str1, char *str2, int free_str1)
 {
-	if (c == ' ')
-		return (1);
-	if (9 <= c && c <= 13)
-		return (1);
-	return (0);
+	char	*new_str;
+
+	new_str = ft_strjoin(*str1, str2);
+	if (free_str1)
+		free(str1);
+	*str1 = new_str;
 }

@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:49:31 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/10 19:57:40 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ void	add_token(t_token **lst_token, t_token *new_token)
 		(*lst_token)->next = new_token;
 	else
 		add_token(&(*lst_token)->next, new_token);
+}
+
+void	print_tokens(t_token *lst_token)
+{
+	while (lst_token) // -----------------------ATTENTION FONTION A SUPP
+	{
+		ft_printf("Token: [%s]\n", lst_token->token);
+		lst_token = lst_token->next;
+	}
 }

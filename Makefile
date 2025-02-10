@@ -6,7 +6,7 @@
 #    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/07 16:57:22 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/10 18:51:59 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ PARSING_DIR = $(SRC_DIR)parsing/
 PARSING = parsing.c\
 	tokenize.c\
 	pars_env.c\
+	replace_var.c\
+	replace_var_utils.c\
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\

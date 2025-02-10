@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 20:17:26 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/10 13:14:29 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*extract_value(char *str)
 
 void	print_env(t_env *env)
 {
-	while (env)  /*SUPPRIMER LA FONCTION*/
+	while (env)		/*SUPPRIMER LA FONCTION*/
 	{
 		ft_printf("%s=%s\n", env->name, env->value);
 		env = env->next;
@@ -50,7 +50,7 @@ void	print_env(t_env *env)
 void	pars_env(char **envp, t_alloc *all)
 {
 	int				i;
-	static t_env	*lst_env;
+	static t_env	*lst_env;		//est ce que c'est bon pour la norme, sinon on perd la tête c'est chiant
 	t_env			*new_env;
 
 	i = -1;
@@ -65,5 +65,5 @@ void	pars_env(char **envp, t_alloc *all)
 		if (!all->env)
 			all->env = &lst_env;
 	}
-	print_env(lst_env);
+	print_env(lst_env); //a enlever
 }
