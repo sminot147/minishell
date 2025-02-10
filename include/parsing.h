@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 19:43:38 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:34:39 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_file
 {
 	char				*file;
 	char				append;
-	struct s_file	*next;
+	struct s_file		*next;
 }	t_file;
 
 
@@ -60,7 +60,7 @@ typedef struct s_alloc
 void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
-t_cmd	*parse_input(char *input, t_alloc *all);
+void	parse_input(char *input, t_alloc *all);
 
 /*---------------------------List_cmd.c--------------------------------------*/
 void	clear_cmd(t_cmd **lst_cmd);
