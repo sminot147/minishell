@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 21:08:08 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:19:18 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_alloc
 	t_cmd	*cmd;
 	t_env	*env;
 }	t_alloc;
+
+/*---------------------------Pars_env.c--------------------------------------*/
+void	pars_env(char **envp, t_alloc *all);
 
 /*---------------------------Tokenize.c--------------------------------------*/
 void	tokenize(char *input, t_token **token, t_alloc *all);
