@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 19:10:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:19:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,53 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
+static int	handle_file(const char *file, int flags, mode_t mode)
+{
+	int	fd;
+
+	fd = open(file, flags, mode);
+	if (fd < 0)
+	{
+		putstr_fd("minishell: ", 2);
+		perror(file);
+		return (1);
+	}
+	if (close(fd) < 0)
+	{
+		putstr_fd("minishell: ", 2);
+		perror(NULL);
+		return (1);
+	}
+	return (0);
+}
+
 static int	open_inter_file(t_cmd cmd)
 {
-	int	r;
-	int	fd;
-	
-	r = 0;
-	while (cmd.inter_file_in != NULL)
+	t_file	*current;
+
+	current = cmd.inter_file_in;
+	while (current)
 	{
-		fd = open(cmd.inter_file_in->token, 01 | O_CREAT | O_TRUNC, 0777); // ajouter un append
-		if (fd < 0)
-		{
-			r = 1;
-			perror(cmd.inter_file_in->token);
-		}
-		if (close(fd) < 0)
-		{
-			r = 1;
-			perror(cmd.inter_file_in->token);
-		}
-		cmd.inter_file_in = cmd.inter_file_in->next;
+		if (handle_file(current->file, O_RDONLY, 0))
+			return (1);
+		current = current->next;
 	}
-	while (cmd.inter_file_out != NULL)
+	current = cmd.inter_file_out;
+	while (current)
 	{
-		fd = open(cmd.inter_file_out->token, 01 | O_CREAT | O_TRUNC, 0777); // ajouter un append
-		if (fd < 0)
+		if (current->append == 1)
 		{
-			r = 1;
-			perror(cmd.inter_file_in->token);
+			if (handle_file(current->file, O_WRONLY | O_CREAT | O_APPEND, 0))
+				return (1);
 		}
-		if (close(fd) < 0)
+		else
 		{
-			r = 1;
-			perror(cmd.inter_file_in->token);
+			if (handle_file(current->file, O_WRONLY | O_CREAT | O_TRUNC, 0))
+				return (1);
+			current = current->next;
 		}
-		cmd.inter_file_out = cmd.inter_file_out->next;
 	}
-	return (r);
+	return (0);
 }
 
 static int	start_child(t_child_info *child_info)
@@ -82,7 +92,7 @@ static int	start_child(t_child_info *child_info)
 	return (pid);
 }
 
-int wait_all_child(int last_pid)
+int	wait_all_child(int last_pid)
 {
 	int	wait_value;
 	int	return_value;
@@ -103,7 +113,6 @@ int wait_all_child(int last_pid)
 
 int	exec_cmd(t_cmd *cmd_list, char **envp)
 {
-	
 	int				last_pid;
 	int				return_value;
 	t_child_info	child_info;
@@ -123,5 +132,5 @@ int	exec_cmd(t_cmd *cmd_list, char **envp)
 		child_info.first = 0;
 	}
 	return_value = wait_all_child(last_pid);
-	return(return_value);
+	return (return_value);
 }

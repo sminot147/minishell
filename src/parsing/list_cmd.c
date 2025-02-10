@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 17:22:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:16:20 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 void	clear_cmd(t_cmd **lst_cmd)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
+	int		i;
 
 	while (*lst_cmd)
 	{
 		tmp = (*lst_cmd)->next;
-
 		if ((*lst_cmd)->args)
 		{
-			for (int i = 0; (*lst_cmd)->args[i]; i++)
-				free((*lst_cmd)->args[i]);
+			i = 0;
+			while ((*lst_cmd)->args[i])
+				free((*lst_cmd)->args[i++]);
 			free((*lst_cmd)->args);
 		}
-		if ((*lst_cmd)->infile) free((*lst_cmd)->infile);
-		if ((*lst_cmd)->outfile) free((*lst_cmd)->outfile);
-		clear_token(&(*lst_cmd)->inter_file_in);
-		clear_token(&(*lst_cmd)->inter_file_out);
+		if ((*lst_cmd)->infile)
+			free((*lst_cmd)->infile);
+		if ((*lst_cmd)->outfile)
+			free((*lst_cmd)->outfile);
+		clear_file(&(*lst_cmd)->inter_file_in);
+		clear_file(&(*lst_cmd)->inter_file_out);
 		clear_token(&(*lst_cmd)->here_doc);
-
 		free(*lst_cmd);
 		*lst_cmd = tmp;
 	}

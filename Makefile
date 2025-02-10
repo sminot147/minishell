@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/10 17:56:37 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/10 19:52:40 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ UTILS_DIR = $(SRC_DIR)utils/
 UTILS = exit.c\
 	array.c \
 	cmd_parser_utils.c \
+	lst_file_utils.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 

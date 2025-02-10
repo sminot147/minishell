@@ -6,13 +6,13 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 19:12:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:16:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char **add_arg(char **args, const char *new_arg)
+static char	**add_arg(char **args, const char *new_arg)
 {
 	int		count;
 	int		i;
@@ -36,11 +36,11 @@ static char **add_arg(char **args, const char *new_arg)
 	return (new_args);
 }
 
-static int make_cmd(t_cmd *cmd, t_token **token_lst)
+static int	make_cmd(t_cmd *cmd, t_token **token_lst)
 {
-	if ((*token_lst)->token[0] == '|') // `|`
+	if ((*token_lst)->token[0] == '|')
 		cmd->pipe = 1;
-	else if ((*token_lst)->token[0] == '<') //`<` `<<`
+	else if ((*token_lst)->token[0] == '<')
 	{
 		if (add_infile(cmd, token_lst) == 1)
 		{
@@ -48,7 +48,7 @@ static int make_cmd(t_cmd *cmd, t_token **token_lst)
 			return (1);
 		}
 	}
-	else if ((*token_lst)->token[0] == '>') //`>` `>>`
+	else if ((*token_lst)->token[0] == '>')
 	{
 		if (add_outfile(cmd, token_lst) == 1)
 		{
@@ -61,10 +61,10 @@ static int make_cmd(t_cmd *cmd, t_token **token_lst)
 	return (0);
 }
 
-t_cmd *parse_cmd(t_token *token_lst)
+t_cmd	*parse_cmd(t_token *token_lst)
 {
-	t_cmd *cmd;
-	t_cmd *new;
+	t_cmd	*cmd;
+	t_cmd	*new;
 
 	cmd = NULL;
 	while (token_lst)

@@ -6,23 +6,24 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 17:57:01 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:17:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char *get_file(t_token *token_lst)
+static char	*get_file(t_token *token_lst)
 {
 	if (!token_lst)
 		return (NULL);
-	return ft_strdup(token_lst->token);
+	return (ft_strdup(token_lst->token));
 }
 
 int	add_infile(t_cmd *cmd, t_token **token_lst)
 {
 	char	*file;
 	t_token	*token;
+	t_file	*file_node;
 
 	if ((*token_lst)->next == NULL)
 		return (1);
@@ -38,8 +39,8 @@ int	add_infile(t_cmd *cmd, t_token **token_lst)
 	{
 		if (cmd->infile)
 		{
-			token = new_token(cmd->infile);
-			add_token(&cmd->inter_file_in, token);
+			file_node = new_file(cmd->infile, 0);
+			add_file(&cmd->inter_file_in, file_node);
 		}
 		cmd->infile = file;
 	}
@@ -50,23 +51,23 @@ int	add_infile(t_cmd *cmd, t_token **token_lst)
 int	add_outfile(t_cmd *cmd, t_token **token_lst)
 {
 	char	*file;
-	t_token	*token;
+	t_file	*file_node;
 
 	if ((*token_lst)->next == NULL)
 		return (1);
 	file = get_file((*token_lst)->next);
 	if (file == NULL)
 		return (1);
-	if ((*token_lst)->token[1] && (*token_lst)->token[1] == '>')
-		cmd->append = 1; // append mode `>>`
-	else
-		cmd->append = 0;
 	if (cmd->outfile)
 	{
-		token = new_token(cmd->outfile);
-		add_token(&cmd->inter_file_out, token);
+		file_node = new_file(cmd->outfile, cmd->append);
+		add_file(&cmd->inter_file_out, file_node);
 	}
 	cmd->outfile = file;
+	if ((*token_lst)->token[1] == '>')
+		cmd->append = 1;
+	else
+		cmd->append = 0;
 	*token_lst = (*token_lst)->next;
 	return (0);
 }

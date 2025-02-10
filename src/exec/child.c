@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 19:12:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:15:12 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static int	open_in_file(t_child_info child_info)
 
 	return_value = open(child_info.in_file, O_RDONLY);
 	if (return_value < 0)
-		{
-			putstr_fd("minishell: ", 2);
-			perror(child_info.in_file);
-			exit(2);
-		}
+	{
+		putstr_fd("minishell: ", 2);
+		perror(child_info.in_file);
+		exit(2);
+	}
 	return (return_value);
 }
 
