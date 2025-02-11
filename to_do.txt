@@ -2,4 +2,5 @@ Si un pip relire la ligne et concatener ?
 Gerer les variable name="HELLO"
 actuellement static devant t_env pour ne pas détruire la tête, erreur de norme?
 Rajouter un int pour savoir si c'est un arg ou pas
-ajout des variable par isalnum_or_underscore
+
+- Dans parsing, traiter les \$ dans les double quote

@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 20:40:59 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 14:15:40 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,47 @@ static char	*dup_value_with_quote(char *var_value)
 	while (var_value[++i])
 		if (var_value [i] == '"')
 			++j;
-	new_value = ft_calloc(i + 3 + (j * 2), sizeof(char));
+	new_value = ft_calloc(i + 3 + (j * 4), sizeof(char));
 	if (!new_value)
 		return (NULL);
 	i = -1;
-	j = 0;
-	new_value[0] = '"';
+	j = -1;
+	new_value[++j] = '"';
 	while (var_value[++i])
 	{
 		if (var_value[i] == '"')
-			new_value[++j] = '\'';
-		new_value[++j] = var_value[i];
+			ft_memcpy(&new_value[++j], "\"'\"'", 4);
 		if (var_value[i] == '"')
-			new_value[++j] = '\'';
+			j += 3;
+		new_value[++j] = var_value[i];
 	}
 	new_value[++j] = '"';
 	return (new_value);
 }
 
-static void	extract_var_name(char **var_name, char *input, t_alloc *all)
+static void	extract_var_name(char **var_name, char *input, int pos_var, \
+								t_alloc *all)
 {
-	int	i;
-
-	i = -1;
-	while (ft_isalnum(input[++i]) || input[i] == '_')
-		;
-	*var_name = malloc((i + 1) * sizeof(char));
+	int	len_var;
+	
+	len_var = 0;
+	while (ft_isalnum(input[++pos_var]) || input[pos_var] == '_')
+			++len_var;
+	pos_var -= len_var;
+	*var_name = malloc((len_var + 1) * sizeof(char));
 	if (!*var_name)
 		exit_error(all, "Error malloc");
-	ft_memcpy(*var_name, input, i);
-	var_name[0][i] = '\0';
+	ft_memcpy(*var_name, &input[pos_var], len_var);
+	var_name[0][len_var] = '\0';
 }
 
-void	add_var_value(char *input, t_token **lst_input, t_alloc *all)
+void	add_var_value(char *input, int pos_var, t_alloc *all)
 {
 	t_token	*node;
 	char	*var_name;
 	char	*var_value;
 
-	extract_var_name(&var_name, input, all);
+	extract_var_name(&var_name, input, pos_var, all);
 	var_value = dup_value_with_quote(search_value(*(all->env), var_name));
 	if (!var_value)
 	{
@@ -76,18 +78,18 @@ void	add_var_value(char *input, t_token **lst_input, t_alloc *all)
 		free(var_name);
 		exit_error(all, "Error malloc");
 	}
-	add_token(lst_input, node);
+	add_token(all->token, node);
 	free(var_name);
 }
 
-void	treat_one_var(char *input, t_token **lst_input, t_alloc *all, \
-						int quote)
+void	treat_one_var(char *input,t_alloc *all, int pos_var, int quote)
 {
-	add_input_before_var(&input, lst_input, all, quote);
-	add_var_value(input, lst_input, all);
+	if (pos_var != 0)
+		add_input_before_var(input, all, pos_var, quote);
+	add_var_value(input, pos_var,  all);
 }
 
-void	check_var(char *input, t_token **lst_input, t_alloc *all)
+void	check_var(char *input, t_alloc *all)
 {
 	int	i;
 	int	quote;
@@ -97,8 +99,14 @@ void	check_var(char *input, t_token **lst_input, t_alloc *all)
 	while (input[++i])
 	{
 		if (input[i] == '$' && quote != 1)
-			treat_one_var(input, lst_input, all, quote);
-		if (input[i] == '\'' && input[i] == '"')
+		{
+			treat_one_var(input, all, i, quote);
+			while (ft_isalnum(input[++i]) || input[i] == '_')
+				;
+			input = &input[i];
+			i = -1;
+		}
+		else if (input[i] == '\'' && input[i] == '"')
 		{
 			if (!quote)
 				quote = 2 - (int)input[i] % 2;
@@ -107,16 +115,24 @@ void	check_var(char *input, t_token **lst_input, t_alloc *all)
 				quote = 0;
 		}
 	}
+	add_input_before_var(input, all, i, quote);
 }
 
 void	replace_var(char **input, t_alloc *all)
 {
 	t_token	*lst_input;
+	char	*new_input;
 
 	lst_input = NULL;
 	all->token = &lst_input;
-	check_var(*input, &lst_input, all);
+	check_var(*input, all);
 	print_tokens(lst_input);
-	//join_input(input, lst_input); //a voir si c'est pas mieux de laisser en lst
+	new_input = ft_calloc(1, sizeof(char));
+	if (!new_input)
+		exit_error(all, "Error malloc");
+	join_input(&new_input, lst_input, all);
+	free(*input);
+	*input = new_input;
+	ft_printf("new_input = %s\n", new_input);
 	clear_token(&lst_input, all);
 }

@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 20:01:37 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 14:06:58 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	pars_env(char **envp, t_alloc *all);
 void	replace_var(char **input, t_alloc *all);
 
 /*---------------------------Replace_var_utils.c------------------------------*/
-void	add_input_before_var(char **input, t_token **lst_input, t_alloc *all, \
-								int quote);
-								
+void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote);
+void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
+
 
 #endif
