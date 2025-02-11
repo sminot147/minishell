@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:15:40 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 14:32:46 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,11 @@ void	replace_var(char **input, t_alloc *all)
 	lst_input = NULL;
 	all->token = &lst_input;
 	check_var(*input, all);
-	print_tokens(lst_input);
-	new_input = ft_calloc(1, sizeof(char));
+	new_input = ft_calloc(2, sizeof(char));
 	if (!new_input)
 		exit_error(all, "Error malloc");
 	join_input(&new_input, lst_input, all);
 	free(*input);
 	*input = new_input;
-	ft_printf("new_input = %s\n", new_input);
 	clear_token(&lst_input, all);
 }

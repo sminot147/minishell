@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 13:14:29 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 14:33:02 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,4 @@ void	pars_env(char **envp, t_alloc *all)
 		if (!all->env)
 			all->env = &lst_env;
 	}
-	print_env(lst_env); //a enlever
 }

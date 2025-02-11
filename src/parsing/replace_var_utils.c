@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:12:29 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 14:31:54 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote)
 	str_node = dup_input_before_var(input, pos_var, quote, all);
 	if(!*str_node)
 	{
-		free(str_append);
+		free(str_node);
 		return ;
 	}
 	node = new_token(str_node);

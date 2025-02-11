@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:10:39 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 14:23:51 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_cmd	*parse_input(char *input, t_alloc *all)
 	replace_var(&input, all);
 	all->input = input;
 	lst_token = NULL;
-	//tokenize(input, &lst_token, all);
+	tokenize(input, &lst_token, all);
 	clear_token(&lst_token, all);
 	cmd = (void *) NULL;
 	return (cmd);
