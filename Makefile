@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/11 15:23:37 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/11 17:25:59 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ PARSING = parsing.c \
 	replace_var.c \
 	cmd_parser.c \
 	replace_var_utils.c \
+	here_doc.c \
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\

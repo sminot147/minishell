@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 16:35:43 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:43:18 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	child(t_child_info child_info)
 	// exec_builtins(child_info);
 	if (child_info.in_file != NULL)
 		fd[0] = open_in_file(child_info);
+	else if (child_info.here_doc.here_doc == 1)
+		fd[0] = child_info.here_doc.fd;
 	else if (child_info.first == 0)
 		fd[0] = child_info.pipe[0];
 	else

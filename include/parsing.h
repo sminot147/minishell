@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 16:58:13 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:17:35 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct s_file
 	struct s_file		*next;
 }	t_file;
 
+typedef	struct s_here_doc
+{
+	char	here_doc;
+	int		fd;
+}	t_here_doc;
 
 typedef struct s_cmd
 {
@@ -46,6 +51,7 @@ typedef struct s_cmd
 	int				append;		// Flag for '>>' (append mode)
 	int				pipe;		// Cmd is following by a pipe '|'
 	t_token			*here_doc;	// here_doc struct
+	t_here_doc		child_here_doc; // here_doc struct for child
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -79,5 +85,8 @@ void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 
 /*---------------------------Cmd_parser.c------------------------------------*/
 t_cmd	*parse_cmd(t_token *token_lst);
+
+/*---------------------------Here_doc.c--------------------------------------*/
+void	execute_here_doc(t_cmd *cmd);
 
 #endif

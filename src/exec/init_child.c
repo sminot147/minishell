@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:46:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 17:28:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:42:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	init_child(t_cmd cmd, char **envp, t_child_info *child_info)
 	(*child_info).envp = envp;
 	(*child_info).path = getenv("PATH");
 	(*child_info).pipe_after = cmd.pipe;
+	(*child_info).here_doc = cmd.child_here_doc;
 }
