@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_append.c                                       :+:      :+:    :+:   */
+/*   args_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 20:27:16 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:12:54 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/11 14:33:29 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/11 14:50:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "unistd.h"
 
-void	str_append(char **str1, char *str2, int free_str1)
+int	size_of_args(char **args)
 {
-	char	*new_str;
+	int count = 0;
 
-	new_str = ft_strjoin(*str1, str2);
-	if (free_str1)
-		free(*str1);
-	*str1 = new_str;
+	while (args[count] != NULL) // On s'arrête au premier NULL
+		count++;
+
+	return count;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:33:02 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 15:13:36 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,29 @@ char	*extract_name(char *str, t_alloc *all)
 }
 
 char	*extract_value(char *str)
-{
+{-------------------------Cmd_parser_utils.c------------------------------*/
+int		add_infile(t_cmd *cmd, t_token **token_lst);
+int		add_outfile(t_cmd *cmd, t_token **token_lst);
+
+/*---------------------------Lst_file_utils.c--------------------------------*/
+void	clear_file(t_file **lst_file);
+t_file	*new_file(char *conten, char append);
+void	add_file(t_file **lst_file, t_file *new_file);
+
+/*---------------------------Replace_var_utils.c------------------------------*/
+void	add_input_before_var(char **input, t_token **lst_input, t_alloc *all, \
+								int quote);
+
+/*---------------------------List_cmd.c--------------------------------------*/
+void	clear_cmd(t_cmd **lst_cmd);
+t_cmd	*new_cmd(void);
+void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd);
+
+/*---------------------------Array_utils.c-----------------------------------*/
+void	free_double_array(void **array);
+
+/*---------------------------Args_utils.c------------------------------------*/
+int		size_of_args(char **args);
 	while (*str != '=')
 		++str;
 	++str;

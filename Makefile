@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
+#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/10 18:51:59 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/11 15:09:11 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,23 +16,39 @@ SRC_DIR = src/
 
 SRC_FILE = main.c\
 
+EXEC_DIR = $(SRC_DIR)exec/
+
+EXEC = child.c\
+	command_exec.c \
+	exec.c \
+	init_child.c \
+	utils.c \
+
 UTILS_DIR = $(SRC_DIR)utils/
 
 UTILS = exit.c\
-	list_token.c\
-	list_env.c\
+	list_token_utils.c \
+	list_file_utils.c \
+	list_cmd_utils.c \
+	list_env_utils.c \
+	array_utils.c \
+	replace_var_utils.c \
+	cmd_parser_utils.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 
-PARSING = parsing.c\
-	tokenize.c\
-	pars_env.c\
-	replace_var.c\
-	replace_var_utils.c\
+EXEC_DIR = $(SRC_DIR)exec/
+
+PARSING = parsing.c \
+	tokenize.c \
+	pars_env.c \
+	replace_var.c \
+	cmd_parser.c \
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\
 	$(addprefix $(PARSING_DIR), $(PARSING))\
+	$(addprefix $(EXEC_DIR), $(EXEC))\
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -I$(LIBFT_DIR)/include -MMD -g3
@@ -48,16 +64,16 @@ DEPS =  $(addprefix $(OBJ_DIR)/, $(FILE:.c=.d))
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+all : $(NAME) force
+
 $(OBJ_DIR)/%.o : %.c $(LIBFT)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all : $(NAME) force
-
 $(LIBFT) : force
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME) : $(OBJ) $(LIBFT)
+$(NAME) : $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(READ_FLAG) $(OBJ) -o $(NAME) $(LIBFT)
 
 clean :

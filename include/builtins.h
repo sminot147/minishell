@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_append.c                                       :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 20:27:16 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:12:54 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/11 14:28:27 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/11 14:49:54 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-void	str_append(char **str1, char *str2, int free_str1)
-{
-	char	*new_str;
+void	exec_cd(t_child_info *child_info);
 
-	new_str = ft_strjoin(*str1, str2);
-	if (free_str1)
-		free(*str1);
-	*str1 = new_str;
-}
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/07 19:58:05 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 15:15:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	free_line(t_alloc *alloced)
 			free(alloced->input);
 			alloced->input = NULL;
 		}
-		if (alloced->token)
-		{
-			clear_token(alloced->token, alloced);
-			alloced->token = NULL;
-		}
+		// if (alloced->token)
+		// {
+		// 	clear_token(alloced->token, alloced);
+		// 	alloced->token = NULL;
+		// }
 		/*if (alloced->cmd)
 		{
 			clear_cmd(alloced->cmd);
@@ -49,6 +49,14 @@ void	free_all(t_alloc *alloced)
 			clear_env(alloced->env);
 		free(alloced);
 	}
+}
+
+void	exit_error(t_alloc *all, char *error_message)
+{
+	putstr_fd(error_message, 2);
+	putstr_fd("\n", 2);
+	free_all(all);
+	exit(EXIT_FAILURE);
 }
 
 void	exit_error(t_alloc *all, char *error_message)

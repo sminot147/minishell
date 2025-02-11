@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 15:10:58 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 15:10:35 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
+#include "command_exec.h"
 
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -29,6 +30,7 @@ void	alloc_all(t_alloc **all)
 int	main(int ac, char **av, char **envp)
 {
 	char	*input;
+	char	last_cmd_value;
 	t_alloc	*all;
 
 	if (ac != 1)
@@ -43,6 +45,7 @@ int	main(int ac, char **av, char **envp)
 		if (*input)
 			add_history(input);
 		parse_input(input, all);
+		last_cmd_value = exec_cmd(all->cmd, envp);
 		free_line(all);
 	}
 	free_all(all);
