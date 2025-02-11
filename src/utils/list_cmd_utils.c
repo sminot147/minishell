@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:48:32 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:20:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	clear_cmd(t_cmd **lst_cmd)
 			free((*lst_cmd)->outfile);
 		clear_file(&(*lst_cmd)->inter_file_in);
 		clear_file(&(*lst_cmd)->inter_file_out);
-		clear_token(&(*lst_cmd)->here_doc);
+		clear_token(&(*lst_cmd)->here_doc, NULL);
 		free(*lst_cmd);
 		*lst_cmd = tmp;
 	}

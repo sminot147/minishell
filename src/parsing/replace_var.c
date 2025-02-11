@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:14:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:28:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	char	*var_value;
 
 	extract_var_name(&var_name, input, pos_var, all);
-	var_value = dup_value_with_quote(search_value(*(all->env), var_name), \
+	var_value = dup_value_with_quote(search_value(all->env, var_name), \
 									quote);
 	if (!var_value)
 	{
