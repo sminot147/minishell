@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 17:17:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:00:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 t_cmd	*parse_cmd(t_token *token_lst);
 
 /*---------------------------Here_doc.c--------------------------------------*/
-void	execute_here_doc(t_cmd *cmd);
+void	execute_here_doc(t_cmd *cmd, t_alloc *all);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:48:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:04:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	extract_var_name(char **var_name, char *input, int pos_var, \
 	pos_var -= len_var;
 	*var_name = malloc((len_var + 1) * sizeof(char));
 	if (!*var_name)
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	ft_memcpy(*var_name, &input[pos_var], len_var);
 	var_name[0][len_var] = '\0';
 }
@@ -41,14 +41,14 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	if (!var_value)
 	{
 		free(var_name);
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	}
 	node = new_token(var_value);
 	if (!node)
 	{
 		
 		free(var_name);
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	}
 	add_token(all->token, node);
 	free(var_name);
@@ -100,7 +100,7 @@ void	replace_var(char **input, t_alloc *all)
 	check_var(*input, all);
 	new_input = ft_calloc(2, sizeof(char));
 	if (!new_input)
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	join_input(&new_input, lst_input, all);
 	free(*input);
 	*input = new_input;

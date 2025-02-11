@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 16:20:11 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:40:56 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*---------------------------Exit.c------------------------------------------*/
 void	free_line(t_alloc *alloced);
 void	free_all(t_alloc *alloced);
-void	exit_error(t_alloc *all, char *error_message);
+void	exit_error(t_alloc *all, char *error_message, char perror_enable);
 
 /*---------------------------List_token.c------------------------------------*/
 void	clear_token(t_token **token, t_alloc *all);
@@ -53,5 +53,7 @@ void	free_double_array(void **array);
 /*---------------------------Args_utils.c------------------------------------*/
 int		size_of_args(char **args);
 
+/*---------------------------Safe_close.c------------------------------------*/
+void	safe_close(t_alloc *all, int fd);
 
 #endif

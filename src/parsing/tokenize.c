@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:25:36 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:03:23 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	calloc_value(char **str, int size, t_alloc *all)
 {
 	*str = ft_calloc((size + 1), sizeof(char));
 	if (!*str)
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 }
 
 static char	*extract_next_token(char *input, t_alloc *all)
@@ -105,7 +105,7 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 	{
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
-			exit_error(all, "Error malloc");
+			exit_error(all, NULL, 1);
 		add_token(lst_token, next_token);
 		if (!all->token)
 			all->token=lst_token;

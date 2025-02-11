@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:01:21 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 18:04:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*dup_input_before_var(char *input, int pos_var, int quote, \
 		++pos_var;
 	dest = (char *)malloc((pos_var + 1) * sizeof(char));
 	if (!dest)
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	ft_memcpy(dest, input, pos_var);
 	if (quote)
 		dest[pos_var - 1] = '"';
@@ -87,7 +87,7 @@ void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote)
 	if (!node)
 	{
 		free(str_node);
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	}
 	add_token(all->token, node);
 }
@@ -98,7 +98,7 @@ void	join_input(char **new_input, t_token *lst_input, t_alloc *all)
 	{
 		str_append(new_input, lst_input->token, 1);
 		if (!*new_input)
-			exit_error(all, "Error malloc");
+			exit_error(all, NULL, 1);
 		join_input(new_input, lst_input->next, all);
 	}
 }

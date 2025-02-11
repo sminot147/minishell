@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:26:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:03:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*extract_name(char *str, t_alloc *all)
 	while (str[++i] && str[i] != '=')
 		;
 	if (str[i] != '=')
-		exit_error(all, "Error, env line haven't  '='");
+		exit_error(all, "Error, env line haven't  '='", 0);
 	name = ft_calloc((i + 1), sizeof(char));
 	if (!name)
-		exit_error(all, "Error malloc");
+		exit_error(all, NULL, 1);
 	ft_memcpy(name, str, i);
 	return (name);
 }
@@ -60,7 +60,7 @@ void	pars_env(char **envp, t_alloc *all)
 		new_env = new_var_env(extract_name(envp[i], all), \
 								extract_value(envp[i]));
 		if (!new_env)
-			exit_error(all, "Error malloc");
+			exit_error(all, NULL, 1);
 		add_env(&lst_env, new_env);
 		if (!all->env)
 			all->env = lst_env;

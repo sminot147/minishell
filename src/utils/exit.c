@@ -6,12 +6,13 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:52:51 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:02:53 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
+#include <stdio.h>
 
 void	free_line(t_alloc *alloced)
 {
@@ -46,10 +47,15 @@ void	free_all(t_alloc *alloced)
 	}
 }
 
-void	exit_error(t_alloc *all, char *error_message)
+void	exit_error(t_alloc *all, char *error_message, char perror_enable)
 {
-	putstr_fd(error_message, 2);
-	putstr_fd("\n", 2);
+	if (perror_enable == 1)
+		perror(error_message);
+	else
+	{
+		putstr_fd(error_message, 2);
+		putstr_fd("\n", 2);
+	}
 	free_all(all);
 	exit(EXIT_FAILURE);
 }

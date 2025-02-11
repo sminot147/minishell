@@ -6,13 +6,14 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:40:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:49:02 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "utils.h"
 
-int	here_doc(const char *limiter)
+int	here_doc(const char *limiter, t_alloc *all)
 {
 	int		pipe_fd[2];
 	char	*buffer;
@@ -36,12 +37,13 @@ int	here_doc(const char *limiter)
 		write(pipe_fd[1], buffer, ft_strlen(buffer));
 		free(buffer);
 	}
-	close(pipe_fd[1]);
+	if (close(pipe_fd[1]) < 0)
+		exit_error(all, NULL, 1);
 	return (pipe_fd[0]);
 }
 
 
-void	execute_here_doc(t_cmd *cmd)
+void	execute_here_doc(t_cmd *cmd, t_alloc *all)
 {
 	t_token	*actual_here_doc;
 	int		fd;
@@ -51,18 +53,16 @@ void	execute_here_doc(t_cmd *cmd)
 		actual_here_doc = cmd->here_doc;
 		while (actual_here_doc)
 		{
-			fd = here_doc(actual_here_doc->token);
-			// if (fd < 0)
-				// exit handler
+			fd = here_doc(actual_here_doc->token, all);
+			if (fd < 0)
+				exit_error(all, NULL, 1);
 			if (actual_here_doc->next == NULL)
 			{
 				cmd->child_here_doc.fd = fd;
 				cmd->child_here_doc.here_doc = 1;
 			}
 			else
-				close(fd);
-				// if (close(fd) < 1)
-					// exit handler
+				safe_close(all, fd);
 			actual_here_doc = actual_here_doc->next;
 		}
 		cmd = cmd->next;
