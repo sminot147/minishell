@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_cmd_utils.c                                   :+:      :+:    :+:   */
+/*   list_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 16:20:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:13:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-int		count_cmd(t_cmd *lst_cmd)
+int	count_cmd(t_cmd *lst_cmd)
 {
 	int	i;
-	
+
 	i = 0;
 	while (lst_cmd)
 	{

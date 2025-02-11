@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:54:55 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 16:09:56 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:10:57 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	init_cmd(t_child_info child_info, char **cmd)
 
 	s_path = ft_split(child_info.path, ':');
 	if (!s_path)
-		exit(5); // add un exit handler (erreur split)
+		exit (5); // add un exit handler (erreur split)
 	*cmd = get_cmd_path(child_info.cmd, s_path);
 	free_double_array((void **)s_path);
 	if (!*cmd)
-		exit(5); // add un exit handler (erreur split or join)
+		exit (5); // add un exit handler (erreur split or join)
 }
 
 void	exec(t_child_info child_info)

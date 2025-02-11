@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 18:02:08 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:20:56 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 	t_alloc	*all;
 
 	if (ac != 1)
-		exit_error((t_alloc *)NULL, "minishell doesn't take argument", 0);
+		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
 	alloc_all(&all);
 	pars_env(envp, all);
 	while (1)

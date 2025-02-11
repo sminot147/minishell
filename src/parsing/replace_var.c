@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 18:04:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:17:18 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	extract_var_name(char **var_name, char *input, int pos_var, \
 								t_alloc *all)
 {
 	int	len_var;
-	
+
 	len_var = 0;
 	while (ft_isalnum(input[++pos_var]) || input[pos_var] == '_')
-			++len_var;
+		++len_var;
 	pos_var -= len_var;
 	*var_name = malloc((len_var + 1) * sizeof(char));
 	if (!*var_name)
@@ -46,7 +46,6 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	node = new_token(var_value);
 	if (!node)
 	{
-		
 		free(var_name);
 		exit_error(all, NULL, 1);
 	}
@@ -54,7 +53,7 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	free(var_name);
 }
 
-void	treat_one_var(char *input,t_alloc *all, int pos_var, int quote)
+void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 {
 	if (pos_var != 0)
 		add_input_before_var(input, all, pos_var, quote);

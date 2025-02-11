@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 18:44:28 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:11:36 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static int	open_inter_file(t_cmd cmd, t_alloc *all)
 		if (current->append == 1)
 		{
 			if (handle_file(current->file, O_WRONLY | O_CREAT | O_APPEND,
-				0, all))
+					0, all))
 				return (1);
 		}
 		else
 			if (handle_file(current->file, O_WRONLY | O_CREAT | O_TRUNC,
-				0, all))
+					0, all))
 				return (1);
 		current = current->next;
 	}
@@ -118,7 +118,7 @@ int	wait_all_child(int *pid, int last)
 
 int	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
 {
-	int				i;;
+	int				i;
 	int				return_value;
 	t_child_info	child_info;
 	int				*pid;

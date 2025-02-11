@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:30:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 20:43:28 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 19:15:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_env	*new_var_env(char *name, char *value)
 	var->value = value;
 	return (var);
 }
-
 
 void	add_env(t_env **lst_env, t_env *new_env)
 {

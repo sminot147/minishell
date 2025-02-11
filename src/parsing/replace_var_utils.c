@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 18:04:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:19:06 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*dup_input_before_var(char *input, int pos_var, int quote, \
 									t_alloc *all)
 {
 	char	*dest;
-	
+
 	if (quote)
 		++pos_var;
 	dest = (char *)malloc((pos_var + 1) * sizeof(char));
@@ -78,7 +78,7 @@ void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote)
 	t_token	*node;
 
 	str_node = dup_input_before_var(input, pos_var, quote, all);
-	if(!*str_node)
+	if (!*str_node)
 	{
 		free(str_node);
 		return ;

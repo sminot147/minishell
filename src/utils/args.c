@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_utils.c                                      :+:      :+:    :+:   */
+/*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 21:07:40 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 16:07:38 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/11 14:33:29 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/11 19:14:19 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "unistd.h"
 
-void	free_double_array(void **array)
+int	size_of_args(char **args)
 {
-	int	i;
+	int	count;
 
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	count = 0;
+	while (args[count] != NULL)
+		count++;
+	return (count);
 }

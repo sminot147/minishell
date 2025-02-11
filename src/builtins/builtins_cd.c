@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 15:05:53 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:13:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 void	cd_absolute(char *path)
 {
-	
+	return ;
 }
 
 void	cd_relative(char *path)
 {
-	
+	return ;
 }
 
 void	exec_cd(t_child_info *child_info)

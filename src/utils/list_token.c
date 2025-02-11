@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:23:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:14:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	clear_token(t_token **lst_token, t_alloc *all)
 	free(*lst_token);
 	*lst_token = NULL;
 }
-
 
 t_token	*new_token(char *content)
 {

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 18:03:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:18:43 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_env(t_env *env)
 void	pars_env(char **envp, t_alloc *all)
 {
 	int				i;
-	static t_env	*lst_env;		//est ce que c'est bon pour la norme, sinon on perd la tête c'est chiant
+	static t_env	*lst_env;//est ce que c'est bon pour la norme, sinon on perd la tête c'est chiant
 	t_env			*new_env;
 
 	i = -1;
