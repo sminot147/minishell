@@ -6,41 +6,12 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:32:46 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 15:03:59 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-static char	*dup_value_with_quote(char *var_value)
-{
-	int		i;
-	int		j;
-	char	*new_value;
-
-	j = 0;
-	i = -1;
-	while (var_value[++i])
-		if (var_value [i] == '"')
-			++j;
-	new_value = ft_calloc(i + 3 + (j * 4), sizeof(char));
-	if (!new_value)
-		return (NULL);
-	i = -1;
-	j = -1;
-	new_value[++j] = '"';
-	while (var_value[++i])
-	{
-		if (var_value[i] == '"')
-			ft_memcpy(&new_value[++j], "\"'\"'", 4);
-		if (var_value[i] == '"')
-			j += 3;
-		new_value[++j] = var_value[i];
-	}
-	new_value[++j] = '"';
-	return (new_value);
-}
 
 static void	extract_var_name(char **var_name, char *input, int pos_var, \
 								t_alloc *all)
@@ -58,14 +29,15 @@ static void	extract_var_name(char **var_name, char *input, int pos_var, \
 	var_name[0][len_var] = '\0';
 }
 
-void	add_var_value(char *input, int pos_var, t_alloc *all)
+void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 {
 	t_token	*node;
 	char	*var_name;
 	char	*var_value;
 
 	extract_var_name(&var_name, input, pos_var, all);
-	var_value = dup_value_with_quote(search_value(*(all->env), var_name));
+	var_value = dup_value_with_quote(search_value(*(all->env), var_name), \
+									quote);
 	if (!var_value)
 	{
 		free(var_name);
@@ -86,7 +58,7 @@ void	treat_one_var(char *input,t_alloc *all, int pos_var, int quote)
 {
 	if (pos_var != 0)
 		add_input_before_var(input, all, pos_var, quote);
-	add_var_value(input, pos_var,  all);
+	add_var_value(input, pos_var, quote, all);
 }
 
 void	check_var(char *input, t_alloc *all)
@@ -106,11 +78,11 @@ void	check_var(char *input, t_alloc *all)
 			input = &input[i];
 			i = -1;
 		}
-		else if (input[i] == '\'' && input[i] == '"')
+		else if (input[i] == '\'' || input[i] == '"')
 		{
 			if (!quote)
 				quote = 2 - (int)input[i] % 2;
-			if ((input[i] == '\'' && quote == 1) || \
+			else if ((input[i] == '\'' && quote == 1) || \
 				(input[i] == '"' && quote == 2))
 				quote = 0;
 		}

@@ -6,14 +6,57 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 14:31:54 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/11 15:01:21 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
 
-static char	*dup_input_before_var(char *input, int pos_var, int quote, t_alloc *all)
+static int	len_var_value(char *var_value, int quote)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = -1;
+	while (var_value[++i])
+		if (var_value [i] == '"')
+			++j;
+	i += 2 + 4 * j;
+	if (quote)
+		++i;
+	return (i);
+}
+
+char	*dup_value_with_quote(char *var_value, int quote)
+{
+	int		i;
+	int		j;
+	char	*new_value;
+
+	new_value = ft_calloc(len_var_value(var_value, quote) + 1, sizeof(char));
+	if (!new_value)
+		return (NULL);
+	i = -1;
+	j = -1;
+	new_value[++j] = '"';
+	while (var_value[++i])
+	{
+		if (var_value[i] == '"')
+			ft_memcpy(&new_value[++j], "\"'\"'", 4);
+		if (var_value[i] == '"')
+			j += 3;
+		new_value[++j] = var_value[i];
+	}
+	new_value[++j] = '"';
+	if (quote)
+		new_value[++j] = '"';
+	return (new_value);
+}
+
+char	*dup_input_before_var(char *input, int pos_var, int quote, \
+									t_alloc *all)
 {
 	char	*dest;
 	
