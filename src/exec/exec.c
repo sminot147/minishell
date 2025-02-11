@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:54:55 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 14:17:23 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:55:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	exec(t_child_info child_info)
 	init_cmd(child_info, &cmd_path);
 	if (access(cmd_path, F_OK | X_OK) < 0)
 	{
-		putstr_fd("pipex: command not found: ", 2);
-		putendl_fd(child_info.cmd, 2);
+		putstr_fd(child_info.cmd, 2);
+		putendl_fd(": command not found", 2);
 		exit(127);
 	}
 	execve(cmd_path, child_info.args, child_info.envp);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:10:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:53:18 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int ac, char **av, char **envp)
 		input = readline(">");
 		if (!input)
 			break ;		//write exit\n
-		if (*input)
-			add_history(input);
+		add_history(input);
 		parse_input(input, all);
 		last_cmd_value = exec_cmd(all->cmd, envp);
 		free_line(all);
