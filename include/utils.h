@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 21:40:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:50:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,9 @@ void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd);
 
 /*---------------------------Array_utils.c-----------------------------------*/
 void	free_double_array(void **array);
+
+/*---------------------------Args_utils.c------------------------------------*/
+int		size_of_args(char **args);
+
 
 #endif

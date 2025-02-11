@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 20:15:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:06:23 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	child(t_child_info child_info)
 {
 	int		fd[2];
 
+	// exec_builtins(child_info);
 	if (child_info.in_file != NULL)
 		fd[0] = open_in_file(child_info);
 	else if (child_info.first == 0)

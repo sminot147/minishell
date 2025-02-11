@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/10 21:38:58 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:25:57 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	init_child(t_cmd cmd, char **envp, t_child_info *child_info);
 char	*get_path(char	**envp);
 char	*get_cmd_path(char *cmd, char **splited_path);
 char	**split_path(char *path);
+
+void	exec_builtins(t_child_info *child_info);
 
 #endif
