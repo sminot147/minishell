@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:25:21 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:58:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ typedef struct s_cmd
 
 typedef struct s_alloc
 {
-	char	*input;
-	t_token	**token;
-	t_cmd	*cmd;
-	t_env	*env;
+	char			*input;
+	t_token			**token;
+	t_cmd			*cmd;
+	t_env			*env;
 }	t_alloc;
 
 /*---------------------------Pars_env.c--------------------------------------*/

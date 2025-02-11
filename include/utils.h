@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:20:23 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:20:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	add_file(t_file **lst_file, t_file *new_file);
 void	clear_cmd(t_cmd **lst_cmd);
 t_cmd	*new_cmd(void);
 void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd);
+int		count_cmd(t_cmd *lst_cmd);
 
 /*---------------------------Array_utils.c-----------------------------------*/
 void	free_double_array(void **array);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:53:18 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:58:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "parsing.h"
 #include "command_exec.h"
 
+#include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -36,6 +37,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		exit_error((t_alloc *)NULL, "minishell doesn't take argument");
 	alloc_all(&all);
+	
 	pars_env(envp, all);
 	while (1)
 	{
@@ -44,7 +46,8 @@ int	main(int ac, char **av, char **envp)
 			break ;		//write exit\n
 		add_history(input);
 		parse_input(input, all);
-		last_cmd_value = exec_cmd(all->cmd, envp);
+		if (all->cmd != NULL)
+			last_cmd_value = exec_cmd(all->cmd, envp, all);
 		free_line(all);
 	}
 	free_all(all);

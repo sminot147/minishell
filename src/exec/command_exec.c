@@ -6,12 +6,13 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 14:15:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:57:51 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "command_exec.h"
+#include "utils.h"
 #include <sys/types.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -92,7 +93,7 @@ static int	start_child(t_child_info *child_info)
 	return (pid);
 }
 
-int	wait_all_child(int last_pid)
+int	wait_all_child(int *pid, int last)
 {
 	int	wait_value;
 	int	return_value;
@@ -102,35 +103,41 @@ int	wait_all_child(int last_pid)
 	while (1)
 	{
 		wait_value = wait(&status);
-		if (last_pid != 0)
-			if ((last_pid == wait_value) && WIFEXITED(status))
+		if (pid[last] != 0)
+			if ((pid[last] == wait_value) && WIFEXITED(status))
 				return_value = WEXITSTATUS(status);
 		if (wait_value < 0)
 			break ;
 	}
+	free(pid);
 	return (return_value);
 }
 
-int	exec_cmd(t_cmd *cmd_list, char **envp)
+int	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
 {
-	int				last_pid;
+	int				i;;
 	int				return_value;
 	t_child_info	child_info;
+	int				*pid;
 
+	pid = malloc(sizeof(int *) * count_cmd(cmd_list));
+	if (pid == NULL)
+		exit_error(all, "Error malloc");
 	child_info.first = 1;
 	child_info.pipe[0] = -1;
-	last_pid = 0;
+	i = 0;
 	while (cmd_list != NULL)
 	{
 		init_child(*cmd_list, envp, &child_info);
 		return_value = open_inter_file(*cmd_list);
 		if (return_value == 0)
-			last_pid = start_child(&child_info);
+			pid[i] = start_child(&child_info);
 		else if (cmd_list->next == NULL)
-			last_pid = 0;
+			pid[i] = 0;
 		cmd_list = cmd_list->next;
 		child_info.first = 0;
+		i++;
 	}
-	return_value = wait_all_child(last_pid);
+	return_value = wait_all_child(pid, i - 1);
 	return (return_value);
 }

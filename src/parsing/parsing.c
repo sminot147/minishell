@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 15:56:56 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:32:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	parse_input(char *input, t_alloc *all)
 	replace_var(&input, all);
 	lst_token = NULL;
 	tokenize(input, &lst_token, all);
+	if (lst_token == NULL)
+		return ;
 	all->cmd = parse_cmd(lst_token);
-	if (!all->cmd)
+	if (all->cmd == NULL)
 		exit_error(all, "Error malloc");
 	clear_token(&lst_token, all);
 }
