@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:34:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 15:58:48 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/12 16:14:45 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 static int	is_sep(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
-	{
-		ft_printf("sep_identify\n\n");
 		return (1);
-	}
 	return (0);
 }
 
