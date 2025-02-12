@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
+#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/12 13:44:49 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/12 17:29:28 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ UTILS = exit.c\
 	array.c \
 	cmd_parser.c \
 	safe_close.c \
+	parsing_message_error.c \
 	
 
 PARSING_DIR = $(SRC_DIR)parsing/

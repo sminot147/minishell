@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:13:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:31:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	clear_cmd(t_cmd **lst_cmd)
 		free(*lst_cmd);
 		*lst_cmd = tmp;
 	}
+	lst_cmd = NULL;
 }
 
 t_cmd	*new_cmd(void)

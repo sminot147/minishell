@@ -6,14 +6,14 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:05:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:37:33 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-static char	**add_arg(char **args, const char *new_arg)
+static char	**add_arg(char **args, const char *new_arg) //add unr protection pour le dup
 {
 	int		count;
 	int		i;
@@ -37,56 +37,59 @@ static char	**add_arg(char **args, const char *new_arg)
 	return (new_args);
 }
 
-static int	make_cmd(t_cmd *cmd, t_token **token_lst)
+static int	make_cmd(t_cmd *cmd, t_token **token_lst, t_alloc *all)
 {
+	// if (((*token_lst)->is_sep == 1 && (*token_lst)->next->is_sep == 1) ||\
+	// 	((*token_lst)->is_sep == 1 && (*token_lst)->next == NULL))
+	// {
+	// 	cmd_parsing_error(**token_lst);
+	// 	return (1);
+	// }
 	if ((*token_lst)->token[0] == '|')
 		cmd->pipe = 1;
 	else if ((*token_lst)->token[0] == '<')
 	{
 		if (add_infile(cmd, token_lst) == 1)
-		{
-			clear_cmd(&cmd);
-			return (1);
-		}
+			exit_error(all, NULL, 1);
 	}
 	else if ((*token_lst)->token[0] == '>')
 	{
 		if (add_outfile(cmd, token_lst) == 1)
-		{
-			clear_cmd(&cmd);
-			return (1);
-		}
+			exit_error(all, NULL, 1);
 	}
 	else
+	{
 		cmd->args = add_arg(cmd->args, (*token_lst)->token);
+		if (cmd->args == NULL)
+			exit_error(all, NULL, 1);
+	}
 	return (0);
 }
 
-t_cmd	*parse_cmd(t_token *token_lst)
+void	parse_cmd(t_token *token_lst, t_alloc *all)
 {
-	t_cmd	*cmd;
 	t_cmd	*new;
 
-	cmd = NULL;
+	all->cmd = NULL;
 	while (token_lst)
 	{
 		new = new_cmd();
 		if (new == NULL)
-		{
-			clear_cmd(&cmd);
-			return (NULL);
-		}
-		add_cmd(&cmd, new);
+			exit_error(all, NULL, 1);
+		add_cmd(&all->cmd, new);
 		while (token_lst)
 		{
-			if (make_cmd(new, &token_lst) == 1)
-				return (NULL);
-			if (token_lst->token[0] == '|')
+			if (make_cmd(new, &token_lst, all) == 1)
+			{
+				clear_cmd(&all->cmd);
+				return ;
+			}
+			if (token_lst->token[0] == '|' && token_lst->is_sep == 1)
 				break ;
 			token_lst = token_lst->next;
 		}
 		if (token_lst)
 			token_lst = token_lst->next;
 	}
-	return (cmd);
 }
+		

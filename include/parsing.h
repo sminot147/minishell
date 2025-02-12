@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 16:00:41 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/12 17:33:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,12 @@ void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote);
 void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 
 /*---------------------------Cmd_parser.c------------------------------------*/
-t_cmd	*parse_cmd(t_token *token_lst);
+void	parse_cmd(t_token *token_lst, t_alloc *all);
 
 /*---------------------------Here_doc.c--------------------------------------*/
 void	execute_here_doc(t_cmd *cmd, t_alloc *all);
+
+/*---------------------------Parsing_message_error.c-------------------------*/
+void	cmd_parsing_error(t_token token_lst);
 
 #endif

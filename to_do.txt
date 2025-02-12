@@ -5,5 +5,8 @@ Si un pip relire la ligne et concatener ?
 Verifier les fd et les leak lors des execution des child et des here_doc
 - Patch le probleme de fd de here_doc open (le pipe here_doc reste open)
 - Changer le focntionement des here_doc (en file et non pipe)
+- Deplacer l'execution du here_doc directement dans le parsing
+
+ajouter t_bool
 
 echo <"" ou echo << ferme minishell
