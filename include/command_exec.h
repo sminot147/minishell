@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:12:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:01:24 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 
 typedef struct s_child_info
 {
-	char				first;
-	char				pipe_after;
-	int					pipe[2];
-	char				*cmd;
-	char				**args;
-	char				*path;
-	char				**envp;
-	char				*in_file;
-	char				*out_file;
-	char				append;
+	char		first;
+	char		pipe_after;
+	int			pipe[2];
+	char		*cmd;
+	char		**args;
+	char		*path;
+	char		**envp;
+	char		*in_file;
+	char		*out_file;
+	char		append;
 	t_here_doc	here_doc;
 }	t_child_info;
 

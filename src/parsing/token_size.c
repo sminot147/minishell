@@ -6,12 +6,22 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:34:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 13:57:52 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/12 15:58:48 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
+
+static int	is_sep(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+	{
+		ft_printf("sep_identify\n\n");
+		return (1);
+	}
+	return (0);
+}
 
 int	size_check_sep(char *input)
 {
@@ -24,13 +34,28 @@ int	size_check_sep(char *input)
 			break ;
 		if (input[i] == '"')
 			while (input[++i] != '"')
-				if (!input[i])
-					return (0);
+				;
 		if (input[i] == '\'')
 			while (input[++i] != '\'')
-				if (!input[i])
-					return (0);
+				;
+		if (is_sep(input[i]))
+		{
+			if (i == 0)
+				while (is_sep(input[++i]))
+					;
+			break ;
+		}
 	}
+	return (i);
+}
+
+static int	size_to_moove_whith_sep(char *input, int i)
+{
+	if (i == 0)
+		while (is_sep(input[++i]))
+			;
+	while (ft_isspace(input[i]))
+		i++;
 	return (i);
 }
 
@@ -49,12 +74,12 @@ int	size_to_moove(char *input)
 		}
 		if (input[i] == '"')
 			while (input[++i] != '"')
-				if (!input[i])
-					return (0);
+				;
 		if (input[i] == '\'')
 			while (input[++i] != '\'')
-				if (!input[i])
-					return (0);
+				;
+		if (is_sep(input[i]))
+			return (size_to_moove_whith_sep(input, i));
 	}
 	return (i);
 }
@@ -72,12 +97,17 @@ int	size_next_token(char *input)
 			break ;
 		if (input[i] == '"' && ++have_quote)
 			while (input[++i] != '"')
-				if (!input[i])
-					return (0);
+				;
 		if (input[i] == '\'' && ++have_quote)
 			while (input[++i] != '\'')
-				if (!input[i])
-					return (0);
+				;
+		if (is_sep(input[i]))
+		{
+			if (i == 0)
+				while (is_sep(input[++i]))
+					;
+			break ;
+		}
 	}
 	return (i - 2 * have_quote);
 }

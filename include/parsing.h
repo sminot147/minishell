@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 13:57:21 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/12 16:00:41 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_file
 	struct s_file		*next;
 }	t_file;
 
-typedef	struct s_here_doc
+typedef struct s_here_doc
 {
 	char	here_doc;
 	int		fd;
