@@ -1,5 +1,7 @@
 Si un pip relire la ligne et concatener ?
-actuellement static devant t_env pour ne pas détruire la tête, erreur de norme?
+
+- Regarder pour reconstuire une partie de l'env;
+
 Rajouter un int pour savoir si c'est un arg ou pas
 
 - retirer la static
@@ -7,3 +9,5 @@ Rajouter un int pour savoir si c'est un arg ou pas
 Verifier les fd et les leak lors des execution des child et des here_doc
 - Patch le probleme de fd de here_doc open (le pipe here_doc reste open)
 - Changer le focntionement des here_doc (en file et non pipe)
+
+echo <"" ou echo << ferme minishell

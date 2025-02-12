@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:14:24 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:29:34 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_tokens(t_token *lst_token)
 {
 	while (lst_token) // -----------------------ATTENTION FONTION A SUPP
 	{
-		ft_printf("Token: [%s]\n", lst_token->token);
+		ft_printf("Token: [%s][%i]\n", lst_token->token, (int)lst_token->is_sep);
 		lst_token = lst_token->next;
 	}
 }

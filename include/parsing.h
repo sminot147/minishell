@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 11:47:25 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/12 13:57:21 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define PARSING_H
 
 # include "libft.h"
+
+typedef enum e_bool
+{
+	FALSE = 0,
+	TRUE = 1
+}	t_bool;
 
 typedef struct s_env
 {
@@ -25,6 +31,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*token;
+	t_bool			is_sep;
 	struct s_token	*next;
 }	t_token;
 
@@ -66,11 +73,16 @@ typedef struct s_alloc
 /*---------------------------Pars_env.c--------------------------------------*/
 t_env	*pars_env(char **envp, t_alloc *all);
 
+/*---------------------------Parsing.c---------------------------------------*/
+void	parse_input(char *input, t_alloc *all);
+
 /*---------------------------Tokenize.c--------------------------------------*/
 void	tokenize(char *input, t_token **token, t_alloc *all);
 
-/*---------------------------Parsing.c---------------------------------------*/
-void	parse_input(char *input, t_alloc *all);
+/*---------------------------Token_size.c------------------------------------*/
+int		size_to_moove(char *input);
+int		size_next_token(char *input);
+int		size_check_sep(char *input);
 
 /*---------------------------Replace_var.c-----------------------------------*/
 void	replace_var(char **input, t_alloc *all);

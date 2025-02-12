@@ -6,7 +6,7 @@
 #    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/12 11:36:08 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/12 13:44:49 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ EXEC_DIR = $(SRC_DIR)exec/
 
 PARSING = parsing.c \
 	tokenize.c \
+	token_size.c\
 	pars_env.c \
 	replace_var.c \
 	cmd_parser.c \

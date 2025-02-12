@@ -3,63 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:15:51 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:57:45 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-static int	size_to_moove(char *input)
-{
-	int	i;
-
-	i = -1;
-	while (input[++i])
-	{
-		if (ft_isspace(input[i]))
-		{
-			while (ft_isspace(input[++i]))
-				;
-			break ;
-		}
-		if (input[i] == '"')
-			while (input[++i] != '"')
-				if (!input[i])
-					return (0);
-		if (input[i] == '\'')
-			while (input[++i] != '\'')
-				if (!input[i])
-					return (0);
-	}
-	return (i);
-}
-
-static int	size_next_token(char *input)
-{
-	int	i;
-	int	have_quote;
-
-	have_quote = 0;
-	i = -1;
-	while (input[++i])
-	{
-		if (ft_isspace(input[i]))
-			break ;
-		if (input[i] == '"' && ++have_quote)
-			while (input[++i] != '"')
-				if (!input[i])
-					return (0);
-		if (input[i] == '\'' && ++have_quote)
-			while (input[++i] != '\'')
-				if (!input[i])
-					return (0);
-	}
-	return (i - 2 * have_quote);
-}
 
 static void	calloc_value(char **str, int size, t_alloc *all)
 {
@@ -97,6 +49,19 @@ static char	*extract_next_token(char *input, t_alloc *all)
 	return (token_value);
 }
 
+t_bool	token_is_sep(char *input)
+{
+	int	i;
+	int	size_token;
+
+	size_token = size_check_sep(input);
+	i = -1;
+	while (++i < size_token)
+		if (!ft_strchr("|<>", (int)input[i]))
+			return (FALSE);
+	return (TRUE);
+}
+
 void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
@@ -106,6 +71,7 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
 			exit_error(all, NULL, 1);
+		next_token->is_sep = token_is_sep(input);
 		add_token(lst_token, next_token);
 		if (!all->token)
 			all->token = lst_token;
