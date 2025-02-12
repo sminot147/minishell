@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/11 18:44:41 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/12 11:36:08 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ UTILS_DIR = $(SRC_DIR)utils/
 
 UTILS = exit.c\
 	list_token.c \
-	list_file_utils.c \
-	list_cmd_utils.c \
+	list_file.c \
+	list_cmd.c \
 	list_env.c \
-	array_utils.c \
-	cmd_parser_utils.c \
+	array.c \
+	cmd_parser.c \
 	safe_close.c \
 	
 

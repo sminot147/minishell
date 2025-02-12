@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:20:56 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:44:35 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
 	alloc_all(&all);
-	pars_env(envp, all);
+	all->env = pars_env(envp, all);
 	while (1)
 	{
 		input = readline(">");

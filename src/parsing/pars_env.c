@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pars_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:18:43 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:47:38 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-char	*extract_name(char *str, t_alloc *all)
+static char	*extract_name(char *str, t_alloc *all)
 {
 	int		i;
 	char	*name;
@@ -30,7 +30,7 @@ char	*extract_name(char *str, t_alloc *all)
 	return (name);
 }
 
-char	*extract_value(char *str)
+static char	*extract_value(char *str)
 {
 	while (*str != '=')
 		++str;
@@ -47,11 +47,11 @@ void	print_env(t_env *env)
 	}
 }
 
-void	pars_env(char **envp, t_alloc *all)
+t_env	*pars_env(char **envp, t_alloc *all)
 {
-	int				i;
-	static t_env	*lst_env;//est ce que c'est bon pour la norme, sinon on perd la tête c'est chiant
-	t_env			*new_env;
+	int		i;
+	t_env	*lst_env;
+	t_env	*new_env;
 
 	i = -1;
 	lst_env = NULL;
@@ -65,5 +65,6 @@ void	pars_env(char **envp, t_alloc *all)
 		if (!all->env)
 			all->env = lst_env;
 	}
-	print_env(lst_env); //a enlever
+	return (lst_env);
+	//print_env(lst_env);
 }

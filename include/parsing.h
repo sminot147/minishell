@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:20:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:47:25 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,13 @@ typedef struct s_alloc
 }	t_alloc;
 
 /*---------------------------Pars_env.c--------------------------------------*/
-void	pars_env(char **envp, t_alloc *all);
+t_env	*pars_env(char **envp, t_alloc *all);
 
 /*---------------------------Tokenize.c--------------------------------------*/
 void	tokenize(char *input, t_token **token, t_alloc *all);
 
 /*---------------------------Parsing.c---------------------------------------*/
 void	parse_input(char *input, t_alloc *all);
-
-/*---------------------------Pars_env.c--------------------------------------*/
-void	pars_env(char **envp, t_alloc *all);
 
 /*---------------------------Replace_var.c-----------------------------------*/
 void	replace_var(char **input, t_alloc *all);
