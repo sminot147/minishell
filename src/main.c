@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 11:44:35 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/12 14:25:57 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "command_exec.h"
 
 #include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 void	alloc_all(t_alloc **all)
 {
@@ -50,7 +48,6 @@ int	main(int ac, char **av, char **envp)
 		free_line(all);
 	}
 	free_all(all);
-	rl_clear_history();
 	exit(EXIT_SUCCESS);
 	(void)av;
 }

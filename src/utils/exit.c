@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 18:02:53 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:25:10 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_all(t_alloc *alloced)
 			clear_env(&alloced->env);
 		free(alloced);
 	}
+	rl_clear_history();
 }
 
 void	exit_error(t_alloc *all, char *error_message, char perror_enable)
