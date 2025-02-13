@@ -2,10 +2,5 @@
 
 Verifier les fd et les leak lors des execution des child et des here_doc
 - Patch le probleme de fd de here_doc open (le pipe here_doc reste open)
-- Changer le focntionement des here_doc (en file et non pipe)
-- verif les double erreur ex "cat << test << test > out | <>><><"
-- probleme here_doc + no limiter
 
 Ajouter le path dans le prompt
-
-ajouter t_bool

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/13 20:26:51 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 22:30:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "parsing.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# define TMP_DIR "/tmp/"
+# define PREFIX "sh-thd-"
 
 /*---------------------------Exit.c------------------------------------------*/
 void	free_line(t_alloc *alloced);
@@ -57,5 +60,12 @@ int		size_of_args(char **args);
 
 /*---------------------------Safe_close.c------------------------------------*/
 void	safe_close(t_alloc *all, int fd);
+
+/*---------------------------Parsing_message_error.c-------------------------*/
+int		check_syntax(t_token *token_lst);
+void	extract_error_message(char *sep);
+
+/*---------------------------Get_random_file_name.c--------------------------*/
+char	*generate_tmp_filename(t_alloc *all);
 
 #endif

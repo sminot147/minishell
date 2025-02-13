@@ -6,11 +6,12 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:57:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:06:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_exec.h"
+#include "utils.h"
 #include "libft.h"
 #include <unistd.h>
 #include <stdlib.h>
@@ -48,37 +49,23 @@ static int	open_out_file(t_child_info child_info)
 	return (return_value);
 }
 
-static void	dup_and_close(int fd_1, int fd_2)
+static void	dup_and_close(int fd_1, int fd_2, t_alloc *all)
 {
 	if (fd_1 != 0)
 	{
 		if (dup2(fd_1, 0) == -1)
-		{
-			perror(NULL);
-			exit(4);
-		}
-		if (close(fd_1) == -1)
-		{
-			perror(NULL);
-			exit(4);
-		}
+			exit_error(all, NULL, 1);
+		safe_close(all, fd_1);
 	}
 	if (fd_2 != 1)
 	{
 		if (dup2(fd_2, 1) == -1)
-		{
-			perror(NULL);
-			exit(4);
-		}
-		if (close(fd_2) == -1)
-		{
-			perror(NULL);
-			exit(4);
-		}
+			exit_error(all, NULL, 1);
+		safe_close(all, fd_2);
 	}
 }
 
-int	child(t_child_info child_info)
+int	child(t_child_info child_info, t_alloc *all)
 {
 	int		fd[2];
 
@@ -97,7 +84,7 @@ int	child(t_child_info child_info)
 		fd[1] = child_info.pipe[1];
 	else
 		fd[1] = 1;
-	dup_and_close(fd[0], fd[1]);
+	dup_and_close(fd[0], fd[1], all);
 	exec(child_info);
 	exit (1);
 }

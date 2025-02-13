@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 18:59:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:08:50 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 	{
 		safe_close(all, pipe_fd[0]);
 		child_info->pipe[1] = pipe_fd[1];
-		child(*child_info);
+		child(*child_info, all);
 	}
 	else
 	{

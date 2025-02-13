@@ -6,72 +6,12 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 20:45:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:27:50 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-static int is_valid_sep(char *sep)
-{
-	return (!ft_strcmp(sep, "<") || !ft_strcmp(sep, ">") ||
-			!ft_strcmp(sep, "<<") || !ft_strcmp(sep, ">>") ||
-			!ft_strcmp(sep, "|"));
-}
-
-static void	extract_sep_and_put_error(char *sep)
-{
-	if (sep[0] == '<' && sep[1] == '<')
-		putstr_fd("minishell: syntax error near unexpected token `<<'\n", 2);
-	else if (sep[0] == '<' && sep[1] != '<')
-		putstr_fd("minishell: syntax error near unexpected token `<'\n", 2);
-	else if (sep[0] == '>' && sep[1] != '>')
-		putstr_fd("minishell: syntax error near unexpected token `>'\n", 2);
-	else if (sep[0] == '>' && sep[1] == '>')
-		putstr_fd("minishell: syntax error near unexpected token `>>'\n", 2);
-	else if (sep[0] == '|')
-		putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
-}
-
-static void	extract_error_message(char *sep)
-{
-	if (is_valid_sep(sep))
-	{
-		if (sep[0] == '|')
-			putstr_fd("minishell: syntax error need command after `|'\n", 2);
-		else
-		{
-			putstr_fd("minishell: syntax error near unexpected ", 2);
-			putstr_fd("token `newline'\n", 2);
-		}
-	}
-	else
-		extract_sep_and_put_error(sep);
-}
-
-static int check_syntax(t_token *token_lst)
-{
-	int	i;
-
-	i = 0;
-	while (token_lst)
-	{
-		if (token_lst->next && token_lst->next->is_sep && token_lst->is_sep)
-		{
-			extract_error_message(token_lst->next->token);
-			return (i);
-		}
-		if (!is_valid_sep(token_lst->token) && token_lst->is_sep)
-		{
-			extract_sep_and_put_error(token_lst->token);
-			return (i);
-		}
-		token_lst = token_lst->next;
-		i++;
-	}
-	return (-1);
-}
 
 static char	**add_arg(char **args, const char *new_arg)
 {
@@ -84,14 +24,19 @@ static char	**add_arg(char **args, const char *new_arg)
 		count++;
 	new_args = malloc(sizeof(char *) * (count + 2));
 	if (!new_args)
-		return (NULL);
-	i = 0;
-	while (i < count)
 	{
-		new_args[i] = args[i];
-		i++;
+		free_double_array((void **)args);
+		return (NULL);
 	}
-	new_args[count] = ft_strdup(new_arg); //add une protection pour le dup
+	i = -1;
+	while (++i < count)
+		new_args[i] = args[i];
+	new_args[count] = ft_strdup(new_arg);
+	if (new_args[count] == NULL)
+	{
+		free_double_array((void **)args);
+		return (NULL);
+	}
 	new_args[count + 1] = NULL;
 	free(args);
 	return (new_args);
@@ -138,7 +83,7 @@ static void	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 	{
 		if ((*i == error) || (append_to_cmd(new, token_lst, all, i) == 1))
 		{
-			if (*i != error)
+			if (error == -1)
 				extract_error_message((*token_lst)->token);
 			clear_cmd(&all->cmd);
 			return ;

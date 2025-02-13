@@ -6,64 +6,58 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 19:09:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 22:40:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
+#include <fcntl.h>
+
+int	open_tmp_file(t_alloc *all, char **tmp_file)
+{
+	int	fd;
+
+    *tmp_file = generate_tmp_filename(all);
+    if (!*tmp_file)
+        exit_error(all, NULL, 1);
+    fd = open(*tmp_file, O_RDWR | O_CREAT | O_TRUNC, 0600);
+    if (fd < 0)
+        exit_error(all, NULL, 1);
+    return (fd);
+}
+
+void read_here_doc(int fd, char *limiter, t_alloc *all)
+{
+    char	*buffer;
+
+    while (1)
+    {
+        buffer = readline(">");
+        if (!buffer)
+            break;
+        if (ft_strcmp(limiter, buffer) == 0)
+        {
+            free(buffer);
+            break;
+        }
+        write(fd, buffer, strlen(buffer));
+		write(fd, "\n", 1);
+        free(buffer);
+    }
+    safe_close(all, fd);
+}
 
 int	here_doc(char *limiter, t_alloc *all)
 {
-	int		pipe_fd[2];
-	char	*buffer;
-	size_t	limiter_size;
+    int		fd;
+    char	*tmp_file;
 
-	if (pipe(pipe_fd) == -1)
-		return (-1);
-	limiter_size = ft_strlen(limiter);
-	while (1)
-	{
-		putstr_fd("> ", 1);
-		buffer = get_next_line(0);
-		if (!buffer)
-			break ;
-		if (ft_strncmp(buffer, limiter, limiter_size) == 0
-			&& buffer[limiter_size] == '\n' && buffer[limiter_size + 1] == '\0')
-		{
-			free(buffer);
-			break ;
-		}
-		write(pipe_fd[1], buffer, ft_strlen(buffer));
-		free(buffer);
-	}
-	if (close(pipe_fd[1]) < 0)
-		exit_error(all, NULL, 1);
-	return (pipe_fd[0]);
-}
-
-void	execute_here_doc(t_cmd *cmd, t_alloc *all)
-{
-	t_token	*actual_here_doc;
-	int		fd;
-
-	while (cmd != NULL)
-	{
-		actual_here_doc = cmd->here_doc;
-		while (actual_here_doc)
-		{
-			fd = here_doc(actual_here_doc->token, all);
-			if (fd < 0)
-				exit_error(all, NULL, 1);
-			if (actual_here_doc->next == NULL)
-			{
-				cmd->child_here_doc.fd = fd;
-				cmd->child_here_doc.here_doc = 1;
-			}
-			else
-				safe_close(all, fd);
-			actual_here_doc = actual_here_doc->next;
-		}
-		cmd = cmd->next;
-	}
+    fd = open_tmp_file(all, &tmp_file);
+    read_here_doc(fd, limiter, all);
+    fd = open(tmp_file, O_RDONLY);
+    if (fd > 0)
+        unlink(tmp_file);
+    free(tmp_file);
+    return fd;
 }

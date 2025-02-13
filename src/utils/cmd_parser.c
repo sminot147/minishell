@@ -6,12 +6,11 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 20:41:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 22:41:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
 #include "utils.h"
 
 static char	*get_file(t_token *token_lst)
