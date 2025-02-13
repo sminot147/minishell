@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 14:25:39 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/13 20:26:51 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	add_env(t_env **lst_env, t_env *new_env);
 char	*search_value(t_env *lst_env, char *name);
 
 /*---------------------------Cmd_parser_utils.c------------------------------*/
-int		add_infile(t_cmd *cmd, t_token **token_lst);
-int		add_outfile(t_cmd *cmd, t_token **token_lst);
+void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i);
+void	add_outfile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i);
 
 /*---------------------------Lst_file_utils.c--------------------------------*/
 void	clear_file(t_file **lst_file);

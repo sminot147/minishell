@@ -6,14 +6,14 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 19:15:19 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:09:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-int	here_doc(const char *limiter, t_alloc *all)
+int	here_doc(char *limiter, t_alloc *all)
 {
 	int		pipe_fd[2];
 	char	*buffer;

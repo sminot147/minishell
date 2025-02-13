@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
+#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/16 14:53:08 by sminot            #+#    #+#              #
-#    Updated: 2025/02/05 12:15:14 by sminot           ###   ########.fr        #
+#    Updated: 2025/02/13 20:22:20 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ STR = ft_split.c\
 	ft_strlcpy.c\
 	ft_strlen.c\
 	ft_strmapi.c\
+	ft_strcmp.c\
 	ft_strncmp.c\
 	ft_strnstr.c\
 	ft_strrchr.c\

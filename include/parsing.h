@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 17:33:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/13 20:56:29 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ typedef struct s_token
 typedef struct s_file
 {
 	char				*file;
-	char				append;
+	t_bool				append;
 	struct s_file		*next;
 }	t_file;
 
 typedef struct s_here_doc
 {
-	char	here_doc;
+	t_bool	here_doc;
 	int		fd;
 }	t_here_doc;
 
@@ -97,6 +97,7 @@ void	parse_cmd(t_token *token_lst, t_alloc *all);
 
 /*---------------------------Here_doc.c--------------------------------------*/
 void	execute_here_doc(t_cmd *cmd, t_alloc *all);
+int		here_doc(char *limiter, t_alloc *all);
 
 /*---------------------------Parsing_message_error.c-------------------------*/
 void	cmd_parsing_error(t_token token_lst);
