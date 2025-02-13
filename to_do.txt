@@ -4,3 +4,14 @@ Verifier les fd et les leak lors des execution des child et des here_doc
 - Patch le probleme de fd de here_doc open (le pipe here_doc reste open)
 
 Ajouter le path dans le prompt
+
+
+pour cd 
+
+Mkdir test
+Cd test
+Mkdir test2
+Cd test2
+RM test (avec le bon path)
+Si tu fait cd .. tu segfault
+Faut retourner au home !
