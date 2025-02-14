@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/13 19:03:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:52:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include <signal.h>
 
-void	alloc_all(t_alloc **all)
+void	alloc_all(t_alloc **all, char *return_value)
 {
 	*all = ft_calloc(1, sizeof(t_alloc));
 	if (!*all)
@@ -24,6 +24,8 @@ void	alloc_all(t_alloc **all)
 		putstr_fd("Error malloc\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	(*all)->last_return_value = return_value;
+	*(*all)->last_return_value = 0;
 }
 
 int	main(int ac, char **av, char **envp)
@@ -34,20 +36,20 @@ int	main(int ac, char **av, char **envp)
 
 	if (ac != 1)
 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
-	alloc_all(&all);
+	alloc_all(&all, &last_cmd_value);
 	all->env = pars_env(envp, all);
 	while (1)
 	{
-		input = readline(">");
+		input = readline(get_pwd());
 		if (!input)
 			break ;		//write exit\n
 		add_history(input);
 		parse_input(input, all);
 		if (all->cmd != NULL)
-			last_cmd_value = exec_cmd(all->cmd, envp, all);
+			exec_cmd(all->cmd, envp, all);
 		free_line(all);
 	}
 	free_all(all);
-	exit(EXIT_SUCCESS);
+	return (0);
 	(void)av;
 }

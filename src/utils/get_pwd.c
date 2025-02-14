@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   get_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 14:28:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/14 14:22:14 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/14 12:52:13 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/14 12:57:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "libft.h"
+#include <stdlib.h>
 
-#include "parsing.h"
-
-int		exec_builtins_solo(t_child_info *child_info, t_alloc *all);
-int		exec_cd(t_child_info *child_info);
-int		exec_pwd(void);
-int		exec_echo(t_child_info *child_info, t_alloc *all);
-
-void	exec_exit(t_alloc *all, t_child_info child_info);
-void	exec_builtins_child(t_child_info *child_info, t_alloc *all);
-
-#endif
+char	*get_pwd(void)
+{
+	char *pwd;
+	
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		putstr_fd("error", 1);
+		return ("$ ");
+	}
+	ft_printf("%s", pwd);
+	free(pwd);
+	return ("$ ");
+}

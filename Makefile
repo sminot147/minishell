@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/13 22:39:54 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/14 14:22:37 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ EXEC = child.c\
 
 UTILS_DIR = $(SRC_DIR)utils/
 
-UTILS = exit.c\
+UTILS = exit.c \
 	list_token.c \
 	list_file.c \
 	list_cmd.c \
@@ -35,8 +35,8 @@ UTILS = exit.c\
 	cmd_parser.c \
 	safe_close.c \
 	parsing_message_error.c \
-	get_random_file_name.c
-	
+	get_random_file_name.c \
+	get_pwd.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 
@@ -51,10 +51,19 @@ PARSING = parsing.c \
 	replace_var_utils.c \
 	here_doc.c \
 
+BUILT_INS_DIR = $(SRC_DIR)builtins/
+
+BUILT_INS = builtins_cd.c \
+		builtins_checker.c \
+		builtins_exit.c \
+		builtins_pwd.c \
+		builtins_echo.c \
+
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\
 	$(addprefix $(PARSING_DIR), $(PARSING))\
 	$(addprefix $(EXEC_DIR), $(EXEC))\
+	$(addprefix $(BUILT_INS_DIR), $(BUILT_INS))\
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE) -I$(LIBFT_DIR)/include -MMD -g3

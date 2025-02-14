@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_cd.c                                      :+:      :+:    :+:   */
+/*   builtins_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/14 13:05:14 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/14 12:41:04 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/14 12:52:06 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command_exec.h"
-#include "utils.h"
+#include "libft.h"
+#include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 
-int	exec_cd(t_child_info *child_info)
+int	exec_pwd(void)
 {
-	if (child_info->pipe_after == 0 && child_info->first == 1)
+	char *pwd;
+	
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
 	{
-		if (child_info->args[2])
-		{
-			putstr_fd("minishell: cd: too many arguments\n", 2);
-			return (1);
-		}
-		if (chdir(child_info->args[1]) < 0)
-		{
-			putstr_fd("minishell: cd: ", 2);
-			perror(child_info->args[1]);
-			return (1);
-		}
+		perror("minishell: pwd");
+		return (1);
 	}
+	ft_printf("%s\n", pwd);
+	free(pwd);
 	return (0);
 }

@@ -6,11 +6,12 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 21:06:01 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:22:18 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_exec.h"
+#include "builtins.h"
 #include "utils.h"
 #include "libft.h"
 #include <unistd.h>
@@ -69,7 +70,6 @@ int	child(t_child_info child_info, t_alloc *all)
 {
 	int		fd[2];
 
-	// exec_builtins(child_info);
 	if (child_info.in_file != NULL)
 		fd[0] = open_in_file(child_info);
 	else if (child_info.here_doc.here_doc == 1)
@@ -85,6 +85,7 @@ int	child(t_child_info child_info, t_alloc *all)
 	else
 		fd[1] = 1;
 	dup_and_close(fd[0], fd[1], all);
+	exec_builtins_child(&child_info, all);
 	exec(child_info);
 	exit (1);
 }

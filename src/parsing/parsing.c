@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/13 17:53:28 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:19:39 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ void	parse_input(char *input, t_alloc *all)
 	if (lst_token == NULL)
 		return ;
 	parse_cmd(lst_token, all);
-	// execute_here_doc(all->cmd, all);
 	clear_token(&lst_token, all);
 }

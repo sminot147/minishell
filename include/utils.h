@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/13 22:30:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:57:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,8 @@ void	extract_error_message(char *sep);
 
 /*---------------------------Get_random_file_name.c--------------------------*/
 char	*generate_tmp_filename(t_alloc *all);
+
+/*---------------------------Get_pwd.c---------------------------------------*/
+char	*get_pwd(void);
 
 #endif

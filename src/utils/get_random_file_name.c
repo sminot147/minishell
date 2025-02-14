@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 22:28:25 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 22:42:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:20:37 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static unsigned int	get_random_number(t_alloc *all)
 	urandom_fd = open("/dev/urandom", O_RDONLY);
 	if (urandom_fd < 0)
 		exit_error(all, NULL, 1);
-	if (read(urandom_fd, &random_value, sizeof(random_value))\
-														!= sizeof(random_value))
+	if (read(urandom_fd, &random_value, sizeof(random_value)) \
+			!= sizeof(random_value))
 	{
 		safe_close(all, urandom_fd);
 		exit_error(all, NULL, 1);
@@ -33,8 +33,8 @@ static unsigned int	get_random_number(t_alloc *all)
 
 static void	int_to_str(unsigned int num, char *str)
 {
-	int		i;
 	char	temp[16];
+	int		i;
 	int		j;
 
 	i = 0;

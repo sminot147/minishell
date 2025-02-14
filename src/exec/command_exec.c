@@ -6,12 +6,13 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 21:08:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:51:41 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "command_exec.h"
+#include "builtins.h"
 #include "utils.h"
 #include <sys/types.h>
 #include <fcntl.h>
@@ -116,7 +117,7 @@ int	wait_all_child(int *pid, int last)
 	return (return_value);
 }
 
-int	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
+void	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
 {
 	int				i;
 	int				return_value;
@@ -132,16 +133,19 @@ int	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
 	while (cmd_list != NULL)
 	{
 		init_child(*cmd_list, envp, &child_info, all);
-		return_value = open_inter_file(*cmd_list, all);
-		if (return_value == 0)
-			pid[i] = start_child(&child_info, all);
-		else if (cmd_list->next == NULL)
-			pid[i] = 0;
-		if (pid[i] == -1)
-			exit_error(all, NULL, 1);
+		if (exec_builtins_solo(&child_info, all) == 0)
+		{
+			return_value = open_inter_file(*cmd_list, all);
+			if (return_value == 0)
+				pid[i] = start_child(&child_info, all);
+			else if (cmd_list->next == NULL)
+				pid[i] = 0;
+			if (pid[i] == -1)
+				exit_error(all, NULL, 1);
+		}
 		cmd_list = cmd_list->next;
 		child_info.first = 0;
 		i++;
 	}
-	return (wait_all_child(pid, i - 1));
+	*all->last_return_value = wait_all_child(pid, i - 1);
 }

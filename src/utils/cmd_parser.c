@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/13 22:41:11 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:36:52 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,22 @@ void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 	char	*file;
 	t_file	*file_node;
 
-	file = get_file((*token_lst)->next);
-	if (file == NULL)
-		exit_error(all, NULL, 1);
+
 	if ((*token_lst)->token[1] == '<' && (*token_lst)->next)
 			execute_here_docs(cmd, (*token_lst)->next->token, all);
 	else
 	{
+		file = get_file((*token_lst)->next);
+		if (file == NULL)
+			exit_error(all, NULL, 1);
 		if (cmd->infile)
 		{
 			file_node = new_file(cmd->infile, 0);
 			if (file_node == NULL)
+			{
+				free(file);
 				exit_error(all, NULL, 1);
+			}
 			add_file(&cmd->inter_file_in, file_node);
 		}
 		cmd->infile = file;

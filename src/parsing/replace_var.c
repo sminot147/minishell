@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 17:12:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:21:52 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,25 @@ static void	extract_var_name(char **var_name, char *input, int pos_var, \
 								t_alloc *all)
 {
 	int	len_var;
+	int	skip_one; // a verifier
 
+	skip_one = 0; // a verifier
 	len_var = 0;
-	while (ft_isalnum(input[++pos_var]) || input[pos_var] == '_')
-		++len_var;
-	pos_var -= len_var;
+	if (input[pos_var + 1] == '?') // a verifier
+	{
+		skip_one = 1;
+		len_var = 1;
+	}
+	else
+	{
+		while (ft_isalnum(input[++pos_var]) || input[pos_var] == '_')
+			++len_var;
+		pos_var -= len_var;
+	}
 	*var_name = malloc((len_var + 1) * sizeof(char));
 	if (!*var_name)
 		exit_error(all, NULL, 1);
-	ft_memcpy(*var_name, &input[pos_var], len_var);
+	ft_memcpy(*var_name, &input[pos_var + skip_one], len_var); // a verifier
 	var_name[0][len_var] = '\0';
 }
 
@@ -36,7 +46,10 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	char	*var_value;
 
 	extract_var_name(&var_name, input, pos_var, all);
-	var_value = dup_value_with_quote(search_value(all->env, var_name), \
+	if (strcmp(var_name, "?") == 0) // a verifier
+		var_value = ft_itoa(*all->last_return_value);
+	else
+		var_value = dup_value_with_quote(search_value(all->env, var_name), \
 									quote);
 	if (!var_value)
 	{
@@ -72,7 +85,7 @@ void	check_var(char *input, t_alloc *all)
 		if (input[i] == '$' && quote != 1)
 		{
 			treat_one_var(input, all, i, quote);
-			while (ft_isalnum(input[++i]) || input[i] == '_')
+			while (ft_isalnum(input[++i]) || input[i] == '_' || input[i] == '?') // a verifier
 				;
 			input = &input[i];
 			i = -1;
@@ -106,3 +119,5 @@ void	replace_var(char **input, t_alloc *all)
 	all->input = *input;
 	clear_token(&lst_input, all);
 }
+
+
