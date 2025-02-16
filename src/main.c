@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/14 13:52:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/16 12:33:47 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 	all->env = pars_env(envp, all);
 	while (1)
 	{
-		input = readline(get_pwd());
+		input = readline(get_short_path(all));
 		if (!input)
 			break ;		//write exit\n
 		add_history(input);

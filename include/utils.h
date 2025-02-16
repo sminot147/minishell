@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/14 12:57:13 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/16 12:33:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define TMP_DIR "/tmp/"
-# define PREFIX "sh-thd-"
+# define MAX_PATH_LENGTH	30
+# define TMP_DIR			"/tmp/"
+# define PREFIX				"sh-thd-"
+# define RESET				"\033[0m"
+# define RED				"\033[31m"
+# define YELLOW				"\033[33m"
+# define GREEN				"\033[32m"
+# define CYAN				"\033[36m"
+# define WHITE				"\033[37m"
+# define BLUE				"\033[34m"
+# define LIGHT_BLUE			"\033[94m"
 
 /*---------------------------Exit.c------------------------------------------*/
 void	free_line(t_alloc *alloced);
@@ -69,6 +78,6 @@ void	extract_error_message(char *sep);
 char	*generate_tmp_filename(t_alloc *all);
 
 /*---------------------------Get_pwd.c---------------------------------------*/
-char	*get_pwd(void);
+char	*get_short_path(t_alloc *all);
 
 #endif

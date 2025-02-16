@@ -8,6 +8,8 @@ Ajouter le path dans le prompt
 
 pour cd 
 
+les signaux
+
 Mkdir test
 Cd test
 Mkdir test2
