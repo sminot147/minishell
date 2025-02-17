@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/14 14:22:18 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:05:55 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	open_in_file(t_child_info child_info)
 	{
 		putstr_fd("minishell: ", 2);
 		perror(child_info.in_file);
-		exit(2);
+		exit(1);
 	}
 	return (return_value);
 }
@@ -45,7 +45,7 @@ static int	open_out_file(t_child_info child_info)
 	{
 		putstr_fd("minishell: ", 2);
 		perror(child_info.out_file);
-		exit(3);
+		exit(1);
 	}
 	return (return_value);
 }
@@ -74,7 +74,7 @@ int	child(t_child_info child_info, t_alloc *all)
 		fd[0] = open_in_file(child_info);
 	else if (child_info.here_doc.here_doc == 1)
 		fd[0] = child_info.here_doc.fd;
-	else if (child_info.first == 0)
+	else if (child_info.first == 0 && child_info.pipe[0] != -1)
 		fd[0] = child_info.pipe[0];
 	else
 		fd[0] = 0;

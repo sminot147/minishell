@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/16 12:33:44 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/16 18:40:14 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define WHITE				"\033[37m"
 # define BLUE				"\033[34m"
 # define LIGHT_BLUE			"\033[94m"
+
+
 
 /*---------------------------Exit.c------------------------------------------*/
 void	free_line(t_alloc *alloced);
@@ -79,5 +81,8 @@ char	*generate_tmp_filename(t_alloc *all);
 
 /*---------------------------Get_pwd.c---------------------------------------*/
 char	*get_short_path(t_alloc *all);
+
+/*---------------------------Signal.c----------------------------------------*/
+void	handle_sigint(int sig);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_cd.c                                      :+:      :+:    :+:   */
+/*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 16:35:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:10:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,17 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	exec_cd(t_child_info *child_info)
+int	exec_env(t_child_info *child_info, t_alloc *all) // virer le child info si il est pas utilser
 {
-	if (child_info->pipe_after == 0 && child_info->first == 1)
+	t_env	*env;
+	(void)child_info;
+	env = all->env;
+	if (!env)
+		return (0);
+	while (env)
 	{
-		if (child_info->args[2])
-		{
-			putstr_fd("minishell: cd: too many arguments\n", 2);
-			return (1);
-		}
-		if (chdir(child_info->args[1]) < 0)
-		{
-			putstr_fd("minishell: cd: ", 2);
-			perror(child_info->args[1]);
-			return (1);
-		}
+		ft_printf("%s=%s\n", env->name, env->value);
+		env = env->next;
 	}
 	return (0);
 }

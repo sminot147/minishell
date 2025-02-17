@@ -6,12 +6,14 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/14 14:21:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:33:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
+
+extern int	g_shell_status;
 
 static void	extract_var_name(char **var_name, char *input, int pos_var, \
 								t_alloc *all)
@@ -45,9 +47,10 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	char	*var_name;
 	char	*var_value;
 
-	extract_var_name(&var_name, input, pos_var, all);
+	extract_var_name(&var_name, input, pos_var, all);	
 	if (strcmp(var_name, "?") == 0) // a verifier
-		var_value = ft_itoa(*all->last_return_value);
+		var_value = dup_value_with_quote(ft_itoa(g_shell_status), \
+									quote);
 	else
 		var_value = dup_value_with_quote(search_value(all->env, var_name), \
 									quote);
@@ -81,12 +84,15 @@ void	check_var(char *input, t_alloc *all)
 	quote = 0;
 	i = -1;
 	while (input[++i])
-	{
-		if (input[i] == '$' && quote != 1)
+	{//									  |				<--- gros bout de scotch --->					 |
+		if (input[i] == '$' && quote != 1 && input[i + 1] && (input[i + 1] != ' ' && input[i + 1] != '"')) // pour ne pas conter les $ seul
 		{
 			treat_one_var(input, all, i, quote);
-			while (ft_isalnum(input[++i]) || input[i] == '_' || input[i] == '?') // a verifier
-				;
+			if (input[i + 1] == '?')
+				i += 2;
+			else
+				while (input[i] && (ft_isalnum(input[++i]) || input[i] == '_')) // a verifier  || input[i] == '?'
+					;
 			input = &input[i];
 			i = -1;
 		}

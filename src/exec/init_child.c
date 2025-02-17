@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:46:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/14 12:21:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:54:31 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@
 void	init_child(t_cmd cmd, char **envp, t_child_info *child_info, \
 		t_alloc *all)
 {
-	(*child_info).args = cmd.args;
-	(*child_info).cmd = cmd.args[0];
+	if (cmd.args)
+	{
+		(*child_info).args = cmd.args;
+		(*child_info).cmd = cmd.args[0];
+	}
+	else
+	{
+		(*child_info).args = NULL;
+		(*child_info).cmd = NULL;
+	}
 	(*child_info).in_file = cmd.infile;
 	(*child_info).out_file = cmd.outfile;
 	(*child_info).append = cmd.append;

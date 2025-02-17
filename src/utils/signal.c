@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_cd.c                                      :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 16:35:48 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/16 18:18:37 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/16 18:40:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command_exec.h"
 #include "utils.h"
-#include <unistd.h>
-#include <stdio.h>
+#include "parsing.h"
+#include "command_exec.h"
+#include <sys/ioctl.h>
+#include <signal.h>
 
-int	exec_cd(t_child_info *child_info)
+extern int	g_shell_status;
+
+void	handle_sigint(int sig)
 {
-	if (child_info->pipe_after == 0 && child_info->first == 1)
+	if (sig == SIGINT)
 	{
-		if (child_info->args[2])
-		{
-			putstr_fd("minishell: cd: too many arguments\n", 2);
-			return (1);
-		}
-		if (chdir(child_info->args[1]) < 0)
-		{
-			putstr_fd("minishell: cd: ", 2);
-			perror(child_info->args[1]);
-			return (1);
-		}
+		g_shell_status = 130;
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
 	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/14 14:22:37 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/17 18:58:40 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ UTILS = exit.c \
 	parsing_message_error.c \
 	get_random_file_name.c \
 	get_pwd.c \
+	signal.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 
@@ -58,6 +59,9 @@ BUILT_INS = builtins_cd.c \
 		builtins_exit.c \
 		builtins_pwd.c \
 		builtins_echo.c \
+		builtins_env.c \
+		builtins_export.c \
+		builtins_unset.c \
 
 FILE =$(addprefix $(SRC_DIR), $(SRC_FILE))\
 	$(addprefix $(UTILS_DIR), $(UTILS))\

@@ -1,14 +1,13 @@
 - Regarder pour reconstuire une partie de l'env;
 
+/////
+
 Verifier les fd et les leak lors des execution des child et des here_doc
 - Patch le probleme de fd de here_doc open (le pipe here_doc reste open)
 
-Ajouter le path dans le prompt
+/////
 
-
-pour cd 
-
-les signaux
+pour cd
 
 Mkdir test
 Cd test
@@ -17,3 +16,46 @@ Cd test2
 RM test (avec le bon path)
 Si tu fait cd .. tu segfault
 Faut retourner au home !
+
+/////
+
+quand on exec une commande avec un space avant il considaire 1 token separateur vide
+...e/madelvin/Documents/minishel [2] >  >> test (segfault)
+Token: [][1]
+Token: [>>][1]
+Token: [test][0]
+
+et sa cause des probleme
+
+/////
+
+modifier le print car jsp pk sa marche pas en gros le ctrl c une commande de lancer
+donne pas un bon resulta 
+
+/////
+
+./ls foncitonne alors qu'il devrai pas de meme que le a.out si il est a l'endroit actuelle 
+
+mkdir tmp_path_test1 tmp_path_test2
+printf '#include <unistd.h>\nint main(){write(1, \"1\\n\", 2);}' > tmp_path_test1/test1.c
+gcc tmp_path_test1/test1.c -o tmp_path_test1/a.out
+printf '#include <unistd.h>\nint main(){write(1, \"2\\n\", 2);}' > tmp_path_test2/test2.c
+gcc tmp_path_test2/test2.c -o tmp_path_test2/a.out
+export PATH=tmp_path_test1:tmp_path_test2
+a.out
+export PATH=tmp_path_test2:tmp_path_test1
+a.out
+/bin/rm -rf tmp_path_test1 tmp_path_test2
+
+/////
+
+corriger les return dans l'exec
+
+/////
+
+corriger mon path (le reconstruire pour les commande avec le path actuelle et non le start enlever envp en gros)
+
+
+/////
+
+corriger export et unset pour prendre plusieur arg et les secur / normer

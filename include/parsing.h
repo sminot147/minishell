@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/14 13:51:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/16 18:07:54 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_alloc
 	t_token			**token;
 	t_cmd			*cmd;
 	t_env			*env;
-	char			*last_return_value;
 }	t_alloc;
 
 /*---------------------------Pars_env.c--------------------------------------*/
