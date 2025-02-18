@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 16:35:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:57:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
 #include "command_exec.h"
 #include "utils.h"
 #include <unistd.h>
@@ -23,6 +24,11 @@ int	exec_cd(t_child_info *child_info)
 		{
 			putstr_fd("minishell: cd: too many arguments\n", 2);
 			return (1);
+		}
+		if (!ft_strcmp(child_info->args[1], "-"))
+		{
+			exec_pwd();
+			return (0);
 		}
 		if (chdir(child_info->args[1]) < 0)
 		{

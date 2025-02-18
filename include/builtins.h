@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:28:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 18:25:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:57:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 #include "parsing.h"
+#include "command_exec.h"
 
 int		exec_builtins_solo(t_child_info *child_info, t_alloc *all);
 int		exec_cd(t_child_info *child_info);
