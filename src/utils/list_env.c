@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:30:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 14:06:28 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/18 16:34:37 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ char	*search_value(t_env *lst_env, char *to_find)
 	if (lst_env->next)
 		return (search_value(lst_env->next, to_find));
 	else
-		return ("");
+		return (NULL);
 }

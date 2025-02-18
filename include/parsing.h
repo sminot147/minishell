@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/16 18:07:54 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:20:47 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ int		size_check_sep(char *input);
 /*---------------------------Replace_var.c-----------------------------------*/
 void	replace_var(char **input, t_alloc *all);
 
+/*---------------------------Replace_var_value.c-----------------------------*/
+void	add_var_value(char *input, int pos_var, int quote, t_alloc *all);
+
 /*---------------------------Replace_var_utils.c-----------------------------*/
-char	*dup_value_with_quote(char *var_value, int quote);
 void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote);
 void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 

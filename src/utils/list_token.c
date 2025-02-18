@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/13 21:00:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:45:41 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ t_token	*new_token(char *content)
 
 	token = ft_calloc(1, sizeof(t_token));
 	if (token == NULL)
+	{
+		free(content);
 		return (NULL);
+	}
 	token->token = content;
 	return (token);
 }

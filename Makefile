@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/17 18:58:40 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/18 17:23:12 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ PARSING = parsing.c \
 	pars_env.c \
 	replace_var.c \
 	cmd_parser.c \
-	replace_var_utils.c \
+	replace_var_utils.c\
+	replace_var_value.c\
 	here_doc.c \
 
 BUILT_INS_DIR = $(SRC_DIR)builtins/
