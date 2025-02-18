@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/18 17:36:58 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/18 21:30:44 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ UTILS = exit.c \
 	signal.c \
 	make_env_tab.c \
 	put_env.c \
+	get_env_value.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 

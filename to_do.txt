@@ -56,4 +56,8 @@ corriger export et unset pour prendre plusieur arg et les secur / normer
 
 retirer les quote dans les var
 
+/////
+
+normer tout
+
 Fait : 

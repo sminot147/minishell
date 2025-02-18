@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 15:32:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:10:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	exec_builtins_solo(t_child_info *child_info, t_alloc *all)
 		return (0);
 	if (ft_strcmp(child_info->cmd, "cd") == 0)
 	{
-		g_shell_status = exec_cd(child_info);
+		g_shell_status = exec_cd(child_info, all);
 		return (1);
 	}
 	if (ft_strcmp(child_info->cmd, "export") == 0)

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 19:39:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:10:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static int	check_validity(char *input)
 	int		i;
 
 	i = 0;
-	if (!ft_isalpha(input[0]) && input[0] != '_')
+	if (ft_isalpha(input[0]) == 0 && input[0] != '_')
 	{
 		put_error(input);
 		return (-1);
 	}
 	while (input[i] && input[i] != '=')
 	{
-		if (!ft_isalnum(input[i]) && input[0] != '_')
+		if (ft_isalnum(input[i]) == 0 && input[i] != '_')
 		{
 			put_error(input);
 			return (-1);
@@ -106,7 +106,7 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 	int	return_value;
 
 	return_value = 0;
-	if (child_info->pipe_after == 0 && child_info->first == 1)
+	if ((child_info->pipe_after == 0 && child_info->first == 1))
 	{
 		if (!child_info->args[1])
 			put_env(all);
@@ -118,4 +118,9 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 		}
 	}
 	return (return_value);
+}
+
+void	export_var(char *value, t_alloc *all)
+{
+	add_var(all, value);
 }

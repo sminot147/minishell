@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:26:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:23:43 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,8 @@ int     count_env_size(t_env *env);
 
 /*---------------------------Put_env.c---------------------------------------*/
 void    put_env(t_alloc *all);
+
+/*---------------------------Get_env_value.c---------------------------------*/
+char	*get_env_value(t_env *envp, const char *name);
 
 #endif
