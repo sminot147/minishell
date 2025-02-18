@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 17:05:55 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:12:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	child(t_child_info child_info, t_alloc *all)
 	else
 		fd[1] = 1;
 	dup_and_close(fd[0], fd[1], all);
+	if (child_info.cmd == NULL) // tout free ici
+		exit (0);
 	exec_builtins_child(&child_info, all);
 	exec(child_info);
 	exit (1);
