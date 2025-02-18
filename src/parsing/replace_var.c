@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:25:16 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/18 17:46:52 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ void	replace_var(char **input, t_alloc *all)
 	free(*input);
 	*input = new_input;
 	all->input = *input;
-	ft_printf("input = %s\n", new_input);
 	clear_token(&lst_input, all);
 }
