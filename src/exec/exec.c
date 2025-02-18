@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:54:55 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 17:22:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:35:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,30 @@
 #include <sys/stat.h>
 
 
-static void	init_cmd(t_child_info child_info, char **cmd)
+static void	init_cmd(t_child_info child_info, char **cmd_path)
 {
 	char	**s_path;
 
-	if (!child_info.cmd || child_info.cmd[0] == '\0') // free tout
+	if (child_info.path && ft_strncmp(child_info.cmd, "./", 2) != 0)
 	{
-		putstr_fd("minishell: : command not found\n", 2);
-		exit(127);
+		s_path = ft_split(child_info.path, ':');
+		if (!s_path) // free tout
+		{
+			putstr_fd("minishell", 2);
+			perror(NULL);
+			exit (12);
+		}
+		*cmd_path = get_cmd_path(child_info.cmd, s_path);
+		free_double_array((void **)s_path);
+		if (!s_path) // free tout
+		{
+			putstr_fd("minishell", 2);
+			perror(NULL);
+			exit (12);
+		}
 	}
-	s_path = ft_split(child_info.path, ':');
-	if (!s_path) // free tout
-	{
-		putstr_fd("minishell", 2);
-		perror(NULL);
-		exit (12);
-	}
-	*cmd = get_cmd_path(child_info.cmd, s_path);
-	free_double_array((void **)s_path);
-	if (!s_path) // free tout
-	{
-		putstr_fd("minishell", 2);
-		perror(NULL);
-		exit (12);
-	}
+	else
+		*cmd_path = child_info.cmd;
 }
 
 void	exec(t_child_info child_info)

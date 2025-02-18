@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/11 16:07:32 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:43:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,28 @@ static char	*join_cmd_path(char **split_path, int i, char *cmd)
 	return (cmd_path);
 }
 
+
 char	*get_cmd_path(char *cmd, char **splited_path)
 {
 	int		i;
-	char	**splited_cmd;
 	char	*cmd_path;
 
 	i = -1;
-	splited_cmd = ft_split(cmd, ' ');
 	while (splited_path[++i])
 	{
-		cmd_path = join_cmd_path(splited_path, i, splited_cmd[0]);
+		cmd_path = join_cmd_path(splited_path, i, cmd);
 		if (!cmd_path)
 		{
-			free_double_array((void **)splited_cmd);
+			free(cmd);
 			return (NULL);
 		}
 		if (!access(cmd_path, F_OK | X_OK))
 		{
-			free_double_array((void **)splited_cmd);
+			free(cmd);
 			return (cmd_path);
 		}
 		free(cmd_path);
 	}
-	free_double_array((void **)splited_cmd);
 	return (cmd);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 19:13:21 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:46:12 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,47 @@ static void	remove_first(t_alloc *all)
 {
 	t_env *tmp;
 
-	tmp= all->env;
+	tmp = all->env;
 	all->env = all->env->next;
 	free_element(tmp);
 }
 
+static void	remove_var(t_alloc *all, const char *var_name)
+{
+	t_env	*current;
+	t_env	*previous;
+
+	if (!all->env)
+		return ;
+	if (strcmp(all->env->name, var_name) == 0)
+	{
+		remove_first(all);
+		return;
+	}
+	previous = all->env;
+	current = all->env->next;
+	while (current)
+	{
+		if (strcmp(current->name, var_name) == 0)
+		{
+			previous->next = current->next;
+			free_element(current);
+			return;
+		}
+		previous = current;
+		current = current->next;
+	}
+}
+
 int exec_unset(t_child_info *child_info, t_alloc *all)
 {
-    t_env *current;
-    t_env *previous;
+	int i;
 
-    if (!all->env || !child_info->args[1])
-        return (0);
-    if (strcmp(all->env->name, child_info->args[1]) == 0)
-    {
-		remove_first(all);
-        return (0);
-    }
-    previous = all->env;
-    current = all->env->next;
-    while (current)
-    {
-        if (strcmp(current->name, child_info->args[1]) == 0)
-        {
-            previous->next = current->next;
-			free_element(current);
-            return (0); 
-        }
-        previous = current;
-        current = current->next;
-    }
-    return (0);
+	if (!all->env || !child_info->args[1])
+		return (0);
+	i = 1;
+	while (child_info->args[i])
+		remove_var(all, child_info->args[i++]);
+	return (0);
 }
+

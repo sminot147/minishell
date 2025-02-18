@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/16 18:36:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:11:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ typedef struct s_child_info
 }	t_child_info;
 
 int		child(t_child_info child_info, t_alloc *all);
-void	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all);
+void	exec_cmd(t_cmd *cmd_list, t_alloc *all);
 void	exec(t_child_info child_info);
-void	init_child(t_cmd cmd, char **envp, t_child_info *child_info, t_alloc *all);
+void	init_child(t_cmd cmd, t_child_info *child_info, t_alloc *all);
 
 char	*get_path(char	**envp);
 char	*get_cmd_path(char *cmd, char **splited_path);

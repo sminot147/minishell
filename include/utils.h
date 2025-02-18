@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/16 18:40:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:26:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,12 @@ char	*get_short_path(t_alloc *all);
 
 /*---------------------------Signal.c----------------------------------------*/
 void	handle_sigint(int sig);
+
+/*---------------------------Make_env.c--------------------------------------*/
+char	**make_env_tab(t_alloc *all);
+int     count_env_size(t_env *env);
+
+/*---------------------------Put_env.c---------------------------------------*/
+void    put_env(t_alloc *all);
 
 #endif

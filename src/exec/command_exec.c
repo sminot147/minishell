@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 17:28:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:28:51 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	wait_all_child(int *pid, int last)
 	return (return_value);
 }
 
-void	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
+void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 {
 	int				i;
 	int				return_value;
@@ -137,11 +137,12 @@ void	exec_cmd(t_cmd *cmd_list, char **envp, t_alloc *all)
 		exit_error(all, NULL, 1);
 	child_info.first = 1;
 	child_info.pipe[0] = -1;
+	child_info.envp = make_env_tab(all);
 	i = 0;
 	signal(SIGINT, SIG_IGN);
 	while (cmd_list != NULL)
 	{
-		init_child(*cmd_list, envp, &child_info, all);
+		init_child(*cmd_list, &child_info, all);
 		if (exec_builtins_solo(&child_info, all) == 0)
 		{
 			return_value = open_inter_file(*cmd_list, all);

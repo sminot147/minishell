@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 18:58:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:32:35 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	exec_builtins_child(t_child_info *child_info, t_alloc *all)
 		exit (exec_pwd());
 	if (ft_strcmp(child_info->cmd, "env") == 0)
 		exit(exec_env(child_info, all));
+	if (ft_strcmp(child_info->cmd, "echo") == 0)
+		exit(exec_echo(child_info, all));	
 	return ;
 }
