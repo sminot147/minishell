@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:30:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/11 19:15:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:06:28 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,17 @@ t_env	*new_var_env(char *name, char *value)
 	t_env	*var;
 
 	if (!value)
+	{
+		free(name);
 		return (NULL);
+	}
 	var = ft_calloc(1, sizeof(t_env));
 	if (var == NULL)
+	{
+		free(name);
+		free(value);
 		return (NULL);
+	}
 	var->name = name;
 	var->value = value;
 	return (var);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/17 19:50:27 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:33:13 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
 
+	while (ft_isspace(*input))
+		++input;
 	while (*input)
 	{
 		next_token = new_token(extract_next_token(input, all));
@@ -77,5 +79,5 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 			all->token = lst_token;
 		input += size_to_moove(input);
 	}
-	// print_tokens(*lst_token);
+	//print_tokens(*lst_token);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/17 20:13:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:24:24 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 #include <signal.h>
 
 int	g_shell_status;
+
+static int	end_minishell(t_alloc *all)
+{
+	free_all(all);
+	write(STDOUT_FILENO, "exit\n", 5);
+	return (EXIT_SUCCESS);
+}
 
 static void	alloc_all(t_alloc **all)
 {
@@ -35,6 +42,7 @@ int	main(int ac, char **av, char **envp)
 	char    *prompt;
 	t_alloc	*all;
 
+	(void)av;
 	if (ac != 1)
 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
 	alloc_all(&all);
@@ -45,14 +53,11 @@ int	main(int ac, char **av, char **envp)
 		input = readline(prompt);
 		free(prompt);
 		if (!input)
-			break ;		//write exit\n
+			return (end_minishell(all));
 		add_history(input);
 		parse_input(input, all);
 		if (all->cmd != NULL)
 			exec_cmd(all->cmd, envp, all);
 		free_line(all);
 	}
-	free_all(all);
-	return (0);
-	(void)av;
 }

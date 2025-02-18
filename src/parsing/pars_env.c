@@ -6,12 +6,52 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/12 11:47:38 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/18 14:22:19 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
+
+static t_env	*add_pwd(t_alloc *all)
+{
+	char	 *name;
+	t_env	*new_env;
+
+	name = ft_strdup("PWD");
+	if (!name)
+		exit_error(all, NULL, 1);
+	new_env = new_var_env(name, getcwd(NULL, 0));
+	if (!new_env)
+		exit_error(all, NULL, 1);
+	return (new_env);
+}
+
+static t_env	*rebuild_env(t_alloc *all)
+{
+	char	 *name;
+	t_env	*lst_env;
+	t_env	*new_env;
+
+	lst_env = NULL;
+	add_env(&lst_env, add_pwd(all));
+	all->env = lst_env;
+	name = ft_strdup("SHLVL");
+	if (!name)
+		exit_error(all, NULL, 1);
+	new_env = new_var_env(name, strdup("1"));
+	if (!new_env)
+		exit_error(all, NULL, 1);
+	add_env(&lst_env, new_env);
+	name = ft_strdup("_");
+	if (!name)
+		exit_error(all, NULL, 1);
+	new_env = new_var_env(name, strdup("/usr/bin/env"));
+	if (!new_env)
+		exit_error(all, NULL, 1);
+	add_env(&lst_env, new_env);
+	return (lst_env);
+}
 
 static char	*extract_name(char *str, t_alloc *all)
 {
@@ -65,6 +105,8 @@ t_env	*pars_env(char **envp, t_alloc *all)
 		if (!all->env)
 			all->env = lst_env;
 	}
+	if (lst_env == NULL)
+		return (rebuild_env(all));
 	return (lst_env);
 	//print_env(lst_env);
 }

@@ -1,4 +1,8 @@
-- Regarder pour reconstuire une partie de l'env;
+
+/!\/!\/!\/!\/!\/!\/!\/!\
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+Quand on lance minishell sans env il est completement cassé et il n'affiche pas de nouvelle ligne avant le exit.
+
 
 /////
 
@@ -17,20 +21,7 @@ RM test (avec le bon path)
 Si tu fait cd .. tu segfault
 Faut retourner au home !
 
-/////
 
-quand on exec une commande avec un space avant il considaire 1 token separateur vide
-...e/madelvin/Documents/minishel [2] >  >> test (segfault)
-Token: [][1]
-Token: [>>][1]
-Token: [test][0]
-
-et sa cause des probleme
-
-/////
-
-modifier le print car jsp pk sa marche pas en gros le ctrl c une commande de lancer
-donne pas un bon resulta 
 
 /////
 
@@ -59,3 +50,26 @@ corriger mon path (le reconstruire pour les commande avec le path actuelle et no
 /////
 
 corriger export et unset pour prendre plusieur arg et les secur / normer
+
+
+FAit : 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
+- Regarder pour reconstuire une partie de l'env;
+
+//
+quand on exec une commande avec un space avant il considaire 1 token separateur vide
+...e/madelvin/Documents/minishel [2] >  >> test (segfault)
+Token: [][1]
+Token: [>>][1]
+Token: [test][0]
+
+et sa cause des probleme
+/////
+
+modifier le print car jsp pk sa marche pas en gros le ctrl c une commande de lancer
+donne pas un bon resultat 
+
+//////
+Ecrire exit quand on sort.
