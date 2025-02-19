@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:46:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:34:39 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 	t_token	*node;
 
 	if (pos_var != 0)
-		add_input_before_var(input, all, pos_var, quote);
+		add_input_before_var(input, all, pos_var);
 	if (input[pos_var + 1] == '?')
 	{
 		var_value = ft_itoa(g_shell_status);
@@ -85,7 +85,7 @@ void	check_var(char *input, t_alloc *all)
 				quote = 0;
 		}
 	}
-	add_input_before_var(input, all, i, quote);
+	add_input_before_var(input, all, i);
 }
 
 void	replace_var(char **input, t_alloc *all)
@@ -104,4 +104,5 @@ void	replace_var(char **input, t_alloc *all)
 	*input = new_input;
 	all->input = *input;
 	clear_token(&lst_input, all);
+	ft_printf("input = %s\n", new_input);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 10:54:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:31:51 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	replace_var(char **input, t_alloc *all);
 void	add_var_value(char *input, int pos_var, int quote, t_alloc *all);
 
 /*---------------------------Replace_var_utils.c-----------------------------*/
-void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote);
+void	add_input_before_var(char *input, t_alloc *all, int pos_var);
 void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 
 /*---------------------------Cmd_parser.c------------------------------------*/

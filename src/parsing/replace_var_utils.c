@@ -6,36 +6,31 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:20:26 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/19 11:34:06 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
 
-static char	*dup_input_before_var(char *input, int pos_var, int quote, \
-									t_alloc *all)
+static char	*dup_input_before_var(char *input, int pos_var,	t_alloc *all)
 {
 	char	*dest;
 
-	if (quote)
-		++pos_var;
 	dest = (char *)malloc((pos_var + 1) * sizeof(char));
 	if (!dest)
 		exit_error(all, NULL, 1);
 	ft_memcpy(dest, input, pos_var);
-	if (quote)
-		dest[pos_var - 1] = '"';
 	dest[pos_var] = '\0';
 	return (dest);
 }
 
-void	add_input_before_var(char *input, t_alloc *all, int pos_var, int quote)
+void	add_input_before_var(char *input, t_alloc *all, int pos_var)
 {
 	char	*str_node;
 	t_token	*node;
 
-	str_node = dup_input_before_var(input, pos_var, quote, all);
+	str_node = dup_input_before_var(input, pos_var, all);
 	if (*str_node == '\0')
 	{
 		free(str_node);

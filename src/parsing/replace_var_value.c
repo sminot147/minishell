@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:17:34 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/19 11:35:09 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,35 @@ static int	len_var_value(char *var_value, int quote)
 	j = 0;
 	i = -1;
 	while (var_value[++i])
-		if (var_value [i] == '"')
-			++j;
-	i += 2 + 4 * j;
-	if (quote)
-		++i;
+	{
+		if (var_value[i] == '"' && quote == 2)
+			j += 4;
+		else if (var_value[i] == '"' || var_value[i] == '\'')
+			j += 2;
+	}
+	i += j;
 	return (i);
+}
+
+static void	copy_the_char(char var_value, char *new_value, int *j, int quote)
+{
+	if (var_value == '"' && quote == 2)
+	{
+		ft_memcpy(&new_value[*j], "\"'\"'\"", 5);
+		*j += 4;
+	}
+	else if (var_value == '"')
+	{
+		ft_memcpy(&new_value[*j], "'\"'", 3);
+		*j += 2;
+	}
+	else if (var_value == '\'')
+	{
+		ft_memcpy(&new_value[*j], "\"'\"", 3);
+		*j += 2;
+	}
+	else
+		new_value[*j] = var_value;
 }
 
 static char	*dup_value_with_quote(char *var_value, int quote)
@@ -42,19 +65,11 @@ static char	*dup_value_with_quote(char *var_value, int quote)
 		return (NULL);
 	i = -1;
 	j = -1;
-	new_value[++j] = '"';
 	while (var_value[++i])
 	{
-		if (var_value[i] == '"')
-		{
-			ft_memcpy(&new_value[++j], "\"'\"'", 4);
-			j += 3;
-		}
-		new_value[++j] = var_value[i];
+		++j;
+		copy_the_char(var_value[i], new_value, &j, quote);
 	}
-	new_value[++j] = '"';
-	if (quote)
-		new_value[++j] = '"';
 	return (new_value);
 }
 
