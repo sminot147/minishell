@@ -145,23 +145,15 @@
   # **************************************************************************** #
   #                                     SCMD                                     #
   # **************************************************************************** #
-  6:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:15  
-  7:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:19  
-  8:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:24  
-  18:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:46  
-  21:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:59  
-  22:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:65  
-  24:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:73  
-  25:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:77  
   # **************************************************************************** #
   #                                  BROKEN SCMD                                 #
   # **************************************************************************** #
-  34:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  1_scmds.sh:100  
+  34:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  1_scmds.sh:100  // a patch juste add le car /<c>
   # **************************************************************************** #
   #                                  VARIABLES                                   #
   # **************************************************************************** #
-  6:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:16  
-  7:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:18  
+  6:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:16  // a patch (par forcement de value apres export X)
+  7:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:18  // a patch (par forcement de value apres export X)
   8:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:20  
   9:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:23  
   10:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:26  
@@ -253,34 +245,3 @@
 🏁                                    RESULT                                    🏁
 🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁
              TOTAL TEST COUNT: 941  TESTS PASSED: 0  LEAKING: 0 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*input;
-// 	// char    *prompt;
-// 	t_alloc	*all;
-
-// 	(void)av;
-// 	if (ac != 1)
-// 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
-// 	alloc_all(&all);
-// 	all->env = pars_env(envp, all);
-// 	while (1)
-// 	{
-// 		if (isatty(fileno(stdin)))
-// 			input = readline("> ");
-// 		else
-// 		{
-// 			char *line;
-// 			line = get_next_line(fileno(stdin));
-// 			input = ft_strtrim(line, "\n");
-// 			free(line);
-// 		}
-// 		if (!input)
-// 			return (end_minishell(all));
-// 		add_history(input);
-// 		parse_input(input, all);
-// 		if (all->cmd != NULL)
-// 			exec_cmd(all->cmd, all);
-// 		free_line(all);
-// 	}
-// }
