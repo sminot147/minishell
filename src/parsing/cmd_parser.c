@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 19:59:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:09:55 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ static char	**add_arg(char **args, const char *new_arg)
 
 static int	append_to_cmd(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 {
-	if ((*token_lst)->token[0] == '|' && (*token_lst)->is_sep == 1 &&\
+	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP &&\
 		(*token_lst)->next == NULL)
 		return (1);
-	if ((*token_lst)->token[0] == '|' && (*token_lst)->is_sep == 1)
+	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP)
 		cmd->pipe = 1;
-	else if ((*token_lst)->token[0] == '<' && (*token_lst)->is_sep == 1)
+	else if ((*token_lst)->token[0] == '<' && (*token_lst)->type == IS_SEP)
 	{
-		if (!(*token_lst)->next || (*token_lst)->next->is_sep)
+		if (!(*token_lst)->next || (*token_lst)->type == IS_SEP)
 			return (1);
 		add_infile(cmd, token_lst, all, i);
 	}
-	else if ((*token_lst)->token[0] == '>' && (*token_lst)->is_sep == 1)
+	else if ((*token_lst)->token[0] == '>' && (*token_lst)->type == IS_SEP)
 	{
-		if (!(*token_lst)->next || (*token_lst)->next->is_sep)
+		if (!(*token_lst)->next || (*token_lst)->type == IS_SEP)
 			return (1);
 		add_outfile(cmd, token_lst, all, i);
 	}
@@ -89,7 +89,7 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 			clear_cmd(&all->cmd);
 			return (1);
 		}
-		if ((*token_lst)->token[0] == '|' && (*token_lst)->is_sep == 1)
+		if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP)
 			break ;
 		(*token_lst) = (*token_lst)->next;
 		(*i)++;
@@ -99,18 +99,18 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 
 static int	specific_case(t_token *token_lst)
 {
-	if (token_lst->is_sep && ft_strcmp(token_lst->token, "|") == 0)
+	if (token_lst->type == IS_SEP && ft_strcmp(token_lst->token, "|") == 0)
 	{
 		g_shell_status = 2;
 		putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
-	if (!token_lst->is_sep && ft_strcmp(token_lst->token, ":") == 0)
+	if (token_lst->type != IS_SEP && ft_strcmp(token_lst->token, ":") == 0)
 	{
 		g_shell_status = 0;
 		return (1);
 	}
-	if (!token_lst->is_sep && ft_strcmp(token_lst->token, "!") == 0)
+	if (token_lst->type != IS_SEP && ft_strcmp(token_lst->token, "!") == 0)
 	{
 		g_shell_status = 1;
 		return (1);

@@ -17,7 +17,7 @@
   # **************************************************************************** #
   #                                PARSING HELL                                  #
   # **************************************************************************** #
-  4:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:14  
+  4:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_p
   12:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:32  
   14:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:40  
   15:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:45  
@@ -60,30 +60,8 @@
   # **************************************************************************** #
   #                                   BUILTINS                                   #
   # **************************************************************************** #
-  1:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:7      // a corriger (voir avec simeon)
   15:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:35     // les crash a re test apres correction du parsing 
-  26:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:57     // les crash a re test apres correction du parsing 
-  73:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:152    // ???? alors a trouver pk mais sa foctionne bien
-  91:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:190    // corriger mais ko toujours
-  92:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:194  
-  93:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:198  
-  94:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:201  
-  95:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:205  
-  97:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:213  
-  98:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:217  
-  99:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:221  
-  100:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:225  
-  102:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:233  
-  105:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:239  
-  107:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:243  
-  116:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:265  
-  118:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:273  
-  122:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:290  
-  125:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:302  
-  128:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:314  
-  131:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:328  
-  132:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:333  
-  133:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:337  
+  26:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:57     // les crash a re test apres correction du parsing
   140:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  1_builtins.sh:360  
   147:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:376  
   148:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:382  
@@ -239,8 +217,6 @@
   # **************************************************************************** #
   #                                  CORRECTION                                  #
   # **************************************************************************** #
-  1:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:5  
-  17:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:39  
   18:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:41  
   19:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(0)  bash(2) ]  2_correction.sh:43  
   20:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:45  

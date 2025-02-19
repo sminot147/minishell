@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:20:47 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/19 10:54:12 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ typedef enum e_bool
 	TRUE = 1
 }	t_bool;
 
+typedef enum e_token_type
+{
+    NO_QUOTE = 0,
+    HAVE_QUOTE = 1,
+    IS_SEP = 2,
+}    t_token_type;
+
 typedef struct s_env
 {
 	char			*name;
@@ -31,7 +38,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*token;
-	t_bool			is_sep;
+	t_token_type	type;
 	struct s_token	*next;
 }	t_token;
 

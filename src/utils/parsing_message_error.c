@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_message_error.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:44:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/17 19:47:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:12:12 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,22 @@ void	extract_error_message(char *sep)
 	g_shell_status = 2;
 }
 
-int check_syntax(t_token *token_lst)
+int	check_syntax(t_token *token_lst)
 {
 	int	i;
 
 	i = 0;
 	while (token_lst)
 	{
-		if (token_lst->next && token_lst->next->is_sep && token_lst->is_sep && 
-			 ft_strcmp(token_lst->token, "|") != 0)
+		if (token_lst->next && token_lst->next->type == IS_SEP && \
+			token_lst->type == IS_SEP && \
+			ft_strcmp(token_lst->token, "|") != 0)
 		{
 			g_shell_status = 2;
 			extract_sep_and_put_error(token_lst->next->token);
 			return (i);
 		}
-		if (!is_valid_sep(token_lst->token) && token_lst->is_sep)
+		if (!is_valid_sep(token_lst->token) && token_lst->type == IS_SEP)
 		{
 			g_shell_status = 2;
 			extract_sep_and_put_error(token_lst->token);
