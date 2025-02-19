@@ -1,0 +1,286 @@
+  🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+  🚀                                MANDATORY                                   🚀
+  🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
+  # **************************************************************************** #
+  #                                COMPARE PARSING                               #
+  # **************************************************************************** #
+  # **************************************************************************** #
+  #                                PARSING HELL                                  #
+  # **************************************************************************** #
+  12:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:32  
+  14:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:40  
+  15:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:45     
+  70:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:195  
+  71:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:198  
+  72:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:201  
+  73:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:204  
+  74:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:207  
+  75:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:210  
+  77:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:216  
+  78:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:219  
+  88:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:244  
+  89:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  10_parsing_hell.sh:247  
+  120:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(0)  bash(253) ]  10_parsing_hell.sh:313    
+  121:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  10_parsing_hell.sh:315  
+  # **************************************************************************** #
+  #                                   BUILTINS                                   #
+  # **************************************************************************** #
+  1:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:7  
+  27:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:59  
+  28:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:61  
+  29:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:63  
+  30:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:65  
+  31:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:67  
+  32:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:69  
+  33:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:71  
+  73:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:152  
+  91:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:190  
+  92:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:194  
+  93:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:198  
+  94:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:201  
+  95:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:205  
+  97:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:213  
+  98:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:217  
+  99:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:221  
+  100:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:225  
+  102:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:233  
+  105:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:239  
+  107:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:243  
+  116:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:265  
+  118:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:273  
+  122:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:290  
+  125:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:302  
+  128:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:314  
+  131:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:328  
+  132:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:333  
+  133:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:337  
+  140:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  1_builtins.sh:360  
+  147:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:376  
+  148:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:382  
+  150:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:390  
+  155:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:400  
+  156:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:402  
+  157:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:404  
+  158:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:406  
+  159:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:408  
+  161:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:412  
+  200:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:490  
+  201:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:492  
+  202:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:496  
+  203:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:501  
+  204:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:505  
+  205:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:509  
+  224:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  1_builtins.sh:552  
+  231:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(2) ]  1_builtins.sh:566  
+  252:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:608  
+  253:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:612  
+  254:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:616  
+  255:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:622  
+  256:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(0)  bash(255) ]  1_builtins.sh:631  
+  257:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:633  
+  258:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:635  
+  259:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:637  
+  260:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(0)  bash(2) ]  1_builtins.sh:639  
+  261:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:641  
+  262:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:643  
+  263:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(0)  bash(3) ]  1_builtins.sh:645  
+  264:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:647  
+  265:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:649  
+  266:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:651  
+  267:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:653  
+  268:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:655  
+  269:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:657  
+  270:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:659  
+  271:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:661  
+  272:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:663  
+  273:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:665  
+  274:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:667  
+  275:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:669  
+  276:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:671  
+  277:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:673  
+  278:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:675  
+  279:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:677  
+  280:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:679  
+  281:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:681  
+  282:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:683  
+  283:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:685  
+  284:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:687  
+  285:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:689  
+  286:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:691  
+  287:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:693  
+  288:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:695  
+  289:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:697  
+  290:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:699  
+  291:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:701  
+  292:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:703  
+  293:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:705  
+  294:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:707  
+  295:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:709  
+  296:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:711  
+  297:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:713  
+  298:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  1_builtins.sh:715  
+  299:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  1_builtins.sh:717  
+  # **************************************************************************** #
+  #                                  PIPELINES                                   #
+  # **************************************************************************** #
+  15:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:32  // a patch
+  26:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:59  // return value pas bonne (141 au lieux de 0)
+  27:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:68  // return value pas bonne (141 au lieux de 0)
+  28:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:84  // return value pas bonne (141 au lieux de 0)
+  29:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(2) ]  1_pipelines.sh:96  // return value pas bonne (141 au lieux de 0)
+  30:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:110 // return value pas bonne (141 au lieux de 0)
+  38:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:151 // a patch 
+  39:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:156 // a patch 
+  40:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:161 // a patch 
+  41:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:166 // a patch 
+  42:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_pipelines.sh:171 // a patch 
+  # **************************************************************************** #
+  #                                    REDIRS                                    #
+  # **************************************************************************** #
+  66:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:142  // a patch (changer les droit lors de la creation des file) 
+  85:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:223  // a patch
+  86:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:229  // a patch
+  87:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:235  // a patch
+  88:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:241  // a patch
+  # **************************************************************************** #
+  #                                     SCMD                                     #
+  # **************************************************************************** #
+  6:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:15  
+  7:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:19  
+  8:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:24  
+  18:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:46  
+  21:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:59  
+  22:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:65  
+  24:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:73  
+  25:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:77  
+  # **************************************************************************** #
+  #                                  BROKEN SCMD                                 #
+  # **************************************************************************** #
+  34:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  1_scmds.sh:100  
+  # **************************************************************************** #
+  #                                  VARIABLES                                   #
+  # **************************************************************************** #
+  6:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:16  
+  7:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:18  
+  8:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:20  
+  9:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:23  
+  10:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:26  
+  11:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:29  
+  12:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:32  
+  13:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:35  
+  14:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:38  
+  39:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:91  
+  40:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:97  
+  41:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:103  
+  42:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:111  
+  43:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:120  
+  45:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:130  
+  46:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:133  
+  47:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:136  
+  48:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:139  
+  49:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:142  
+  50:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:145  
+  51:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:148  
+  52:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:151  
+  53:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:154  
+  54:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:157  
+  55:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:160  
+  56:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:163  
+  57:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:166  
+  58:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:169  
+  59:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:172  
+  # **************************************************************************** #
+  #                                  CORRECTION                                  #
+  # **************************************************************************** #
+  1:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:5  
+  17:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:39  
+  18:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:41  
+  19:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(0)  bash(2) ]  2_correction.sh:43  
+  20:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:45  
+  21:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:47  
+  22:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:49  
+  23:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:51  
+  24:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:53  
+  25:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:55  
+  29:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:65  
+  81:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:171  
+  82:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:173  
+  83:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:176  
+  84:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:179  
+  85:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:182  
+  86:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:185  
+  90:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:194  
+  92:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:198  
+  95:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:204  
+  96:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:211  
+  97:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:222  
+  98:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:225  
+  100:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:231  
+  106:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:251  
+  110:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:261  
+  111:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:265  
+  112:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:269  
+  113:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:273  
+  114:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:277  
+  # **************************************************************************** #
+  #                                  PATH FAILS                                  #
+  # **************************************************************************** #
+  1:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:5  
+  2:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:12  
+  3:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:21  
+  7:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:30  
+  8:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:32  
+  9:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:35  
+  10:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:39  
+  11:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_path_check.sh:43  
+  12:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:47  
+  # **************************************************************************** #
+  #                                SYNTAX ERRORS                                 #
+  # **************************************************************************** #
+  # **************************************************************************** #
+  #                                     WILD                                     #
+  # **************************************************************************** #
+  4:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:11  
+  6:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:18  
+  7:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:22  
+  10:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:31  
+  11:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:38  
+  12:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:41  
+  13:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:47  
+  14:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:50  
+  15:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:53  
+🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁
+🏁                                    RESULT                                    🏁
+🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁🏁
+             TOTAL TEST COUNT: 941  TESTS PASSED: 0  LEAKING: 0 
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*input;
+// 	// char    *prompt;
+// 	t_alloc	*all;
+
+// 	(void)av;
+// 	if (ac != 1)
+// 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
+// 	alloc_all(&all);
+// 	all->env = pars_env(envp, all);
+// 	while (1)
+// 	{
+// 		if (isatty(fileno(stdin)))
+// 			input = readline("> ");
+// 		else
+// 		{
+// 			char *line;
+// 			line = get_next_line(fileno(stdin));
+// 			input = ft_strtrim(line, "\n");
+// 			free(line);
+// 		}
+// 		if (!input)
+// 			return (end_minishell(all));
+// 		add_history(input);
+// 		parse_input(input, all);
+// 		if (all->cmd != NULL)
+// 			exec_cmd(all->cmd, all);
+// 		free_line(all);
+// 	}
+// }

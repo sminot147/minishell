@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:31:51 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/19 11:54:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_cmd
 typedef struct s_alloc
 {
 	char			*input;
+	char			*input_after_replace;
 	t_token			**token;
 	t_cmd			*cmd;
 	t_env			*env;
@@ -92,7 +93,7 @@ int		size_next_token(char *input);
 int		size_check_sep(char *input);
 
 /*---------------------------Replace_var.c-----------------------------------*/
-void	replace_var(char **input, t_alloc *all);
+void	replace_var(char *input, t_alloc *all);
 
 /*---------------------------Replace_var_value.c-----------------------------*/
 void	add_var_value(char *input, int pos_var, int quote, t_alloc *all);
@@ -105,8 +106,7 @@ void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 void	parse_cmd(t_token *token_lst, t_alloc *all);
 
 /*---------------------------Here_doc.c--------------------------------------*/
-void	execute_here_doc(t_cmd *cmd, t_alloc *all);
-int		here_doc(char *limiter, t_alloc *all);
+int		here_doc(t_token *token, t_alloc *all);
 
 /*---------------------------Parsing_message_error.c-------------------------*/
 void	cmd_parsing_error(t_token token_lst);

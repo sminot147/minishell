@@ -60,4 +60,16 @@ retirer les quote dans les var
 
 normer tout
 
+/////
+
+faire un chois sur le get_env_value a garder
+
+/////
+
+modifier les export des "|" stoquer les faux sep avec les quote
+
+//////
+
+update la last commande "_="
+
 Fait : 

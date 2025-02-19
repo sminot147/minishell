@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/19 11:09:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:34:30 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static char	*get_file(t_token *token_lst)
 	return (ft_strdup(token_lst->token));
 }
 
-static void	execute_here_docs(t_cmd *cmd, char *limiter, t_alloc *all)
+static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 {
 	int	fd;
 
 	if (cmd->child_here_doc.here_doc == 1)
 		safe_close(all, cmd->child_here_doc.fd);
-	fd = here_doc(limiter, all);
+	fd = here_doc(token, all);
 	if (fd < 0)
 		exit_error(all, NULL, 1);
 	cmd->child_here_doc.here_doc = 1;
@@ -38,9 +38,8 @@ void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 	char	*file;
 	t_file	*file_node;
 
-
 	if ((*token_lst)->token[1] == '<' && (*token_lst)->next)
-			execute_here_docs(cmd, (*token_lst)->next->token, all);
+			execute_here_docs(cmd, (*token_lst)->next, all);
 	else
 	{
 		file = get_file((*token_lst)->next);

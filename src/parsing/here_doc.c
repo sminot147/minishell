@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/14 12:19:24 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:51:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ static int	open_tmp_file(t_alloc *all, char **tmp_file)
 	return (fd);
 }
 
-static void	read_here_doc(int fd, char *limiter, t_alloc *all)
+static void	read_here_doc(int fd, t_token *token, t_alloc *all)
 {
 	char	*buffer;
 
+	// all->input
 	while (1)
 	{
 		buffer = readline(">");
 		if (!buffer)
 			break ;
-		if (ft_strcmp(limiter, buffer) == 0)
+		if (ft_strcmp(token->token, buffer) == 0)
 		{
 			free(buffer);
 			break ;
@@ -48,13 +49,13 @@ static void	read_here_doc(int fd, char *limiter, t_alloc *all)
 	safe_close(all, fd);
 }
 
-int	here_doc(char *limiter, t_alloc *all)
+int	here_doc(t_token *token, t_alloc *all)
 {
 	int		fd;
 	char	*tmp_file;
 
 	fd = open_tmp_file(all, &tmp_file);
-	read_here_doc(fd, limiter, all);
+	read_here_doc(fd, token, all);
 	fd = open(tmp_file, O_RDONLY);
 	if (fd > 0)
 		unlink(tmp_file);

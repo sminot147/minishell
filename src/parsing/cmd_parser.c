@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/19 11:09:55 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:32:52 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ static int	append_to_cmd(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 		cmd->pipe = 1;
 	else if ((*token_lst)->token[0] == '<' && (*token_lst)->type == IS_SEP)
 	{
-		if (!(*token_lst)->next || (*token_lst)->type == IS_SEP)
+		if (!(*token_lst)->next)
 			return (1);
 		add_infile(cmd, token_lst, all, i);
 	}
 	else if ((*token_lst)->token[0] == '>' && (*token_lst)->type == IS_SEP)
 	{
-		if (!(*token_lst)->next || (*token_lst)->type == IS_SEP)
+		if (!(*token_lst)->next)
 			return (1);
 		add_outfile(cmd, token_lst, all, i);
 	}

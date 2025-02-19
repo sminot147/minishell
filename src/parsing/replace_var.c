@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:34:39 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/19 11:55:41 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,18 @@ void	check_var(char *input, t_alloc *all)
 	add_input_before_var(input, all, i);
 }
 
-void	replace_var(char **input, t_alloc *all)
+void	replace_var(char *input, t_alloc *all)
 {
 	t_token	*lst_input;
 	char	*new_input;
 
 	lst_input = NULL;
 	all->token = &lst_input;
-	check_var(*input, all);
+	check_var(input, all);
 	new_input = ft_calloc(2, sizeof(char));
 	if (!new_input)
 		exit_error(all, NULL, 1);
 	join_input(&new_input, lst_input, all);
-	free(*input);
-	*input = new_input;
-	all->input = *input;
+	all->input_after_replace = new_input;
 	clear_token(&lst_input, all);
-	ft_printf("input = %s\n", new_input);
 }
