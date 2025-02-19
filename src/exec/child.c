@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 19:12:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:06:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	child(t_child_info child_info, t_alloc *all)
 {
 	int		fd[2];
 
-	if (child_info.in_file != NULL)
+	if (child_info.in_file != NULL) // close le pipe
 		fd[0] = open_in_file(child_info);
 	else if (child_info.here_doc.here_doc == 1)
 		fd[0] = child_info.here_doc.fd;

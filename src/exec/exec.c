@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:54:55 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 16:35:40 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:09:28 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	init_cmd(t_child_info child_info, char **cmd_path)
 {
 	char	**s_path;
 
-	if (child_info.path && ft_strncmp(child_info.cmd, "./", 2) != 0)
+	if (child_info.path && ft_strncmp(child_info.cmd, "./", 2) != 0
+		&& ft_strncmp(child_info.cmd, "/", 1) != 0)  // verif le patch
 	{
 		s_path = ft_split(child_info.path, ':');
 		if (!s_path) // free tout

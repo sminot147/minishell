@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 15:28:51 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:28:08 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 		safe_close(all, pipe_fd[0]);
 		return (-1);
 	}
-	if (!pid)
+	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
 		safe_close(all, pipe_fd[0]);
@@ -101,7 +101,7 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 	return (pid);
 }
 
-int	wait_all_child(int *pid, int last)
+int	wait_all_child(int last)
 {
 	int	wait_value;
 	int	return_value;
@@ -113,15 +113,14 @@ int	wait_all_child(int *pid, int last)
 		wait_value = wait(&status);
 		if (wait_value < 0)
 			break ;
-		if (pid[last] != 0)
+		if (last != 0)
 		{
-			if ((pid[last] == wait_value) && WIFEXITED(status))
+			if ((last == wait_value) && WIFEXITED(status))
 				return_value = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				return_value = 128 + WTERMSIG(status);
 		}
 	}
-	free(pid);
 	return (return_value);
 }
 
@@ -130,14 +129,11 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 	int				i;
 	int				return_value;
 	t_child_info	child_info;
-	int				*pid;
+	int				last;
 
-	pid =  calloc(count_cmd(cmd_list), sizeof(*pid));
-	if (pid == NULL)
-		exit_error(all, NULL, 1);
 	child_info.first = 1;
 	child_info.pipe[0] = -1;
-	child_info.envp = make_env_tab(all);
+	child_info.envp = make_env_tab(all); // verifier si il y a besoin d'un secu
 	i = 0;
 	signal(SIGINT, SIG_IGN);
 	while (cmd_list != NULL)
@@ -147,10 +143,10 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 		{
 			return_value = open_inter_file(*cmd_list, all);
 			if (return_value == 0)
-				pid[i] = start_child(&child_info, all);
+				last = start_child(&child_info, all);
 			else if (cmd_list->next == NULL)
-				pid[i] = 0;
-			if (pid[i] == -1)
+				last = 0;
+			if (last == -1)
 				exit_error(all, NULL, 1);
 		}
 		else
@@ -168,9 +164,8 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 		child_info.first = 0;
 		i++;
 	}
-	if (pid[i - 1] != 0)
-		g_shell_status = wait_all_child(pid, i - 1);
-	else
-		wait_all_child(pid, i - 1);
+	if (last != 0)
+		g_shell_status = wait_all_child(last);
+	wait_all_child(last);
 	signal(SIGINT, handle_sigint);
 }
