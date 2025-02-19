@@ -72,4 +72,15 @@ modifier les export des "|" stoquer les faux sep avec les quote
 
 update la last commande "_="
 
+
+/////
+
+export sans = (export X)
+modif l'affichage le strncmp("=")
+
+/////
+
+modif le env
+pas afficher les name sans value (declarer sans = (value a null))
+
 Fait : 
