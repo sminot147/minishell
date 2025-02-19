@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 17:46:28 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:49:23 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,25 @@ static char	*extract_next_token(char *input, t_alloc *all)
 	return (token_value);
 }
 
-t_bool	token_is_sep(char *input)
+static t_token_type	token_type(char *input)
 {
-	int	i;
-	int	size_token;
+	int		i;
+	int		size_token;
+	t_bool	is_sep;
 
 	size_token = size_check_sep(input);
 	i = -1;
+	is_sep = TRUE;
 	while (++i < size_token)
 		if (!ft_strchr("|<>", (int)input[i]))
-			return (FALSE);
-	return (TRUE);
+			is_sep = FALSE;
+	if (is_sep)
+		return (IS_SEP);
+	i = -1;
+	while (++i < size_token)
+		if (ft_strchr("'\"", (int)input[i]))
+			return (HAVE_QUOTE);
+	return (NO_QUOTE);
 }
 
 void	tokenize(char *input, t_token **lst_token, t_alloc *all)
@@ -73,11 +81,11 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
 			exit_error(all, NULL, 1);
-		next_token->is_sep = token_is_sep(input);
+		next_token->type = token_type(input);
 		add_token(lst_token, next_token);
 		if (!all->token)
 			all->token = lst_token;
 		input += size_to_moove(input);
 	}
-	// print_tokens(*lst_token);
+	print_tokens(*lst_token);
 }
