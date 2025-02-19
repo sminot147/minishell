@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:35:09 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:15:01 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	copy_the_char(char var_value, char *new_value, int *j, int quote)
 		ft_memcpy(&new_value[*j], "'\"'", 3);
 		*j += 2;
 	}
-	else if (var_value == '\'')
+	else if (var_value == '\'' && !quote)
 	{
 		ft_memcpy(&new_value[*j], "\"'\"", 3);
 		*j += 2;
@@ -60,6 +60,7 @@ static char	*dup_value_with_quote(char *var_value, int quote)
 
 	if (!var_value)
 		return ("");
+	printf("%i", quote);
 	new_value = ft_calloc(len_var_value(var_value, quote) + 1, sizeof(char));
 	if (!new_value)
 		return (NULL);

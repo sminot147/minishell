@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:55:56 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:59:51 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,10 @@ static void	alloc_all(t_alloc **all)
 	signal(SIGINT, &handle_sigint);
 }
 
-int	main(int ac, char **av, char **envp)
-{
-	char	*input;
-	// char    *prompt;
-	t_alloc	*all;
-
-	(void)av;
-	if (ac != 1)
-		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
-	alloc_all(&all);
-	all->env = pars_env(envp, all);
-	while (1)
-	{
-		if (isatty(fileno(stdin)))
-			input = readline("> ");
-		else
-		{
-			char *line;
-			line = get_next_line(fileno(stdin));
-			input = ft_strtrim(line, "\n");
-			free(line);
-		}
-		if (!input)
-			return (end_minishell(all));
-		add_history(input);
-		parse_input(input, all);
-		if (all->cmd != NULL)
-			exec_cmd(all->cmd, all);
-		free_line(all);
-	}
-}
-
-
 // int	main(int ac, char **av, char **envp)
 // {
 // 	char	*input;
-// 	char    *prompt;
+// 	// char    *prompt;
 // 	t_alloc	*all;
 
 // 	(void)av;
@@ -82,9 +49,15 @@ int	main(int ac, char **av, char **envp)
 // 	all->env = pars_env(envp, all);
 // 	while (1)
 // 	{
-// 		prompt = get_short_path(all);
-// 		input = readline(prompt);
-// 		free(prompt);
+// 		if (isatty(fileno(stdin)))
+// 			input = readline("> ");
+// 		else
+// 		{
+// 			char *line;
+// 			line = get_next_line(fileno(stdin));
+// 			input = ft_strtrim(line, "\n");
+// 			free(line);
+// 		}
 // 		if (!input)
 // 			return (end_minishell(all));
 // 		add_history(input);
@@ -94,3 +67,30 @@ int	main(int ac, char **av, char **envp)
 // 		free_line(all);
 // 	}
 // }
+
+
+int	main(int ac, char **av, char **envp)
+{
+	char	*input;
+	char    *prompt;
+	t_alloc	*all;
+
+	(void)av;
+	if (ac != 1)
+		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
+	alloc_all(&all);
+	all->env = pars_env(envp, all);
+	while (1)
+	{
+		prompt = get_short_path(all);
+		input = readline(prompt);
+		free(prompt);
+		if (!input)
+			return (end_minishell(all));
+		add_history(input);
+		parse_input(input, all);
+		if (all->cmd != NULL)
+			exec_cmd(all->cmd, all);
+		free_line(all);
+	}
+}

@@ -3,6 +3,8 @@
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 Quand on lance minishell sans env il est completement cassé et il n'affiche pas de nouvelle ligne avant le exit.
 
+/////
+ctr c Here doc -> mettre fin
 
 /////
 
