@@ -1,10 +1,8 @@
 
 /!\/!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-Quand on lance minishell sans env il est completement cassé et il n'affiche pas de nouvelle ligne avant le exit.
-
 /////
-ctr c Here doc -> mettre fin
+ctr c Here doc -> mettre fin au heredoc
 
 /////
 
@@ -14,16 +12,6 @@ Verifier les fd et les leak lors des execution des child et des here_doc
 /////
 
 pour cd
-
-Mkdir test
-Cd test
-Mkdir test2
-Cd test2
-RM test (avec le bon path)
-Si tu fait cd .. tu segfault
-Faut retourner au home !
-
-
 
 /////
 
@@ -56,10 +44,6 @@ corriger export et unset pour prendre plusieur arg et les secur / normer
 
 /////
 
-retirer les quote dans les var
-
-/////
-
 normer tout
 
 /////
@@ -77,7 +61,7 @@ update la last commande "_="
 
 /////
 
-export sans = (export X)
+export sans = (export T)
 modif l'affichage le strncmp("=")
 
 /////
@@ -86,3 +70,7 @@ modif le env
 pas afficher les name sans value (declarer sans = (value a null))
 
 Fait : 
+
+/////
+
+retirer les quote dans les var

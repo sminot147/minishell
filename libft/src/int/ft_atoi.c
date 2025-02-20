@@ -6,30 +6,26 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:22:45 by sminot            #+#    #+#             */
-/*   Updated: 2025/01/21 11:24:46 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/20 19:10:58 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
 
-#include "libft.h"
-#include <limits.h>
-
-//error value is set to INT_MAX + 1;
-static long int	result_overflow(void)
+int	result_overflow(int sgn)
 {
-	long int	error;
-
-	error = (long int)INT_MAX + 1;
-	return (error);
+	if (sgn > 0)
+		return (-1);
+	else
+		return (0);
 }
 
-long int	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int			i;
-	int			sgn;
-	long int	nb;
+	int				i;
+	int				sgn;
+	long long int	nb;
 
 	i = 0;
 	sgn = 1;
@@ -46,8 +42,8 @@ long int	ft_atoi(const char *str)
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		nb = 10 * nb + str[i] - '0';
-		if (nb - 1 > INT_MAX || (nb - 1 == INT_MAX && sgn > 0))
-			return (result_overflow());
+		if (nb > LONG_MAX || nb < 0)
+			return (result_overflow(sgn));
 		i++;
 	}
 	return ((int)(sgn * nb));

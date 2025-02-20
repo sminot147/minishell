@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   token_size.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:34:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/17 15:32:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:55:12 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-static int	is_sep(char c)
+int	is_sep(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (1);

@@ -10,18 +10,18 @@
   12:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:32  
   14:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:40  
   15:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:45     
-  70:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:195  
-  71:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:198  
-  72:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:201  
-  73:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:204  
-  74:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:207  
-  75:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:210  
-  77:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:216  
-  78:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:219  
-  88:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  10_parsing_hell.sh:244  
-  89:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(127) ]  10_parsing_hell.sh:247  
-  120:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(0)  bash(253) ]  10_parsing_hell.sh:313    
-  121:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  10_parsing_hell.sh:315  
+
+
+
+
+
+
+
+
+
+
+
+
   # **************************************************************************** #
   #                                   BUILTINS                                   #
   # **************************************************************************** #

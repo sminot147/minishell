@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 16:15:01 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/20 18:55:47 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	len_var_value(char *var_value, int quote)
 		if (var_value[i] == '"' && quote == 2)
 			j += 4;
 		else if (var_value[i] == '"' || var_value[i] == '\'')
+			j += 2;
+		else if (is_sep(var_value[i]) && !quote)
 			j += 2;
 	}
 	i += j;
@@ -48,6 +50,12 @@ static void	copy_the_char(char var_value, char *new_value, int *j, int quote)
 		ft_memcpy(&new_value[*j], "\"'\"", 3);
 		*j += 2;
 	}
+	else if (is_sep(var_value) && !quote)
+	{
+		new_value[*j] = '"';
+		new_value[++(*j)] = var_value;
+		new_value[++(*j)] = '"';
+	}
 	else
 		new_value[*j] = var_value;
 }
@@ -60,7 +68,6 @@ static char	*dup_value_with_quote(char *var_value, int quote)
 
 	if (!var_value)
 		return ("");
-	printf("%i", quote);
 	new_value = ft_calloc(len_var_value(var_value, quote) + 1, sizeof(char));
 	if (!new_value)
 		return (NULL);
