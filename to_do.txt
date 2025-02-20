@@ -50,10 +50,6 @@ normer tout
 
 faire un chois sur le get_env_value a garder
 
-/////
-
-modifier les export des "|" stoquer les faux sep avec les quote
-
 //////
 
 update la last commande "_="
@@ -71,6 +67,6 @@ pas afficher les name sans value (declarer sans = (value a null))
 
 Fait : 
 
-/////
-
-retirer les quote dans les var
+-retirer les quote dans les var
+-gerer les |<> dans les var (toujours avec des guillemet)
+-gerer exit 12215410541054103540130
