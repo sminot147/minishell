@@ -26,13 +26,13 @@
   #                                   BUILTINS                                   #
   # **************************************************************************** #
   1:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:7  
-  27:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:59  
-  28:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:61  
-  29:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:63  
-  30:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:65  
-  31:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:67  
-  32:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:69  
-  33:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:71  
+
+
+
+
+
+
+
   73:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:152  
   91:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:190  
   92:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_builtins.sh:194  

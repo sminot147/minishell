@@ -6,6 +6,10 @@ ctr c Here doc -> mettre fin au heredoc
 
 /////
 
+cd sans env n'a pas le bon message d'erreur la premiere fois mais 2e c'est bon...
+
+/////
+
 Verifier les fd et les leak lors des execution des child et des here_doc
 - Patch le probleme de fd de here_doc open (le pipe here_doc reste open)
 
