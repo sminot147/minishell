@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_file_utils.c                                   :+:      :+:    :+:   */
+/*   list_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/10 19:52:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:49:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clear_file(t_file **lst_file)
 {
-	if (!*lst_file)
+	if (!*lst_file || !(*lst_file)->file)
 		return ;
 	clear_file(&(*lst_file)->next);
 	free((*lst_file)->file);

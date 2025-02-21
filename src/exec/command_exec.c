@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 17:13:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:05:33 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, &handle_sigquit);
+		signal(SIGQUIT, SIG_DFL);
 		safe_close(all, pipe_fd[0]);
 		child_info->pipe[1] = pipe_fd[1];
 		child(child_info);
@@ -90,8 +90,6 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 	else
 	{
 		safe_close(all, pipe_fd[1]);
-		if (child_info->here_doc.here_doc == 1)
-			safe_close(all, child_info->here_doc.fd);
 		if (child_info->pipe[0] != -1)
 			safe_close(all, child_info->pipe[0]);
 		if (child_info->pipe_after == 0)

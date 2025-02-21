@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_env_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 19:04:12 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:55:09 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ void	put_env_export(t_alloc *all)
 			ft_putvar(env_tab[i]);
 		++i;
 	}
+	free_double_array((void **)env_tab);
 }

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 16:23:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:01:35 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	main(int ac, char **av, char **envp)
 // 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
 // 	alloc_all(&all);
 // 	all->env = pars_env(envp, all);
+// 	update_shell_lvl(all);
 // 	while (1)
 // 	{
 // 		prompt = get_short_path(all);

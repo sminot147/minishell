@@ -6,13 +6,15 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 16:40:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:47:50 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 #include <fcntl.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 static int	open_tmp_file(t_alloc *all, char **tmp_file)
 {
@@ -27,7 +29,7 @@ static int	open_tmp_file(t_alloc *all, char **tmp_file)
 	return (fd);
 }
 
-static void	read_here_doc_replace(int fd, t_token *token, t_alloc *all)
+static void	here_doc_child(int fd, t_token *token)
 {
 	char	*buffer;
 
@@ -41,37 +43,29 @@ static void	read_here_doc_replace(int fd, t_token *token, t_alloc *all)
 			free(buffer);
 			break ;
 		}
-		write(fd, buffer, strlen(buffer));
+		write(fd, buffer, ft_strlen(buffer));
 		write(fd, "\n", 1);
 		free(buffer);
 	}
-	safe_close(all, fd);
+	here_doc_safe_close(fd);
+	exit(0);
 }
 
 static void	read_here_doc(int fd, t_token *token, t_alloc *all)
 {
-	char	*buffer;
+	int		pid;
 
-	if (token->type == HAVE_QUOTE)
+	pid = fork();
+	if (pid < 0)
+		exit_error(all, NULL, 1);
+	if (!pid)
 	{
-		while (1)
-		{
-			buffer = readline(">");
-			if (!buffer)
-				break ;
-			if (ft_strcmp(token->token, buffer) == 0)
-			{
-				free(buffer);
-				break ;
-			}
-			write(fd, buffer, strlen(buffer));
-			write(fd, "\n", 1);
-			free(buffer);
-		}
-		safe_close(all, fd);
+		signal(SIGINT, SIG_DFL);
+		here_doc_child(fd, token);
 	}
 	else
-		read_here_doc_replace(fd, token, all);
+		wait(NULL);
+	safe_close(all, fd);
 }
 
 int	here_doc(t_token *token, t_alloc *all)

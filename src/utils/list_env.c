@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:30:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:38:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:52:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ void	clear_env(t_env **lst_env)
 	free((*lst_env)->value);
 	free(*lst_env);
 	*lst_env = NULL;
+}
+
+t_env	*new_var_export(char *name, char *value)
+{
+	t_env	*var;
+
+	var = ft_calloc(1, sizeof(t_env));
+	if (var == NULL)
+	{
+		free(name);
+		free(value);
+		return (NULL);
+	}
+	var->name = name;
+	var->value = value;
+	return (var);
 }
 
 t_env	*new_var_env(char *name, char *value)

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 17:10:55 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:58:28 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	print_tokens(t_token *lst_token); /*-----------------------------------a de
 /*---------------------------List_env.c--------------------------------------*/
 void	clear_env(t_env **lst_env);
 t_env	*new_var_env(char *name, char *value);
+t_env	*new_var_export(char *name, char *value);
 void	add_env(t_env **lst_env, t_env *new_env);
 char	*search_value(t_env *lst_env, char *name);
 
@@ -74,6 +75,7 @@ int		size_of_args(char **args);
 /*---------------------------Safe_close.c------------------------------------*/
 void	safe_close(t_alloc *all, int fd);
 void	child_safe_close(t_child_info *child_info, int fd);
+void	here_doc_safe_close(int fd);
 
 /*---------------------------Parsing_message_error.c-------------------------*/
 int		check_syntax(t_token *token_lst);
@@ -87,7 +89,6 @@ char	*get_short_path(t_alloc *all);
 
 /*---------------------------Signal.c----------------------------------------*/
 void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
 
 /*---------------------------Make_env.c--------------------------------------*/
 char	**make_env_tab(t_alloc *all);
@@ -98,5 +99,9 @@ void	put_env_export(t_alloc *all);
 
 /*---------------------------Get_env_value.c---------------------------------*/
 char	*get_env_value(t_env *envp, const char *name);
+
+/*---------------------------Export.c----------------------------------------*/
+int     add_or_update_env(t_env **env, char *name, char *value, char append);
+int     var_len_name(char *input, char *append);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_env_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:53:19 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 13:56:10 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:56:14 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*make_env_value(t_env *env)
 	value = ft_strdup(env->name);
 	if (value == NULL)
 		return (NULL);
-	if (!env->value[0])
+	if (!env->value)
 		return (value);
 	str_append(&value, "=", 1);
 	if (value == NULL)
