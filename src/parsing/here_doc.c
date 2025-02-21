@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/19 11:51:24 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:40:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ static int	open_tmp_file(t_alloc *all, char **tmp_file)
 	return (fd);
 }
 
-static void	read_here_doc(int fd, t_token *token, t_alloc *all)
+static void	read_here_doc_replace(int fd, t_token *token, t_alloc *all)
 {
 	char	*buffer;
 
-	// all->input
 	while (1)
 	{
 		buffer = readline(">");
@@ -47,6 +46,32 @@ static void	read_here_doc(int fd, t_token *token, t_alloc *all)
 		free(buffer);
 	}
 	safe_close(all, fd);
+}
+
+static void	read_here_doc(int fd, t_token *token, t_alloc *all)
+{
+	char	*buffer;
+
+	if (token->type == HAVE_QUOTE)
+	{
+		while (1)
+		{
+			buffer = readline(">");
+			if (!buffer)
+				break ;
+			if (ft_strcmp(token->token, buffer) == 0)
+			{
+				free(buffer);
+				break ;
+			}
+			write(fd, buffer, strlen(buffer));
+			write(fd, "\n", 1);
+			free(buffer);
+		}
+		safe_close(all, fd);
+	}
+	else
+		read_here_doc_replace(fd, token, all);
 }
 
 int	here_doc(t_token *token, t_alloc *all)

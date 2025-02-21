@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/20 18:48:54 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:10:08 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_cmd
 	t_file			*inter_file_in; // All inter file (> file_x < file_x <)
 	int				append;		// Flag for '>>' (append mode)
 	int				pipe;		// Cmd is following by a pipe '|'
-	t_token			*here_doc;	// here_doc struct
 	t_here_doc		child_here_doc; // here_doc struct for child
 	struct s_cmd	*next;
 }	t_cmd;

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/19 11:32:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:13:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 		{
 			if (error == -1)
 				extract_error_message((*token_lst)->token);
-			clear_cmd(&all->cmd);
+			clear_cmd(&all->cmd, all);
 			return (1);
 		}
 		if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP)

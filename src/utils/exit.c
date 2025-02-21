@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 13:22:11 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:13:14 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_line(t_alloc *alloced)
 		}
 		if (alloced->cmd)
 		{
-			clear_cmd(&alloced->cmd);
+			clear_cmd(&alloced->cmd, alloced);
 			alloced->cmd = NULL;
 		}
 	}
@@ -47,7 +47,7 @@ void	free_all(t_alloc *alloced)
 		if (alloced->token)
 			clear_token(alloced->token, alloced);
 		if (alloced->cmd)
-			clear_cmd(&alloced->cmd);
+			clear_cmd(&alloced->cmd, alloced);
 		if (alloced->env)
 			clear_env(&alloced->env);
 		free(alloced);
@@ -65,5 +65,18 @@ void	exit_error(t_alloc *all, char *error_message, char perror_enable)
 		putstr_fd("\n", 2);
 	}
 	free_all(all);
+	exit(EXIT_FAILURE);
+}
+
+void	child_exit_error(t_child_info *child_info, char *cmd_path, char *error_message, char perror_enable)
+{
+	if (perror_enable == 1)
+		perror(error_message);
+	else
+	{
+		putstr_fd(error_message, 2);
+		putstr_fd("\n", 2);
+	}
+	free_child(child_info, cmd_path);
 	exit(EXIT_FAILURE);
 }

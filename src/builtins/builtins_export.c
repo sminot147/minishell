@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 13:28:27 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:03:17 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	add_var(t_alloc *all, char *input)
 		exit_error(all, NULL, 1);
 	if (input[i])
 		i++;
-	value = ft_strdup(&input[i]); //pourquoi tu utilises des fonctions non autorisé????
+	value = ft_strdup(&input[i]);
 	if (!value)
 	{
 		free(name);

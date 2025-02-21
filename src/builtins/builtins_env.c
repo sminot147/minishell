@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 13:59:46 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:37:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	exec_env(t_child_info *child_info, t_alloc *all) // virer le child info si il est pas utilser
+int	exec_env(t_child_info *child_info) // virer le child info si il est pas utilser
 {
 	t_env	*env;
-	(void)child_info;
-	env = all->env;
+
+	env = child_info->envp_pars;
 	if (!env)
 		return (0);
 	while (env)

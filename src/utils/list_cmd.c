@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/14 12:37:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:12:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,26 @@ int	count_cmd(t_cmd *lst_cmd)
 	return (i);
 }
 
-void	clear_cmd(t_cmd **lst_cmd)
+void	clear_cmd(t_cmd **lst_cmd, t_alloc *all)
 {
 	t_cmd	*tmp;
-	int		i;
 
 	while (*lst_cmd)
 	{
 		tmp = (*lst_cmd)->next;
-		if ((*lst_cmd)->args)
-		{
-			i = 0;
-			while ((*lst_cmd)->args[i])
-				free((*lst_cmd)->args[i++]);
-			free((*lst_cmd)->args);
-		}
 		if ((*lst_cmd)->infile)
 			free((*lst_cmd)->infile);
 		if ((*lst_cmd)->outfile)
 			free((*lst_cmd)->outfile);
 		clear_file(&(*lst_cmd)->inter_file_in);
 		clear_file(&(*lst_cmd)->inter_file_out);
-		clear_token(&(*lst_cmd)->here_doc, NULL);
+		free_double_array((void **)((*lst_cmd)->args));
 		free(*lst_cmd);
+		if ((*lst_cmd)->child_here_doc.here_doc == 1)
+		{
+			(*lst_cmd)->child_here_doc.here_doc = 0;
+			safe_close(all, (*lst_cmd)->child_here_doc.fd);
+		}
 		*lst_cmd = tmp;
 	}
 	lst_cmd = NULL;

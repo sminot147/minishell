@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/19 14:28:08 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:13:10 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, &handle_sigquit);
 		safe_close(all, pipe_fd[0]);
 		child_info->pipe[1] = pipe_fd[1];
-		child(*child_info, all);
+		child(child_info);
 	}
 	else
 	{
@@ -133,7 +134,9 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 
 	child_info.first = 1;
 	child_info.pipe[0] = -1;
-	child_info.envp = make_env_tab(all); // verifier si il y a besoin d'un secu
+	child_info.envp = make_env_tab(all);
+	if (!child_info.envp)
+		exit_error(all, NULL, 1);
 	i = 0;
 	signal(SIGINT, SIG_IGN);
 	while (cmd_list != NULL)
@@ -164,6 +167,8 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 		child_info.first = 0;
 		i++;
 	}
+	if (child_info.envp)
+		free_double_array((void **)child_info.envp);
 	if (last != 0)
 		g_shell_status = wait_all_child(last);
 	wait_all_child(last);

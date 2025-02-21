@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 13:08:43 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:10:55 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define UTILS_H
 
 # include "parsing.h"
+# include "command_exec.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -35,6 +36,7 @@
 void	free_line(t_alloc *alloced);
 void	free_all(t_alloc *alloced);
 void	exit_error(t_alloc *all, char *error_message, char perror_enable);
+void	child_exit_error(t_child_info *child_info, char *cmd_path, char *error_message, char perror_enable);
 
 /*---------------------------List_token.c------------------------------------*/
 void	clear_token(t_token **token, t_alloc *all);
@@ -58,7 +60,7 @@ t_file	*new_file(char *conten, char append);
 void	add_file(t_file **lst_file, t_file *new_file);
 
 /*---------------------------List_cmd.c--------------------------------------*/
-void	clear_cmd(t_cmd **lst_cmd);
+void	clear_cmd(t_cmd **lst_cmd, t_alloc *all);
 t_cmd	*new_cmd(void);
 void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd);
 int		count_cmd(t_cmd *lst_cmd);
@@ -71,6 +73,7 @@ int		size_of_args(char **args);
 
 /*---------------------------Safe_close.c------------------------------------*/
 void	safe_close(t_alloc *all, int fd);
+void	child_safe_close(t_child_info *child_info, int fd);
 
 /*---------------------------Parsing_message_error.c-------------------------*/
 int		check_syntax(t_token *token_lst);
@@ -84,6 +87,7 @@ char	*get_short_path(t_alloc *all);
 
 /*---------------------------Signal.c----------------------------------------*/
 void	handle_sigint(int sig);
+void	handle_sigquit(int sig);
 
 /*---------------------------Make_env.c--------------------------------------*/
 char	**make_env_tab(t_alloc *all);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:08:56 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 15:32:34 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:49:38 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_flag(t_child_info *child_info, t_bool *newline)
 	return (i);
 }
 
-int	exec_echo(t_child_info *child_info, t_alloc *all)
+int	exec_echo(t_child_info *child_info)
 {
 	int		i;
 	t_bool	newline;
@@ -44,13 +44,13 @@ int	exec_echo(t_child_info *child_info, t_alloc *all)
 	while (child_info->args[i])
 	{
 		if (write(1, child_info->args[i], ft_strlen(child_info->args[i])) < 0)
-			exit_error(all, NULL, 1);
+			child_exit_error(child_info, NULL, NULL, 1);
 		if (child_info->args[i + 1])
 			if (write(1, " ", 1) < 0)
-				exit_error(all, NULL, 1);
+				child_exit_error(child_info, NULL, NULL, 1);
 		i++;
 	}
 	if (newline && write(1, "\n", 1) < 0)
-		exit_error(all, NULL, 1);
+		child_exit_error(child_info, NULL, NULL, 1);
 	return (0);
 }

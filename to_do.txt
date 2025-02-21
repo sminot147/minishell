@@ -79,10 +79,13 @@ pas afficher les name sans value (declarer sans = (value a null))
 ///////
 export +=
 
-///////
-make est cassé normal ?? avant il fonctionné niquel
+//////
+putstr_fd("Quit (core dumped)", 2);
 
 Fait : 
+
+///////
+make est cassé normal ?? avant il fonctionné niquel
 
 -retirer les quote dans les var
 -gerer les |<> dans les var (toujours avec des guillemet)
