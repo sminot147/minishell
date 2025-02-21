@@ -1,8 +1,13 @@
 
-/!\/!\/!\/!\/!\/!\/!\/!\
+/!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 /////
 ctr c Here doc -> mettre fin au heredoc
+
+ctr d pas de message d'erreur
+
+//////
+ctr \ dans cat doit quitter 
 
 /////
 
@@ -56,21 +61,35 @@ faire un chois sur le get_env_value a garder
 
 //////
 
-update la last commande "_="
-
+update la last commande "_=" -> c'est le dernier token de la ligne precedent sauf dans env ou c'est toujours _=/usr/bin/env
+/!\ pas présente dans export
+/!\ toujour en dernier dans env
 
 /////
 
-export sans = (export T)
-modif l'affichage le strncmp("=")
+/!\ Ne pas donner les valeurs export sans =  dans l'env.
+
+
 
 /////
 
 modif le env
 pas afficher les name sans value (declarer sans = (value a null))
 
+///////
+export +=
+
+///////
+make est cassé normal ?? avant il fonctionné niquel
+
 Fait : 
 
 -retirer les quote dans les var
 -gerer les |<> dans les var (toujours avec des guillemet)
--gerer exit 12215410541054103540130
+-gerer exit 1221541054105410354013045465
+gerer exit -
+
+//////
+export il n'y a pas la variable _ dans export
+export sans = (export T)
+modif l'affichage le strncmp("=")

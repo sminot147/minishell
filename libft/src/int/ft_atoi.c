@@ -6,20 +6,12 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:22:45 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/20 19:10:58 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 07:22:21 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
-
-int	result_overflow(int sgn)
-{
-	if (sgn > 0)
-		return (-1);
-	else
-		return (0);
-}
 
 int	ft_atoi(const char *str)
 {
@@ -43,7 +35,7 @@ int	ft_atoi(const char *str)
 	{
 		nb = 10 * nb + str[i] - '0';
 		if (nb > LONG_MAX || nb < 0)
-			return (result_overflow(sgn));
+			return (0);
 		i++;
 	}
 	return ((int)(sgn * nb));

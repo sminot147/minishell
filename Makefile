@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/18 21:30:44 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/21 13:13:22 by sminot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ UTILS = exit.c \
 	get_pwd.c \
 	signal.c \
 	make_env_tab.c \
-	put_env.c \
+	put_env_export.c \
 	get_env_value.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/

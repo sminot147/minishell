@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 21:10:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:28:27 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static int	add_or_update_env(t_env **env, const char *name, const char *value)
 		if (strcmp(tmp->name, name) == 0)
 		{
 			free(tmp->value);
-			tmp->value = strdup(value);
+			tmp->value = strdup(value); //pas proteger + vrai fonction
 			return (0);
 		}
 		tmp = tmp->next;
 	}
-	new_node = new_var_env(ft_strdup(name), ft_strdup(value));
+	new_node = new_var_env(ft_strdup(name), ft_strdup(value)); //proteger les dups + pk ne pas utiliser le name déja alloué avant?
 	if (!new_node)
 		return (1);
 	new_node->next = *env;
@@ -65,11 +65,11 @@ static int	check_validity(char *input)
 		}
 		i++;
 	}
-	if (!input[i] || input[i] != '=')
+	/*if (!input[i] || input[i] != '=')
 	{
 		put_error(input);
 		return (-1);
-	}
+	}*/
 	return (i);
 }
 
@@ -79,14 +79,15 @@ static int	add_var(t_alloc *all, char *input)
 	char	*value;
 	int		i;
 
-	i = check_validity(input);
+	i = check_validity(input); //len_in
 	if (i == -1)
 		return (1);
-	name = strndup(input, i);
+	name = strndup(input, i); //pourquoi tu utilises des fonctions non autorisé????
 	if (!name)
 		exit_error(all, NULL, 1);
-	i++;
-	value = strdup(&input[i]);
+	if (input[i])
+		i++;
+	value = ft_strdup(&input[i]); //pourquoi tu utilises des fonctions non autorisé????
 	if (!value)
 	{
 		free(name);
@@ -109,7 +110,7 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 	if ((child_info->pipe_after == 0 && child_info->first == 1))
 	{
 		if (!child_info->args[1])
-			put_env(all);
+		put_env_export(all);
 		arg_index = 0;
 		while (child_info->args[++arg_index])
 		{
@@ -122,5 +123,5 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 
 void	export_var(char *value, t_alloc *all)
 {
-	add_var(all, value);
+	add_var(all, value); //quelle rapport avec le fichier? et quelle utilité d'avoir un fontion qui ne fait que appeller une autre
 }

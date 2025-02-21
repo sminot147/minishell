@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/18 19:36:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:22:20 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ static int	is_numeric(char *src)
 {
 	int	i;
 
-	i = 0;
-	if (src[0] == '+' || (src[0] == '-'))
-		i = 1;
-	while (src[i])
+	i = -1;
+	if ((src[0] == '+' || (src[0] == '-')) && src[1])
+		i = 0;
+	while (src[++i])
 	{
 		if (ft_isdigit(src[i]) == 0)
 			return (0);
-		i++;
 	}
+	if (i >= 20 || (i >= 19 && *src != '-'))
+		return (0);
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 21:23:43 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:08:43 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**make_env_tab(t_alloc *all);
 int     count_env_size(t_env *env);
 
 /*---------------------------Put_env.c---------------------------------------*/
-void    put_env(t_alloc *all);
+void	put_env_export(t_alloc *all);
 
 /*---------------------------Get_env_value.c---------------------------------*/
 char	*get_env_value(t_env *envp, const char *name);
