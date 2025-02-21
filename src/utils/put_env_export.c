@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 13:54:18 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 19:04:12 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	ft_putvar(char *str)
 	i = -1;
 	while (str[++i] && str[i] != '=')
 		putchar_fd(str[i], 1);
-	//ft_printf("[Hey i = %i et c = %c-%i-]", i, str[i], (int)str[i]);
 	if (str[i] == '\0')
 	{
 		putchar_fd('\n', 1);

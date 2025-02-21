@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/18 14:22:19 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/21 18:41:13 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_env	*rebuild_env(t_alloc *all)
 	name = ft_strdup("_");
 	if (!name)
 		exit_error(all, NULL, 1);
-	new_env = new_var_env(name, strdup("/usr/bin/env"));
+	new_env = new_var_env(name, strdup("./minishell"));
 	if (!new_env)
 		exit_error(all, NULL, 1);
 	add_env(&lst_env, new_env);
@@ -62,7 +62,7 @@ static char	*extract_name(char *str, t_alloc *all)
 	while (str[++i] && str[i] != '=')
 		;
 	if (str[i] != '=')
-		exit_error(all, "Error, env line haven't  '='", 0);
+		return (NULL);
 	name = ft_calloc((i + 1), sizeof(char));
 	if (!name)
 		exit_error(all, NULL, 1);
@@ -90,6 +90,7 @@ void	print_env(t_env *env)
 t_env	*pars_env(char **envp, t_alloc *all)
 {
 	int		i;
+	char	*name;
 	t_env	*lst_env;
 	t_env	*new_env;
 
@@ -97,13 +98,16 @@ t_env	*pars_env(char **envp, t_alloc *all)
 	lst_env = NULL;
 	while (envp[++i])
 	{
-		new_env = new_var_env(extract_name(envp[i], all), \
-								extract_value(envp[i]));
-		if (!new_env)
+		name = extract_name(envp[i], all);
+		if (name)
+		{
+			new_env = new_var_env(name, extract_value(envp[i]));
+			if (!new_env)
 			exit_error(all, NULL, 1);
-		add_env(&lst_env, new_env);
-		if (!all->env)
+			add_env(&lst_env, new_env);
+			if (!all->env)
 			all->env = lst_env;
+		}
 	}
 	if (lst_env == NULL)
 		return (rebuild_env(all));

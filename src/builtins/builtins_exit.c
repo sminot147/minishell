@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 16:50:37 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:15 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 #include "command_exec.h"
 
-extern int	g_shell_status;
+extern long int	g_shell_status;
 
 static int	is_numeric(char *src)
 {
@@ -28,8 +28,6 @@ static int	is_numeric(char *src)
 		if (ft_isdigit(src[i]) == 0)
 			return (0);
 	}
-	if (i >= 20 || (i >= 19 && *src != '-'))
-		return (0);
 	return (1);
 }
 
@@ -76,6 +74,11 @@ void	exec_exit(t_alloc *all, t_child_info child_info)
 			return ;
 		}
 		g_shell_status = ft_atoi(child_info.args[1]);
+		if (g_shell_status == ATOI_OVERFLOW)
+		{
+			g_shell_status = 2;
+			print_error("numeric argument required", child_info.args[1]);
+		}
 		exit_safe(all, TRUE);
 	}
 }

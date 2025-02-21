@@ -40,7 +40,8 @@ void		*ft_memset(void *s, int c, size_t n);
 //int
 
 char		*ft_itoa(int n);
-int			ft_atoi(const char *str);
+long int	ft_atoi(const char *str);
+# define ATOI_OVERFLOW 2147483648
 
 //str
 
@@ -54,6 +55,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *s1, const char *s2, size_t len);
 char		*ft_strdup(const char *str);
+char		*ft_strndup(const char *str, int n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 17:03:17 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:01:52 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <unistd.h>
 #include <stdio.h>
 
-static int	add_or_update_env(t_env **env, const char *name, const char *value)
+static int	add_or_update_env(t_env **env, char *name, char *value)
 {
-	t_env	*new_node;
+	t_env	*new_var;
 	t_env	*tmp;
 
 	tmp = *env;
@@ -25,17 +25,19 @@ static int	add_or_update_env(t_env **env, const char *name, const char *value)
 	{
 		if (strcmp(tmp->name, name) == 0)
 		{
-			free(tmp->value);
-			tmp->value = strdup(value); //pas proteger + vrai fonction
+			tmp->value = value;
+			free(name);
 			return (0);
 		}
 		tmp = tmp->next;
 	}
-	new_node = new_var_env(ft_strdup(name), ft_strdup(value)); //proteger les dups + pk ne pas utiliser le name déja alloué avant?
-	if (!new_node)
+	new_var = new_var_env(name, value);
+	if (!new_var)
+	{
+		free(name);
 		return (1);
-	new_node->next = *env;
-	*env = new_node;
+	}
+	add_env(env, new_var);
 	return (0);
 }
 
@@ -46,7 +48,7 @@ static void	put_error(char *input)
 	putstr_fd("': not a valid identifier\n", 2);
 }
 
-static int	check_validity(char *input)
+static int	len_name(char *input)
 {
 	int		i;
 
@@ -65,57 +67,54 @@ static int	check_validity(char *input)
 		}
 		i++;
 	}
-	/*if (!input[i] || input[i] != '=')
-	{
-		put_error(input);
-		return (-1);
-	}*/
 	return (i);
 }
 
-static int	add_var(t_alloc *all, char *input)
+static int	treat_var(t_alloc *all, char *input)
 {
 	char	*name;
 	char	*value;
 	int		i;
 
-	i = check_validity(input); //len_in
+	i = len_name(input);
 	if (i == -1)
 		return (1);
-	name = strndup(input, i); //pourquoi tu utilises des fonctions non autorisé????
+	name = ft_strndup(input, i);
 	if (!name)
-		exit_error(all, NULL, 1);
+		return (2);
 	if (input[i])
 		i++;
 	value = ft_strdup(&input[i]);
 	if (!value)
 	{
 		free(name);
-		exit_error(all, NULL, 1);
+		return (2);
 	}
-	i = add_or_update_env(&(all->env), name, value);
-	free(name);
-	free(value);
-	if (i == 1)
-		exit_error(all, NULL, 1);
-	return (0);
+	return (add_or_update_env(&all->env, name, value));
 }
 
 int	exec_export(t_child_info *child_info, t_alloc *all)
 {
 	int	arg_index;
 	int	return_value;
+	int	tmp;
 
 	return_value = 0;
 	if ((child_info->pipe_after == 0 && child_info->first == 1))
 	{
 		if (!child_info->args[1])
-		put_env_export(all);
+			put_env_export(all);
 		arg_index = 0;
 		while (child_info->args[++arg_index])
 		{
-			if (add_var(all, child_info->args[arg_index]))
+			tmp = treat_var(all, child_info->args[arg_index]);
+			if (tmp == 1)
 				return_value = 1;
+			if (tmp == 2)
+			{
+				free_child(child_info, NULL);
+				exit_error(all, NULL, 1);
+			}
 		}
 	}
 	return (return_value);
@@ -123,5 +122,5 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 
 void	export_var(char *value, t_alloc *all)
 {
-	add_var(all, value); //quelle rapport avec le fichier? et quelle utilité d'avoir un fontion qui ne fait que appeller une autre
+	treat_var(all, value); //quelle rapport avec le fichier? et quelle utilité d'avoir un fontion qui ne fait que appeller une autre
 }
