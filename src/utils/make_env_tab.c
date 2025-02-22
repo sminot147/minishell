@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:53:19 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 20:56:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:29:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ static char	*make_env_value(t_env *env)
 char	**make_env_tab(t_alloc *all)
 {
 	t_env	*env_cp;
-    char	**env;
+	char	**env;
 	int		env_len;
 	int		i;
-    
+
 	env_cp = all->env;
 	env_len = count_env_size(env_cp);
-    env = malloc(sizeof(char *) * (env_len + 1));
+	env = malloc(sizeof(char *) * (env_len + 1));
 	if (env == NULL)
 		exit_error(all, NULL, 1);
 	env[env_len] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 18:35:44 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/22 15:28:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	free_element(t_env *element)
 
 static void	remove_first(t_alloc *all)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = all->env;
 	all->env = all->env->next;
@@ -41,7 +41,7 @@ static void	remove_var(t_alloc *all, const char *var_name)
 	if (strcmp(all->env->name, var_name) == 0)
 	{
 		remove_first(all);
-		return;
+		return ;
 	}
 	previous = all->env;
 	current = all->env->next;
@@ -51,16 +51,16 @@ static void	remove_var(t_alloc *all, const char *var_name)
 		{
 			previous->next = current->next;
 			free_element(current);
-			return;
+			return ;
 		}
 		previous = current;
 		current = current->next;
 	}
 }
 
-int exec_unset(t_child_info *child_info, t_alloc *all)
+int	exec_unset(t_child_info *child_info, t_alloc *all)
 {
-	int i;
+	int	i;
 
 	if (!all->env || !child_info->args[1])
 		return (0);

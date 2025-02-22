@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 21:18:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:10:27 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ typedef enum e_bool
 
 typedef enum e_token_type
 {
-    NO_QUOTE = 0,
-    HAVE_QUOTE = 1,
-    IS_SEP = 2,
-}    t_token_type;
+	NO_QUOTE = 0,
+	HAVE_QUOTE = 1,
+	IS_SEP = 2,
+}	t_token_type;
 
 typedef struct s_env
 {
@@ -75,6 +75,7 @@ typedef struct s_alloc
 	t_token			**token;
 	t_cmd			*cmd;
 	t_env			*env;
+	int				*return_value;
 }	t_alloc;
 
 /*---------------------------Pars_env.c--------------------------------------*/

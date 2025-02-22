@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:28 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:20:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,19 @@
 # define MAX_PATH_LENGTH	30
 # define TMP_DIR			"/tmp/"
 # define PREFIX				"sh-thd-"
-# define RESET				"\033[0m"
-# define RED				"\033[31m"
-# define YELLOW				"\033[33m"
-# define GREEN				"\033[32m"
-# define CYAN				"\033[36m"
-# define WHITE				"\033[37m"
-# define BLUE				"\033[34m"
-# define LIGHT_BLUE			"\033[94m"
-
-
+# define DEBBUG				0
 
 /*---------------------------Exit.c------------------------------------------*/
 void	free_line(t_alloc *alloced);
 void	free_all(t_alloc *alloced);
 void	exit_error(t_alloc *all, char *error_message, char perror_enable);
-void	child_exit_error(t_child_info *child_info, char *cmd_path, char *error_message, char perror_enable);
+void	child_exit_error(t_child_info *child_info, char *cmd_path, \
+				char *error_message, char perror_enable);
 
 /*---------------------------List_token.c------------------------------------*/
 void	clear_token(t_token **token, t_alloc *all);
 t_token	*new_token(char *content);
 void	add_token(t_token **token, t_token *new_token);
-void	print_tokens(t_token *lst_token); /*-----------------------------------a delete*/
 
 /*---------------------------List_env.c--------------------------------------*/
 void	clear_env(t_env **lst_env);
@@ -78,8 +69,8 @@ void	child_safe_close(t_child_info *child_info, int fd);
 void	here_doc_safe_close(int fd);
 
 /*---------------------------Parsing_message_error.c-------------------------*/
-int		check_syntax(t_token *token_lst);
-void	extract_error_message(char *sep);
+int		check_syntax(t_token *token_lst, t_alloc *all);
+void	extract_error_message(char *sep, t_alloc *all);
 
 /*---------------------------Get_random_file_name.c--------------------------*/
 char	*generate_tmp_filename(t_alloc *all);
@@ -92,7 +83,7 @@ void	handle_sigint(int sig);
 
 /*---------------------------Make_env.c--------------------------------------*/
 char	**make_env_tab(t_alloc *all);
-int     count_env_size(t_env *env);
+int		count_env_size(t_env *env);
 
 /*---------------------------Put_env.c---------------------------------------*/
 void	put_env_export(t_alloc *all);
@@ -101,7 +92,11 @@ void	put_env_export(t_alloc *all);
 char	*get_env_value(t_env *envp, const char *name);
 
 /*---------------------------Export.c----------------------------------------*/
-int     add_or_update_env(t_env **env, char *name, char *value, char append);
-int     var_len_name(char *input, char *append);
+int		add_or_update_env(t_env **env, char *name, char *value, char append);
+int		var_len_name(char *input, char *append);
+
+/*---------------------------Debbug.c----------------------------------------*/
+void	print_tokens(t_token *lst_token);
+void	print_env(t_env *env);
 
 #endif

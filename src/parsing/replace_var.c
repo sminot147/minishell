@@ -6,16 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:55:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:12:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-extern int	g_shell_status;
-
-
 
 void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 {
@@ -26,7 +22,7 @@ void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 		add_input_before_var(input, all, pos_var);
 	if (input[pos_var + 1] == '?')
 	{
-		var_value = ft_itoa(g_shell_status);
+		var_value = ft_itoa(*(*all).return_value);
 		if (!var_value)
 			exit_error(all, NULL, 1);
 		node = new_token(var_value);
@@ -43,13 +39,13 @@ static t_bool	is_arg(char *input, int pos, int quote)
 	char	next_c;
 
 	next_c = input[pos + 1];
-	if (ft_isalnum(next_c) || next_c == '_' || next_c == '\'' ||\
-		next_c == '?' || (next_c == '"' && quote != 2))
+	if (ft_isalnum(next_c) || next_c == '_' || next_c == '\'' || next_c == '?'
+		|| (next_c == '"' && quote != 2))
 		return (TRUE);
 	return (FALSE);
 }
 
-static int	i_after_arg(char *input, int i)
+static int	is_after_arg(char *input, int i)
 {
 	int	add_one;
 
@@ -60,6 +56,7 @@ static int	i_after_arg(char *input, int i)
 		;
 	return (i + add_one);
 }
+
 void	check_var(char *input, t_alloc *all)
 {
 	int	i;
@@ -72,7 +69,7 @@ void	check_var(char *input, t_alloc *all)
 		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote))
 		{
 			treat_one_var(input, all, i, quote);
-			i = i_after_arg(input, i);
+			i = is_after_arg(input, i);
 			input = &input[i];
 			i = -1;
 		}
@@ -80,8 +77,8 @@ void	check_var(char *input, t_alloc *all)
 		{
 			if (!quote)
 				quote = 2 - (int)input[i] % 2;
-			else if ((input[i] == '\'' && quote == 1) || \
-				(input[i] == '"' && quote == 2))
+			else if ((input[i] == '\'' && quote == 1) || (input[i] == '"'
+					&& quote == 2))
 				quote = 0;
 		}
 	}
@@ -102,4 +99,5 @@ void	replace_var(char *input, t_alloc *all)
 	join_input(&new_input, lst_input, all);
 	all->input_after_replace = new_input;
 	clear_token(&lst_input, all);
+	
 }

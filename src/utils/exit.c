@@ -6,12 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 19:03:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:29:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "parsing.h"
+#include "utils.h"
 #include <stdio.h>
 
 void	free_line(t_alloc *alloced)
@@ -68,7 +68,8 @@ void	exit_error(t_alloc *all, char *error_message, char perror_enable)
 	exit(EXIT_FAILURE);
 }
 
-void	child_exit_error(t_child_info *child_info, char *cmd_path, char *error_message, char perror_enable)
+void	child_exit_error(t_child_info *child_info, char *cmd_path,
+		char *error_message, char perror_enable)
 {
 	if (perror_enable == 1)
 		perror(error_message);

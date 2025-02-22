@@ -6,14 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 19:03:06 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:35:19 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-extern int	g_shell_status;
 
 static char	**add_arg(char **args, const char *new_arg)
 {
@@ -46,7 +44,7 @@ static char	**add_arg(char **args, const char *new_arg)
 
 static int	append_to_cmd(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 {
-	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP &&\
+	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP && \
 		(*token_lst)->next == NULL)
 		return (1);
 	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP)
@@ -85,7 +83,7 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 		if ((*i == error) || (append_to_cmd(new, token_lst, all, i) == 1))
 		{
 			if (error == -1)
-				extract_error_message((*token_lst)->token);
+				extract_error_message((*token_lst)->token, all);
 			clear_cmd(&all->cmd, all);
 			return (1);
 		}
@@ -97,22 +95,22 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 	return (0);
 }
 
-static int	specific_case(t_token *token_lst)
+static int	specific_case(t_token *token_lst, t_alloc *all)
 {
 	if (token_lst->type == IS_SEP && ft_strcmp(token_lst->token, "|") == 0)
 	{
-		g_shell_status = 2;
+		*(*all).return_value = 2;
 		putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
 	if (token_lst->type != IS_SEP && ft_strcmp(token_lst->token, ":") == 0)
 	{
-		g_shell_status = 0;
+		*(*all).return_value = 0;
 		return (1);
 	}
 	if (token_lst->type != IS_SEP && ft_strcmp(token_lst->token, "!") == 0)
 	{
-		g_shell_status = 1;
+		*(*all).return_value = 1;
 		return (1);
 	}
 	return (0);
@@ -124,8 +122,8 @@ void	parse_cmd(t_token *token_lst, t_alloc *all)
 	int		error;
 
 	all->cmd = NULL;
-	error = check_syntax(token_lst);
-	if (specific_case(token_lst) == 1)
+	error = check_syntax(token_lst, all);
+	if (specific_case(token_lst, all) == 1)
 		return ;
 	i = 0;
 	while (token_lst)

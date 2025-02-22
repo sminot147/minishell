@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:54:55 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 16:14:24 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:06:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ void	exec(t_child_info *child_info)
 	if (stat(cmd_path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
 	{
 		putstr_fd("minishell: ", 2);
-		perror(child_info->cmd);
+		putstr_fd(child_info->cmd, 2);
+		putstr_fd(": Is a directory\n", 2);
 		free_child(child_info, cmd_path);
 		exit(126);
 	}
 	if (access(cmd_path, F_OK | X_OK) < 0)
 	{
-		putstr_fd("minishell: ", 2);
-		perror(child_info->cmd);
-		free_child(child_info, cmd_path);
+		putstr_fd(child_info->cmd, 2);
+		putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
 	execve(cmd_path, child_info->args, child_info->envp);
@@ -62,4 +62,3 @@ void	exec(t_child_info *child_info)
 	free_child(child_info, cmd_path);
 	exit(1);
 }
-

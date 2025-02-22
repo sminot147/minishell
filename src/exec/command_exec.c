@@ -6,20 +6,18 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 19:05:33 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:39:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "command_exec.h"
 #include "builtins.h"
+#include "command_exec.h"
+#include "parsing.h"
 #include "utils.h"
-#include <sys/types.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <sys/types.h>
 #include <sys/wait.h>
-
-extern int	g_shell_status;
 
 static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
 {
@@ -29,7 +27,7 @@ static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
 	if (fd < 0)
 	{
 		perror(file);
-		g_shell_status = 1;
+		*(*all).return_value = 1;
 		return (1);
 	}
 	safe_close(all, fd);
@@ -52,14 +50,13 @@ static int	open_inter_file(t_cmd cmd, t_alloc *all)
 	{
 		if (current->append == 1)
 		{
-			if (handle_file(current->file, O_WRONLY | O_CREAT | O_APPEND,
-					0, all))
+			if (handle_file(current->file, O_WRONLY | O_CREAT | O_APPEND, 0777,
+					all))
 				return (1);
 		}
-		else
-			if (handle_file(current->file, O_WRONLY | O_CREAT | O_TRUNC,
-					0, all))
-				return (1);
+		else if (handle_file(current->file, O_WRONLY | O_CREAT | O_TRUNC, 0777,
+				all))
+			return (1);
 		current = current->next;
 	}
 	return (0);
@@ -168,7 +165,7 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 	if (child_info.envp)
 		free_double_array((void **)child_info.envp);
 	if (last != 0)
-		g_shell_status = wait_all_child(last);
+		*(*all).return_value = wait_all_child(last);
 	wait_all_child(last);
 	signal(SIGINT, handle_sigint);
 }

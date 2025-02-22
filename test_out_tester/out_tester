@@ -15,90 +15,28 @@
   # **************************************************************************** #
   # **************************************************************************** #
   #                                    REDIRS                                    #
-  # **************************************************************************** #
-  59:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:121  
-  60:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:125  
-  65:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:138  
-  66:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:142  
-  67:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:153  
-  80:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:186  
-  81:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:195  
-  82:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:204  
-  83:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:208  
-  84:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:217  
-  85:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:223  
-  86:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:229  
-  87:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:235  
-  88:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_redirs.sh:241  
+  # **************************************************************************** # 
   # **************************************************************************** #
   #                                     SCMD                                     #
-  # **************************************************************************** #
-  7:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:19  
-  18:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:46  
-  21:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:59  
-  22:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_scmds.sh:65  
+  # **************************************************************************** # 
   # **************************************************************************** #
   #                                  BROKEN SCMD                                 #
   # **************************************************************************** #
   # **************************************************************************** #
   #                                  VARIABLES                                   #
   # **************************************************************************** #
-  39:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:91  
-  40:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:97  
-  41:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:103  
-  42:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:111  
-  43:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  1_variables.sh:120  
   # **************************************************************************** #
   #                                  CORRECTION                                  #
-  # **************************************************************************** #
-  1:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:5  
-  17:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:39  
-  18:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:41  
-  19:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(0)  bash(2) ]  2_correction.sh:43  
-  20:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:45  
-  21:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:47  
-  22:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:49  
-  23:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_correction.sh:51  
-  24:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:53  
-  25:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:55  
-  29:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:65  
-  81:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:171  
-  82:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:173  
-  83:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:176  
-  84:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:179  
-  85:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:182  
-  86:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:185  
-  95:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:204  
-  96:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(1) ]  2_correction.sh:211  
-  98:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:225  
-  100:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:231  
-  106:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:251  
-  110:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:261  
-  111:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:265  
-  112:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:269  
-  114:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_correction.sh:277  
+  # **************************************************************************** # 
   # **************************************************************************** #
   #                                  PATH FAILS                                  #
-  # **************************************************************************** #
-  1:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:5  
-  2:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:12  
-  8:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:32  
-  9:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:35  
-  10:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:39  
-  11:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ✅  2_path_check.sh:43  
-  12:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  2_path_check.sh:47  
+  # **************************************************************************** # 
   # **************************************************************************** #
   #                                SYNTAX ERRORS                                 #
   # **************************************************************************** #
   # **************************************************************************** #
   #                                     WILD                                     #
-  # **************************************************************************** #
-  4:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:11  
-  6:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:18  
-  7:	STD_OUT: ✅  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:22  
-  10:	STD_OUT: ❌  STD_ERR: ❌  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:31  
-  11:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:38  
-  12:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:41  
+  # **************************************************************************** # 
   13:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:47  
   14:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:50  
   15:	STD_OUT: ❌  STD_ERR: ✅  EXIT_CODE: ❌ [ minishell(139)  bash(0) ]  9_go_wild.sh:53  

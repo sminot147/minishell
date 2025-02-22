@@ -6,15 +6,15 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 21:04:01 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:30:58 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "command_exec.h"
 #include "utils.h"
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 static char	*make_env_assignment(const char *env_name, const char *env_value)
 {
@@ -45,7 +45,7 @@ static void	update_oldpwd(t_child_info *child_info, t_alloc *all)
 		if (ft_strcmp(env->name, "PWD") == 0)
 		{
 			current_pwd = env->value;
-			break;
+			break ;
 		}
 		env = env->next;
 	}
@@ -66,7 +66,7 @@ static void	update_pwd(t_alloc *all)
 	char	*assign_str;
 
 	assign_str = NULL;
-	new_pwd  = getcwd(NULL, 0);
+	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 		exit_error(all, NULL, 1);
 	assign_str = make_env_assignment("PWD", new_pwd);
@@ -89,8 +89,8 @@ static int	go_to_old(t_child_info *child_info, t_alloc *all)
 	char	*tmp;
 
 	oldpwd_value = get_env_value(child_info->envp_pars, "OLDPWD");
-	current_pwd  = get_env_value(child_info->envp_pars, "PWD");
-	exec_pwd();
+	current_pwd = get_env_value(child_info->envp_pars, "PWD");
+	putendl_fd(oldpwd_value, 1);
 	if (!oldpwd_value)
 	{
 		putstr_fd("minishell: cd: OLDPWD not set\n", 2);
@@ -126,9 +126,9 @@ static int	go_to_old(t_child_info *child_info, t_alloc *all)
 	return (0);
 }
 
-int go_to_home(t_child_info *child_info)
+int	go_to_home(t_child_info *child_info)
 {
-	t_env *env;
+	t_env	*env;
 
 	env = child_info->envp_pars;
 	while (env)
@@ -148,32 +148,31 @@ int go_to_home(t_child_info *child_info)
 	return (1);
 }
 
-int exec_cd(t_child_info *child_info, t_alloc *all)
+int	exec_cd(t_child_info *child_info, t_alloc *all)
 {
-	if (child_info->pipe_after == 0 && child_info->first == 1)
+	if (child_info->pipe_after != 0 || child_info->first != 1)
+		return (0);
+	if (!child_info->args[1])
 	{
-		if (!child_info->args[1])
-		{
-			update_oldpwd(child_info, all);
-			if (go_to_home(child_info) == 0)
-				update_pwd(all);
-			return (0);
-		}
-		if (child_info->args[2])
-		{
-			putstr_fd("minishell: cd: too many arguments\n", 2);
-			return (1);
-		}
-		if (ft_strcmp(child_info->args[1], "-") == 0)
-			return (go_to_old(child_info, all));
 		update_oldpwd(child_info, all);
-		if (chdir(child_info->args[1]) < 0)
-		{
-			putstr_fd("minishell: cd: ", 2);
-			perror(child_info->args[1]);
-			return (1);
-		}
-		update_pwd(all);
+		if (go_to_home(child_info) == 0)
+			update_pwd(all);
+		return (0);
 	}
+	if (child_info->args[2])
+	{
+		putstr_fd("minishell: cd: too many arguments\n", 2);
+		return (1);
+	}
+	if (ft_strcmp(child_info->args[1], "-") == 0)
+		return (go_to_old(child_info, all));
+	update_oldpwd(child_info, all);
+	if (chdir(child_info->args[1]) < 0)
+	{
+		putstr_fd("minishell: cd: ", 2);
+		perror(child_info->args[1]);
+		return (1);
+	}
+	update_pwd(all);
 	return (0);
 }

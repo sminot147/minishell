@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 20:55:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:32:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_strcmp_name(const char *s1, const char *s2)
 
 static void	ft_putvar(char *str)
 {
-	int i;
+	int	i;
 
 	putstr_fd("declare -x ", 1);
 	i = -1;
@@ -58,8 +58,8 @@ static void	ft_putvar(char *str)
 
 static char	**ft_sort_arrays(int len, char **lst)
 {
-	char *buf;
-	int i;
+	char	*buf;
+	int		i;
 
 	i = 0;
 	while (i < len)

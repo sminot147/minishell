@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:52:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/16 18:05:54 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:46:27 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 #include "utils.h"
 #include <stdio.h>
 
-extern int	g_shell_status;
-
-static char *shorten_path(char *path, int max_length)
+static char	*shorten_path(char *path, int max_length)
 {
-	int   len;
-	char  *short_path;
+	int		len;
+	char	*short_path;
 
 	len = ft_strlen(path);
 	if (len <= max_length)
@@ -48,18 +46,16 @@ static void	add_str(char **dest, const char *src)
 	*dest = tmp;
 }
 
-static void	add_return_value(char **prompt)
+static void	add_return_value(char **prompt, t_alloc *all)
 {
 	char	*num_str;
 
-	num_str = ft_itoa(g_shell_status);
+	num_str = ft_itoa(*(*all).return_value);
 	if (!num_str)
 		return ;
-	add_str(prompt, RED);
 	add_str(prompt, " [");
 	add_str(prompt, num_str);
 	add_str(prompt, "]");
-	add_str(prompt, RESET);
 	free(num_str);
 }
 
@@ -72,7 +68,7 @@ char	*get_short_path(t_alloc *all)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
-		prompt = ft_strdup(RED "path error" RESET " > ");
+		prompt = ft_strdup("path error > ");
 		if (!prompt)
 			exit_error(all, NULL, 1);
 		return (prompt);
@@ -82,11 +78,9 @@ char	*get_short_path(t_alloc *all)
 	if (!short_pwd)
 		return (ft_strdup("error > "));
 	prompt = NULL;
-	add_str(&prompt, GREEN);
 	add_str(&prompt, short_pwd);
-	add_str(&prompt, RESET);
-	if (g_shell_status != 0)
-		add_return_value(&prompt);
+	if (*(*all).return_value != 0)
+		add_return_value(&prompt, all);
 	add_str(&prompt, " > ");
 	free(short_pwd);
 	return (prompt);

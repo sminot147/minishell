@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   safe_close.c                                       :+:      :+:    :+:   */
+/*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 18:37:45 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:29:43 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/22 18:07:29 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/22 18:19:05 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command_exec.h"
 #include "parsing.h"
-#include "utils.h"
-#include <unistd.h>
 
-void	safe_close(t_alloc *all, int fd)
+void	print_env(t_env *env)
 {
-	if (close(fd) < 0)
-		exit_error(all, NULL, 1);
-}
-
-void	child_safe_close(t_child_info *child_info, int fd)
-{
-	if (close(fd) < 0)
-		child_exit_error(child_info, NULL, NULL, 1);
-}
-
-void	here_doc_safe_close(int fd)
-{
-	if (close(fd) < 0)
+	while (env)
 	{
-		perror(NULL);
-		exit(1);
+		ft_printf("%s=%s\n", env->name, env->value);
+		env = env->next;
+	}
+}
+
+void	print_tokens(t_token *lst_token)
+{
+	while (lst_token)
+	{
+		ft_printf("Token: [%s][%i]\n", lst_token->token, (int)lst_token->type);
+		lst_token = lst_token->next;
 	}
 }

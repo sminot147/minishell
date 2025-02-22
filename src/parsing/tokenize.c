@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/19 11:55:17 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:19:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 			all->token = lst_token;
 		input += size_to_moove(input);
 	}
-	// print_tokens(*lst_token);
+	if (DEBBUG == 1)
+		print_tokens(*lst_token);
 }

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/21 21:17:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:16:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static t_env	*add_pwd(t_alloc *all)
 {
-	char	 *name;
+	char	*name;
 	t_env	*new_env;
 
 	name = ft_strdup("PWD");
@@ -29,7 +29,7 @@ static t_env	*add_pwd(t_alloc *all)
 
 static t_env	*rebuild_env(t_alloc *all)
 {
-	char	 *name;
+	char	*name;
 	t_env	*lst_env;
 	t_env	*new_env;
 
@@ -78,15 +78,6 @@ static char	*extract_value(char *str)
 	return (ft_strdup(str));
 }
 
-void	print_env(t_env *env)
-{
-	while (env)		/*SUPPRIMER LA FONCTION*/
-	{
-		ft_printf("%s=%s\n", env->name, env->value);
-		env = env->next;
-	}
-}
-
 void	update_shell_lvl(t_alloc *all)
 {
 	char	*var;
@@ -104,7 +95,7 @@ void	update_shell_lvl(t_alloc *all)
 		exit_error(all, NULL, 1);
 	}
 	str_append(&var, new_value, 1);
-	free (new_value);
+	free(new_value);
 	if (!var)
 		exit_error(all, NULL, 1);
 	if (treat_var(all, var) == 2)
@@ -131,14 +122,16 @@ t_env	*pars_env(char **envp, t_alloc *all)
 		{
 			new_env = new_var_env(name, extract_value(envp[i]));
 			if (!new_env)
-			exit_error(all, NULL, 1);
+				exit_error(all, NULL, 1);
 			add_env(&lst_env, new_env);
 			if (!all->env)
-			all->env = lst_env;
+				all->env = lst_env;
 		}
 	}
 	if (lst_env == NULL)
 		return (rebuild_env(all));
 	return (lst_env);
-	//print_env(lst_env);
+	update_shell_lvl(all);
+	if (DEBBUG == 1)
+		print_env(all->env);
 }

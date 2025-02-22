@@ -6,14 +6,14 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:31:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_exec.h"
 #include "utils.h"
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 static int	append_value(char **value, char *append_value, char append)
 {
@@ -62,7 +62,6 @@ static void	put_error(char *input)
 	putstr_fd("': not a valid identifier\n", 2);
 }
 
-
 static int	set_append(char *input, char *append, int i)
 {
 	if (input[i] == '+')
@@ -81,7 +80,7 @@ static int	set_append(char *input, char *append, int i)
 
 int	var_len_name(char *input, char *append)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (ft_isalpha(input[0]) == 0 && input[0] != '_')
