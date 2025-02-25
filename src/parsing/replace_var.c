@@ -6,14 +6,24 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 13:49:04 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:50:46 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-//add to the linked list the input before var, and the value of the var
+/**
+ * @return is a here doc name
+*/
+static t_bool	is_not_here_doc_name(char *input, int i, int quote)
+{
+	return (TRUE);
+}
+
+/**
+ * Add to the linked list the input before var, and the value of the var
+*/
 static void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 {
 	char	*var_value;
@@ -35,7 +45,9 @@ static void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 		add_var_value(input, pos_var, quote, all);
 }
 
-//Check if the argument must be replace
+/**
+ * Check if the argument must be replace
+*/
 static t_bool	is_arg(char *input, int pos, int quote)
 {
 	char	next_c;
@@ -47,10 +59,13 @@ static t_bool	is_arg(char *input, int pos, int quote)
 	return (FALSE);
 }
 
-/* return the size of the var name
-- var name must be digit, alpha or _
-- $? is the last return value
-- if the name start by a digit, just this digit is consider like the name */
+/**
+ * @return return the size of the var name
+ * 
+ * - var name must be digit, alpha or _
+ * - $? is the last return value
+ * - if the name start by a digit, just this digit is consider like the name
+*/
 static int	size_of_var_name(char *input, int i)
 {
 	int	add_one;
@@ -64,7 +79,9 @@ static int	size_of_var_name(char *input, int i)
 	return (i + add_one);
 }
 
-//Store the new input in a linked list (type t_token) in all->token.
+/**
+ * Store the new input in a linked list (type t_token) in all->token.
+*/
 static void	identify_and_replace_variables(char *input, t_alloc *all)
 {
 	int	i;
@@ -74,7 +91,8 @@ static void	identify_and_replace_variables(char *input, t_alloc *all)
 	i = -1;
 	while (input[++i])
 	{
-		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote))
+		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote) \
+			&& here_doc_case(input, i, quote))
 		{
 			treat_one_var(input, all, i, quote);
 			i = size_of_var_name(input, i);
@@ -93,7 +111,9 @@ static void	identify_and_replace_variables(char *input, t_alloc *all)
 	add_input_before_var(input, all, i);
 }
 
-//Replace the variables starting with $
+/**
+ * Replace the variables in input
+*/
 void	replace_var(char **input, t_alloc *all)
 {
 	t_token	*lst_input;

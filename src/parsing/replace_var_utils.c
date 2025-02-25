@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 13:53:47 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:53:09 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static char	*dup_input_before_var(char *input, int pos_var,	t_alloc *all)
 	return (dest);
 }
 
-//Add the part of the input before the variable.
+/**
+ * Add the part of the input before the variable.
+*/
 void	add_input_before_var(char *input, t_alloc *all, int pos_var)
 {
 	char	*str_node;
@@ -38,7 +40,9 @@ void	add_input_before_var(char *input, t_alloc *all, int pos_var)
 	add_token(all->token, node);
 }
 
-//Join the linked list to get the input with variable replacement.
+/**
+ * Join the linked list to get the input with variable replacement.
+*/
 void	join_input(char **new_input, t_token *lst_input, t_alloc *all)
 {
 	if (lst_input)

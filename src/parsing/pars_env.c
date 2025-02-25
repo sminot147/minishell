@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   pars_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 18:16:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:55:42 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * Add pwd if he environnement must be rebuild
+*/
 static t_env	*add_pwd(t_alloc *all)
 {
 	char	*name;
@@ -26,7 +29,9 @@ static t_env	*add_pwd(t_alloc *all)
 		exit_error(all, NULL, 1);
 	return (new_env);
 }
-
+/**
+ * Rebuild env (Last commande, SHLVL, and PWD) if necessicery
+*/
 static t_env	*rebuild_env(t_alloc *all)
 {
 	char	*name;
@@ -78,34 +83,9 @@ static char	*extract_value(char *str)
 	return (ft_strdup(str));
 }
 
-void	update_shell_lvl(t_alloc *all)
-{
-	char	*var;
-	char	*new_value;
-	int		atoi_value;
-
-	atoi_value = ft_atoi(get_env_value(all->env, "SHLVL")) + 1;
-	new_value = ft_itoa(atoi_value);
-	if (!new_value)
-		exit_error(all, NULL, 1);
-	var = ft_strdup("SHLVL=");
-	if (!var)
-	{
-		free(new_value);
-		exit_error(all, NULL, 1);
-	}
-	str_append(&var, new_value, 1);
-	free(new_value);
-	if (!var)
-		exit_error(all, NULL, 1);
-	if (treat_var(all, var) == 2)
-	{
-		free(var);
-		exit_error(all, NULL, 1);
-	}
-	free(var);
-}
-
+/**
+ * Pars environnement
+*/
 t_env	*pars_env(char **envp, t_alloc *all)
 {
 	int		i;

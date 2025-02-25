@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 16:42:36 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:21:36 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void	calloc_value(char **str, int size, t_alloc *all)
 		exit_error(all, NULL, 1);
 }
 
+/**
+ * @return token without quote
+ */
 static char	*extract_next_token(char *input, t_alloc *all)
 {
 	char	*token_value;
@@ -49,7 +52,9 @@ static char	*extract_next_token(char *input, t_alloc *all)
 	return (token_value);
 }
 
-//return the tag of the token
+/**
+ * @return Tag of the token
+*/
 static t_token_type	token_tag(char *input)
 {
 	int		i;
@@ -71,10 +76,12 @@ static t_token_type	token_tag(char *input)
 	return (NO_QUOTE);
 }
 
-/*Parse input, remove quotes, and create a token that can be used to separate
-commands. Each token has a tag to identify whether it's a command separator, 
-or if the token was enclosed in quotes*/
-void	tokenize(char *input, t_token **lst_token, t_alloc *all)
+/**
+ * Parse input, remove quotes, and create a token that can be used to separate
+ * commands. Each token has a tag to identify whether it's a command separator, 
+ * or if the token was enclosed in quotes
+*/
+ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
 

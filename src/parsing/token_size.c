@@ -6,20 +6,26 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:34:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/20 18:55:12 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:34:14 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-int	is_sep(char c)
+/**
+ * @return Lenght to know if a sep is a really a sep or just a char
+*/
+t_bool	is_sep(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
+/**
+ * @return Lenght to know if a sep is a really a sep or just a char
+*/
 int	size_check_sep(char *input)
 {
 	int	i;
@@ -46,7 +52,10 @@ int	size_check_sep(char *input)
 	return (i);
 }
 
-static int	size_to_moove_whith_sep(char *input, int i)
+/**
+ * @return treat the case of sep in size_to_moove()
+*/
+static int	size_to_moove_with_sep(char *input, int i)
 {
 	if (i == 0)
 		while (is_sep(input[++i]))
@@ -56,6 +65,9 @@ static int	size_to_moove_whith_sep(char *input, int i)
 	return (i);
 }
 
+/**
+ * @return lenght of token in input (with space, quote,...)
+*/
 int	size_to_moove(char *input)
 {
 	int	i;
@@ -76,11 +88,14 @@ int	size_to_moove(char *input)
 			while (input[++i] != '\'')
 				;
 		if (is_sep(input[i]))
-			return (size_to_moove_whith_sep(input, i));
+			return (size_to_moove_with_sep(input, i));
 	}
 	return (i);
 }
 
+/**
+ * @return lenght of the token (without quote)
+*/
 int	size_next_token(char *input)
 {
 	int	i;

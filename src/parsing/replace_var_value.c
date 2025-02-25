@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 16:42:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:52:45 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-/*Return the length of the var value, paying attention to the quotes that need 
-to be added.*/
+/** Return the length of the var value, paying attention to the quotes that need 
+to be added.
+*/
 static int	len_var_value(char *var_value, int quote)
 {
 	int	i;
@@ -35,9 +36,10 @@ static int	len_var_value(char *var_value, int quote)
 	return (i);
 }
 
-/*Copy the character into the string, paying attention to certain characters:
-- Quote should be considered as a character and not a delimiter.
-- The separators (| < >) should also be considered as characters.*/
+/** Copy the character into the string, paying attention to certain characters:
+ * - Quote should be considered as a character and not a delimiter.
+ * - The separators (| < >) should also be considered as characters.
+*/
 static void	copy_the_char(char var_value, char *new_value, int *j, int quote)
 {
 	++(*j);
@@ -66,7 +68,9 @@ static void	copy_the_char(char var_value, char *new_value, int *j, int quote)
 		new_value[*j] = var_value;
 }
 
-//Duplicate var value with quote around character when it's necesserary
+/**
+ * Duplicate var value with quote around character when it's necesserary
+*/
 static char	*dup_value_with_quote(char *var_value, int quote)
 {
 	int		i;
@@ -85,6 +89,9 @@ static char	*dup_value_with_quote(char *var_value, int quote)
 	return (new_value);
 }
 
+/**
+ *@return Duplicate variable name (malloc)
+*/
 static void	extract_var_name(char **var_name, char *input, int pos_var, \
 								t_alloc *all)
 {
