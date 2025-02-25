@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/22 18:19:53 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/25 16:33:09 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ EXEC = child.c\
 	exec.c \
 	init_child.c \
 	utils.c \
+	parent.c \
 
 UTILS_DIR = $(SRC_DIR)utils/
 

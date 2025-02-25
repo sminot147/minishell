@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:54:55 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 14:09:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:36:43 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "command_exec.h"
 #include <stdlib.h>
 #include <sys/stat.h>
-
-extern int	signal_received;
 
 static void	check_cmd_validity(char	*cmd_path, t_child_info *child_info)
 {

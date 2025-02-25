@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 16:04:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:37:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
-extern int	signal_received;
 
 static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
 {
@@ -64,41 +62,6 @@ static int	open_inter_file(t_cmd cmd, t_alloc *all)
 	return (0);
 }
 
-static int	start_child(t_child_info *child_info, t_alloc *all)
-{
-	pid_t	pid;
-	int		pipe_fd[2];
-
-	if (pipe(pipe_fd) == -1)
-		return (-1);
-	pid = fork();
-	if (pid == -1)
-	{
-		safe_close(all, pipe_fd[1]);
-		safe_close(all, pipe_fd[0]);
-		return (-1);
-	}
-	if (pid == 0)
-	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
-		safe_close(all, pipe_fd[0]);
-		child_info->pipe[1] = pipe_fd[1];
-		child(child_info);
-	}
-	else
-	{
-		safe_close(all, pipe_fd[1]);
-		if (child_info->pipe[0] != -1)
-			safe_close(all, child_info->pipe[0]);
-		if (child_info->pipe_after == 0)
-			safe_close(all, pipe_fd[0]);
-		else
-			child_info->pipe[0] = pipe_fd[0];
-	}
-	return (pid);
-}
-
 int	wait_all_child(int last)
 {
 	int	wait_value;
@@ -115,6 +78,8 @@ int	wait_all_child(int last)
 		{
 			if (WTERMSIG(status) == SIGINT)
 				putchar_fd('\n', 1);
+			if (WTERMSIG(status) == SIGQUIT)
+				putstr_fd("Quit (core dumped)\n", 1);
 			if ((last == wait_value) && WIFEXITED(status))
 				return_value = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
@@ -124,50 +89,53 @@ int	wait_all_child(int last)
 	return (return_value);
 }
 
+static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
+{
+	int	return_value;
+
+	if (exec_builtins_solo(child_info, all) == 0)
+	{
+		return_value = open_inter_file(*cmd_list, all);
+		if (return_value == 0)
+			return (start_child(child_info, all));
+		else if (cmd_list->next == NULL)
+			return (0);
+	}
+	else
+	{
+		if (child_info->pipe[0] != -1)
+			safe_close(all, child_info->pipe[0]);
+		child_info->pipe[0] = -1;
+		if (cmd_list->next == NULL)
+		{
+			signal(SIGINT, handle_sigint);
+			return (-2);
+		}
+		return (0);
+	}
+	return (0);
+}
+
 void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 {
-	int				i;
-	int				return_value;
 	t_child_info	child_info;
 	int				last;
 
-	child_info.first = 1;
-	child_info.pipe[0] = -1;
-	child_info.envp = make_env_tab(all);
-	if (!child_info.envp)
-		exit_error(all, NULL, 1);
-	i = 0;
+	last = 0;
+	init_child(&child_info, all);
 	signal(SIGINT, SIG_IGN);
 	while (cmd_list != NULL)
 	{
-		init_child(*cmd_list, &child_info, all);
-		if (exec_builtins_solo(&child_info, all) == 0)
-		{
-			return_value = open_inter_file(*cmd_list, all);
-			if (return_value == 0)
-				last = start_child(&child_info, all);
-			else if (cmd_list->next == NULL)
-				last = 0;
-			if (last == -1)
-				exit_error(all, NULL, 1);
-		}
-		else
-		{
-			if (child_info.pipe[0] != -1)
-				safe_close(all, child_info.pipe[0]);
-			child_info.pipe[0] = -1;
-			if (cmd_list->next == NULL)
-			{
-				signal(SIGINT, handle_sigint);
-				return ;
-			}
-		}
+		setup_child(*cmd_list, &child_info, all);
+		last = start_cmd(cmd_list, &child_info, all);
+		if (last == -1)
+			exit_error(all, NULL, 1);
+		if (last == -2)
+			return ;
 		cmd_list = cmd_list->next;
 		child_info.first = 0;
-		i++;
 	}
-	if (child_info.envp)
-		free_double_array((void **)child_info.envp);
+	free_double_array((void **)child_info.envp);
 	if (last != 0)
 		*(*all).return_value = wait_all_child(last);
 	wait_all_child(last);

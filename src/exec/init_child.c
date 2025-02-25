@@ -6,15 +6,25 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:46:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 15:55:15 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:28:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_exec.h"
 #include "parsing.h"
+#include "utils.h"
 #include <stdlib.h>
 
-void	init_child(t_cmd cmd, t_child_info *child_info, \
+void	init_child(t_child_info *child_info, t_alloc *all)
+{
+	(*child_info).first = 1;
+	(*child_info).pipe[0] = -1;
+	(*child_info).envp = make_env_tab(all);
+	if (!(*child_info).envp)
+		exit_error(all, NULL, 1);
+}
+
+void	setup_child(t_cmd cmd, t_child_info *child_info, \
 		t_alloc *all)
 {
 	if (cmd.args)
