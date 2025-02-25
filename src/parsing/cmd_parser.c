@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 15:02:36 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:02:05 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 			clear_cmd(&all->cmd, all);
 			return (1);
 		}
+		if (all->cmd == NULL)
+			return (1);
 		if ((*token_lst)->token[0] == '|' && (*token_lst)->tag == IS_SEP)
 			break ;
 		(*token_lst) = (*token_lst)->next;

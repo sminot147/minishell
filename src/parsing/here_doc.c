@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 19:47:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:02:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ static void	here_doc_child(int fd, t_token *token)
 	exit(0);
 }
 
-static void	read_here_doc(int fd, t_token *token, t_alloc *all)
+static int	read_here_doc(int fd, t_token *token, t_alloc *all)
 {
 	int		pid;
+	int		status;
 
 	pid = fork();
 	if (pid < 0)
@@ -64,8 +65,17 @@ static void	read_here_doc(int fd, t_token *token, t_alloc *all)
 		here_doc_child(fd, token);
 	}
 	else
-		wait(NULL);
-	safe_close(all, fd);
+	{
+		wait(&status);
+		if (WTERMSIG(status) == SIGINT)
+		{
+			clear_cmd(&all->cmd, all);
+			putchar_fd('\n', 1);
+			return (1);
+		}
+		safe_close(all, fd);
+	}
+	return (0);
 }
 
 int	here_doc(t_token *token, t_alloc *all)
@@ -73,11 +83,19 @@ int	here_doc(t_token *token, t_alloc *all)
 	int		fd;
 	char	*tmp_file;
 
+	signal(SIGINT, SIG_IGN);
 	fd = open_tmp_file(all, &tmp_file);
-	read_here_doc(fd, token, all);
+	if (read_here_doc(fd, token, all) == 1)
+	{
+		signal(SIGINT, handle_sigint);
+		return (-1);
+	}
 	fd = open(tmp_file, O_RDONLY);
 	if (fd > 0)
 		unlink(tmp_file);
 	free(tmp_file);
+	if (fd < 0)
+		exit_error(all, NULL, 1);
+	signal(SIGINT, handle_sigint);
 	return (fd);
 }

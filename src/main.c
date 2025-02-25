@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 13:32:42 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:02:38 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	alloc_all(t_alloc **all, int *return_value)
 // 	}
 // } get_short_path(all)
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp) // corriger le ctrl+c puis exec sleep 5
 {
 	char	*input;
 	char	*prompt;

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:29:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:59:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 		safe_close(all, cmd->child_here_doc.fd);
 	fd = here_doc(token, all);
 	if (fd < 0)
-		exit_error(all, NULL, 1);
+		return ;
 	cmd->child_here_doc.here_doc = 1;
 	cmd->child_here_doc.fd = fd;
 }

@@ -5,9 +5,6 @@
 les message et value de return des child pour les cpermition deny / is directory / no sutch file or directory
 
 /////
-patch le non retour a la ligne si ctrl + c en commande
-
-/////
 normer tout
 
 /////

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 20:35:44 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 17:39:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:04:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
+extern int	signal_received;
 
 static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
 {
@@ -78,8 +80,8 @@ static int	start_child(t_child_info *child_info, t_alloc *all)
 	}
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		safe_close(all, pipe_fd[0]);
 		child_info->pipe[1] = pipe_fd[1];
 		child(child_info);
@@ -111,6 +113,8 @@ int	wait_all_child(int last)
 			break ;
 		if (last != 0)
 		{
+			if (WTERMSIG(status) == SIGINT)
+				putchar_fd('\n', 1);
 			if ((last == wait_value) && WIFEXITED(status))
 				return_value = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
