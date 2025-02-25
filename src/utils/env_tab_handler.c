@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_env_tab.c                                     :+:      :+:    :+:   */
+/*   env_tab_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:53:19 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:29:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:29:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**make_env_tab(t_alloc *all)
 		env[i] = make_env_value(env_cp);
 		if (env[i] == NULL)
 		{
-			free_double_array((void **)env);
+			ft_free_double_array((void **)env);
 			exit_error(all, NULL, 1);
 		}
 		env_cp = env_cp->next;

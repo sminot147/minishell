@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:30:58 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:37:32 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,78 +16,15 @@
 #include <stdio.h>
 #include <unistd.h>
 
-static char	*make_env_assignment(const char *env_name, const char *env_value)
-{
-	char	*tmp;
-	char	*res;
-
-	if (!env_name || !env_value)
-		return (NULL);
-	tmp = ft_strjoin(env_name, "=");
-	if (tmp == NULL)
-		return (NULL);
-	res = ft_strjoin(tmp, env_value);
-	free(tmp);
-	return (res);
-}
-
-static void	update_oldpwd(t_child_info *child_info, t_alloc *all)
-{
-	t_env	*env;
-	char	*current_pwd;
-	char	*assign_str;
-
-	env = child_info->envp_pars;
-	current_pwd = NULL;
-	assign_str = NULL;
-	while (env)
-	{
-		if (ft_strcmp(env->name, "PWD") == 0)
-		{
-			current_pwd = env->value;
-			break ;
-		}
-		env = env->next;
-	}
-	if (current_pwd)
-	{
-		assign_str = make_env_assignment("OLDPWD", current_pwd);
-		if (assign_str)
-		{
-			treat_var(all, assign_str);
-			free(assign_str);
-		}
-	}
-}
-
-static void	update_pwd(t_alloc *all)
-{
-	char	*new_pwd;
-	char	*assign_str;
-
-	assign_str = NULL;
-	new_pwd = getcwd(NULL, 0);
-	if (!new_pwd)
-		exit_error(all, NULL, 1);
-	assign_str = make_env_assignment("PWD", new_pwd);
-	free(new_pwd);
-	if (assign_str)
-	{
-		treat_var(all, assign_str);
-		free(assign_str);
-	}
-	else
-		exit_error(all, NULL, 1);
-}
-
 static int	go_to_old(t_child_info *child_info, t_alloc *all)
 {
 	char	*oldpwd_value;
 	char	*current_pwd;
 	char	*assign_pwd;
 	char	*assign_oldpwd;
-	char	*tmp;
 
+	assign_pwd = NULL;
+	assign_oldpwd = NULL;
 	oldpwd_value = get_env_value(child_info->envp_pars, "OLDPWD");
 	current_pwd = get_env_value(child_info->envp_pars, "PWD");
 	putendl_fd(oldpwd_value, 1);
@@ -101,28 +38,7 @@ static int	go_to_old(t_child_info *child_info, t_alloc *all)
 		perror("minishell: cd -");
 		return (1);
 	}
-	if (current_pwd)
-	{
-		assign_oldpwd = make_env_assignment("OLDPWD", current_pwd);
-		if (assign_oldpwd)
-		{
-			treat_var(all, assign_oldpwd);
-			free(assign_oldpwd);
-		}
-	}
-	tmp = getcwd(NULL, 0);
-	if (tmp == NULL)
-		exit_error(all, NULL, 1);
-	else
-	{
-		assign_pwd = make_env_assignment("PWD", tmp);
-		free(tmp);
-		if (assign_pwd)
-		{
-			treat_var(all, assign_pwd);
-			free(assign_pwd);
-		}
-	}
+	swap_old_actual_pwd(assign_oldpwd, assign_pwd, current_pwd, all);
 	return (0);
 }
 

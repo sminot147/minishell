@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 17:55:42 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 19:21:52 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_env	*add_pwd(t_alloc *all)
 		exit_error(all, NULL, 1);
 	return (new_env);
 }
+
 /**
  * Rebuild env (Last commande, SHLVL, and PWD) if necessicery
 */
@@ -110,8 +111,12 @@ t_env	*pars_env(char **envp, t_alloc *all)
 	}
 	if (lst_env == NULL)
 		return (rebuild_env(all));
+	update_shell_lvl(all);
+	return (lst_env);
+}
+/*
 	return (lst_env);
 	update_shell_lvl(all);
 	if (DEBBUG == 1)
 		print_env(all->env);
-}
+*/

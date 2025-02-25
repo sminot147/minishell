@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 17:28:04 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 19:15:04 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_alloc
 	t_env			*env;
 	int				*return_value;
 }	t_alloc;
+
+extern pid_t	g_signal_received;
 
 /*---------------------------Pars_env.c--------------------------------------*/
 t_env	*pars_env(char **envp, t_alloc *all);

@@ -1,25 +1,8 @@
 
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-/////
-les message et value de return des child pour les cpermition deny / is directory / no sutch file or directory
 
 /////
-normer tout
-
-/////
-
 faire un choix sur le get_env_value a garder
 
-//////
-putstr_fd("Quit (core dumped)", 2);
-
 Fait : 
-
-///////
-export +=
-
-/////
-
-modif le env
-pas afficher les name sans value (declarer sans = (value a null))

@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   path_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 11:31:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 11:59:21 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/25 17:01:38 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/25 19:16:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft.h"
 #include "utils.h"
-#include "command_exec.h"
 
-void	free_child(t_child_info *child_info, char *cmd_path)
+static char	*join_cmd_path(char **split_path, int i, char *cmd)
 {
-	free_double_array((void **)child_info->args);
-	free_double_array((void **)child_info->envp);
-	clear_env(&child_info->envp_pars);
-	if (child_info->in_file)
-		free(child_info->in_file);
-	if (child_info->out_file)
-		free(child_info->out_file);
-	if (cmd_path)
-		free(cmd_path);
+	char	*temp;
+	char	*cmd_path;
+
+	temp = ft_strjoin(split_path[i], "/");
+	if (!temp)
+		return (NULL);
+	cmd_path = ft_strjoin(temp, cmd);
+	free(temp);
+	if (!cmd_path)
+		return (NULL);
+	return (cmd_path);
 }
 
-char	*get_path(char	**envp)
+char	*get_path(char **envp)
 {
 	char	*path;
 	int		i;
@@ -47,21 +44,6 @@ char	*get_path(char	**envp)
 		i++;
 	}
 	return (path);
-}
-
-static char	*join_cmd_path(char **split_path, int i, char *cmd)
-{
-	char	*temp;
-	char	*cmd_path;
-
-	temp = ft_strjoin(split_path[i], "/");
-	if (!temp)
-		return (NULL);
-	cmd_path = ft_strjoin(temp, cmd);
-	free(temp);
-	if (!cmd_path)
-		return (NULL);
-	return (cmd_path);
 }
 
 char	*get_cmd_path(char *cmd, char **splited_path)

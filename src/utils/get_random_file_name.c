@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_random_file_name.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 22:28:25 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/14 12:20:37 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:17:56 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

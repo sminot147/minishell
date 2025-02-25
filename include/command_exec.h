@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 16:32:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:22:16 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,13 @@ typedef struct s_child_info
 	t_here_doc	here_doc;
 }	t_child_info;
 
+/*---------------------------Child.c-----------------------------------------*/
 int		child(t_child_info *child_info);
+
+/*---------------------------Exec_cmd.c--------------------------------------*/
 void	exec_cmd(t_cmd *cmd_list, t_alloc *all);
-void	exec(t_child_info *child_info);
-void	init_child(t_child_info *child_info, t_alloc *all);
-void	setup_child(t_cmd cmd, t_child_info *child_info, t_alloc *all);
 
+/*---------------------------Start_child.c-----------------------------------*/
 int		start_child(t_child_info *child_info, t_alloc *all);
-
-char	*get_path(char	**envp);
-char	*get_cmd_path(char *cmd, char **splited_path);
-void	free_child(t_child_info *child_info, char *cmd_path);
 
 #endif

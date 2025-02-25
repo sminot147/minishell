@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 16:42:20 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:15:17 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "utils.h"
 #include <signal.h>
 
-int	signal_received;
+int	g_signal_received;
 
 static int	end_minishell(t_alloc *all)
 {
@@ -85,10 +85,10 @@ int	main(int argc, char **argv, char **envp)
 	all->env = pars_env(envp, all);
 	while (1)
 	{
-		prompt = get_short_path(all);
+		prompt = get_promp(all);
 		input = readline(prompt);
 		free(prompt);
-		if (signal_received == 1)
+		if (g_signal_received == 1)
 			return_value = 130;
 		if (!input)
 			return (end_minishell(all));
@@ -97,6 +97,6 @@ int	main(int argc, char **argv, char **envp)
 		if (all->cmd != NULL)
 			exec_cmd(all->cmd, all);
 		free_line(all);
-		signal_received = 0;
+		g_signal_received = 0;
 	}
 }

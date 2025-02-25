@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 16:38:21 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:31:46 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ void	put_env_export(t_alloc *all)
 			ft_putvar(env_tab[i]);
 		++i;
 	}
-	free_double_array((void **)env_tab);
+	ft_free_double_array((void **)env_tab);
 }

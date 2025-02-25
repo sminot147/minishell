@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:05 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:45:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	**add_arg(char **args, const char *new_arg)
 	new_args = malloc(sizeof(char *) * (count + 2));
 	if (!new_args)
 	{
-		free_double_array((void **)args);
+		ft_free_double_array((void **)args);
 		return (NULL);
 	}
 	i = -1;
@@ -34,7 +34,7 @@ static char	**add_arg(char **args, const char *new_arg)
 	new_args[count] = ft_strdup(new_arg);
 	if (new_args[count] == NULL)
 	{
-		free_double_array((void **)args);
+		ft_free_double_array((void **)args);
 		return (NULL);
 	}
 	new_args[count + 1] = NULL;

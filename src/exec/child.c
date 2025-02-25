@@ -5,48 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 11:31:59 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 13:59:48 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/25 18:56:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "command_exec.h"
 #include "utils.h"
-#include <fcntl.h>
 
-static int	open_input_file(t_child_info *child_info)
+static void	exec(t_child_info *child_info)
 {
-	int	return_value;
+	char	*cmd_path;
 
-	return_value = open(child_info->in_file, O_RDONLY);
-	if (return_value < 0)
-	{
-		putstr_fd("minishell: ", 2);
-		perror(child_info->in_file);
-		free_child(child_info, NULL);
-		exit(1);
-	}
-	return (return_value);
-}
-
-static int	open_output_file(t_child_info *child_info)
-{
-	int	return_value;
-
-	if (child_info->append == 1)
-		return_value = open(child_info->out_file, 01 | O_CREAT | O_APPEND, \
-			0777);
-	else
-		return_value = open(child_info->out_file, 01 | O_CREAT | O_TRUNC, \
-			0777);
-	if (return_value < 0)
-	{
-		putstr_fd("minishell: ", 2);
-		perror(child_info->out_file);
-		free_child(child_info, NULL);
-		exit(1);
-	}
-	return (return_value);
+	cmd_path = NULL;
+	init_cmd(child_info, &cmd_path);
+	check_cmd_validity(cmd_path, child_info);
+	execve(cmd_path, child_info->args, child_info->envp);
+	putstr_fd("minishell: ", 2);
+	perror(child_info->cmd);
+	free_child(child_info, cmd_path);
+	exit(1);
 }
 
 static void	dup_and_close(int fd_1, int fd_2, t_child_info *child_info)
@@ -73,36 +52,18 @@ static void	dup_and_close(int fd_1, int fd_2, t_child_info *child_info)
 	}
 }
 
-static void	select_file(int *fd_1, int *fd_2, t_child_info *child_info)
-{
-	if (child_info->in_file != NULL)
-		*fd_1 = open_input_file(child_info);
-	else if (child_info->here_doc.here_doc == 1)
-		*fd_1 = child_info->here_doc.fd;
-	else if (child_info->first == 0 && child_info->pipe[0] != -1)
-		*fd_1 = child_info->pipe[0];
-	else
-		*fd_1 = 0;
-	if (child_info->out_file != NULL)
-		*fd_2 = open_output_file(child_info);
-	else if (child_info->pipe_after == 1)
-		*fd_2 = child_info->pipe[1];
-	else
-		*fd_2 = 1;
-}
-
 int	child(t_child_info *child_info)
 {
-	int		fd[2];
+	int	fd[2];
 
-	select_file(&fd[0], &fd[1], child_info);
+	select_fd(&fd[0], &fd[1], child_info);
 	dup_and_close(fd[0], fd[1], child_info);
 	if (child_info->cmd == NULL)
 	{
 		free_child(child_info, NULL);
-		exit (0);
+		exit(0);
 	}
 	exec_builtins_child(child_info);
 	exec(child_info);
-	exit (1);
+	exit(1);
 }

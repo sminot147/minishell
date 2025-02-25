@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 17:52:45 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 19:17:27 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-/** Return the length of the var value, paying attention to the quotes that need 
-to be added.
+/** Return the length of the var value, paying attention to the quotes
+ * that need to be added.
 */
 static int	len_var_value(char *var_value, int quote)
 {

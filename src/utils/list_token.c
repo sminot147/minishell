@@ -6,11 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 18:14:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:06:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "utils.h"
 
 void	clear_token(t_token **lst_token, t_alloc *all)
 {

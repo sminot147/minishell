@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 17:50:46 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 19:23:06 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-/**
- * @return is a here doc name
-*/
-static t_bool	is_not_here_doc_name(char *input, int i, int quote)
-{
-	return (TRUE);
-}
 
 /**
  * Add to the linked list the input before var, and the value of the var
@@ -43,20 +35,6 @@ static void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 	}
 	else
 		add_var_value(input, pos_var, quote, all);
-}
-
-/**
- * Check if the argument must be replace
-*/
-static t_bool	is_arg(char *input, int pos, int quote)
-{
-	char	next_c;
-
-	next_c = input[pos + 1];
-	if (ft_isalnum(next_c) || next_c == '_' || next_c == '\'' || next_c == '?'
-		|| (next_c == '"' && quote != 2))
-		return (TRUE);
-	return (FALSE);
 }
 
 /**
@@ -92,7 +70,7 @@ static void	identify_and_replace_variables(char *input, t_alloc *all)
 	while (input[++i])
 	{
 		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote) \
-			&& here_doc_case(input, i, quote))
+			&& is_not_here_doc_name(input, i, quote))
 		{
 			treat_one_var(input, all, i, quote);
 			i = size_of_var_name(input, i);

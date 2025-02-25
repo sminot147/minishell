@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/25 16:33:09 by madelvin         ###   ########.fr        #
+#    Updated: 2025/02/25 19:35:23 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,31 +19,37 @@ SRC_FILE = main.c\
 EXEC_DIR = $(SRC_DIR)exec/
 
 EXEC = child.c\
-	command_exec.c \
-	exec.c \
-	init_child.c \
-	utils.c \
-	parent.c \
+	exec_cmd.c \
+	start_child.c \
 
 UTILS_DIR = $(SRC_DIR)utils/
 
-UTILS = exit.c \
-	list_token.c \
-	list_file.c \
+UTILS = child_manager.c \
+	clean_and_exit.c \
+	clean_child.c \
+	cmd_parser_function.c \
+	debbug_messager.c \
+	env_tab_handler.c \
+	export_handler.c \
+	file_manager.c \
+	ft_free_double_array.c \
+	get_env_value.c \
+	get_random_file_name.c \
 	list_cmd.c \
 	list_env.c \
-	array.c \
-	cmd_parser.c \
-	safe_close.c \
+	list_file.c \
+	list_token.c \
 	parsing_message_error.c \
-	get_random_file_name.c \
-	get_pwd.c \
-	signal.c \
-	make_env_tab.c \
+	path_handler.c \
+	promp_pwd.c \
 	put_env_export.c \
-	get_env_value.c \
-	export.c \
-	debbug.c \
+	safe_close.c \
+	signal_handler.c \
+	size_of_args.c \
+	update_shlev.c \
+	cmd_handler.c \
+	replace_var_check.c \
+	cd_function.c \
 
 PARSING_DIR = $(SRC_DIR)parsing/
 

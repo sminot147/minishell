@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 17:21:36 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 19:21:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static t_token_type	token_tag(char *input)
  * commands. Each token has a tag to identify whether it's a command separator, 
  * or if the token was enclosed in quotes
 */
- void	tokenize(char *input, t_token **lst_token, t_alloc *all)
+void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
 
@@ -98,6 +98,4 @@ static t_token_type	token_tag(char *input)
 			all->token = lst_token;
 		input += size_to_moove(input);
 	}
-	if (DEBBUG == 1)
-		print_tokens(*lst_token);
 }

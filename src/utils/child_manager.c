@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_child.c                                       :+:      :+:    :+:   */
+/*   child_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 14:46:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 16:28:45 by madelvin         ###   ########.fr       */
+/*   Created: 2025/02/25 17:00:39 by madelvin          #+#    #+#             */
+/*   Updated: 2025/02/25 18:28:58 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command_exec.h"
-#include "parsing.h"
 #include "utils.h"
-#include <stdlib.h>
 
 void	init_child(t_child_info *child_info, t_alloc *all)
 {
@@ -24,8 +21,7 @@ void	init_child(t_child_info *child_info, t_alloc *all)
 		exit_error(all, NULL, 1);
 }
 
-void	setup_child(t_cmd cmd, t_child_info *child_info, \
-		t_alloc *all)
+void	setup_child(t_cmd cmd, t_child_info *child_info, t_alloc *all)
 {
 	if (cmd.args)
 	{
