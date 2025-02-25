@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 14:26:01 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/25 16:42:52 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static void	extract_var_name(char **var_name, char *input, int pos_var, \
 
 	++pos_var;
 	len_var = 0;
-	while (ft_isalnum(input[pos_var + len_var]) || input[pos_var + len_var] == '_')
+	while (ft_isalnum(input[pos_var + len_var]) || \
+				input[pos_var + len_var] == '_')
 		++len_var;
 	*var_name = malloc((len_var + 1) * sizeof(char));
 	if (!*var_name)

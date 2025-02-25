@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:38 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:42:20 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "utils.h"
 #include <signal.h>
 
-int			signal_received;
+int	signal_received;
 
 static int	end_minishell(t_alloc *all)
 {
@@ -72,7 +72,7 @@ static void	alloc_all(t_alloc **all, int *return_value)
 // 	}
 // } get_short_path(all)
 
-int	main(int argc, char **argv, char **envp) // corriger le ctrl+c puis exec sleep 5
+int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	*prompt;
