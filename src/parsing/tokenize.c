@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 18:19:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:04:53 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	calloc_value(char **str, int size, t_alloc *all)
 	if (!*str)
 		exit_error(all, NULL, 1);
 }
+
 
 static char	*extract_next_token(char *input, t_alloc *all)
 {
@@ -49,7 +50,8 @@ static char	*extract_next_token(char *input, t_alloc *all)
 	return (token_value);
 }
 
-static t_token_type	token_type(char *input)
+//return the tag of the token
+static t_token_type	token_tag(char *input)
 {
 	int		i;
 	int		size_token;
@@ -70,6 +72,9 @@ static t_token_type	token_type(char *input)
 	return (NO_QUOTE);
 }
 
+/*Parse input, remove quotes, and create a token that can be used to separate
+commands. Each token has a tag to identify whether it's a command separator, 
+or if the token was enclosed in quotes*/
 void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 {
 	t_token	*next_token;
@@ -81,7 +86,7 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 		next_token = new_token(extract_next_token(input, all));
 		if (!next_token)
 			exit_error(all, NULL, 1);
-		next_token->type = token_type(input);
+		next_token->tag = token_tag(input);
 		add_token(lst_token, next_token);
 		if (!all->token)
 			all->token = lst_token;

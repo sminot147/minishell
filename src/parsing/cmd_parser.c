@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 17:35:19 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:02:36 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ static char	**add_arg(char **args, const char *new_arg)
 
 static int	append_to_cmd(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 {
-	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP && \
+	if ((*token_lst)->token[0] == '|' && (*token_lst)->tag == IS_SEP && \
 		(*token_lst)->next == NULL)
 		return (1);
-	if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP)
+	if ((*token_lst)->token[0] == '|' && (*token_lst)->tag == IS_SEP)
 		cmd->pipe = 1;
-	else if ((*token_lst)->token[0] == '<' && (*token_lst)->type == IS_SEP)
+	else if ((*token_lst)->token[0] == '<' && (*token_lst)->tag == IS_SEP)
 	{
 		if (!(*token_lst)->next)
 			return (1);
 		add_infile(cmd, token_lst, all, i);
 	}
-	else if ((*token_lst)->token[0] == '>' && (*token_lst)->type == IS_SEP)
+	else if ((*token_lst)->token[0] == '>' && (*token_lst)->tag == IS_SEP)
 	{
 		if (!(*token_lst)->next)
 			return (1);
@@ -87,7 +87,7 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 			clear_cmd(&all->cmd, all);
 			return (1);
 		}
-		if ((*token_lst)->token[0] == '|' && (*token_lst)->type == IS_SEP)
+		if ((*token_lst)->token[0] == '|' && (*token_lst)->tag == IS_SEP)
 			break ;
 		(*token_lst) = (*token_lst)->next;
 		(*i)++;
@@ -97,18 +97,18 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 
 static int	specific_case(t_token *token_lst, t_alloc *all)
 {
-	if (token_lst->type == IS_SEP && ft_strcmp(token_lst->token, "|") == 0)
+	if (token_lst->tag == IS_SEP && ft_strcmp(token_lst->token, "|") == 0)
 	{
 		*(*all).return_value = 2;
 		putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
-	if (token_lst->type != IS_SEP && ft_strcmp(token_lst->token, ":") == 0)
+	if (token_lst->tag != IS_SEP && ft_strcmp(token_lst->token, ":") == 0)
 	{
 		*(*all).return_value = 0;
 		return (1);
 	}
-	if (token_lst->type != IS_SEP && ft_strcmp(token_lst->token, "!") == 0)
+	if (token_lst->tag != IS_SEP && ft_strcmp(token_lst->token, "!") == 0)
 	{
 		*(*all).return_value = 1;
 		return (1);

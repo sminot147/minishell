@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 18:12:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:49:04 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
+//add to the linked list the input before var, and the value of the var
+static void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 {
 	char	*var_value;
 	t_token	*node;
@@ -34,6 +35,7 @@ void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
 		add_var_value(input, pos_var, quote, all);
 }
 
+//Check if the argument must be replace
 static t_bool	is_arg(char *input, int pos, int quote)
 {
 	char	next_c;
@@ -45,19 +47,25 @@ static t_bool	is_arg(char *input, int pos, int quote)
 	return (FALSE);
 }
 
-static int	is_after_arg(char *input, int i)
+/* return the size of the var name
+- var name must be digit, alpha or _
+- $? is the last return value
+- if the name start by a digit, just this digit is consider like the name */
+static int	size_of_var_name(char *input, int i)
 {
 	int	add_one;
 
 	add_one = 0;
-	if (input[i + 1] == '?')
+	if (input[i + 1] == '?' || ft_isdigit(input[i + 1]))
 		add_one = 1;
-	while (ft_isalnum(input[++i]) || input[i] == '_')
-		;
+	if (ft_isalpha(input[++i]))
+		while (ft_isalnum(input[++i]) || input[i] == '_')
+			;
 	return (i + add_one);
 }
 
-void	check_var(char *input, t_alloc *all)
+//Store the new input in a linked list (type t_token) in all->token.
+static void	identify_and_replace_variables(char *input, t_alloc *all)
 {
 	int	i;
 	int	quote;
@@ -69,7 +77,7 @@ void	check_var(char *input, t_alloc *all)
 		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote))
 		{
 			treat_one_var(input, all, i, quote);
-			i = is_after_arg(input, i);
+			i = size_of_var_name(input, i);
 			input = &input[i];
 			i = -1;
 		}
@@ -85,19 +93,21 @@ void	check_var(char *input, t_alloc *all)
 	add_input_before_var(input, all, i);
 }
 
-void	replace_var(char *input, t_alloc *all)
+//Replace the variables starting with $
+void	replace_var(char **input, t_alloc *all)
 {
 	t_token	*lst_input;
 	char	*new_input;
 
 	lst_input = NULL;
 	all->token = &lst_input;
-	check_var(input, all);
+	identify_and_replace_variables(*input, all);
 	new_input = ft_calloc(2, sizeof(char));
 	if (!new_input)
 		exit_error(all, NULL, 1);
 	join_input(&new_input, lst_input, all);
-	all->input_after_replace = new_input;
+	free(*input);
+	*input = new_input;
+	all->input = new_input;
 	clear_token(&lst_input, all);
-	
 }

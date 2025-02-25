@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 18:20:13 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:57:57 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MAX_PATH_LENGTH	30
 # define TMP_DIR			"/tmp/"
 # define PREFIX				"sh-thd-"
-# define DEBBUG				0
+# define DEBBUG				1
 
 /*---------------------------Exit.c------------------------------------------*/
 void	free_line(t_alloc *alloced);

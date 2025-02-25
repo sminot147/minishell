@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 18:06:43 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:32:42 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ int			signal_received;
 
 static int	end_minishell(t_alloc *all)
 {
+	int	return_value;
+
+	return_value = *(*all).return_value;
 	free_all(all);
 	write(STDOUT_FILENO, "exit\n", 5);
-	return (*(*all).return_value);
+	return (return_value);
 }
 
 static void	alloc_all(t_alloc **all, int *return_value)

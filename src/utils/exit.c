@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 15:29:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:47:22 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ void	free_line(t_alloc *alloced)
 			free(alloced->input);
 			alloced->input = NULL;
 		}
-		if (alloced->input_after_replace)
-		{
-			free(alloced->input_after_replace);
-			alloced->input_after_replace = NULL;
-		}
 		if (alloced->cmd)
 		{
 			clear_cmd(&alloced->cmd, alloced);
@@ -42,8 +37,6 @@ void	free_all(t_alloc *alloced)
 	{
 		if (alloced->input)
 			free(alloced->input);
-		if (alloced->input_after_replace)
-			free(alloced->input_after_replace);
 		if (alloced->token)
 			clear_token(alloced->token, alloced);
 		if (alloced->cmd)

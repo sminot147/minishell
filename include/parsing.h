@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/22 17:10:27 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:01:02 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*token;
-	t_token_type	type;
+	t_token_type	tag;
 	struct s_token	*next;
 }	t_token;
 
@@ -71,7 +71,6 @@ typedef struct s_cmd
 typedef struct s_alloc
 {
 	char			*input;
-	char			*input_after_replace;
 	t_token			**token;
 	t_cmd			*cmd;
 	t_env			*env;
@@ -95,7 +94,7 @@ int		size_check_sep(char *input);
 int		is_sep(char c);
 
 /*---------------------------Replace_var.c-----------------------------------*/
-void	replace_var(char *input, t_alloc *all);
+void	replace_var(char **input, t_alloc *all);
 
 /*---------------------------Replace_var_value.c-----------------------------*/
 void	add_var_value(char *input, int pos_var, int quote, t_alloc *all);

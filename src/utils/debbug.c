@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:07:29 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 18:19:05 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:00:36 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_tokens(t_token *lst_token)
 {
 	while (lst_token)
 	{
-		ft_printf("Token: [%s][%i]\n", lst_token->token, (int)lst_token->type);
+		ft_printf("Token: [%s][%i]\n", lst_token->token, (int)lst_token->tag);
 		lst_token = lst_token->next;
 	}
 }
