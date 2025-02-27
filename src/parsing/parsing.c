@@ -6,13 +6,16 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 16:04:27 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 19:39:56 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * @return 0 quote not close
+*/
 static int	quote_not_close(char *input)
 {
 	int	i;
@@ -33,22 +36,21 @@ static int	quote_not_close(char *input)
 }
 
 /**
- * call different step of parsing
+ * Call different step of parsing
 */
 void	parse_input(char *input, t_alloc *all)
 {
 	t_token	*lst_token;
 
-	
 	all->input = input;
-	if (quote_not_close(input))
+	if (quote_not_close(input) != 0)
 		return ;
 	replace_var(&input, all);
 	lst_token = NULL;
 	tokenize(input, &lst_token, all);
 	if (DEBBUG == 1)
 	{
-		//print_env(all->env);
+		print_env(all->env);
 		print_tokens(lst_token);
 	}
 	if (lst_token == NULL)

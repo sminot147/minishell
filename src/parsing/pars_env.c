@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 17:42:38 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:36:45 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ static t_env	*rebuild_env(t_alloc *all)
 	return (lst_env);
 }
 
+/**
+ * @return name of var or NULL if the environnement haven't '=' char 
+ * (case of you execute "export test" before execute minishell)
+ */
 static char	*extract_name(char *str, t_alloc *all)
 {
 	int		i;
@@ -76,6 +80,9 @@ static char	*extract_name(char *str, t_alloc *all)
 	return (name);
 }
 
+/**
+ * @return the value (malloc)
+ */
 static char	*extract_value(char *str)
 {
 	while (*str != '=')
@@ -85,7 +92,7 @@ static char	*extract_value(char *str)
 }
 
 /**
- * Pars environnement
+ * @return Linked liste with name et value for all environnement variable
 */
 t_env	*pars_env(char **envp, t_alloc *all)
 {
@@ -99,14 +106,15 @@ t_env	*pars_env(char **envp, t_alloc *all)
 	while (envp[++i])
 	{
 		name = extract_name(envp[i], all);
-		if (!name)
-			exit_error(all, NULL, 1);
-		new_env = new_var_env(name, extract_value(envp[i]));
-		if (!new_env)
-			exit_error(all, NULL, 1);
-		add_env(&lst_env, new_env);
-		if (!all->env)
-			all->env = lst_env;
+		if (name)
+		{
+			new_env = new_var_env(name, extract_value(envp[i]));
+			if (!new_env)
+				exit_error(all, NULL, 1);
+			add_env(&lst_env, new_env);
+			if (!all->env)
+				all->env = lst_env;
+		}
 	}
 	if (lst_env == NULL)
 		return (rebuild_env(all));

@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:12:49 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * treat one update or creation of variable
+*/
 int	treat_var(t_alloc *all, char *input)
 {
 	char	*name;
@@ -42,6 +45,13 @@ int	treat_var(t_alloc *all, char *input)
 	return (add_or_update_env(&all->env, name, value, append));
 }
 
+/**
+ * Execute the commande export
+ * Export : create or update one or more environnement variable
+ * @cond is the only commande in the line.
+ * @note set the return value on failure if one or more vraiable name isn't 
+ * conform
+*/
 int	exec_export(t_child_info *child_info, t_alloc *all)
 {
 	int	arg_index;

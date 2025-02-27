@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:27:10 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 19:17:27 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:10:21 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	add_var_value(char *input, int pos_var, int quote, t_alloc *all)
 	extract_var_name(&var_name, input, pos_var, all);
 	if (!*var_name)
 		return ;
-	var_value = dup_value_with_quote(search_value(all->env, var_name), quote);
+	var_value = dup_value_with_quote(get_env_value(all->env, var_name), quote);
 	if (!var_value)
 	{
 		free(var_name);

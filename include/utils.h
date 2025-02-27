@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 15:37:05 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 19:14:20 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 # define MAX_PATH_LENGTH	30
 # define TMP_DIR			"/tmp/"
 # define PREFIX				"sh-thd-"
-# define DEBBUG				1
+# define DEBBUG				0
 
-/*---------------------------Clean_and_exit----------------------------------*/
+/*---------------------------------------------------------------------------*/
+/*                           Clean_and_exit                                  */
+/*---------------------------------------------------------------------------*/
 void	free_line(t_alloc *alloced);
 void	free_all(t_alloc *alloced);
 void	exit_error(t_alloc *all, char *error_message, char perror_enable);
@@ -43,7 +45,6 @@ void	clear_env(t_env **lst_env);
 t_env	*new_var_env(char *name, char *value);
 t_env	*new_var_export(char *name, char *value);
 void	add_env(t_env **lst_env, t_env *new_env);
-char	*search_value(t_env *lst_env, char *name);
 
 /*---------------------------Cmd_parser_function.c---------------------------*/
 void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i);

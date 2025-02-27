@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:22:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 16:06:27 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 18:44:39 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 /**
  * @return is a here doc name
- * @note quote = 0 or 2.
 */
 t_bool	is_heredoc_name(char *input, int pos_var, t_alloc *all)
 {
 	int		i;
-	int 	pos_prev_token;
+	int		pos_prev_token;
 	char	*value_prev_token;
 
 	i = 0;

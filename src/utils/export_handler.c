@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 18:05:39 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:32:33 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
+/**
+ * Append value (case of export +=)
+*/
 static int	append_value(char **value, char *append_value, char append)
 {
 	if (append == 1)
@@ -34,6 +37,9 @@ static int	append_value(char **value, char *append_value, char append)
 	return (0);
 }
 
+/**
+ * Add or udate the environnement value
+*/
 int	add_or_update_env(t_env **env, char *name, char *value, char append)
 {
 	t_env	*new_var;
@@ -68,11 +74,14 @@ static void	put_error(char *input)
 	putstr_fd("': not a valid identifier\n", 2);
 }
 
+/**
+ * Look it's export = or export += , set apped and return the len of name
+*/
 static int	set_append(char *input, char *append, int i)
 {
 	if (input[i] == '+')
 	{
-		if (!input[i + 1] || input[i + 1] != '=')
+		if (input[i + 1] != '=')
 		{
 			put_error(input);
 			return (-1);
@@ -84,6 +93,11 @@ static int	set_append(char *input, char *append, int i)
 	return (i);
 }
 
+/**
+ * @return lenght of variable name or -1 if variable name is not correcte
+ * @note this fonction print also an error message if necesserary
+ * @note append is set to 1 if necesserary
+*/
 int	var_len_name(char *input, char *append)
 {
 	int	i;

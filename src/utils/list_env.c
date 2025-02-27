@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:30:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 17:18:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:37:44 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/**
+ * Clear the linked liste env.
+ * @note name and value is free.
+*/
 void	clear_env(t_env **lst_env)
 {
 	if (!*lst_env)
@@ -23,6 +27,10 @@ void	clear_env(t_env **lst_env)
 	*lst_env = NULL;
 }
 
+/**
+ * @return a new variable environnement.
+ * @note Use by fonction export, value can be null
+*/
 t_env	*new_var_export(char *name, char *value)
 {
 	t_env	*var;
@@ -39,6 +47,10 @@ t_env	*new_var_export(char *name, char *value)
 	return (var);
 }
 
+/**
+ * @return a new variable environnement.
+ * @note use only during the parsing, value NULL in case of malloc error.
+*/
 t_env	*new_var_env(char *name, char *value)
 {
 	t_env	*var;
@@ -60,6 +72,9 @@ t_env	*new_var_env(char *name, char *value)
 	return (var);
 }
 
+/**
+ * Add back new environnement var
+*/
 void	add_env(t_env **lst_env, t_env *new_env)
 {
 	if (!*lst_env)
@@ -68,24 +83,4 @@ void	add_env(t_env **lst_env, t_env *new_env)
 		(*lst_env)->next = new_env;
 	else
 		add_env(&(*lst_env)->next, new_env);
-}
-
-char	*search_value(t_env *lst_env, char *to_find)
-{
-	int	size_to_find;
-
-	size_to_find = ft_strlen(to_find);
-	if (!lst_env)
-		return ("");
-	if (!ft_strncmp(lst_env->name, to_find, size_to_find))
-	{
-		if (lst_env->name[size_to_find] == '\0')
-		{
-			return (lst_env->value);
-		}
-	}
-	if (lst_env->next)
-		return (search_value(lst_env->next, to_find));
-	else
-		return (NULL);
 }
