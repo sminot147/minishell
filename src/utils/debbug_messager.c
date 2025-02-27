@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debbug_messager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 18:07:29 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 18:13:42 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:03:50 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	print_env(t_env *env)
 
 void	print_tokens(t_token *lst_token)
 {
+	if (!lst_token)
+		ft_printf("No token\n");
 	while (lst_token)
 	{
 		ft_printf("Token: [%s][%i]\n", lst_token->token, (int)lst_token->tag);

@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 15:26:13 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 15:37:05 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MAX_PATH_LENGTH	30
 # define TMP_DIR			"/tmp/"
 # define PREFIX				"sh-thd-"
-# define DEBBUG				0
+# define DEBBUG				1
 
 /*---------------------------Clean_and_exit----------------------------------*/
 void	free_line(t_alloc *alloced);
