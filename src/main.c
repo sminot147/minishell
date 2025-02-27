@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 17:18:27 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:07:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	alloc_all(t_alloc **all, int *return_value)
 // 	char	*input;
 // 	t_alloc	*all;
 // 			char *line;
-
 // 	// char    *prompt;
 // 	(void)av;
 // 	if (ac != 1)

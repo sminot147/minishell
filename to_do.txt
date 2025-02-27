@@ -1,8 +1,4 @@
 
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-
-/////
-faire un choix sur le get_env_value a garder
-
 Fait : 

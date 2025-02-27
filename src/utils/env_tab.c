@@ -6,13 +6,18 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:53:19 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 17:35:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:14:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * @brief Counts the number of environment variables in the list.
+ * @param env The environment variable list.
+ * @return The number of variables in the list.
+ */
 int	count_env_size(t_env *env)
 {
 	int	i;
@@ -26,6 +31,12 @@ int	count_env_size(t_env *env)
 	return (i);
 }
 
+/**
+ * @brief Constructs an environment variable string in `NAME=VALUE` format.
+ * @param env The environment variable.
+ * @return A newly allocated string representing the environment variable,
+ *  or `NULL` on failure.
+ */
 static char	*make_env_value(t_env *env)
 {
 	char	*value;
@@ -44,6 +55,12 @@ static char	*make_env_value(t_env *env)
 	return (value);
 }
 
+/**
+ * @brief Creates an array of environment variable strings from the list.
+ * @param all A structure containing the environment variable list.
+ * @return A newly allocated array of environment variable strings,
+ *  or exits on failure.
+ */
 char	**make_env_tab(t_alloc *all)
 {
 	t_env	*env_cp;

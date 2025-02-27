@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 18:56:44 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:32:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "command_exec.h"
 #include "utils.h"
 
+/**
+ * @brief Executes a command using execve.
+ * @param child_info Structure containing command arguments and environment
+ *  variables.
+ */
 static void	exec(t_child_info *child_info)
 {
 	char	*cmd_path;
@@ -28,6 +33,12 @@ static void	exec(t_child_info *child_info)
 	exit(1);
 }
 
+/**
+ * @brief Duplicates file descriptors and closes unnecessary ones.
+ * @param fd_1 File descriptor to duplicate as stdin (0).
+ * @param fd_2 File descriptor to duplicate as stdout (1).
+ * @param child_info Structure containing command execution details.
+ */
 static void	dup_and_close(int fd_1, int fd_2, t_child_info *child_info)
 {
 	if (fd_1 != 0)
@@ -52,6 +63,13 @@ static void	dup_and_close(int fd_1, int fd_2, t_child_info *child_info)
 	}
 }
 
+/**
+ * @brief Executes a child process, handling redirections and command
+ *  execution.
+ * @param child_info Structure containing command arguments and execution
+ *  details.
+ * @return Always exits the process with an appropriate status.
+ */
 int	child(t_child_info *child_info)
 {
 	int	fd[2];

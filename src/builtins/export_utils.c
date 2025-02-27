@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_handler.c                                   :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:32:33 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 21:23:30 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ static int	append_value(char **value, char *append_value, char append)
 	if (append == 1)
 	{
 		str_append(value, append_value, 1);
+		free(append_value);
 		if (!value)
-		{
-			free(append_value);
 			return (2);
-		}
 	}
 	else
 	{

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_env_export.c                                   :+:      :+:    :+:   */
+/*   put_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 18:31:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:44:33 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * @brief Compares two strings up to the first `=` or the end of the string.
+ * @param s1 First string to compare.
+ * @param s2 Second string to compare.
+ * @return Zero if the compared parts are equal. A negative or positive value 
+ * if they differ (similar to standard `ft_strcmp`).
+ */
 static int	ft_strcmp_name(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -31,6 +38,11 @@ static int	ft_strcmp_name(const char *s1, const char *s2)
 	return (0);
 }
 
+/**
+ * @brief Prints a string in the format `declare -x VAR="value"`.
+ * If no `=` is found, only `declare -x VAR` followed by a newline is printed.
+ * @param str The string (environment variable) to print.
+ */
 static void	ft_putvar(char *str)
 {
 	int	i;
@@ -56,6 +68,14 @@ static void	ft_putvar(char *str)
 	putstr_fd("\"\n", 1);
 }
 
+/**
+ * @brief Sorts an array of strings in ascending order based on
+ * `ft_strcmp_name()`.
+ * Uses a simple bubble-sort-like approach.
+ * @param len Number of elements in the array.
+ * @param lst The array of strings to sort.
+ * @return The sorted array of strings.
+ */
 static char	**ft_sort_arrays(int len, char **lst)
 {
 	char	*buf;
@@ -80,7 +100,17 @@ static char	**ft_sort_arrays(int len, char **lst)
 	return (lst);
 }
 
-void	put_env_export(t_alloc *all)
+/**
+ * @brief Creates a sorted copy of the environment and prints each variable
+ *  in `declare -x VAR` format.
+ * The function counts the size of the current environment, duplicates it
+ *  into an array, 
+ * sorts it with `ft_sort_arrays()`, then prints each variable using
+ *  `ft_putvar()`.
+ * @param all Pointer to a `t_alloc` structure that contains the
+ *  environment list.
+ */
+void	put_env(t_alloc *all)
 {
 	int		env_len;
 	int		i;

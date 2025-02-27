@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 15:22:16 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 21:00:29 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,17 @@ int		here_doc(t_token *token, t_alloc *all);
 
 /*---------------------------Parsing_message_error.c-------------------------*/
 int		treat_var(t_alloc *all, char *input);
+
+/*---------------------------Cmd_parser_function.c---------------------------*/
+void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i);
+void	add_outfile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i);
+
+/*---------------------------Parsing_error_message_.c-------------------------*/
+int		check_syntax(t_token *token_lst, t_alloc *all);
+void	extract_error_message(char *sep, t_alloc *all);
+
+/*---------------------------Replace_var_check.c-----------------------------*/
+t_bool	is_heredoc_name(char *input, int i, t_alloc *all);
+t_bool	is_arg(char *input, int pos, int quote);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:41:04 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:29:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:26:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ * @brief Executes the pwd command to print the current working directory.
+ * @return Returns 0 on success, 1 if getcwd fails.
+ */
 int	exec_pwd(void)
 {
 	char	*pwd;

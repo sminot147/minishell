@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_random_file_name.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 22:28:25 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 19:40:32 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/27 20:36:56 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <fcntl.h>
 
+/**
+* @brief Generates a random unsigned integer using `/dev/urandom`.
+* @param all A structure containing necessary allocations.
+* @return A randomly generated unsigned integer.
+*/
 static unsigned int	get_random_number(t_alloc *all)
 {
 	unsigned int	random_value;
@@ -31,6 +36,11 @@ static unsigned int	get_random_number(t_alloc *all)
 	return (random_value);
 }
 
+/**
+* @brief Converts an unsigned integer to a string.
+* @param num The number to convert.
+* @param str The output string buffer.
+*/
 static void	int_to_str(unsigned int num, char *str)
 {
 	char	temp[16];
@@ -57,6 +67,11 @@ static void	int_to_str(unsigned int num, char *str)
 	str[i] = '\0';
 }
 
+/**
+* @brief Generates a temporary filename with a random identifier.
+* @param all A structure containing necessary allocations.
+* @return A dynamically allocated string containing the filename.
+*/
 char	*generate_tmp_filename(t_alloc *all)
 {
 	char			*filename;

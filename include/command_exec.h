@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 17:22:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:57:09 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,24 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all);
 
 /*---------------------------Start_child.c-----------------------------------*/
 int		start_child(t_child_info *child_info, t_alloc *all);
+
+/*---------------------------Clean_child.c-----------------------------------*/
+void	free_child(t_child_info *child_info, char *cmd_path);
+
+/*---------------------------Child_manager.c---------------------------------*/
+void	init_child(t_child_info *child_info, t_alloc *all);
+void	setup_child(t_cmd cmd, t_child_info *child_info, t_alloc *all);
+
+/*---------------------------Cmd_utils.c-----------------------------------*/
+void	init_cmd(t_child_info *child_info, char **cmd_path);
+void	check_cmd_validity(char	*cmd_path, t_child_info *child_info);
+
+/*---------------------------File_manager.c----------------------------------*/
+int		open_inter_file(t_cmd cmd, t_alloc *all);
+void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info);
+
+/*---------------------------Path_utils.c----------------------------------*/
+char	*get_cmd_path(char *cmd, char **splited_path);
+char	*get_path(char **envp);
 
 #endif

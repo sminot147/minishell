@@ -6,13 +6,18 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 18:30:28 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:46:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * @brief Counts the number of commands in a linked list.
+ * @param lst_cmd The linked list of commands.
+ * @return The number of commands in the list.
+ */
 int	count_cmd(t_cmd *lst_cmd)
 {
 	int	i;
@@ -26,6 +31,11 @@ int	count_cmd(t_cmd *lst_cmd)
 	return (i);
 }
 
+/**
+ * @brief Frees all memory associated with a `command list` and handles errors.
+ * @param lst_cmd The linked list of commands to free.
+ * @param all A structure containing necessary allocations.
+ */
 void	clear_cmd(t_cmd **lst_cmd, t_alloc *all)
 {
 	t_cmd	*tmp;
@@ -51,6 +61,10 @@ void	clear_cmd(t_cmd **lst_cmd, t_alloc *all)
 	*lst_cmd = NULL;
 }
 
+/**
+ * @brief Creates and initializes a `new command structure`.
+ * @return A newly allocated `command structure`, or `NULL` on failure.
+ */
 t_cmd	*new_cmd(void)
 {
 	t_cmd	*cmd;
@@ -61,6 +75,11 @@ t_cmd	*new_cmd(void)
 	return (cmd);
 }
 
+/**
+ * @brief Adds a `new command` node to the `command list`.
+ * @param lst_cmd The linked list of commands.
+ * @param new_cmd The new command node to add.
+ */
 void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd)
 {
 	if (!*lst_cmd)

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 17:37:47 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:33:02 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <signal.h>
 #include <wait.h>
 
+/**
+ * @brief Waits for all child processes to finish and handles signals.
+ * @param last The process ID of the last child.
+ * @return The exit status of the last executed command.
+ */
 static int	wait_all_child(int last)
 {
 	int	wait_value;
@@ -43,6 +48,15 @@ static int	wait_all_child(int last)
 	return (return_value);
 }
 
+/**
+ * @brief Starts a command, handling built-in execution and child process
+ *  creation.
+ * @param cmd_list The command to execute.
+ * @param child_info Structure containing command execution details.
+ * @param all Structure containing shell resources.
+ * @return The process ID of the last executed command or a special value
+ *  (-1 or -2) on failure.
+ */
 static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 {
 	int	return_value;
@@ -70,6 +84,12 @@ static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 	return (0);
 }
 
+/**
+ * @brief Executes a command list by creating child processes and managing
+ *  pipes.
+ * @param cmd_list The list of commands to execute.
+ * @param all Structure containing shell resources.
+ */
 void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 {
 	t_child_info	child_info;

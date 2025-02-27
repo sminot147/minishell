@@ -6,12 +6,18 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:00:39 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 18:28:58 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:21:57 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/**
+ * @brief Initializes the child structure.
+ * @param child_info A structure containing information about the child
+ *  process.
+ * @param all A structure containing necessary allocations.
+ */
 void	init_child(t_child_info *child_info, t_alloc *all)
 {
 	(*child_info).first = 1;
@@ -21,6 +27,13 @@ void	init_child(t_child_info *child_info, t_alloc *all)
 		exit_error(all, NULL, 1);
 }
 
+/**
+ * @brief Setup command information for the new child process.
+ * @param cmd The command structure.
+ * @param child_info A structure containing information about the child
+ *  process.
+ * @param all A structure containing necessary allocations.
+ */
 void	setup_child(t_cmd cmd, t_child_info *child_info, t_alloc *all)
 {
 	if (cmd.args)

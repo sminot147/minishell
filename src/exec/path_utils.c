@@ -6,12 +6,20 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:38 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 19:16:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:34:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/**
+ * @brief Joins a directory path with a command to form a full executable path.
+ * @param split_path An array of directory paths.
+ * @param i The index of the directory in the array.
+ * @param cmd The command to append.
+ * @return A newly allocated string containing the `full path`, or `NULL` on
+ *  failure.
+ */
 static char	*join_cmd_path(char **split_path, int i, char *cmd)
 {
 	char	*temp;
@@ -27,6 +35,11 @@ static char	*join_cmd_path(char **split_path, int i, char *cmd)
 	return (cmd_path);
 }
 
+/**
+ * @brief Retrieves the system `PATH` environment variable from the environment.
+ * @param envp The environment variables array.
+ * @return A pointer to the `PATH` variable value, or `NULL` if not found.
+ */
 char	*get_path(char **envp)
 {
 	char	*path;
@@ -46,6 +59,13 @@ char	*get_path(char **envp)
 	return (path);
 }
 
+/**
+ * @brief Finds the full path of a given command by searching in the directories.
+ * @param cmd The command to locate.
+ * @param splited_path An array of directory paths.
+ * @return The full path to the executable if found, or a duplicate of cmd
+ *  otherwise.
+ */
 char	*get_cmd_path(char *cmd, char **splited_path)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:28:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:25:54 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Frees the memory allocated for an environment variable.
+ * @param element The environment variable to free.
+ */
 static void	free_element(t_env *element)
 {
 	free(element->name);
@@ -22,6 +26,10 @@ static void	free_element(t_env *element)
 	free(element);
 }
 
+/**
+ * @brief Removes the first element from the environment list.
+ * @param all Structure containing the environment.
+ */
 static void	remove_first(t_alloc *all)
 {
 	t_env	*tmp;
@@ -31,6 +39,11 @@ static void	remove_first(t_alloc *all)
 	free_element(tmp);
 }
 
+/**
+ * @brief Removes a specific environment variable.
+ * @param all Structure containing the environment.
+ * @param var_name Name of the variable to remove.
+ */
 static void	remove_var(t_alloc *all, const char *var_name)
 {
 	t_env	*current;
@@ -58,6 +71,12 @@ static void	remove_var(t_alloc *all, const char *var_name)
 	}
 }
 
+/**
+ * @brief Executes the unset command to remove environment variables.
+ * @param child_info Structure containing the command arguments.
+ * @param all Structure containing the environment.
+ * @return Always returns 0.
+ */
 int	exec_unset(t_child_info *child_info, t_alloc *all)
 {
 	int	i;

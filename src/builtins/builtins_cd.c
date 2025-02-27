@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 19:37:32 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:30:51 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 #include <stdio.h>
 #include <unistd.h>
 
+/**
+ * @brief Changes the current directory to the previous one (OLDPWD).
+ * @param child_info Structure containing command arguments and environment
+ *  variables.
+ * @param all Structure containing shell resources.
+ * @return Returns 0 on success, 1 on failure.
+ */
 static int	go_to_old(t_child_info *child_info, t_alloc *all)
 {
 	char	*oldpwd_value;
@@ -42,6 +49,12 @@ static int	go_to_old(t_child_info *child_info, t_alloc *all)
 	return (0);
 }
 
+/**
+ * @brief Changes the current directory to the user's home directory (HOME).
+ * @param child_info Structure containing command arguments and environment
+ *  variables.
+ * @return Returns 0 on success, 1 if HOME is not set or chdir fails.
+ */
 int	go_to_home(t_child_info *child_info)
 {
 	t_env	*env;
@@ -64,6 +77,12 @@ int	go_to_home(t_child_info *child_info)
 	return (1);
 }
 
+/**
+ * @brief Executes the cd command to change the current directory.
+ * @param child_info Structure containing command arguments.
+ * @param all Structure containing shell resources.
+ * @return Returns 0 on success, 1 on failure.
+ */
 int	exec_cd(t_child_info *child_info, t_alloc *all)
 {
 	if (child_info->pipe_after != 0 || child_info->first != 1)

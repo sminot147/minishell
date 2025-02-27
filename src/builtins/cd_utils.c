@@ -6,13 +6,20 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:28:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 19:47:19 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:23:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
 
+/**
+ * @brief Creates an environment variable assignment string.
+ * @param env_name The name of the environment variable.
+ * @param env_value The value of the environment variable.
+ * @return A newly allocated string representing the environment assignment,
+ *  or NULL on failure.
+ */
 char	*make_env_assignment(const char *env_name, const char *env_value)
 {
 	char	*tmp;
@@ -28,6 +35,13 @@ char	*make_env_assignment(const char *env_name, const char *env_value)
 	return (res);
 }
 
+/**
+ * @brief Updates the PWD and OLDPWD environment variables.
+ * @param assign_oldpwd A pointer to the OLDPWD assignment string.
+ * @param assign_pwd A pointer to the PWD assignment string.
+ * @param current_pwd The current working directory.
+ * @param all A structure containing necessary allocations.
+ */
 void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 				char *current_pwd, t_alloc *all)
 {
@@ -57,6 +71,11 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 	}
 }
 
+/**
+ * @brief Updates the OLDPWD environment variable.
+ * @param child_info A structure containing information about the child.
+ * @param all A structure containing necessary allocations.
+ */
 void	update_oldpwd(t_child_info *child_info, t_alloc *all)
 {
 	t_env	*env;
@@ -86,6 +105,10 @@ void	update_oldpwd(t_child_info *child_info, t_alloc *all)
 	}
 }
 
+/**
+ * @brief Updates the PWD environment variable.
+ * @param all A structure containing necessary allocations.
+ */
 void	update_pwd(t_alloc *all)
 {
 	char	*new_pwd;

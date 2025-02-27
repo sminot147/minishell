@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:08:56 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/22 15:29:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:34:31 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "utils.h"
 #include <unistd.h>
 
+/**
+ * @brief Checks for the -n flag in the echo command arguments.
+ * @param child_info Structure containing command arguments.
+ * @param newline Pointer to a boolean indicating whether to print a newline.
+ * @return The index of the first non-flag argument.
+ */
 static int	check_flag(t_child_info *child_info, t_bool *newline)
 {
 	int	i;
@@ -34,6 +40,11 @@ static int	check_flag(t_child_info *child_info, t_bool *newline)
 	return (i);
 }
 
+/**
+ * @brief Executes the echo command, printing arguments to standard output.
+ * @param child_info Structure containing command arguments.
+ * @return Always returns 0.
+ */
 int	exec_echo(t_child_info *child_info)
 {
 	int		i;

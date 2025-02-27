@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:36:53 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 18:06:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:45:20 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 
 /**
- * 
+ * @brief Increment shell lvl on start
  */
 void	update_shell_lvl(t_alloc *all)
 {

@@ -6,13 +6,21 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/26 13:21:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:54:28 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <fcntl.h>
 
+/**
+ * @brief Opens a file with the given flags and mode, handling errors.
+ * @param file The name of the file to open.
+ * @param flags The flags for opening the file.
+ * @param mode The file mode (permissions) to use if created.
+ * @param all A structure containing necessary allocations.
+ * @return `0` on success, `1` on failure.
+ */
 static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
 {
 	int	fd;
@@ -28,6 +36,12 @@ static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
 	return (0);
 }
 
+/**
+ * @brief Opens an input file for reading.
+ * @param child_info A structure containing information about the child
+ *  process.
+ * @return The `file descriptor` on success, exits on failure.
+ */
 static int	open_input_file(t_child_info *child_info)
 {
 	int	return_value;
@@ -43,6 +57,12 @@ static int	open_input_file(t_child_info *child_info)
 	return (return_value);
 }
 
+/**
+ * @brief Opens an output file for writing, handling append mode.
+ * @param child_info A structure containing information about
+ *  the child process.
+ * @return The `file descriptor` on success, exits on failure.
+ */
 static int	open_output_file(t_child_info *child_info)
 {
 	int	return_value;
@@ -63,6 +83,14 @@ static int	open_output_file(t_child_info *child_info)
 	return (return_value);
 }
 
+/**
+ * @brief Selects the appropriate file descriptors for input
+ *  and output.
+ * @param fd_1 The file descriptor for input.
+ * @param fd_2 The file descriptor for output.
+ * @param child_info A structure containing information about the
+ *  child process.
+ */
 void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 {
 	if (child_info->in_file != NULL)
@@ -81,6 +109,12 @@ void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 		*fd_2 = 1;
 }
 
+/**
+ * @brief Opens intermediate files needed for command execution.
+ * @param cmd The command structure containing file information.
+ * @param all A structure containing necessary allocations.
+ * @return `0` on success, `1` on failure.
+ */
 int	open_inter_file(t_cmd cmd, t_alloc *all)
 {
 	t_file	*current;

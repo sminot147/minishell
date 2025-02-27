@@ -6,13 +6,19 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 18:13:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:37:05 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * @brief Retrieves a file name from a token list.
+ * @param token_lst The list of tokens.
+ * @return A newly allocated string containing the `file name`, or `NULL`
+ *  on failure.
+ */
 static char	*get_file(t_token *token_lst)
 {
 	if (!token_lst)
@@ -20,6 +26,12 @@ static char	*get_file(t_token *token_lst)
 	return (ft_strdup(token_lst->token));
 }
 
+/**
+ * @brief Handles the execution of here-doc.
+ * @param cmd The `command structure`.
+ * @param token The token representing the `here-doc sep`.
+ * @param all A structure containing necessary allocations.
+ */
 static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 {
 	int	fd;
@@ -33,6 +45,13 @@ static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 	cmd->child_here_doc.fd = fd;
 }
 
+/**
+ * @brief Adds an input file to the `command structure`.
+ * @param cmd The `command structure`.
+ * @param token_lst The `list of tokens`.
+ * @param all A structure containing necessary allocations.
+ * @param i A pointer to the `index variable` to update.
+ */
 void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 {
 	char	*file;
@@ -61,6 +80,13 @@ void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 	(*i)++;
 }
 
+/**
+ * @brief Adds an output file to the command structure.
+ * @param cmd The `command structure`.
+ * @param token_lst The `list of tokens`.
+ * @param all A structure containing necessary allocations.
+ * @param i A pointer to the `index variable` to update.
+ */
 void	add_outfile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 {
 	char	*file;
