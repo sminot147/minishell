@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 19:10:23 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:21:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static int	open_output_file(t_child_info *child_info)
 
 	if (child_info->append == 1)
 		return_value = open(child_info->out_file, O_WRONLY | O_CREAT | \
-			O_APPEND, 0777);
+			O_APPEND, 0664);
 	else
 		return_value = open(child_info->out_file, O_WRONLY | O_CREAT | \
-			O_TRUNC, 0777);
+			O_TRUNC, 0664);
 	if (return_value < 0)
 	{
 		putstr_fd("minishell: ", 2);

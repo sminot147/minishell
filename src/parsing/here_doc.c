@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 16:05:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:34:20 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	open_tmp_file(t_alloc *all, char **tmp_file)
 	return (fd);
 }
 
-static void	here_doc_child(int fd, t_token *token)
+static void	here_doc_child(int fd, t_token *token, t_alloc *all)
 {
 	char	*buffer;
 
@@ -43,6 +43,13 @@ static void	here_doc_child(int fd, t_token *token)
 			free(buffer);
 			break ;
 		}
+		ft_printf("%d | %s | %s | ", token->tag != HAVE_QUOTE, token->token, buffer);
+		if (token->tag != HAVE_QUOTE)
+		{
+			ft_printf(" |enter| ");
+			replace_var(&buffer, all);
+		}
+		ft_printf("%s\n", buffer);
 		write(fd, buffer, ft_strlen(buffer));
 		write(fd, "\n", 1);
 		free(buffer);
@@ -62,7 +69,7 @@ static int	read_here_doc(int fd, t_token *token, t_alloc *all)
 	if (!pid)
 	{
 		signal(SIGINT, SIG_DFL);
-		here_doc_child(fd, token);
+		here_doc_child(fd, token, all);
 	}
 	else
 	{
