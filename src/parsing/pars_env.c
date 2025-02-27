@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/26 12:25:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:42:38 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,24 +99,17 @@ t_env	*pars_env(char **envp, t_alloc *all)
 	while (envp[++i])
 	{
 		name = extract_name(envp[i], all);
-		if (name)
-		{
-			new_env = new_var_env(name, extract_value(envp[i]));
-			if (!new_env)
-				exit_error(all, NULL, 1);
-			add_env(&lst_env, new_env);
-			if (!all->env)
-				all->env = lst_env;
-		}
+		if (!name)
+			exit_error(all, NULL, 1);
+		new_env = new_var_env(name, extract_value(envp[i]));
+		if (!new_env)
+			exit_error(all, NULL, 1);
+		add_env(&lst_env, new_env);
+		if (!all->env)
+			all->env = lst_env;
 	}
 	if (lst_env == NULL)
 		return (rebuild_env(all));
 	update_shell_lvl(all);
 	return (lst_env);
 }
-/*
-	return (lst_env);
-	update_shell_lvl(all);
-	if (DEBBUG == 1)
-		print_env(all->env);
-*/

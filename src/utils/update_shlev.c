@@ -6,13 +6,16 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:36:53 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 18:32:02 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:06:50 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
+/**
+ * 
+ */
 void	update_shell_lvl(t_alloc *all)
 {
 	char	*var;

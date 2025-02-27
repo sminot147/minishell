@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 18:16:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:05:39 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@ static int	append_value(char **value, char *append_value, char append)
 	{
 		str_append(value, append_value, 1);
 		if (!value)
+		{
+			free(append_value);
 			return (2);
+		}
 	}
 	else
+	{
+		free(*value);
 		*value = append_value;
+	}
 	return (0);
 }
 
