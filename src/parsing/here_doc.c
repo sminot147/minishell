@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 15:34:20 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:09:41 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,8 @@ static void	here_doc_child(int fd, t_token *token, t_alloc *all)
 			free(buffer);
 			break ;
 		}
-		ft_printf("%d | %s | %s | ", token->tag != HAVE_QUOTE, token->token, buffer);
 		if (token->tag != HAVE_QUOTE)
-		{
-			ft_printf(" |enter| ");
 			replace_var(&buffer, all);
-		}
-		ft_printf("%s\n", buffer);
 		write(fd, buffer, ft_strlen(buffer));
 		write(fd, "\n", 1);
 		free(buffer);
