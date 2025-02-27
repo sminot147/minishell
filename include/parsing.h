@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 19:15:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:22:16 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	parse_input(char *input, t_alloc *all);
 
 /*---------------------------Tokenize.c--------------------------------------*/
 void	tokenize(char *input, t_token **token, t_alloc *all);
+char	*extract_next_token(char *input, t_alloc *all);
 
 /*---------------------------Token_size.c------------------------------------*/
 int		size_to_moove(char *input);

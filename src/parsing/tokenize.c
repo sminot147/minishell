@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 19:21:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:21:32 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	calloc_value(char **str, int size, t_alloc *all)
 /**
  * @return token without quote
  */
-static char	*extract_next_token(char *input, t_alloc *all)
+char	*extract_next_token(char *input, t_alloc *all)
 {
 	char	*token_value;
 	int		size_token;

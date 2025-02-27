@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/25 19:47:32 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:26:13 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	init_cmd(t_child_info *child_info, char **cmd_path);
 void	check_cmd_validity(char	*cmd_path, t_child_info *child_info);
 
 /*---------------------------Replace_var_check.c-----------------------------*/
-t_bool	is_not_here_doc_name(char *input, int i, int quote);
+t_bool	is_heredoc_name(char *input, int i, t_alloc *all);
 t_bool	is_arg(char *input, int pos, int quote);
 
 /*---------------------------Cd_function.c-----------------------------------*/

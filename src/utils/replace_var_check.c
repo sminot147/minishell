@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:22:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/25 19:24:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:25:32 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,28 @@
 
 /**
  * @return is a here doc name
+ * @note quote = 0 or 2.
 */
-t_bool	is_not_here_doc_name(char *input, int i, int quote)
+t_bool	is_heredoc_name(char *input, int pos_var, t_alloc *all)
 {
-	(void)input;
-	(void)i;
-	(void)quote;
-	return (TRUE);
+	int		i;
+	int 	pos_prev_token;
+	char	*value_prev_token;
+
+	i = 0;
+	while (i <= pos_var)
+	{
+		pos_prev_token = i;
+		i += size_to_moove(&input[i]);
+	}
+	value_prev_token = extract_next_token(&input[pos_prev_token], all);
+	if (ft_strcmp(value_prev_token, "<<") == 0)
+	{
+		free(value_prev_token);
+		return (TRUE);
+	}
+	free(value_prev_token);
+	return (FALSE);
 }
 
 /**
