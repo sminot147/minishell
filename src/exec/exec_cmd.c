@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 13:21:13 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/28 13:59:02 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static int	wait_all_child(int last)
  */
 static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 {
+	int		pipe_fd[2];
+
 	if (exec_builtins_solo(child_info, all) == 1)
 	{
 		if (child_info->pipe[0] != -1)
@@ -69,7 +71,11 @@ static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 			signal(SIGINT, handle_sigint);
 			return (-2);
 		}
-		//faire un pip
+		if (pipe(pipe_fd) == -1)
+			return (-1);
+		if (close(pipe_fd[1]) < 0)
+			return (-1);
+		child_info->pipe[0] = pipe_fd[0];
 	}
 	else
 		if (open_inter_file(*cmd_list, all) == 0)

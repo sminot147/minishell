@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/28 11:42:07 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/28 14:01:41 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	end_minishell(t_alloc *all)
 	return (return_value);
 }
 
-static void	alloc_all(t_alloc **all, int *return_value)
+static void	alloc_all(t_alloc **all)
 {
 	*all = ft_calloc(1, sizeof(t_alloc));
 	if (!*all)
@@ -35,6 +35,12 @@ static void	alloc_all(t_alloc **all, int *return_value)
 		putstr_fd("Error malloc\n", 2);
 		exit(EXIT_FAILURE);
 	}
+
+}
+
+static void	init_all(t_alloc **all, int *return_value)
+{
+	alloc_all(all);
 	(*all)->return_value = return_value;
 	*(*all)->return_value = 0;
 	signal(SIGQUIT, SIG_IGN);
@@ -50,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || !argv)
 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
-	alloc_all(&all, &return_value);
+	init_all(&all, &return_value);
 	all->env = pars_env(envp, all);
 	while (1)
 	{

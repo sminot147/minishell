@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 19:54:28 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:54:05 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 		*fd_2 = child_info->pipe[1];
 	else
 		*fd_2 = 1;
+	if (child_info->pipe_after == FALSE)
+		child_safe_close(child_info, child_info->pipe[1]);
+	if (child_info->first == 0 && child_info->pipe[0] != *fd_1)
+		child_safe_close(child_info, child_info->pipe[0]);
 }
 
 /**

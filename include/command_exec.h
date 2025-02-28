@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:57:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:58:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_child_info
 	char		*out_file;
 	t_bool		append;
 	t_here_doc	here_doc;
+	int			*here_doc_fd;
+	int			nb_here_doc;
 }	t_child_info;
 
 /*---------------------------Child.c-----------------------------------------*/

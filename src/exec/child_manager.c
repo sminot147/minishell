@@ -6,11 +6,46 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:00:39 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:21:57 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:07:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include <stdlib.h>
+
+static void	get_all_here_doc_fd(t_alloc *all, t_child_info *child_info)
+{
+	t_cmd	*cmd_lst;
+	int		i;
+
+	i = 0;
+	cmd_lst = all->cmd;
+	while (cmd_lst != NULL)
+	{
+		if (cmd_lst->child_here_doc.here_doc == TRUE)
+		{
+			child_info->here_doc_fd[i] = cmd_lst->child_here_doc.fd;
+			i++;
+		}
+		cmd_lst = cmd_lst->next;
+	}
+}
+
+static int	count_here_doc(t_alloc *all)
+{
+	t_cmd	*cmd_lst;
+	int		i;
+
+	i = 0;
+	cmd_lst = all->cmd;
+	while (cmd_lst != NULL)
+	{
+		if (cmd_lst->child_here_doc.here_doc == TRUE)
+			i++;
+		cmd_lst = cmd_lst->next;
+	}
+	return (i);
+}
 
 /**
  * @brief Initializes the child structure.
@@ -25,6 +60,16 @@ void	init_child(t_child_info *child_info, t_alloc *all)
 	(*child_info).envp = make_env_tab(all);
 	if (!(*child_info).envp)
 		exit_error(all, NULL, 1);
+	(*child_info).nb_here_doc = count_here_doc(all);
+	if ((*child_info).nb_here_doc == 0)
+	{
+		(*child_info).here_doc_fd = NULL;
+		return ;
+	}
+	(*child_info).here_doc_fd = malloc(sizeof(int) * (*child_info).nb_here_doc);
+	if ((*child_info).here_doc_fd == NULL)
+		exit_error(all, NULL, 1);
+	get_all_here_doc_fd(all, child_info);
 }
 
 /**
