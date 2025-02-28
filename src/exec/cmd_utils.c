@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:47:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:55:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:32:28 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init_cmd(t_child_info *child_info, char **cmd_path)
 			child_exit_error(child_info, *cmd_path, NULL, 1);
 		*cmd_path = get_cmd_path(child_info->cmd, s_path);
 		ft_free_double_array((void **)s_path);
-		if (!s_path)
+		if (!s_path)									/* Comment on peut regarder qqc qui vient d'etre free sans faire un invalide read Quelle utilité pour ce test ?*/
 			child_exit_error(child_info, *cmd_path, NULL, 1);
 	}
 	else

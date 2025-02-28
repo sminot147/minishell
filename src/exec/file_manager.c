@@ -3,38 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 13:54:05 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:08:59 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <fcntl.h>
-
-/**
- * @brief Opens a file with the given flags and mode, handling errors.
- * @param file The name of the file to open.
- * @param flags The flags for opening the file.
- * @param mode The file mode (permissions) to use if created.
- * @param all A structure containing necessary allocations.
- * @return `0` on success, `1` on failure.
- */
-static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
-{
-	int	fd;
-
-	fd = open(file, flags, mode);
-	if (fd < 0)
-	{
-		perror(file);
-		*(*all).return_value = 1;
-		return (1);
-	}
-	safe_close(all, fd);
-	return (0);
-}
 
 /**
  * @brief Opens an input file for reading.
@@ -114,6 +91,29 @@ void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 }
 
 /**
+ * @brief Opens a file with the given flags and mode, handling errors.
+ * @param file The name of the file to open.
+ * @param flags The flags for opening the file.
+ * @param mode The file mode (permissions) to use if created.
+ * @param all A structure containing necessary allocations.
+ * @return `0` on success, `1` on failure.
+ */
+static int	handle_file(char *file, int flags, mode_t mode, t_alloc *all)
+{
+	int	fd;
+
+	fd = open(file, flags, mode);
+	if (fd < 0)
+	{
+		perror(file);
+		*(*all).return_value = 1;
+		return (1);
+	}
+	safe_close(all, fd);
+	return (0);
+}
+
+/**
  * @brief Opens intermediate files needed for command execution.
  * @param cmd The command structure containing file information.
  * @param all A structure containing necessary allocations.
@@ -135,11 +135,11 @@ int	open_inter_file(t_cmd cmd, t_alloc *all)
 	{
 		if (current->append == 1)
 		{
-			if (handle_file(current->file, O_WRONLY | O_CREAT | O_APPEND, 0777,
+			if (handle_file(current->file, O_WRONLY | O_CREAT | O_APPEND, 0664,
 					all))
 				return (1);
 		}
-		else if (handle_file(current->file, O_WRONLY | O_CREAT | O_TRUNC, 0777,
+		else if (handle_file(current->file, O_WRONLY | O_CREAT | O_TRUNC, 0664,
 				all))
 			return (1);
 		current = current->next;
