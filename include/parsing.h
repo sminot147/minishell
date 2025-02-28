@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 21:00:29 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:10:04 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	tokenize(char *input, t_token **token, t_alloc *all);
 char	*extract_next_token(char *input, t_alloc *all);
 
 /*---------------------------Token_size.c------------------------------------*/
-int		size_to_moove(char *input);
+int		size_to_move(char *input);
 int		size_next_token(char *input);
 int		size_check_sep(char *input);
 t_bool	is_sep(char c);

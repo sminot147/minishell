@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 21:35:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:34:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	child_exit_error(t_child_info *child_info, char *cmd_path, \
 
 /*---------------------------Env_tab.c---------------------------------------*/
 char	**make_env_tab(t_alloc *all);
+char	**make_env_tab_child(t_env *env_part);
 int		count_env_size(t_env *env);
 
 /*---------------------------Ft_free_double_array.c--------------------------*/
@@ -85,6 +86,6 @@ t_file	*new_file(char *conten, char append);
 void	add_file(t_file **lst_file, t_file *new_file);
 
 /*---------------------------Put_env.c---------------------------------------*/
-void	put_env(t_alloc *all);
+int		put_env(t_env *env);
 
 #endif

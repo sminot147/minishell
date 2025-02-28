@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/28 14:01:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:06:37 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	alloc_all(t_alloc **all)
 		putstr_fd("Error malloc\n", 2);
 		exit(EXIT_FAILURE);
 	}
-
 }
 
 static void	init_all(t_alloc **all, int *return_value)

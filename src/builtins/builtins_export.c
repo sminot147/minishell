@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 21:17:18 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:23:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 	return_value = 0;
 	if ((child_info->pipe_after == 0 && child_info->first == 1))
 	{
-		if (!child_info->args[1])
-			put_env(all);
 		arg_index = 0;
 		while (child_info->args[++arg_index])
 		{

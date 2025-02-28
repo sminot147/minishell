@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:44:33 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:34:21 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,16 @@ static char	**ft_sort_arrays(int len, char **lst)
  * @param all Pointer to a `t_alloc` structure that contains the
  *  environment list.
  */
-void	put_env(t_alloc *all)
+int	put_env(t_env *env)
 {
 	int		env_len;
 	int		i;
 	char	**env_tab;
 
-	env_len = count_env_size(all->env);
-	env_tab = make_env_tab(all);
+	env_len = count_env_size(env);
+	env_tab = make_env_tab_child(env);
+	if (env_tab == NULL)
+		return (1);
 	env_tab = ft_sort_arrays(env_len, env_tab);
 	i = 0;
 	while (i < env_len)
@@ -127,4 +129,5 @@ void	put_env(t_alloc *all)
 		++i;
 	}
 	ft_free_double_array((void **)env_tab);
+	return (0);
 }

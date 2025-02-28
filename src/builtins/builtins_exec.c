@@ -6,11 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 13:59:44 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:38:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "utils.h"
 #include "command_exec.h"
 
 /**
@@ -28,7 +29,7 @@ int	exec_builtins_solo(t_child_info *child_info, t_alloc *all)
 		*(*all).return_value = exec_cd(child_info, all);
 		return (1);
 	}
-	if (ft_strcmp(child_info->cmd, "export") == 0)
+	if (ft_strcmp(child_info->cmd, "export") == 0 && child_info->args[1])
 	{
 		*(*all).return_value = exec_export(child_info, all);
 		return (1);
@@ -52,11 +53,21 @@ int	exec_builtins_solo(t_child_info *child_info, t_alloc *all)
  */
 void	exec_builtins_child(t_child_info *child_info)
 {
+	int	return_value;
+
+	return_value = -1;
 	if (ft_strcmp(child_info->cmd, "pwd") == 0)
-		exit(exec_pwd());
+		return_value = exec_pwd();
 	if (ft_strcmp(child_info->cmd, "env") == 0)
-		exit(exec_env(child_info));
+		return_value = exec_env(child_info);
 	if (ft_strcmp(child_info->cmd, "echo") == 0)
-		exit(exec_echo(child_info));
+		return_value = exec_echo(child_info);
+	if (ft_strcmp(child_info->cmd, "export") == 0 && !child_info->args[1])
+		return_value = put_env(child_info->envp_pars);
+	if (return_value != -1)
+	{
+		free_child(child_info, NULL);
+		exit (return_value);
+	}
 	return ;
 }

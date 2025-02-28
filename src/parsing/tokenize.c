@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 15:21:32 by sminot           ###   ########.fr       */
+/*   Updated: 2025/02/28 14:10:23 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	tokenize(char *input, t_token **lst_token, t_alloc *all)
 		add_token(lst_token, next_token);
 		if (!all->token)
 			all->token = lst_token;
-		input += size_to_moove(input);
+		input += size_to_move(input);
 	}
 }
