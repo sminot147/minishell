@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 21:33:02 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:21:13 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,7 @@ static int	wait_all_child(int last)
  */
 static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 {
-	int	return_value;
-
-	if (exec_builtins_solo(child_info, all) == 0)
-	{
-		return_value = open_inter_file(*cmd_list, all);
-		if (return_value == 0)
-			return (start_child(child_info, all));
-		else if (cmd_list->next == NULL)
-			return (0);
-	}
-	else
+	if (exec_builtins_solo(child_info, all) == 1)
 	{
 		if (child_info->pipe[0] != -1)
 			safe_close(all, child_info->pipe[0]);
@@ -79,8 +69,11 @@ static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 			signal(SIGINT, handle_sigint);
 			return (-2);
 		}
-		return (0);
+		//faire un pip
 	}
+	else
+		if (open_inter_file(*cmd_list, all) == 0)
+			return (start_child(child_info, all));
 	return (0);
 }
 
