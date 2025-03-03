@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:27:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:56:47 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	here_doc(t_token *token, t_alloc *all)
 	fd = open_tmp_file(all, &tmp_file);
 	if (read_here_doc(fd, token, all) == 1)
 	{
+		free(tmp_file);
 		signal(SIGINT, handle_sigint);
 		return (-1);
 	}

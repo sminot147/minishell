@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 13:59:02 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:56:23 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 	return (0);
 }
 
+static void	wait_cmd_exec(t_alloc *all, int last)
+{
+	if (last != 0)
+		*(*all).return_value = wait_all_child(last);
+	wait_all_child(last);
+	signal(SIGINT, handle_sigint);
+}
+
 /**
  * @brief Executes a command list by creating child processes and managing
  *  pipes.
@@ -112,8 +120,7 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 		child_info.first = 0;
 	}
 	ft_free_double_array((void **)child_info.envp);
-	if (last != 0)
-		*(*all).return_value = wait_all_child(last);
-	wait_all_child(last);
-	signal(SIGINT, handle_sigint);
+	if (child_info.here_doc_fd)
+		free(child_info.here_doc_fd);
+	wait_cmd_exec(all, last);
 }
