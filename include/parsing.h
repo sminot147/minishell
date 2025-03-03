@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/03 17:57:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:16:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	extract_error_message(char *sep, t_alloc *all);
 /*----------------------------------------------------------------------------*/
 /*                         Replace_var_check.c                                */
 /*----------------------------------------------------------------------------*/
-t_bool	is_heredoc_name(char *input, int i, t_alloc *all);
+t_bool	is_heredoc_name(int i, t_alloc *all);
 t_bool	is_arg(char *input, int pos, int quote);
 
 #endif

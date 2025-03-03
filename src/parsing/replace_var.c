@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 15:59:56 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/03 19:15:41 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	identify_and_replace_variables(char *input, t_alloc *all)
 	while (input[++i])
 	{
 		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote) \
-			&& !is_heredoc_name(input, i, all))
+			&& !is_heredoc_name(i, all))
 		{
 			treat_one_var(input, all, i, quote);
 			i = size_of_var_name(input, i);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 13:31:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:15:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	close_all_here_doc(t_child_info *child_info)
 				child_safe_close(child_info, child_info->here_doc_fd[i]);
 		i++;
 	}
+	free(child_info->here_doc_fd);
+	child_info->here_doc_fd = NULL;
 }
 
 /**
@@ -100,5 +102,6 @@ int	child(t_child_info *child_info)
 	}
 	exec_builtins_child(child_info);
 	exec(child_info);
+	free_child(child_info, NULL);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:22:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 14:10:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:16:31 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @return is a here doc name
 */
-t_bool	is_heredoc_name(char *input, int pos_var, t_alloc *all)
+t_bool	is_heredoc_name(int pos_var, t_alloc *all)
 {
 	int		i;
 	int		pos_prev_token;
@@ -26,13 +26,13 @@ t_bool	is_heredoc_name(char *input, int pos_var, t_alloc *all)
 	while (i < pos_var)
 	{
 		pos_prev_token = i;
-		i += size_to_move(&input[i]);
-		if (!input[i])
+		i += size_to_move(&all->input[i]);
+		if (!all->input[i])
 			return (FALSE);
 	}
 	if (pos_prev_token == 0)
 		return (FALSE);
-	value_prev_token = extract_next_token(&input[pos_prev_token], all);
+	value_prev_token = extract_next_token(&all->input[pos_prev_token], all);
 	if (ft_strcmp(value_prev_token, "<<") == 0)
 	{
 		free(value_prev_token);

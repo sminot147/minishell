@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:47:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/03 12:54:06 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:15:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	check_cmd_validity(char	*cmd_path, t_child_info *child_info)
 	{
 		putstr_fd(child_info->cmd, 2);
 		putstr_fd(": command not found\n", 2);
+		free_child(child_info, cmd_path);
 		exit(127);
 	}
 }
