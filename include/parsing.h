@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/03 19:16:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:17:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_alloc
 extern int	g_signal_received;
 
 /*----------------------------------------------------------------------------*/
-/*                                Pars_env.c                                   */
+/*                                Pars_env.c                                  */
 /*----------------------------------------------------------------------------*/
 t_env	*pars_env(char **envp, t_alloc *all);
 void	update_shell_lvl(t_alloc *all);
