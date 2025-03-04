@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/02/27 21:10:00 by madelvin         ###   ########.fr        #
+#    Updated: 2025/03/04 14:22:32 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ PARSING = parsing.c \
 	replace_var_value.c\
 	replace_var_check.c\
 	here_doc.c \
+	here_doc_utils.c \
 	parsing_error_message.c \
 
 BUILT_INS_DIR = $(SRC_DIR)builtins/

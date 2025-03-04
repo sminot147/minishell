@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/03 19:17:42 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:22:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,13 @@ void	parse_cmd(t_token *token_lst, t_alloc *all);
 /*                               Here_doc.c                                   */
 /*----------------------------------------------------------------------------*/
 int		here_doc(t_token *token, t_alloc *all);
+
+/*----------------------------------------------------------------------------*/
+/*                           Here_doc_utils.c                                 */
+/*----------------------------------------------------------------------------*/
+void	here_doc_child(int fd, t_token *token, t_alloc *all);
+int		here_doc_parent(int fd, char *name, t_alloc *all);
+int		open_tmp_file(t_alloc *all, char **tmp_file);
 
 /*----------------------------------------------------------------------------*/
 /*                      Parsing_message_error.c                               */
