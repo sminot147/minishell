@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_function.c                                      :+:      :+:    :+:   */
+/*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:28:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:23:15 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:59:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,11 @@ void	update_pwd(t_alloc *all)
 	assign_str = NULL;
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
-		exit_error(all, NULL, 1);
+	{
+		putstr_fd("cd: error retrieving current directory: getcwd: ", 2);
+		perror(NULL);
+		return ;
+	}
 	assign_str = make_env_assignment("PWD", new_pwd);
 	free(new_pwd);
 	if (assign_str)

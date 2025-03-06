@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_parser_function.c                              :+:      :+:    :+:   */
+/*   cmd_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 20:37:05 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:10:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 {
 	int	fd;
 
-	if (cmd->child_here_doc.here_doc == 1)
+	if (cmd->child_here_doc.here_doc == TRUE)
 		safe_close(all, cmd->child_here_doc.fd);
 	fd = here_doc(token, all);
 	if (fd < 0)
 		return ;
-	cmd->child_here_doc.here_doc = 1;
+	cmd->child_here_doc.here_doc = TRUE;
 	cmd->child_here_doc.fd = fd;
 }
 

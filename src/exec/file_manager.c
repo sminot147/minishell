@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 15:08:59 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/06 15:26:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 		*fd_1 = 0;
 	if (child_info->out_file != NULL)
 		*fd_2 = open_output_file(child_info);
-	else if (child_info->pipe_after == 1)
+	else if (child_info->pipe_after == 1 && child_info->pipe[1] != -1)
 		*fd_2 = child_info->pipe[1];
 	else
 		*fd_2 = 1;
-	if (child_info->pipe_after == FALSE)
+	if (child_info->pipe_after == FALSE && child_info->pipe[1] != -1)
 		child_safe_close(child_info, child_info->pipe[1]);
-	if (child_info->first == 0 && child_info->pipe[0] != *fd_1)
+	if (child_info->first == 0 && child_info->pipe[0] != *fd_1 && \
+			child_info->pipe[0] != -1)
 		child_safe_close(child_info, child_info->pipe[0]);
 }
 

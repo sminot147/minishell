@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:37:45 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/04 13:12:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:15:40 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,4 @@ void	child_safe_close(t_child_info *child_info, int fd)
 {
 	if (close(fd) < 0)
 		child_exit_error(child_info, NULL, NULL, 1);
-}
-
-/**
- * @brief Safely closes a file descriptor used for here-doc,
- *  calling `exit(1)` on failure.
- *
- * @param fd The file descriptor to close.
- */
-void	here_doc_safe_close(int fd)
-{
-	if (close(fd) < 0)
-	{
-		perror(NULL);
-		exit(1);
-	}
 }

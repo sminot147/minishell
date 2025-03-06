@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/04 13:12:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:16:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int		size_of_args(char **args);
 /*----------------------------------------------------------------------------*/
 void	safe_close(t_alloc *all, int fd);
 void	child_safe_close(t_child_info *child_info, int fd);
-void	here_doc_safe_close(int fd);
 
 /*----------------------------------------------------------------------------*/
 /*                             List_cmd.c                                     */

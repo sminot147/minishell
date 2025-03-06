@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:00:39 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 13:07:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:20:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_child(t_child_info *child_info, t_alloc *all)
 {
 	(*child_info).first = 1;
 	(*child_info).pipe[0] = -1;
+	(*child_info).pipe[1] = -1;
 	(*child_info).envp = make_env_tab(all);
 	if (!(*child_info).envp)
 		exit_error(all, NULL, 1);

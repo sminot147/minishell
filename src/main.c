@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/04 13:53:33 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:42:24 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,57 @@ static void	init_all(t_alloc **all, int *return_value)
 	signal(SIGINT, &handle_sigint);
 }
 
-int	main(int argc, char **argv, char **envp)
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	*input;
+// 	char	*prompt;
+// 	int		return_value;
+// 	t_alloc	*all;
+
+// 	if (argc != 1 || !argv)
+// 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
+// 	init_all(&all, &return_value);
+// 	all->env = pars_env(envp, all);
+// 	while (1)
+// 	{
+// 		prompt = get_promp(all);
+// 		input = readline(prompt);
+// 		free(prompt);
+// 		if (g_signal_received == 1)
+// 			return_value = 130;
+// 		if (!input)
+// 			return (end_minishell(all));
+// 		add_history(input);
+// 		parse_input(input, all);
+// 		if (all->cmd != NULL)
+// 			exec_cmd(all->cmd, all);
+// 		free_line(all);
+// 		g_signal_received = 0;
+// 	}
+// }
+
+int	main(int ac, char **av, char **envp)
 {
 	char	*input;
-	char	*prompt;
-	int		return_value;
 	t_alloc	*all;
-
-	if (argc != 1 || !argv)
-		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
+	int		return_value;
+	char *line;
+	// char    *prompt;
+	(void)av;
+	if (ac != 1)
+		exit_error((t_alloc *)NULL, "minishell doesn't take argument", 0);
 	init_all(&all, &return_value);
 	all->env = pars_env(envp, all);
 	while (1)
 	{
-		prompt = get_promp(all);
-		input = readline(prompt);
-		free(prompt);
-		if (g_signal_received == 1)
-			return_value = 130;
+		if (isatty(fileno(stdin)))
+			input = readline("> ");
+		else
+		{
+			line = get_next_line(fileno(stdin));
+			input = ft_strtrim(line, "\n");
+			free(line);
+		}
 		if (!input)
 			return (end_minishell(all));
 		add_history(input);
@@ -71,6 +104,5 @@ int	main(int argc, char **argv, char **envp)
 		if (all->cmd != NULL)
 			exec_cmd(all->cmd, all);
 		free_line(all);
-		g_signal_received = 0;
 	}
 }

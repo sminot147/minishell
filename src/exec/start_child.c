@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/03 19:14:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:21:09 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static void	manage_fd(t_child_info *child_info, t_alloc *all, int *fd_1, \
  */
 int	start_child(t_child_info *child_info, t_alloc *all)
 {
-	pid_t	pid;
-	int		pipe_fd[2];
+	int	pid;
+	int	pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
 		return (-1);

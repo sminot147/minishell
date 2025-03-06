@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:56:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/04 14:22:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:28:26 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ int	open_tmp_file(t_alloc *all, char **tmp_file)
 		exit_error(all, NULL, 1);
 	}
 	return (fd);
+}
+
+/**
+ * @brief Cleans up resources and exits after handling a here-document.
+ *
+ * Frees allocated memory, closes the file descriptor, and terminates
+ * the process with the appropriate exit status.
+ * 
+ * @param fd The file descriptor to close.
+ * @param token The token structure to be cleared.
+ * @param all A structure containing necessary allocations.
+ */
+void	end_here_doc(int fd, t_token *token, t_alloc *all)
+{
+	if (token)
+		clear_token(&token, all);
+	if (all->cmd)
+		clear_cmd(&all->cmd, all);
+	if (all->env)
+		clear_env(&all->env);
+	free(all);
+	if (close(fd) < 0)
+		exit (1);
+	exit(0);
 }
 
 /**
@@ -72,34 +96,38 @@ void	here_doc_child(int fd, t_token *token, t_alloc *all)
 		write(fd, "\n", 1);
 		free(buffer);
 	}
-	if (token_lst)
-		clear_token(&token_lst, all);
-	if (all->cmd)
-		clear_cmd(&all->cmd, all);
-	if (all->env)
-		clear_env(&all->env);
-	free(all);
-	here_doc_safe_close(fd);
-	exit(0);
+	end_here_doc(fd, token_lst, all);
 }
 
+/**
+ * @brief Handles the parent process logic after here-document input.
+ *
+ * Waits for the child process to complete, checks for interruption signals,
+ * and cleans up resources accordingly. If SIGINT was received, it updates 
+ * the return value and clears relevant structures.
+ * 
+ * @param fd The file descriptor to close.
+ * @param name The name of the temporary file to be freed.
+ * @param all A structure containing necessary allocations.
+ * @return 1 if the process was interrupted, 0 otherwise.
+ */
 int	here_doc_parent(int fd, char *name, t_alloc *all)
 {
 	int		status;
 
-    if (close(fd) < 0)
-    {
-        free(name);
-        exit_error(all, NULL, 1);
-    }
-    wait(&status);
-    if (WTERMSIG(status) == SIGINT)
-    {
-        *all->return_value = 130;
-        free(name);
-        clear_cmd(&all->cmd, all);
-        putchar_fd('\n', 1);
-        return (1);
-    }
-    return (0);
+	if (close(fd) < 0)
+	{
+		free(name);
+		exit_error(all, NULL, 1);
+	}
+	wait(&status);
+	if (WTERMSIG(status) == SIGINT)
+	{
+		*all->return_value = 130;
+		free(name);
+		clear_cmd(&all->cmd, all);
+		putchar_fd('\n', 1);
+		return (1);
+	}
+	return (0);
 }
