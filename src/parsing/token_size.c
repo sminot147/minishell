@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_size.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:34:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/28 14:10:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:51:39 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_bool	is_sep(char c)
 /**
  * @return Lenght to know if a sep is a really a sep or just a char
 */
-int	size_check_sep(char *input)
+size_t	size_check_sep(char *input)
 {
-	int	i;
+	size_t	i;
 
 	i = -1;
 	while (input[++i])
@@ -55,7 +55,7 @@ int	size_check_sep(char *input)
 /**
  * @return treat the case of sep in size_to_move()
 */
-static int	size_to_move_with_sep(char *input, int i)
+static size_t	size_to_move_with_sep(char *input, size_t i)
 {
 	if (i == 0)
 		while (is_sep(input[++i]))
@@ -68,9 +68,9 @@ static int	size_to_move_with_sep(char *input, int i)
 /**
  * @return lenght of token in input (with space, quote,...)
 */
-int	size_to_move(char *input)
+size_t	size_to_move(char *input)
 {
-	int	i;
+	size_t	i;
 
 	i = -1;
 	while (input[++i])
@@ -96,10 +96,10 @@ int	size_to_move(char *input)
 /**
  * @return lenght of the token (without quote)
 */
-int	size_next_token(char *input)
+size_t	size_next_token(char *input)
 {
-	int	i;
-	int	have_quote;
+	size_t	i;
+	size_t	have_quote;
 
 	have_quote = 0;
 	i = -1;

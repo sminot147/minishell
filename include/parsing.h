@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/06 14:10:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:58:06 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,25 +99,25 @@ char	*extract_next_token(char *input, t_alloc *all);
 /*----------------------------------------------------------------------------*/
 /*                               Token_size.c                                 */
 /*----------------------------------------------------------------------------*/
-int		size_to_move(char *input);
-int		size_next_token(char *input);
-int		size_check_sep(char *input);
+size_t	size_to_move(char *input);
+size_t	size_next_token(char *input);
+size_t	size_check_sep(char *input);
 t_bool	is_sep(char c);
 
 /*----------------------------------------------------------------------------*/
 /*                              Replace_var.c                                 */
 /*----------------------------------------------------------------------------*/
-void	replace_var(char **input, t_alloc *all);
+void	replace_var(char **input, t_alloc *all, t_bool is_in_heredoc);
 
 /*----------------------------------------------------------------------------*/
 /*                          Replace_var_value.c                               */
 /*----------------------------------------------------------------------------*/
-void	add_var_value(char *input, int pos_var, int quote, t_alloc *all);
+void	add_var_value(char *input, size_t pos_var, int quote, t_alloc *all);
 
 /*----------------------------------------------------------------------------*/
 /*                          Replace_var_utils.c                               */
 /*----------------------------------------------------------------------------*/
-void	add_input_before_var(char *input, t_alloc *all, int pos_var);
+void	add_input_before_var(char *input, t_alloc *all, size_t pos_var);
 void	join_input(char **new_input, t_token *lst_input, t_alloc *all);
 
 /*----------------------------------------------------------------------------*/
@@ -157,7 +157,8 @@ void	extract_error_message(char *sep, t_alloc *all);
 /*----------------------------------------------------------------------------*/
 /*                         Replace_var_check.c                                */
 /*----------------------------------------------------------------------------*/
-t_bool	is_heredoc_name(int i, t_alloc *all);
-t_bool	is_arg(char *input, int pos, int quote);
+t_bool	is_heredoc_name(char *input, size_t i, t_alloc *all, \
+						t_bool is_in_heredoc);
+t_bool	is_arg(char *input, size_t pos, int quote);
 
 #endif

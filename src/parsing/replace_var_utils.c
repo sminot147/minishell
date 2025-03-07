@@ -6,14 +6,14 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:52:02 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 15:58:45 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/07 16:06:08 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
 
-static char	*dup_input_before_var(char *input, int pos_var,	t_alloc *all)
+static char	*dup_input_before_var(char *input, size_t pos_var,	t_alloc *all)
 {
 	char	*dest;
 
@@ -28,7 +28,7 @@ static char	*dup_input_before_var(char *input, int pos_var,	t_alloc *all)
 /**
  * Add the part of the input before the variable.
 */
-void	add_input_before_var(char *input, t_alloc *all, int pos_var)
+void	add_input_before_var(char *input, t_alloc *all, size_t pos_var)
 {
 	char	*str_node;
 	t_token	*node;

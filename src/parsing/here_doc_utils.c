@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:56:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 14:28:26 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:59:23 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	here_doc_child(int fd, t_token *token, t_alloc *all)
 			break ;
 		}
 		if (token->tag != HAVE_QUOTE)
-			replace_var(&buffer, all);
+			replace_var(&buffer, all, 1);
 		write(fd, buffer, ft_strlen(buffer));
 		write(fd, "\n", 1);
 		free(buffer);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/02/27 21:08:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:52:36 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	parse_input(char *input, t_alloc *all)
 	all->input = input;
 	if (quote_not_close(input) != 0)
 		return ;
-	replace_var(&input, all);
+	replace_var(&input, all, 0);
 	lst_token = NULL;
 	tokenize(input, &lst_token, all);
 	if (lst_token == NULL)

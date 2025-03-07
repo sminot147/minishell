@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/03 19:15:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:58:37 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /**
  * Add to the linked list the input before var, and the value of the var
 */
-static void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
+static void	treat_one_var(char *input, t_alloc *all, size_t pos_var, int quote)
 {
 	char	*var_value;
 	t_token	*node;
@@ -44,9 +44,9 @@ static void	treat_one_var(char *input, t_alloc *all, int pos_var, int quote)
  * - $? is the last return value
  * - if the name start by a digit, just this digit is consider like the name
 */
-static int	size_of_var_name(char *input, int i)
+static int	size_of_var_name(char *input, size_t i)
 {
-	int	add_one;
+	size_t	add_one;
 
 	add_one = 0;
 	if (input[i + 1] == '?' || ft_isdigit(input[i + 1]))
@@ -60,17 +60,18 @@ static int	size_of_var_name(char *input, int i)
 /**
  * Store the new input in a linked list (type t_token) in all->token.
 */
-static void	identify_and_replace_variables(char *input, t_alloc *all)
+static void	identify_and_replace_variables(char *input, t_alloc *all, \
+											t_bool is_in_heredoc)
 {
-	int	i;
-	int	quote;
+	size_t	i;
+	int		quote;
 
 	quote = 0;
 	i = -1;
 	while (input[++i])
 	{
 		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote) \
-			&& !is_heredoc_name(i, all))
+			&& (!is_heredoc_name(input, i, all, is_in_heredoc)))
 		{
 			treat_one_var(input, all, i, quote);
 			i = size_of_var_name(input, i);
@@ -92,14 +93,14 @@ static void	identify_and_replace_variables(char *input, t_alloc *all)
 /**
  * Replace the variables in input
 */
-void	replace_var(char **input, t_alloc *all)
+void	replace_var(char **input, t_alloc *all, t_bool is_in_heredoc)
 {
 	t_token	*lst_input;
 	char	*new_input;
 
 	lst_input = NULL;
 	all->token = &lst_input;
-	identify_and_replace_variables(*input, all);
+	identify_and_replace_variables(*input, all, is_in_heredoc);
 	new_input = ft_calloc(2, sizeof(char));
 	if (!new_input)
 		exit_error(all, NULL, 1);
