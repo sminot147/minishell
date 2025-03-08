@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:22:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/07 18:07:39 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/08 16:44:26 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bool	is_heredoc_name(char *input, size_t pos_var, t_alloc *all, \
 	size_t		pos_prev_token;
 	char		*value_prev_token;
 
-	if (is_in_herdoc)
+	if (is_in_herdoc == TRUE || pos_var == 0)
 		return (FALSE);
 	i = 0;
 	pos_prev_token = 0;
@@ -32,10 +32,8 @@ t_bool	is_heredoc_name(char *input, size_t pos_var, t_alloc *all, \
 		pos_prev_token = i;
 		i += size_to_move(&input[i]);
 		if (!input[i])
-			return (FALSE);
-	}
-	if (pos_prev_token == 0)
 		return (FALSE);
+	}
 	value_prev_token = extract_next_token(&input[pos_prev_token], all);
 	if (ft_strcmp(value_prev_token, "<<") == 0)
 	{
