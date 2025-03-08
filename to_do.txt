@@ -2,4 +2,4 @@
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
-Fait : 
+Quand on ctr C dans un heardock : il y a un invalide free et des leaks
