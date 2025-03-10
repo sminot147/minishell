@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:51:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/10 16:51:30 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/10 19:20:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool	is_heredoc_name(char *input, size_t pos_var, t_alloc *all, \
 	while (pos_prev_token < pos_var)
 	{
 		tmp = pos_act_token + size_to_move(&input[pos_act_token]);
-		if	(tmp > pos_var)
+		if (tmp > pos_var)
 			break ;
 		pos_prev_token = pos_act_token;
 		pos_act_token = tmp;

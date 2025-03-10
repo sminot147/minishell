@@ -6,13 +6,19 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 19:14:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:22:16 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "parsing.h"
 #include "utils.h"
+
+int	check_validity(t_child_info *child_info)
+{
+	return (child_info != NULL && !(child_info->pipe_after == 0 && \
+		child_info->first == 1));
+}
 
 /**
  * treat one update or creation of variable
@@ -41,7 +47,7 @@ int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
 			return (2);
 		}
 	}
-	if (child_info != NULL && !(child_info->pipe_after == 0 && child_info->first == 1))
+	if (check_validity(child_info) == 1)
 		return (0);
 	return (add_or_update_env(&all->env, name, value, append));
 }
