@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 14:11:06 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:25:23 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static int	exec_here_doc(int fd, t_token *token, t_alloc *all, char *name)
 	if (!pid)
 	{
 		free(name);
-		signal(SIGINT, SIG_DFL);
+		signal(SIGINT, handle_sigint_here_doc);
 		here_doc_child(fd, token, all);
 	}
 	else
-		return (here_doc_parent(fd, name, all));
+		return (here_doc_parent(fd, all, name));
 	return (0);
 }
 

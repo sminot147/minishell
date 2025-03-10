@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 13:49:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:16:56 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	append_to_cmd(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 	{
 		if (!(*token_lst)->next)
 			return (1);
-		add_infile(cmd, token_lst, all, i);
+		if (add_infile(cmd, token_lst, all, i) == 1)
+			return (1);
 	}
 	else if ((*token_lst)->token[0] == '>' && (*token_lst)->tag == IS_SEP)
 	{
@@ -110,7 +111,7 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 	{
 		if ((*i == error) || (append_to_cmd(new, token_lst, all, i) == 1))
 		{
-			if (error == -1)
+			if (error == -1 && g_signal_received == 0)
 				extract_error_message((*token_lst)->token, all);
 			clear_cmd(&all->cmd, all);
 			return (1);
