@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 19:22:27 by madelvin          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/03/10 16:40:38 by sminot           ###   ########.fr       */
-=======
-/*   Updated: 2025/03/10 15:28:17 by madelvin         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Created: 2025/03/10 16:51:12 by sminot            #+#    #+#             */
+/*   Updated: 2025/03/10 16:51:30 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +30,11 @@ t_bool	is_heredoc_name(char *input, size_t pos_var, t_alloc *all, \
 	pos_prev_token = 0;
 	while (pos_prev_token < pos_var)
 	{
-<<<<<<< HEAD
 		tmp = pos_act_token + size_to_move(&input[pos_act_token]);
 		if	(tmp > pos_var)
 			break ;
 		pos_prev_token = pos_act_token;
 		pos_act_token = tmp;
-=======
-		pos_prev_token = i;
-		i += size_to_move(&input[i]);
-		if (!input[i])
-			return (FALSE);
->>>>>>> refs/remotes/origin/main
 	}
 	value_prev_token = extract_next_token(&input[pos_prev_token], all);
 	if (ft_strcmp(value_prev_token, "<<") == 0)
