@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 18:58:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:18:20 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	exec_exit(t_alloc *all, t_child_info child_info)
 	{
 		*(all)->return_value = 2;
 		print_error("numeric argument required", child_info.args[1]);
-		exit_safe(all, TRUE);
+		if (child_info.pipe_after == 0 && child_info.first == 1)
+			exit_safe(all, TRUE);
 	}
 	if (child_info.args[2])
 	{
