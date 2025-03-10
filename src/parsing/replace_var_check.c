@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_var_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 19:22:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 15:28:17 by madelvin         ###   ########.fr       */
+/*   Created: 2025/03/10 16:51:12 by sminot            #+#    #+#             */
+/*   Updated: 2025/03/10 16:51:30 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@
 t_bool	is_heredoc_name(char *input, size_t pos_var, t_alloc *all, \
 						t_bool is_in_herdoc)
 {
-	size_t		i;
-	size_t		pos_prev_token;
-	char		*value_prev_token;
+	size_t	tmp;
+	size_t	pos_act_token;
+	size_t	pos_prev_token;
+	char	*value_prev_token;
 
 	if (is_in_herdoc == TRUE || pos_var == 0)
 		return (FALSE);
-	i = 0;
+	pos_act_token = 0;
 	pos_prev_token = 0;
-	while (i < pos_var)
+	while (pos_prev_token < pos_var)
 	{
-		pos_prev_token = i;
-		i += size_to_move(&input[i]);
-		if (!input[i])
-			return (FALSE);
+		tmp = pos_act_token + size_to_move(&input[pos_act_token]);
+		if	(tmp > pos_var)
+			break ;
+		pos_prev_token = pos_act_token;
+		pos_act_token = tmp;
 	}
 	value_prev_token = extract_next_token(&input[pos_prev_token], all);
 	if (ft_strcmp(value_prev_token, "<<") == 0)
