@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:45:07 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 14:10:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:29:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,34 @@ static char	*get_file(t_token *token_lst)
 	return (ft_strdup(token_lst->token));
 }
 
+static void	add_input_file(t_cmd *cmd, t_token **token_lst, t_alloc *all)
+{
+	char	*file;
+	t_file	*file_node;
+
+	file = get_file((*token_lst)->next);
+	if (file == NULL)
+		exit_error(all, NULL, 1);
+	if (cmd->infile)
+	{
+		file_node = new_file(cmd->infile, 0);
+		if (file_node == NULL)
+		{
+			free(file);
+			exit_error(all, NULL, 1);
+		}
+		add_file(&cmd->inter_file_in, file_node);
+	}
+	cmd->infile = file;
+}
+
 /**
  * @brief Handles the execution of here-doc.
  * @param cmd The `command structure`.
  * @param token The token representing the `here-doc sep`.
  * @param all A structure containing necessary allocations.
  */
-static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
+static int	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 {
 	int	fd;
 
@@ -40,9 +61,13 @@ static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
 		safe_close(all, cmd->child_here_doc.fd);
 	fd = here_doc(token, all);
 	if (fd < 0)
-		return ;
+	{
+		cmd->child_here_doc.here_doc = FALSE;
+		return (1);
+	}
 	cmd->child_here_doc.here_doc = TRUE;
 	cmd->child_here_doc.fd = fd;
+	return (0);
 }
 
 /**
@@ -52,32 +77,18 @@ static void	execute_here_docs(t_cmd *cmd, t_token *token, t_alloc *all)
  * @param all A structure containing necessary allocations.
  * @param i A pointer to the `index variable` to update.
  */
-void	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
+int	add_infile(t_cmd *cmd, t_token **token_lst, t_alloc *all, int *i)
 {
-	char	*file;
-	t_file	*file_node;
-
 	if ((*token_lst)->token[1] == '<' && (*token_lst)->next)
-		execute_here_docs(cmd, (*token_lst)->next, all);
-	else
 	{
-		file = get_file((*token_lst)->next);
-		if (file == NULL)
-			exit_error(all, NULL, 1);
-		if (cmd->infile)
-		{
-			file_node = new_file(cmd->infile, 0);
-			if (file_node == NULL)
-			{
-				free(file);
-				exit_error(all, NULL, 1);
-			}
-			add_file(&cmd->inter_file_in, file_node);
-		}
-		cmd->infile = file;
+		if (execute_here_docs(cmd, (*token_lst)->next, all) == 1)
+			return (1);
 	}
+	else
+		add_input_file(cmd, token_lst, all);
 	*token_lst = (*token_lst)->next;
 	(*i)++;
+	return (0);
 }
 
 /**

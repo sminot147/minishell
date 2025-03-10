@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:56:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/07 18:59:23 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/10 15:28:06 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 /**
  * @brief Opens a temporary file for here-doc input.
@@ -53,12 +54,18 @@ void	end_here_doc(int fd, t_token *token, t_alloc *all)
 	if (token)
 		clear_token(&token, all);
 	if (all->cmd)
-		clear_cmd(&all->cmd, all);
+		here_doc_clear_cmd(&all->cmd, all, fd);
 	if (all->env)
 		clear_env(&all->env);
 	free(all);
+	(void)fd;
 	if (close(fd) < 0)
-		exit (1);
+	{
+		perror(NULL);
+		exit(1);
+	}
+	if (g_signal_received == 1)
+		exit(SIGINT);
 	exit(0);
 }
 
@@ -83,7 +90,7 @@ void	here_doc_child(int fd, t_token *token, t_alloc *all)
 	while (1)
 	{
 		buffer = readline(">");
-		if (!buffer)
+		if (!buffer || g_signal_received == 1)
 			break ;
 		if (ft_strcmp(token->token, buffer) == 0)
 		{
@@ -111,7 +118,7 @@ void	here_doc_child(int fd, t_token *token, t_alloc *all)
  * @param all A structure containing necessary allocations.
  * @return 1 if the process was interrupted, 0 otherwise.
  */
-int	here_doc_parent(int fd, char *name, t_alloc *all)
+int	here_doc_parent(int fd, t_alloc *all, char *name)
 {
 	int		status;
 
@@ -121,13 +128,14 @@ int	here_doc_parent(int fd, char *name, t_alloc *all)
 		exit_error(all, NULL, 1);
 	}
 	wait(&status);
-	if (WTERMSIG(status) == SIGINT)
+	if (WEXITSTATUS(status) == 2)
 	{
+		g_signal_received = 1;
 		*all->return_value = 130;
-		free(name);
-		clear_cmd(&all->cmd, all);
 		putchar_fd('\n', 1);
 		return (1);
 	}
+	if (WEXITSTATUS(status) == 1)
+		return (1);
 	return (0);
 }
