@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 14:57:27 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:16:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,8 @@ static int	wait_all_child(int last)
  */
 static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 {
-	int		pipe_fd[2];
-
-	if (exec_builtins_solo(child_info, all) == 1)
-	{
-		if (child_info->pipe[0] != -1)
-			safe_close(all, child_info->pipe[0]);
-		child_info->pipe[0] = -1;
-		if (cmd_list->next == NULL)
-		{
-			signal(SIGINT, handle_sigint);
-			return (-2);
-		}
-		if (pipe(pipe_fd) == -1)
-			return (-1);
-		if (close(pipe_fd[1]) < 0)
-			return (-1);
-		child_info->pipe[0] = pipe_fd[0];
-	}
-	else
-		if (open_inter_file(*cmd_list, all) == 0)
-			return (start_child(child_info, all));
+	if (open_inter_file(*cmd_list, all) == 0)
+		return (start_child(child_info, all));
 	return (0);
 }
 
@@ -114,8 +95,6 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 			ft_free_double_array((void **)child_info.envp);
 			exit_error(all, NULL, 1);
 		}
-		if (last == -2)
-			return (ft_free_double_array((void **)child_info.envp));
 		cmd_list = cmd_list->next;
 		child_info.first = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 14:53:47 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:56:26 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 #include "utils.h"
 #include <stdio.h>
 #include <unistd.h>
+
+static	int	check_cd_input(t_child_info *child_info)
+{
+	if (child_info->args[2])
+	{
+		putstr_fd("minishell: cd: too many arguments\n", 2);
+		return (1);
+	}
+	if (ft_strcmp(child_info->args[1], "-") != 0 && \
+		chdir(child_info->args[1]) < 0)
+	{
+		putstr_fd("minishell: cd: ", 2);
+		perror(child_info->args[1]);
+		return (1);
+	}
+	return (0);
+}
 
 /**
  * @brief Changes the current directory to the previous one (OLDPWD).
@@ -85,6 +102,8 @@ int	go_to_home(t_child_info *child_info)
  */
 int	exec_cd(t_child_info *child_info, t_alloc *all)
 {
+	if (check_cd_input(child_info) == 1)
+		return (1);
 	if (child_info->pipe_after != 0 || child_info->first != 1)
 		return (0);
 	if (!child_info->args[1])
@@ -93,11 +112,6 @@ int	exec_cd(t_child_info *child_info, t_alloc *all)
 		if (go_to_home(child_info) == 0)
 			update_pwd(all);
 		return (0);
-	}
-	if (child_info->args[2])
-	{
-		putstr_fd("minishell: cd: too many arguments\n", 2);
-		return (1);
 	}
 	if (ft_strcmp(child_info->args[1], "-") == 0)
 		return (go_to_old(child_info, all));

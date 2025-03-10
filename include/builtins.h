@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:28:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/03 19:17:32 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:02:57 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 /*----------------------------------------------------------------------------*/
 int		exec_builtins_solo(t_child_info *child_info, t_alloc *all);
 void	exec_builtins_child(t_child_info *child_info);
+int		check_builtins_solo(t_child_info *child_info);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_cd.c                                 */
@@ -61,6 +62,7 @@ void	exec_exit(t_alloc *all, t_child_info child_info);
 /*                              Export_utils.c                                */
 /*----------------------------------------------------------------------------*/
 int		add_or_update_env(t_env **env, char *name, char *value, char append);
+int		treat_var(t_alloc *all, char *input, t_child_info *child_info);
 int		var_len_name(char *input, char *append);
 
 /*----------------------------------------------------------------------------*/

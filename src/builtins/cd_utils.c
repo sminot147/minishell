@@ -6,12 +6,13 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:28:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 14:59:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:04:55 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "parsing.h"
+#include "builtins.h"
 
 /**
  * @brief Creates an environment variable assignment string.
@@ -52,7 +53,7 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 		assign_oldpwd = make_env_assignment("OLDPWD", current_pwd);
 		if (assign_oldpwd)
 		{
-			treat_var(all, assign_oldpwd);
+			treat_var(all, assign_oldpwd, NULL);
 			free(assign_oldpwd);
 		}
 	}
@@ -65,7 +66,7 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 		free(tmp);
 		if (assign_pwd)
 		{
-			treat_var(all, assign_pwd);
+			treat_var(all, assign_pwd, NULL);
 			free(assign_pwd);
 		}
 	}
@@ -99,7 +100,7 @@ void	update_oldpwd(t_child_info *child_info, t_alloc *all)
 		assign_str = make_env_assignment("OLDPWD", current_pwd);
 		if (assign_str)
 		{
-			treat_var(all, assign_str);
+			treat_var(all, assign_str, NULL);
 			free(assign_str);
 		}
 	}
@@ -126,7 +127,7 @@ void	update_pwd(t_alloc *all)
 	free(new_pwd);
 	if (assign_str)
 	{
-		treat_var(all, assign_str);
+		treat_var(all, assign_str, NULL);
 		free(assign_str);
 	}
 	else

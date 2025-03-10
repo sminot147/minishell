@@ -6,3 +6,4 @@ Quand on ctr C dans un heardock : il y a un invalide free et des leaks
 // normalement patch
 
 Quand on fait echo Bonjour | cd test ca ne sort pas
+set value erreur et mesage pour le cd

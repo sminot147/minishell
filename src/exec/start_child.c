@@ -6,11 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 15:21:09 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:52:58 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "builtins.h"
 #include <signal.h>
 
 static void	clear_cmd_child(t_cmd **lst_cmd, t_child_info *child_info)
@@ -69,6 +70,27 @@ static void	manage_fd(t_child_info *child_info, t_alloc *all, int *fd_1, \
 		child_info->pipe[0] = *fd_1;
 }
 
+static	void	exec_child(t_child_info *child_info, t_alloc *all, \
+	t_bool solo_exec)
+{
+	if (solo_exec == FALSE)
+	{
+		free_unsued_child_info(all, child_info);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+		child(child_info);
+	}
+	safe_close(all, child_info->pipe[1]);
+	if (child_info->pipe[0] != -1)
+	{
+		safe_close(all, child_info->pipe[0]);
+		child_info->pipe[1] = -1;
+	}
+	free_unsued_child_info(all, child_info);
+	free_child(child_info, NULL);
+	exit (0);
+}
+
 /**
  * @brief Starts a child process, handling pipe creation and forking.
  * @param child_info Structure containing command execution details.
@@ -77,11 +99,13 @@ static void	manage_fd(t_child_info *child_info, t_alloc *all, int *fd_1, \
  */
 int	start_child(t_child_info *child_info, t_alloc *all)
 {
-	int	pid;
-	int	pipe_fd[2];
+	t_bool	solo_exec;
+	int		pid;
+	int		pipe_fd[2];
 
 	if (pipe(pipe_fd) == -1)
 		return (-1);
+	solo_exec = exec_builtins_solo(child_info, all);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -91,14 +115,13 @@ int	start_child(t_child_info *child_info, t_alloc *all)
 	}
 	if (pid == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
 		safe_close(all, pipe_fd[0]);
 		child_info->pipe[1] = pipe_fd[1];
-		free_unsued_child_info(all, child_info);
-		child(child_info);
+		exec_child(child_info, all, solo_exec);
 	}
 	else
 		manage_fd(child_info, all, &pipe_fd[0], &pipe_fd[1]);
+	if (solo_exec == TRUE)
+		return (0);
 	return (pid);
 }

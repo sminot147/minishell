@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 21:27:47 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:58:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,26 @@ static void	exit_safe(t_alloc *all, t_bool use_return_value)
  */
 void	exec_exit(t_alloc *all, t_child_info child_info)
 {
-	if (child_info.pipe_after == 0 && child_info.first == 1)
+	if (!child_info.args[1])
+		exit_safe(all, TRUE);
+	if (is_num(child_info.args[1]) == 0 || child_info.args[1][0] == '\0')
 	{
-		if (!child_info.args[1])
-			exit_safe(all, TRUE);
-		if (is_num(child_info.args[1]) == 0 || child_info.args[1][0] == '\0')
-		{
-			*(all)->return_value = 2;
-			print_error("numeric argument required", child_info.args[1]);
-			exit_safe(all, TRUE);
-		}
-		if (child_info.args[2])
-		{
-			*(all)->return_value = 1;
-			print_error("too many arguments", NULL);
-			return ;
-		}
-		*(all)->return_value = ft_atoi(child_info.args[1]);
-		if ((long)(*(all)->return_value) == ATOI_OVERFLOW)
-		{
-			*(all)->return_value = 2;
-			print_error("numeric argument required", child_info.args[1]);
-		}
+		*(all)->return_value = 2;
+		print_error("numeric argument required", child_info.args[1]);
 		exit_safe(all, TRUE);
 	}
+	if (child_info.args[2])
+	{
+		*(all)->return_value = 1;
+		print_error("too many arguments", NULL);
+		return ;
+	}
+	*(all)->return_value = ft_atoi(child_info.args[1]);
+	if ((long)(*(all)->return_value) == ATOI_OVERFLOW)
+	{
+		*(all)->return_value = 2;
+		print_error("numeric argument required", child_info.args[1]);
+	}
+	if (child_info.pipe_after == 0 && child_info.first == 1)
+		exit_safe(all, TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/10 15:24:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:02:45 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,11 +136,6 @@ int		here_doc(t_token *token, t_alloc *all);
 void	here_doc_child(int fd, t_token *token, t_alloc *all);
 int		here_doc_parent(int fd, t_alloc *all, char *name);
 int		open_tmp_file(t_alloc *all, char **tmp_file);
-
-/*----------------------------------------------------------------------------*/
-/*                      Parsing_message_error.c                               */
-/*----------------------------------------------------------------------------*/
-int		treat_var(t_alloc *all, char *input);
 
 /*----------------------------------------------------------------------------*/
 /*                      Cmd_parser_function.c                                 */

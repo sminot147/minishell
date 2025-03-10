@@ -6,13 +6,28 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 15:31:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:56:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "utils.h"
 #include "command_exec.h"
+
+int	check_builtins_solo(t_child_info *child_info)
+{
+	if (child_info->cmd == NULL)
+		return (0);
+	if (ft_strcmp(child_info->cmd, "cd") == 0)
+		return (1);
+	if (ft_strcmp(child_info->cmd, "export") == 0 && child_info->args[1])
+		return (1);
+	if (ft_strcmp(child_info->cmd, "unset") == 0)
+		return (1);
+	if (ft_strcmp(child_info->cmd, "exit") == 0)
+		return (1);
+	return (0);
+}
 
 /**
  * @brief Executes built-in commands in parrent.
