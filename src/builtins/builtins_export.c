@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 19:22:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:26:53 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ int	check_validity(t_child_info *child_info)
 {
 	return (child_info != NULL && !(child_info->pipe_after == 0 && \
 		child_info->first == 1));
+}
+
+static int	free_name_return_2(char *name)
+{
+	free(name);
+	return (2);
 }
 
 /**
@@ -42,11 +48,10 @@ int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
 			i += 1 + append;
 		value = ft_strdup(&input[i]);
 		if (!value)
-		{
-			free(name);
-			return (2);
-		}
+			return (free_name_return_2(name));
 	}
+	else
+		value = NULL;
 	if (check_validity(child_info) == 1)
 		return (0);
 	return (add_or_update_env(&all->env, name, value, append));
