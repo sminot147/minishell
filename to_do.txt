@@ -2,12 +2,8 @@
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
-Quand on ctr C dans un heardock : il y a un invalide free et des leaks
-// normalement patch
-
-Quand on fait echo Bonjour | cd test ca ne sort pas
-set value erreur et mesage pour le cd
-
-valgrind + env -i crash a cause de update shell lvl
-
-valgrind + env -i unset les 2 variable de valgrind leaks
+Exit leak fd
+Echo | cd leak
+cat plein de redirection > < | ls leak
+Export a=1 a=2 a=3 casse le env
+cd seul ne fais pas revenir au home
