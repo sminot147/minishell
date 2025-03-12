@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:36:53 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/12 10:43:49 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:09:05 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*replace_shlvl_value(t_alloc *all)
 	shlvl_var = get_env_value(all->env, "SHLVL");
 	if (shlvl_var == NULL)
 		return (NULL);
-	atoi_value = ft_atoi(shlvl_var) + 1;	
+	atoi_value = ft_atoi(shlvl_var) + 1;
 	return (ft_itoa(atoi_value));
 }
 
