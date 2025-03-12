@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 18:52:58 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:00:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ static	void	exec_child(t_child_info *child_info, t_alloc *all, \
 		signal(SIGINT, SIG_DFL);
 		child(child_info);
 	}
+	free_unsued_child_info(all, child_info);
+	free_child(child_info, NULL);
 	safe_close(all, child_info->pipe[1]);
 	if (child_info->pipe[0] != -1)
 	{
 		safe_close(all, child_info->pipe[0]);
 		child_info->pipe[1] = -1;
 	}
-	free_unsued_child_info(all, child_info);
-	free_child(child_info, NULL);
 	exit (0);
 }
 

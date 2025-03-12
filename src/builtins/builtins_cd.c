@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/12 11:02:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:35:41 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 static	int	check_cd_input(t_child_info *child_info)
 {
 	if (child_info->args[1] == NULL)
-	{
-		putstr_fd("minishell: cd: missing argument\n", 2);
-		return (1);
-	}
+		return (0);
 	if (child_info->args[2])
 	{
 		putstr_fd("minishell: cd: too many arguments\n", 2);
