@@ -6,13 +6,25 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:36:53 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/10 19:03:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:43:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "builtins.h"
 #include "utils.h"
+
+static char	*replace_shlvl_value(t_alloc *all)
+{
+	char	*shlvl_var;
+	int		atoi_value;
+
+	shlvl_var = get_env_value(all->env, "SHLVL");
+	if (shlvl_var == NULL)
+		return (NULL);
+	atoi_value = ft_atoi(shlvl_var) + 1;	
+	return (ft_itoa(atoi_value));
+}
 
 /**
  * @brief Increment shell lvl on start
@@ -21,12 +33,10 @@ void	update_shell_lvl(t_alloc *all)
 {
 	char	*var;
 	char	*new_value;
-	int		atoi_value;
 
-	atoi_value = ft_atoi(get_env_value(all->env, "SHLVL")) + 1;
-	new_value = ft_itoa(atoi_value);
+	new_value = replace_shlvl_value(all);
 	if (!new_value)
-		exit_error(all, NULL, 1);
+		return ;
 	var = ft_strdup("SHLVL=");
 	if (!var)
 	{
