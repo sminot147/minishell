@@ -5,7 +5,7 @@
 Exit leak fd
 Echo | cd leak
 cat plein de redirection > < | ls leak
-Export a=1 a=2 a=3 casse le env
+
 
 
 fait:

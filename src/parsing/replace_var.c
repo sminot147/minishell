@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/07 17:58:37 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:27:17 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	size_of_var_name(char *input, size_t i)
 	add_one = 0;
 	if (input[i + 1] == '?' || ft_isdigit(input[i + 1]))
 		add_one = 1;
-	if (ft_isalpha(input[++i]))
+	if (ft_isalpha(input[++i]) || input[i] == '_')
 		while (ft_isalnum(input[++i]) || input[i] == '_')
 			;
 	return (i + add_one);
