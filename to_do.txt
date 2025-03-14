@@ -2,11 +2,4 @@
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
-unset les variable valgrind pose probleme (invalide: free / read / write)
-
-fait:
-cd seul ne fais pas revenir au home
-
-Exit leak fd
-Echo | cd leak
-cat plein de redirection > < | ls leak
+echo '$USER'"$HOME_test]123'$PATH'"$PWD_$SHELL"'$VAR_name'"$HOME_test]123
