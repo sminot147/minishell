@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:29:15 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:13:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,52 @@
 #include "utils.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/stat.h>
 
-static	int	check_cd_input(t_child_info *child_info)
+static void	check_solo(t_child_info *child_info)
 {
+	struct stat	path_stat;
+
 	if (child_info->args[1] == NULL)
-		return (0);
+		return ;
 	if (child_info->args[2])
 	{
 		putstr_fd("minishell: cd: too many arguments\n", 2);
+		return ;
+	}
+	if (ft_strcmp(child_info->args[1], "-") != 0)
+	{
+		if (stat(child_info->args[1], &path_stat) == 0)
+		{
+			if (!S_ISDIR(path_stat.st_mode))
+				ft_printf("minishell: cd: %s: Not a directory\n", \
+					child_info->args[1]);
+			else if ((path_stat.st_mode & S_IXUSR) == 0)
+				ft_printf("minishell: cd: %s: Permission denied\n", \
+					child_info->args[1]);
+		}
+		else
+			ft_printf("minishell: cd: %s: No such file or directory\n", \
+				child_info->args[1]);
+	}
+}
+
+static int	check_cd_input(t_child_info *child_info)
+{
+	if (child_info->pipe_after != 0 || child_info->first != 1)
+	{
+		check_solo(child_info);
 		return (1);
 	}
-	if (ft_strcmp(child_info->args[1], "-") != 0 && \
-		chdir(child_info->args[1]) < 0)
+	else
 	{
-		putstr_fd("minishell: cd: ", 2);
-		perror(child_info->args[1]);
-		return (1);
+		if (child_info->args[1] == NULL)
+			return (0);
+		if (child_info->args[2])
+		{
+			putstr_fd("minishell: cd: too many arguments\n", 2);
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -120,7 +150,7 @@ int	exec_cd(t_child_info *child_info, t_alloc *all)
 	update_oldpwd(child_info, all);
 	if (chdir(child_info->args[1]) < 0)
 	{
-		putstr_fd("llllminishell: cd: ", 2);
+		putstr_fd("minishell: cd: ", 2);
 		perror(child_info->args[1]);
 		return (1);
 	}

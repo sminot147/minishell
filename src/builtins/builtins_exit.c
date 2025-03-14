@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:29:37 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:09:16 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	exit_safe(t_alloc *all, t_child_info *child_info)
  */
 void	exec_exit(t_alloc *all, t_child_info *child_info)
 {
-	if (!child_info->args[1] && child_info->pipe_after == 0 && child_info->first == 1)
+	if (!child_info->args[1] && !child_info->pipe_after && child_info->first)
 		exit_safe(all, child_info);
 	else if (!child_info->args[1])
 		return ;
