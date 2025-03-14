@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:28:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 19:02:57 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:22:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_exec.c                               */
 /*----------------------------------------------------------------------------*/
-int		exec_builtins_solo(t_child_info *child_info, t_alloc *all);
+int		exec_builtins_solo(t_child_info *child_info, t_alloc *all, int pipe[2]);
 void	exec_builtins_child(t_child_info *child_info);
 int		check_builtins_solo(t_child_info *child_info);
 
@@ -56,7 +56,7 @@ int		exec_echo(t_child_info *child_info);
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_exit.c                               */
 /*----------------------------------------------------------------------------*/
-void	exec_exit(t_alloc *all, t_child_info child_info);
+void	exec_exit(t_alloc *all, t_child_info *child_info, int pipe_fd[2]);
 
 /*----------------------------------------------------------------------------*/
 /*                              Export_utils.c                                */

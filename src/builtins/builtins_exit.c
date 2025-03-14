@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 19:18:20 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:44:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,16 @@ static void	print_error(char *msg, char *arg)
  * @param all Structure containing shell resources.
  * @param use_return_value If TRUE, exits with the stored return value.
  */
-static void	exit_safe(t_alloc *all, t_bool use_return_value)
+static void	exit_safe(t_alloc *all, t_child_info *child_info, int pipe[2])
 {
 	char	exit_code;
 
+	safe_close(all, pipe[1]);
+	safe_close(all, pipe[0]);
 	exit_code = *(all)->return_value;
+	ft_free_double_array((void **)child_info->envp);
 	free_all(all);
-	if (use_return_value == TRUE)
-		exit(exit_code);
-	exit(0);
+	exit(exit_code);
 }
 
 /**
@@ -72,29 +73,31 @@ static void	exit_safe(t_alloc *all, t_bool use_return_value)
  * @param all Structure containing shell resources.
  * @param child_info Structure containing command arguments.
  */
-void	exec_exit(t_alloc *all, t_child_info child_info)
+void	exec_exit(t_alloc *all, t_child_info *child_info, int pipe[2])
 {
-	if (!child_info.args[1])
-		exit_safe(all, TRUE);
-	if (is_num(child_info.args[1]) == 0 || child_info.args[1][0] == '\0')
+	if (!child_info->args[1] && child_info->pipe_after == 0 && child_info->first == 1)
+		exit_safe(all, child_info, pipe);
+	else if (!child_info->args[1])
+		return ;
+	if (is_num(child_info->args[1]) == 0 || child_info->args[1][0] == '\0')
 	{
 		*(all)->return_value = 2;
-		print_error("numeric argument required", child_info.args[1]);
-		if (child_info.pipe_after == 0 && child_info.first == 1)
-			exit_safe(all, TRUE);
+		print_error("numeric argument required", child_info->args[1]);
+		if (child_info->pipe_after == 0 && child_info->first == 1)
+			exit_safe(all, child_info, pipe);
 	}
-	if (child_info.args[2])
+	if (child_info->args[2])
 	{
 		*(all)->return_value = 1;
 		print_error("too many arguments", NULL);
 		return ;
 	}
-	*(all)->return_value = ft_atoi(child_info.args[1]);
+	*(all)->return_value = ft_atoi(child_info->args[1]);
 	if ((long)(*(all)->return_value) == ATOI_OVERFLOW)
 	{
 		*(all)->return_value = 2;
-		print_error("numeric argument required", child_info.args[1]);
+		print_error("numeric argument required", child_info->args[1]);
 	}
-	if (child_info.pipe_after == 0 && child_info.first == 1)
-		exit_safe(all, TRUE);
+	if (child_info->pipe_after == 0 && child_info->first == 1)
+		exit_safe(all, child_info, pipe);
 }

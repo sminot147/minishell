@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/12 15:00:34 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:50:47 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,24 @@ static void	manage_fd(t_child_info *child_info, t_alloc *all, int *fd_1, \
 static	void	exec_child(t_child_info *child_info, t_alloc *all, \
 	t_bool solo_exec)
 {
+	free_unsued_child_info(all, child_info);
 	if (solo_exec == FALSE)
 	{
-		free_unsued_child_info(all, child_info);
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		child(child_info);
 	}
-	free_unsued_child_info(all, child_info);
+	close_all_here_doc(child_info);
 	free_child(child_info, NULL);
-	safe_close(all, child_info->pipe[1]);
+	if (child_info->pipe[1] != -1)
+	{
+		safe_close(all, child_info->pipe[1]);
+		child_info->pipe[1] = -1;
+	}
 	if (child_info->pipe[0] != -1)
 	{
 		safe_close(all, child_info->pipe[0]);
-		child_info->pipe[1] = -1;
+		child_info->pipe[0] = -1;
 	}
 	exit (0);
 }
@@ -105,17 +109,17 @@ int	start_child(t_child_info *child_info, t_alloc *all)
 
 	if (pipe(pipe_fd) == -1)
 		return (-1);
-	solo_exec = exec_builtins_solo(child_info, all);
+	solo_exec = exec_builtins_solo(child_info, all, pipe_fd);
 	pid = fork();
 	if (pid == -1)
 	{
-		safe_close(all, pipe_fd[1]);
-		safe_close(all, pipe_fd[0]);
+		close(pipe_fd[1]);
+		close(pipe_fd[0]);
 		return (-1);
 	}
 	if (pid == 0)
 	{
-		safe_close(all, pipe_fd[0]);
+		close (pipe_fd[0]);
 		child_info->pipe[1] = pipe_fd[1];
 		exec_child(child_info, all, solo_exec);
 	}

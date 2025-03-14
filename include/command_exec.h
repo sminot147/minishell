@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/03 19:17:21 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:26:26 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	free_child(t_child_info *child_info, char *cmd_path);
 /*----------------------------------------------------------------------------*/
 void	init_child(t_child_info *child_info, t_alloc *all);
 void	setup_child(t_cmd cmd, t_child_info *child_info, t_alloc *all);
+void	close_all_here_doc(t_child_info *child_info);
 
 /*----------------------------------------------------------------------------*/
 /*                                Cmd_utils.c                                 */

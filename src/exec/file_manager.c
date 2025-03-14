@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/11 19:14:31 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:47:58 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ static int	open_output_file(t_child_info *child_info)
 void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 {
 	if (child_info->in_file != NULL)
+	{
 		*fd_1 = open_input_file(child_info);
+		if (child_info->here_doc.here_doc == TRUE)
+			close(child_info->here_doc.fd);
+	}
 	else if (child_info->here_doc.here_doc == 1)
 		*fd_1 = child_info->here_doc.fd;
 	else if (child_info->first == 0 && child_info->pipe[0] != -1)

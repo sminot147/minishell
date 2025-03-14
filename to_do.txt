@@ -2,11 +2,10 @@
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
-Exit leak fd
-Echo | cd leak
-cat plein de redirection > < | ls leak
-
-
 
 fait:
 cd seul ne fais pas revenir au home
+
+Exit leak fd
+Echo | cd leak
+cat plein de redirection > < | ls leak

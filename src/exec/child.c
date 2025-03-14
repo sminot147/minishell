@@ -6,31 +6,13 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/03 19:15:07 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:49:02 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "command_exec.h"
-#include "utils.h"
-
-static void	close_all_here_doc(t_child_info *child_info)
-{
-	int	i;
-
-	i = 0;
-	while (i < child_info->nb_here_doc)
-	{
-		if (child_info->here_doc.here_doc == FALSE)
-			child_safe_close(child_info, child_info->here_doc_fd[i]);
-		else
-			if (child_info->here_doc_fd[i] != child_info->here_doc.fd)
-				child_safe_close(child_info, child_info->here_doc_fd[i]);
-		i++;
-	}
-	free(child_info->here_doc_fd);
-	child_info->here_doc_fd = NULL;
-}
+#include "utils.h" 
 
 /**
  * @brief Executes a command using execve.

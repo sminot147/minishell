@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:00:39 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/06 15:20:42 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:40:29 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,22 @@ void	setup_child(t_cmd cmd, t_child_info *child_info, t_alloc *all)
 	(*child_info).pipe_after = cmd.pipe;
 	(*child_info).here_doc = cmd.child_here_doc;
 	(*child_info).envp_pars = all->env;
+}
+
+void	close_all_here_doc(t_child_info *child_info)
+{
+	int	i;
+
+	i = 0;
+	while (i < child_info->nb_here_doc)
+	{
+		if (child_info->here_doc.here_doc == FALSE)
+			child_safe_close(child_info, child_info->here_doc_fd[i]);
+		else
+			if (child_info->here_doc_fd[i] != child_info->here_doc.fd)
+				child_safe_close(child_info, child_info->here_doc_fd[i]);
+		i++;
+	}
+	free(child_info->here_doc_fd);
+	child_info->here_doc_fd = NULL;
 }
