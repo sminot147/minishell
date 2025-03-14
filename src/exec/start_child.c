@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:30 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:25:33 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:30:21 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	start_child(t_child_info *child_info, t_alloc *all)
 
 	if (pipe(pipe_fd) == -1)
 		return (-1);
-	solo_exec = exec_builtins_solo(child_info, all, pipe_fd);
+	solo_exec = exec_builtins_solo(child_info, all);
 	pid = fork();
 	if (pid == -1)
 	{

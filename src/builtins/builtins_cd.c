@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/12 14:35:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:29:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	exec_cd(t_child_info *child_info, t_alloc *all)
 	update_oldpwd(child_info, all);
 	if (chdir(child_info->args[1]) < 0)
 	{
-		putstr_fd("minishell: cd: ", 2);
+		putstr_fd("llllminishell: cd: ", 2);
 		perror(child_info->args[1]);
 		return (1);
 	}

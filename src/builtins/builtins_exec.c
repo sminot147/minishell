@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:24:52 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:30:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_builtins_solo(t_child_info *child_info)
  * @param all Structure containing shell resources.
  * @return Returns 1 if a built-in command is find, 0 otherwise.
  */
-int	exec_builtins_solo(t_child_info *child_info, t_alloc *all, int pipe_fd[2])
+int	exec_builtins_solo(t_child_info *child_info, t_alloc *all)
 {
 	if (child_info->cmd == NULL)
 		return (0);
@@ -56,7 +56,7 @@ int	exec_builtins_solo(t_child_info *child_info, t_alloc *all, int pipe_fd[2])
 	}
 	if (ft_strcmp(child_info->cmd, "exit") == 0)
 	{
-		exec_exit(all, child_info, pipe_fd);
+		exec_exit(all, child_info);
 		return (1);
 	}
 	return (0);

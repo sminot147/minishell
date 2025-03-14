@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:26:36 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:30:16 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
 {
 	if (open_inter_file(*cmd_list, all) == 0)
 	{
-		if (child_info->pipe_after == 0 && exec_builtins_solo(child_info, all, NULL) == 1)
+		if (child_info->pipe_after == 0 && exec_builtins_solo(child_info, all) == 1)
 			return (0);
 		return (start_child(child_info, all));
 	}
