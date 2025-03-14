@@ -2,6 +2,7 @@
 /!\/!\/!\/!\/!\/!\/!\
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
+unset les variable valgrind pose probleme (invalide: free / read / write)
 
 fait:
 cd seul ne fais pas revenir au home
