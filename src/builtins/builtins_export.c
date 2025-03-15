@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/12 15:26:53 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/15 16:03:16 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
 	int		i;
 
 	i = var_len_name(input, &append);
+	if (check_validity(child_info) == 1)
+		return (0);
 	if (i == -1)
 		return (1);
 	name = ft_strndup(input, i);
@@ -52,8 +54,6 @@ int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
 	}
 	else
 		value = NULL;
-	if (check_validity(child_info) == 1)
-		return (0);
 	return (add_or_update_env(&all->env, name, value, append));
 }
 
