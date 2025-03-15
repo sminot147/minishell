@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:49:58 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 14:09:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,15 @@ void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
 		if (last == -1)
 		{
 			ft_free_double_array((void **)child_info.envp);
+			if (child_info.here_doc_fd) // check utiliter
+				free(child_info.here_doc_fd); // check utiliter
 			exit_error(all, NULL, 1);
 		}
 		cmd_list = cmd_list->next;
 		child_info.first = 0;
 	}
 	ft_free_double_array((void **)child_info.envp);
-	if (child_info.here_doc_fd)
-		free(child_info.here_doc_fd);
+	if (child_info.here_doc_fd) // check utiliter
+		free(child_info.here_doc_fd); // check utiliter
 	wait_cmd_exec(all, last);
 }

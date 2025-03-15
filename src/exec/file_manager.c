@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 14:47:58 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:43:54 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	open_input_file(t_child_info *child_info)
 	{
 		putstr_fd("minishell: ", 2);
 		perror(child_info->in_file);
+		if (child_info->pipe[1] != -1)
+			close(child_info->pipe[1]);
 		free_child(child_info, NULL);
 		exit(1);
 	}
@@ -40,7 +42,7 @@ static int	open_input_file(t_child_info *child_info)
  *  the child process.
  * @return The `file descriptor` on success, exits on failure.
  */
-static int	open_output_file(t_child_info *child_info)
+static int	open_output_file(t_child_info *child_info, int fd_1)
 {
 	int	return_value;
 
@@ -54,6 +56,10 @@ static int	open_output_file(t_child_info *child_info)
 	{
 		putstr_fd("minishell: ", 2);
 		perror(child_info->out_file);
+		if (fd_1 != -1)
+			close(fd_1);
+		if (child_info->pipe[1] != -1)
+			close(child_info->pipe[1]);
 		free_child(child_info, NULL);
 		exit(1);
 	}
@@ -70,28 +76,29 @@ static int	open_output_file(t_child_info *child_info)
  */
 void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
 {
+	*fd_1 = -1;
+	*fd_2 = -1;
 	if (child_info->in_file != NULL)
 	{
-		*fd_1 = open_input_file(child_info);
 		if (child_info->here_doc.here_doc == TRUE)
 			close(child_info->here_doc.fd);
+		*fd_1 = open_input_file(child_info);
 	}
-	else if (child_info->here_doc.here_doc == 1)
+	else if (child_info->here_doc.here_doc == TRUE)
 		*fd_1 = child_info->here_doc.fd;
 	else if (child_info->first == 0 && child_info->pipe[0] != -1)
 		*fd_1 = child_info->pipe[0];
 	else
 		*fd_1 = 0;
 	if (child_info->out_file != NULL)
-		*fd_2 = open_output_file(child_info);
+		*fd_2 = open_output_file(child_info, *fd_1);
 	else if (child_info->pipe_after == 1 && child_info->pipe[1] != -1)
 		*fd_2 = child_info->pipe[1];
 	else
 		*fd_2 = 1;
-	if (child_info->pipe_after == FALSE && child_info->pipe[1] != -1)
+	if (child_info->pipe[1] != *fd_2 && child_info->pipe[1] != -1)
 		child_safe_close(child_info, child_info->pipe[1]);
-	if (child_info->first == 0 && child_info->pipe[0] != *fd_1 && \
-			child_info->pipe[0] != -1)
+	if (child_info->pipe[0] != *fd_1 && child_info->pipe[0] != -1)
 		child_safe_close(child_info, child_info->pipe[0]);
 }
 

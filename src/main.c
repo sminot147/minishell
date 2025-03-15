@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
+/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 11:35:39 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/15 15:54:35 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,3 @@ int	main(int argc, char **argv, char **envp)
 		g_signal_received = 0;
 	}
 }
-
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*input;
-// 	t_alloc	*all;
-// 	int		return_value;
-// 	char *line;
-// 	// char    *prompt;
-// 	(void)av;
-// 	if (ac != 1)
-// 		exit_error((t_alloc *)NULL, "minishell doesn't take argument", 0);
-// 	init_all(&all, &return_value);
-// 	all->env = pars_env(envp, all);
-// 	while (1)
-// 	{
-// 		if (isatty(fileno(stdin)))
-// 			input = readline("> ");
-// 		else
-// 		{
-// 			line = get_next_line(fileno(stdin));
-// 			input = ft_strtrim(line, "\n");
-// 			free(line);
-// 		}
-// 		if (!input)
-// 			return (end_minishell(all));
-// 		add_history(input);
-// 		parse_input(input, all);
-// 		if (all->cmd != NULL)
-// 			exec_cmd(all->cmd, all);
-// 		free_line(all);
-// 	}
-// }

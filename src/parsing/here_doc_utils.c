@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:56:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 15:28:06 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 14:50:39 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ void	end_here_doc(int fd, t_token *token, t_alloc *all)
 	free(all);
 	(void)fd;
 	if (close(fd) < 0)
-	{
-		perror(NULL);
 		exit(1);
-	}
 	if (g_signal_received == 1)
 		exit(SIGINT);
 	exit(0);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 18:09:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:22:30 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ static void	exit_safe(t_alloc *all, t_child_info *child_info)
 	exit(exit_code);
 }
 
+// static void	check_init_entry(t_alloc *all, t_child_info *child_info)
+// {
+// 	if (!child_info->args[1] && !child_info->pipe_after && child_info->first)
+// 		exit_safe(all, child_info);
+// 	else if (!child_info->args[1])
+// 		return ;
+// }
+
 /**
  * @brief Executes the exit command, handling numeric arguments and errors.
  * @param all Structure containing shell resources.
@@ -83,6 +91,7 @@ void	exec_exit(t_alloc *all, t_child_info *child_info)
 		print_error("numeric argument required", child_info->args[1]);
 		if (child_info->pipe_after == 0 && child_info->first == 1)
 			exit_safe(all, child_info);
+		return ;
 	}
 	if (child_info->args[2])
 	{
