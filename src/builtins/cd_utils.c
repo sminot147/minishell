@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:28:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:50:38 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 20:05:26 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 		assign_oldpwd = make_env_assignment("OLDPWD", current_pwd);
 		if (assign_oldpwd)
 		{
-			treat_var(all, assign_oldpwd, NULL);
+			treat_var(all, assign_oldpwd, FALSE);
 			free(assign_oldpwd);
 		}
 	}
@@ -66,7 +66,7 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 		free(tmp);
 		if (assign_pwd)
 		{
-			treat_var(all, assign_pwd, NULL);
+			treat_var(all, assign_pwd, FALSE);
 			free(assign_pwd);
 		}
 	}

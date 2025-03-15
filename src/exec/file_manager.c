@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:13:56 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 20:05:15 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static int	open_output_file(t_alloc *all, int fd_1)
 	{
 		putstr_fd("minishell: ", 2);
 		perror(all->current->outfile);
-		close_all_here_doc(all, fd_1);
+		close_all_here_doc(all, all->current);
 		if (fd_1 != -1)
 			close(fd_1);
 		if (all->current->pipe_fd[1] != -1)
 			close(all->current->pipe_fd[1]);
-		free_child(all);
+		free_all(all);
 		exit(1);
 	}
 	return (return_value);

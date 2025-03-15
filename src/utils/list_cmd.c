@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 16:15:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 20:29:16 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	here_doc_clear_cmd(t_cmd **lst_cmd, t_alloc *all, int fd)
 			*lst_cmd = tmp;
 			exit_error(all, NULL, 1);
 		}
+		(*lst_cmd)->child_here_doc.fd = -1;
+		(*lst_cmd)->child_here_doc.here_doc = FALSE;
 		free(*lst_cmd);
 		*lst_cmd = tmp;
 	}
@@ -105,6 +107,7 @@ t_cmd	*new_cmd(void)
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (cmd == NULL)
 		return (NULL);
+	cmd->next = NULL;
 	return (cmd);
 }
 

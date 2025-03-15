@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:56:38 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 20:38:53 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,32 @@
 #include "command_exec.h"
 #include "utils.h" 
 
+static char	**extract_arg_free_all(t_alloc *all)
+{
+	char	**args;
+	int		i;
+
+	i = 0;
+	while (all->current->args[i])
+		i++;
+	args = malloc(sizeof(char *) * (i + 1));
+	if (args == NULL)
+		exit_error(all, NULL, 1);
+	i = 0;
+	while (all->current->args[i])
+	{
+		args[i] = ft_strdup(all->current->args[i]);
+		if (args[i] == NULL)
+		{
+			ft_free_double_array((void **)args);
+			exit_error(all, NULL, 1);
+		}
+		i++;
+	}
+	args[i] = NULL;
+	free_all(all);
+	return (args);
+}
 /**
  * @brief Executes a command using execve.
  * @param child_info Structure containing command arguments and environment
@@ -22,23 +48,27 @@
 static void	exec(t_alloc *all)
 {
 	char	*cmd_path;
+	char	**args;
 	char	**env_tab;
 
 	cmd_path = NULL;
-	if (init_cmd(all, &cmd_path) == 1)
-	{
-		perror("minishell: ");
-		exit (1);
-	}
 	env_tab = make_env_tab(all->env);
 	if (env_tab == NULL)
 		exit_error(all, NULL, 1);
+	if (init_cmd(all, &cmd_path, get_path(env_tab)) == 1)
+	{
+		ft_free_double_array((void **)env_tab);
+		free_all(all);
+		perror("minishell: ");
+		exit (1);
+	}
 	check_cmd_validity(cmd_path, all, env_tab);
-	execve(cmd_path, all->current->args, env_tab);
+	args = extract_arg_free_all(all);
+	execve(cmd_path, args, env_tab);
 	putstr_fd("minishell: ", 2);
 	perror(all->current->args[0]);
 	ft_free_double_array((void **)env_tab);
-	free_all(all);
+	ft_free_double_array((void **)args);
 	exit(1);
 }
 

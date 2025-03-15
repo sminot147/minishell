@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:47:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:31:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 20:04:13 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,10 @@ void	check_cmd_validity(char	*cmd_path, t_alloc *all, char **env_tab)
  *  process.
  * @param cmd_path A pointer to store the resolved command path.
  */
-int	init_cmd(t_alloc *all, char **cmd_path)
+int	init_cmd(t_alloc *all, char **cmd_path, char *path)
 {
 	char	**s_path;
-	char	*path;
 
-	path = get_path(all);
 	if (path && ft_strncmp(all->current->args[0], "./", 2) != 0
 		&& ft_strncmp(all->current->args[0], "/", 1) != 0)
 	{
