@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:34:11 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/13 12:27:17 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/15 11:39:16 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	identify_and_replace_variables(char *input, t_alloc *all, \
 	while (input[++i])
 	{
 		if (input[i] == '$' && quote != 1 && is_arg(input, i, quote) \
-			&& (!is_heredoc_name(input, i, all, is_in_heredoc)))
+			&& (!is_heredoc_name(all->input, i, all, is_in_heredoc)))
 		{
 			treat_one_var(input, all, i, quote);
 			i = size_of_var_name(input, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/14 17:04:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:35:39 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	main(int argc, char **argv, char **envp)
 		prompt = get_promp(all);
 		input = readline(prompt);
 		free(prompt);
-		if (g_signal_received == 1)
-			return_value = 130;
 		if (!input)
 			return (end_minishell(all));
 		add_history(input);
+		if (g_signal_received == 1)
+			return_value = 130;
 		parse_input(input, all);
 		if (all->cmd != NULL)
 			exec_cmd(all->cmd, all);
