@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 21:23:30 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:50:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	add_or_update_env(t_env **env, char *name, char *value, char append)
 	tmp = *env;
 	while (tmp)
 	{
-		if (strcmp(tmp->name, name) == 0)
+		if (ft_strcmp(tmp->name, name) == 0)
 		{
 			free(name);
 			if (append_value(&tmp->value, value, append) == 1)

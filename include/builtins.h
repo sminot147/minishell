@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:28:27 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:30:10 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:50:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,23 @@
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_exec.c                               */
 /*----------------------------------------------------------------------------*/
-int		exec_builtins_solo(t_child_info *child_info, t_alloc *all);
-void	exec_builtins_child(t_child_info *child_info);
-int		check_builtins_solo(t_child_info *child_info);
+int		exec_builtins_solo(t_alloc *all);
+void	exec_builtins_child(t_alloc *all);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_cd.c                                 */
 /*----------------------------------------------------------------------------*/
-int		exec_cd(t_child_info *child_info, t_alloc *all);
+int		exec_cd(t_alloc *all, t_bool in_child);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_unset.c                              */
 /*----------------------------------------------------------------------------*/
-int		exec_unset(t_child_info *child_info, t_alloc *all);
+int		exec_unset(t_alloc *all, t_bool in_child);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_export.c                             */
 /*----------------------------------------------------------------------------*/
-int		exec_export(t_child_info *child_info, t_alloc *all);
+int		exec_export(t_alloc *all, t_bool in_child);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_pwd.c                                */
@@ -46,23 +45,23 @@ int		exec_pwd(void);
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_env.c                                */
 /*----------------------------------------------------------------------------*/
-int		exec_env(t_child_info *child_info);
+int		exec_env(t_alloc *all);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_echo.c                               */
 /*----------------------------------------------------------------------------*/
-int		exec_echo(t_child_info *child_info);
+int		exec_echo(t_alloc *all);
 
 /*----------------------------------------------------------------------------*/
 /*                              Builtins_exit.c                               */
 /*----------------------------------------------------------------------------*/
-void	exec_exit(t_alloc *all, t_child_info *child_info);
+int		exec_exit(t_alloc *all, t_bool in_child);
 
 /*----------------------------------------------------------------------------*/
 /*                              Export_utils.c                                */
 /*----------------------------------------------------------------------------*/
 int		add_or_update_env(t_env **env, char *name, char *value, char append);
-int		treat_var(t_alloc *all, char *input, t_child_info *child_info);
+int		treat_var(t_alloc *all, char *input, t_bool in_child);
 int		var_len_name(char *input, char *append);
 
 /*----------------------------------------------------------------------------*/
@@ -70,7 +69,7 @@ int		var_len_name(char *input, char *append);
 /*----------------------------------------------------------------------------*/
 void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 							char *current_pwd, t_alloc *all);
-void	update_oldpwd(t_child_info *child_info, t_alloc *all);
+void	update_oldpwd(t_alloc *all);
 void	update_pwd(t_alloc *all);
 
 #endif

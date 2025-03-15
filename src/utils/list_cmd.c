@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 14:50:51 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:15:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	count_cmd(t_cmd *lst_cmd)
 	i = 0;
 	while (lst_cmd)
 	{
+		if (i == __INT32_MAX__)
+			return (-1);
 		i++;
 		lst_cmd = lst_cmd->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 15:54:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 17:31:05 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 			return_value = 130;
 		parse_input(input, all);
 		if (all->cmd != NULL)
-			exec_cmd(all->cmd, all);
+			exec_cmd(all);
 		free_line(all);
 		g_signal_received = 0;
 	}

@@ -5,22 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 16:58:26 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 14:09:11 by madelvin         ###   ########.fr       */
+/*   Created: 2025/03/15 17:29:48 by madelvin          #+#    #+#             */
+/*   Updated: 2025/03/15 18:53:47 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_exec.h"
 #include "builtins.h"
+#include "parsing.h"
 #include "utils.h"
 #include <signal.h>
 #include <wait.h>
 
-/**
- * @brief Waits for all child processes to finish and handles signals.
- * @param last The process ID of the last child.
- * @return The exit status of the last executed command.
- */
+void	close_all_read_pipe(t_alloc *all)
+{
+	t_cmd	*current;
+	int		return_value;
+
+	current = all->cmd;
+	return_value = 0;
+	while (current)
+	{
+		if (current->pipe_fd[0] != -1);
+			if (close(current->pipe_fd[0]) < 0)
+				return_value = 1;
+		current = current->next;
+	}
+	return (return_value);
+}
+
+int	start_cmd(t_alloc *all)
+{
+	if (all->current->next == NULL && all->current == all->cmd && \
+		exec_builtins_solo(all) == 1)
+		return (0);
+	return (start_child(all));
+}
+
 static int	wait_all_child(int last)
 {
 	int	wait_value;
@@ -35,12 +56,14 @@ static int	wait_all_child(int last)
 			break ;
 		if (last != 0)
 		{
-			if (WTERMSIG(status) == SIGINT)
-				putchar_fd('\n', 1);
-			if (WTERMSIG(status) == SIGQUIT)
-				putstr_fd("Quit (core dumped)\n", 1);
 			if ((last == wait_value) && WIFEXITED(status))
+			{
+				if (WTERMSIG(status) == SIGINT)
+					putchar_fd('\n', 1);
+				if (WTERMSIG(status) == SIGQUIT)
+					putstr_fd("Quit (core dumped)\n", 1);
 				return_value = WEXITSTATUS(status);
+			}
 			else if (WIFSIGNALED(status))
 				return_value = 128 + WTERMSIG(status);
 		}
@@ -48,65 +71,24 @@ static int	wait_all_child(int last)
 	return (return_value);
 }
 
-/**
- * @brief Starts a command, handling built-in execution and child process
- *  creation.
- * @param cmd_list The command to execute.
- * @param child_info Structure containing command execution details.
- * @param all Structure containing shell resources.
- * @return The process ID of the last executed command or a special value
- *  (-1 or -2) on failure.
- */
-static int	start_cmd(t_cmd *cmd_list, t_child_info *child_info, t_alloc *all)
+void	exec_cmd(t_alloc *all)
 {
-	if (open_inter_file(*cmd_list, all) == 0)
-	{
-		if (child_info->pipe_after == 0 && child_info->first == 1 && \
-				exec_builtins_solo(child_info, all) == 1)
-			return (0);
-		return (start_child(child_info, all));
-	}
-	return (0);
-}
+	int last;
 
-static void	wait_cmd_exec(t_alloc *all, int last)
-{
-	if (last != 0)
-		*(*all).return_value = wait_all_child(last);
-	wait_all_child(last);
-	signal(SIGINT, handle_sigint);
-}
-
-/**
- * @brief Executes a command list by creating child processes and managing
- *  pipes.
- * @param cmd_list The list of commands to execute.
- * @param all Structure containing shell resources.
- */
-void	exec_cmd(t_cmd *cmd_list, t_alloc *all)
-{
-	t_child_info	child_info;
-	int				last;
-
-	last = 0;
-	init_child(&child_info, all);
+	all->current = all->cmd;
 	signal(SIGINT, SIG_IGN);
-	while (cmd_list != NULL)
+	while (all->current != NULL)
 	{
-		setup_child(*cmd_list, &child_info, all);
-		last = start_cmd(cmd_list, &child_info, all);
-		if (last == -1)
+		last = start_cmd(all);
+		if (last < 0)
 		{
-			ft_free_double_array((void **)child_info.envp);
-			if (child_info.here_doc_fd) // check utiliter
-				free(child_info.here_doc_fd); // check utiliter
-			exit_error(all, NULL, 1);
+			perror("minishell: ");
+			break ;
 		}
-		cmd_list = cmd_list->next;
-		child_info.first = 0;
+		all->current = all->current->next;
 	}
-	ft_free_double_array((void **)child_info.envp);
-	if (child_info.here_doc_fd) // check utiliter
-		free(child_info.here_doc_fd); // check utiliter
-	wait_cmd_exec(all, last);
+	*(*all).return_value = wait_all_child(last);
+	close_all_here_doc(all, NULL);
+	close_all_read_pipe(all);
+	signal(SIGINT, handle_sigint);
 }

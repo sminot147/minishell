@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/27 21:34:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:39:18 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
  *  variables.
  * @return Returns 0 on success, 127 if an invalid argument is provided.
  */
-int	exec_env(t_child_info *child_info)
+int	exec_env(t_alloc *all)
 {
 	t_env	*env;
 
-	env = child_info->envp_pars;
+	env = all->env;
 	if (!env)
 		return (0);
-	if (child_info->args[1])
+	if (all->current->args[1])
 	{
 		putstr_fd("env: ", 2);
-		putstr_fd(child_info->args[1], 2);
+		putstr_fd(all->current->args[1], 2);
 		putstr_fd(": No such file or directory\n", 2);
 		return (127);
 	}

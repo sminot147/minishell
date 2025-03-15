@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/10 14:32:21 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:55:12 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,11 @@
 void	free_line(t_alloc *alloced);
 void	free_all(t_alloc *alloced);
 void	exit_error(t_alloc *all, char *error_message, char perror_enable);
-void	child_exit_error(t_child_info *child_info, char *cmd_path, \
-				char *error_message, char perror_enable);
 
 /*----------------------------------------------------------------------------*/
 /*                               Env_tab.c                                    */
 /*----------------------------------------------------------------------------*/
-char	**make_env_tab(t_alloc *all);
-char	**make_env_tab_child(t_env *env_part);
+char	**make_env_tab(t_env *env_lst);
 int		count_env_size(t_env *env);
 
 /*----------------------------------------------------------------------------*/
@@ -79,7 +76,6 @@ int		size_of_args(char **args);
 /*                             Safe_close.c                                   */
 /*----------------------------------------------------------------------------*/
 void	safe_close(t_alloc *all, int fd);
-void	child_safe_close(t_child_info *child_info, int fd);
 
 /*----------------------------------------------------------------------------*/
 /*                             List_cmd.c                                     */

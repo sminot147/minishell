@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:37:45 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 14:51:05 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:31:27 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,3 @@ void	safe_close(t_alloc *all, int fd)
 		exit_error(all, NULL, 1);
 }
 
-/**
- * @brief Safely closes a file descriptor in a child process, calling
- * `child_exit_error()` on failure.
- *
- * @param child_info Pointer to a `t_child_info` structure used for
- * error handling in the child process.
- * @param fd         The file descriptor to close.
- */
-void	child_safe_close(t_child_info *child_info, int fd)
-{
-	if (close(fd) < 0)
-		child_exit_error(child_info, NULL, NULL, 1);
-}

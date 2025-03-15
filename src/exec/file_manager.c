@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 15:43:54 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:13:56 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@
  *  process.
  * @return The `file descriptor` on success, exits on failure.
  */
-static int	open_input_file(t_child_info *child_info)
+static int	open_input_file(t_alloc *all)
 {
 	int	return_value;
 
-	return_value = open(child_info->in_file, O_RDONLY);
+	return_value = open(all->current->infile, O_RDONLY);
 	if (return_value < 0)
 	{
 		putstr_fd("minishell: ", 2);
-		perror(child_info->in_file);
-		if (child_info->pipe[1] != -1)
-			close(child_info->pipe[1]);
-		free_child(child_info, NULL);
+		perror(all->current->infile);
+		if (all->current->pipe_fd[1] != -1)
+			close(all->current->pipe_fd[1]);
+		close_all_here_doc(all, NULL);
+		free_all(all);
 		exit(1);
 	}
 	return (return_value);
@@ -42,25 +43,26 @@ static int	open_input_file(t_child_info *child_info)
  *  the child process.
  * @return The `file descriptor` on success, exits on failure.
  */
-static int	open_output_file(t_child_info *child_info, int fd_1)
+static int	open_output_file(t_alloc *all, int fd_1)
 {
 	int	return_value;
 
-	if (child_info->append == 1)
-		return_value = open(child_info->out_file, O_WRONLY | O_CREAT | \
+	if (all->current->append == 1)
+		return_value = open(all->current->outfile, O_WRONLY | O_CREAT | \
 			O_APPEND, 0664);
 	else
-		return_value = open(child_info->out_file, O_WRONLY | O_CREAT | \
+		return_value = open(all->current->outfile, O_WRONLY | O_CREAT | \
 			O_TRUNC, 0664);
 	if (return_value < 0)
 	{
 		putstr_fd("minishell: ", 2);
-		perror(child_info->out_file);
+		perror(all->current->outfile);
+		close_all_here_doc(all, fd_1);
 		if (fd_1 != -1)
 			close(fd_1);
-		if (child_info->pipe[1] != -1)
-			close(child_info->pipe[1]);
-		free_child(child_info, NULL);
+		if (all->current->pipe_fd[1] != -1)
+			close(all->current->pipe_fd[1]);
+		free_child(all);
 		exit(1);
 	}
 	return (return_value);
@@ -74,32 +76,28 @@ static int	open_output_file(t_child_info *child_info, int fd_1)
  * @param child_info A structure containing information about the
  *  child process.
  */
-void	select_fd(int *fd_1, int *fd_2, t_child_info *child_info)
+void	select_fd(int *fd_1, int *fd_2, t_alloc *all)
 {
 	*fd_1 = -1;
 	*fd_2 = -1;
-	if (child_info->in_file != NULL)
-	{
-		if (child_info->here_doc.here_doc == TRUE)
-			close(child_info->here_doc.fd);
-		*fd_1 = open_input_file(child_info);
-	}
-	else if (child_info->here_doc.here_doc == TRUE)
-		*fd_1 = child_info->here_doc.fd;
-	else if (child_info->first == 0 && child_info->pipe[0] != -1)
-		*fd_1 = child_info->pipe[0];
+	if (all->current->infile != NULL)
+		*fd_1 = open_input_file(all);
+	else if (all->current->child_here_doc.here_doc == TRUE)
+		*fd_1 = all->current->child_here_doc.fd;
+	else if (all->cmd == all->current && all->current->pipe_fd[0] != -1)
+		*fd_1 = all->current->pipe_fd[0];
 	else
 		*fd_1 = 0;
-	if (child_info->out_file != NULL)
-		*fd_2 = open_output_file(child_info, *fd_1);
-	else if (child_info->pipe_after == 1 && child_info->pipe[1] != -1)
-		*fd_2 = child_info->pipe[1];
+	if (all->current->outfile != NULL)
+		*fd_2 = open_output_file(all, *fd_1);
+	else if (all->current->next != NULL && all->current->pipe_fd[1] != -1)
+		*fd_2 = all->current->pipe_fd[1];
 	else
 		*fd_2 = 1;
-	if (child_info->pipe[1] != *fd_2 && child_info->pipe[1] != -1)
-		child_safe_close(child_info, child_info->pipe[1]);
-	if (child_info->pipe[0] != *fd_1 && child_info->pipe[0] != -1)
-		child_safe_close(child_info, child_info->pipe[0]);
+	if (all->current->pipe_fd[1] != *fd_2 && all->current->pipe_fd[1] != -1)
+		close(all->current->pipe_fd[1]);
+	if (all->current->pipe_fd[0] != *fd_1 && all->current->pipe_fd[0] != -1)
+		close(all->current->pipe_fd[0]);
 }
 
 /**

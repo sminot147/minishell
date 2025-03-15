@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:15:05 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 14:34:21 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:54:35 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,12 @@ int	put_env(t_env *env)
 	char	**env_tab;
 
 	env_len = count_env_size(env);
-	env_tab = make_env_tab_child(env);
+	env_tab = make_env_tab(env);
 	if (env_tab == NULL)
+	{
+		perror("minishell: ");
 		return (1);
+	}
 	env_tab = ft_sort_arrays(env_len, env_tab);
 	i = 0;
 	while (i < env_len)

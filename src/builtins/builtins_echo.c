@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:08:56 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 15:39:42 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:38:50 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
  * @param newline Pointer to a boolean indicating whether to print a newline.
  * @return The index of the first non-flag argument.
  */
-static int	check_flag(t_child_info *child_info, t_bool *newline)
+static int	check_flag(t_alloc *all, t_bool *newline)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	while (child_info->args[i] && child_info->args[i][0] == '-'
-		&& child_info->args[i][1] == 'n')
+	while (all->current->args[i] && all->current->args[i][0] == '-'
+		&& all->current->args[i][1] == 'n')
 	{
 		j = 1;
-		while (child_info->args[i][j] == 'n')
+		while (all->current->args[i][j] == 'n')
 			j++;
-		if (child_info->args[i][j] != '\0')
+		if (all->current->args[i][j] != '\0')
 			break ;
 		(*newline) = FALSE;
 		i++;
@@ -45,23 +45,23 @@ static int	check_flag(t_child_info *child_info, t_bool *newline)
  * @param child_info Structure containing command arguments.
  * @return Always returns 0.
  */
-int	exec_echo(t_child_info *child_info)
+int	exec_echo(t_alloc *all)
 {
 	int		i;
 	t_bool	newline;
 
 	newline = TRUE;
-	i = check_flag(child_info, &newline);
-	while (child_info->args[i])
+	i = check_flag(all, &newline);
+	while (all->current->args[i])
 	{
-		if (write(1, child_info->args[i], ft_strlen(child_info->args[i])) < 0)
-			child_exit_error(child_info, NULL, NULL, 1);
-		if (child_info->args[i + 1])
+		if (write(1, all->current->args[i], ft_strlen(all->current->args[i])) < 0)
+			exit_error(all, NULL, 1);
+		if (all->current->args[i + 1])
 			if (write(1, " ", 1) < 0)
-				child_exit_error(child_info, NULL, NULL, 1);
+				exit_error(all, NULL, 1);
 		i++;
 	}
 	if (newline && write(1, "\n", 1) < 0)
-		child_exit_error(child_info, NULL, NULL, 1);
+		exit_error(all, NULL, 1);
 	return (0);
 }

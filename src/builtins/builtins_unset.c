@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:24:54 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:20:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:48:07 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	remove_var(t_alloc *all, const char *var_name)
 
 	if (!all->env)
 		return ;
-	if (strcmp(all->env->name, var_name) == 0)
+	if (ft_strcmp(all->env->name, var_name) == 0)
 	{
 		remove_first(all);
 		return ;
@@ -60,7 +60,7 @@ static void	remove_var(t_alloc *all, const char *var_name)
 	current = all->env->next;
 	while (current)
 	{
-		if (strcmp(current->name, var_name) == 0)
+		if (ft_strcmp(current->name, var_name) == 0)
 		{
 			previous->next = current->next;
 			free_element(current);
@@ -77,14 +77,14 @@ static void	remove_var(t_alloc *all, const char *var_name)
  * @param all Structure containing the environment.
  * @return Always returns 0.
  */
-int	exec_unset(t_child_info *child_info, t_alloc *all)
+int	exec_unset(t_alloc *all)
 {
 	int	i;
 
-	if (!all->env || !child_info->args[1])
+	if (!all->env || !all->current->args[1])
 		return (0);
 	i = 1;
-	while (child_info->args[i])
-		remove_var(all, child_info->args[i++]);
+	while (all->current->args[i])
+		remove_var(all, all->current->args[i++]);
 	return (0);
 }

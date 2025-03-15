@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 15:35:36 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:18:49 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include "utils.h"
 #include "command_exec.h"
 
-int	check_builtins_solo(t_child_info *child_info)
+int	exec_builtins_solo_child(t_alloc *all)
 {
-	if (child_info->cmd == NULL)
-		return (0);
-	if (ft_strcmp(child_info->cmd, "cd") == 0)
-		return (1);
-	if (ft_strcmp(child_info->cmd, "export") == 0 && child_info->args[1])
-		return (1);
-	if (ft_strcmp(child_info->cmd, "unset") == 0)
-		return (1);
-	if (ft_strcmp(child_info->cmd, "exit") == 0)
-		return (1);
-	return (0);
+	if (all->current->args == NULL)
+		return (-1);
+	if (ft_strcmp(all->current->args[0], "cd") == 0)
+		return (exec_cd(all, FALSE));
+	if (ft_strcmp(all->current->args[0], "export") == 0 && all->current->args[1])
+		return (exec_export(all, FALSE));
+	if (ft_strcmp(all->current->args[0], "unset") == 0)
+		return (exec_unset(all, FALSE));
+	if (ft_strcmp(all->current->args[0], "exit") == 0)
+		return (exec_exit(all, FALSE));
+	return (-1);
 }
 
 /**
@@ -35,28 +35,28 @@ int	check_builtins_solo(t_child_info *child_info)
  * @param all Structure containing shell resources.
  * @return Returns 1 if a built-in command is find, 0 otherwise.
  */
-int	exec_builtins_solo(t_child_info *child_info, t_alloc *all)
+int	exec_builtins_solo(t_alloc *all)
 {
-	if (child_info->cmd == NULL)
+	if (all->current->args == NULL)
 		return (0);
-	if (ft_strcmp(child_info->cmd, "cd") == 0)
+	if (ft_strcmp(all->current->args[0], "cd") == 0)
 	{
-		*(*all).return_value = exec_cd(child_info, all);
+		*(*all).return_value = exec_cd(all, TRUE);
 		return (1);
 	}
-	if (ft_strcmp(child_info->cmd, "export") == 0 && child_info->args[1])
+	if (ft_strcmp(all->current->args[0], "export") == 0 && all->current->args[1])
 	{
-		*(*all).return_value = exec_export(child_info, all);
+		*(*all).return_value = exec_export(all, TRUE);
 		return (1);
 	}
-	if (ft_strcmp(child_info->cmd, "unset") == 0)
+	if (ft_strcmp(all->current->args[0], "unset") == 0)
 	{
-		*(*all).return_value = exec_unset(child_info, all);
+		*(*all).return_value = exec_unset(all, TRUE);
 		return (1);
 	}
-	if (ft_strcmp(child_info->cmd, "exit") == 0)
+	if (ft_strcmp(all->current->args[0], "exit") == 0)
 	{
-		exec_exit(all, child_info);
+		exec_exit(all, TRUE);
 		return (1);
 	}
 	return (0);
@@ -66,22 +66,23 @@ int	exec_builtins_solo(t_child_info *child_info, t_alloc *all)
  * @brief Executes built-in commands that run in a child process.
  * @param child_info Structure containing command information.
  */
-void	exec_builtins_child(t_child_info *child_info)
+void	exec_builtins_child(t_alloc *all)
 {
 	int	return_value;
 
 	return_value = -1;
-	if (ft_strcmp(child_info->cmd, "pwd") == 0)
+	return_value = exec_builtins_solo_child(all);
+	if (ft_strcmp(all->current->args[0], "pwd") == 0)
 		return_value = exec_pwd();
-	if (ft_strcmp(child_info->cmd, "env") == 0)
-		return_value = exec_env(child_info);
-	if (ft_strcmp(child_info->cmd, "echo") == 0)
-		return_value = exec_echo(child_info);
-	if (ft_strcmp(child_info->cmd, "export") == 0 && !child_info->args[1])
-		return_value = put_env(child_info->envp_pars);
+	if (ft_strcmp(all->current->args[0], "env") == 0)
+		return_value = exec_env(all);
+	if (ft_strcmp(all->current->args[0], "echo") == 0)
+		return_value = exec_echo(all);
+	if (ft_strcmp(all->current->args[0], "export") == 0 && !all->current->args[1])
+		return_value = put_env(all->env);
 	if (return_value != -1)
 	{
-		free_child(child_info, NULL);
+		free(all);
 		exit (return_value);
 	}
 	return ;

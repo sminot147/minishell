@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/10 19:02:45 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:34:36 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef struct s_file
 	struct s_file		*next;
 }	t_file;
 
+typedef struct s_out_fd
+{
+	int		*out_fd;
+	size_t	nb;
+}	t_out_fd;
+
+
 typedef struct s_here_doc
 {
 	t_bool	here_doc;
@@ -66,15 +73,18 @@ typedef struct s_cmd
 	int				pipe;		// Cmd is following by a pipe '|'
 	t_here_doc		child_here_doc; // here_doc struct for child
 	struct s_cmd	*next;
+	int				pipe_fd[2];
 }	t_cmd;
 
 typedef struct s_alloc
 {
 	char			*input;
 	t_token			**token;
+	t_here_doc		*pipe_out_fd;
 	t_cmd			*cmd;
 	t_env			*env;
 	int				*return_value;
+	t_cmd			*current;
 }	t_alloc;
 
 extern int	g_signal_received;

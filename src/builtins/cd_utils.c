@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:28:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/14 17:27:35 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:50:38 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
  * @param child_info A structure containing information about the child.
  * @param all A structure containing necessary allocations.
  */
-void	update_oldpwd(t_child_info *child_info, t_alloc *all)
+void	update_oldpwd(t_alloc *all)
 {
 	t_env	*env;
 	char	*current_pwd;
 	char	*assign_str;
 
-	env = child_info->envp_pars;
+	env = all->env;
 	current_pwd = NULL;
 	assign_str = NULL;
 	while (env)
@@ -100,7 +100,7 @@ void	update_oldpwd(t_child_info *child_info, t_alloc *all)
 		assign_str = make_env_assignment("OLDPWD", current_pwd);
 		if (assign_str)
 		{
-			treat_var(all, assign_str, NULL);
+			treat_var(all, assign_str, FALSE);
 			free(assign_str);
 		}
 	}
@@ -127,7 +127,7 @@ void	update_pwd(t_alloc *all)
 	free(new_pwd);
 	if (assign_str)
 	{
-		treat_var(all, assign_str, NULL);
+		treat_var(all, assign_str, FALSE);
 		free(assign_str);
 	}
 	else

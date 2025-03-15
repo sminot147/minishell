@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:53:19 by madelvin          #+#    #+#             */
-/*   Updated: 2025/02/28 14:33:51 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:55:14 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,42 +61,14 @@ static char	*make_env_value(t_env *env)
  * @return A newly allocated array of environment variable strings,
  *  or exits on failure.
  */
-char	**make_env_tab(t_alloc *all)
+char	**make_env_tab(t_env *env_lst)
 {
 	t_env	*env_cp;
 	char	**env;
 	int		env_len;
 	int		i;
 
-	env_cp = all->env;
-	env_len = count_env_size(env_cp);
-	env = malloc(sizeof(char *) * (env_len + 1));
-	if (env == NULL)
-		exit_error(all, NULL, 1);
-	env[env_len] = NULL;
-	i = 0;
-	while (env_cp)
-	{
-		env[i] = make_env_value(env_cp);
-		if (env[i] == NULL)
-		{
-			ft_free_double_array((void **)env);
-			exit_error(all, NULL, 1);
-		}
-		env_cp = env_cp->next;
-		i++;
-	}
-	return (env);
-}
-
-char	**make_env_tab_child(t_env *env_part)
-{
-	t_env	*env_cp;
-	char	**env;
-	int		env_len;
-	int		i;
-
-	env_cp = env_part;
+	env_cp = env_lst;
 	env_len = count_env_size(env_cp);
 	env = malloc(sizeof(char *) * (env_len + 1));
 	if (env == NULL)

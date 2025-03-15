@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/04 12:49:43 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:38:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,3 @@ void	exit_error(t_alloc *all, char *error_message, char perror_enable)
 	exit(EXIT_FAILURE);
 }
 
-void	child_exit_error(t_child_info *child_info, char *cmd_path,
-		char *error_message, char perror_enable)
-{
-	if (perror_enable == 1)
-		perror(error_message);
-	else
-	{
-		putstr_fd(error_message, 2);
-		putstr_fd("\n", 2);
-	}
-	free_child(child_info, cmd_path);
-	exit(EXIT_FAILURE);
-}

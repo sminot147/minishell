@@ -6,19 +6,13 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 16:03:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/15 19:50:04 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "parsing.h"
 #include "utils.h"
-
-int	check_validity(t_child_info *child_info)
-{
-	return (child_info != NULL && !(child_info->pipe_after == 0 && \
-		child_info->first == 1));
-}
 
 static int	free_name_return_2(char *name)
 {
@@ -29,7 +23,7 @@ static int	free_name_return_2(char *name)
 /**
  * treat one update or creation of variable
 */
-int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
+int	treat_var(t_alloc *all, char *input, t_bool in_child)
 {
 	char	*name;
 	char	*value;
@@ -37,7 +31,7 @@ int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
 	int		i;
 
 	i = var_len_name(input, &append);
-	if (check_validity(child_info) == 1)
+	if (in_child == TRUE)
 		return (0);
 	if (i == -1)
 		return (1);
@@ -64,7 +58,7 @@ int	treat_var(t_alloc *all, char *input, t_child_info *child_info)
  * @note set the return value on failure if one or more vraiable name isn't 
  * conform
 */
-int	exec_export(t_child_info *child_info, t_alloc *all)
+int	exec_export(t_alloc *all, t_bool in_child)
 {
 	int	arg_index;
 	int	return_value;
@@ -72,14 +66,14 @@ int	exec_export(t_child_info *child_info, t_alloc *all)
 
 	return_value = 0;
 	arg_index = 0;
-	while (child_info->args[++arg_index])
+	while (all->current->args[++arg_index])
 	{
-		tmp = treat_var(all, child_info->args[arg_index], child_info);
+		tmp = treat_var(all, all->current->args[arg_index], in_child);
 		if (tmp == 1)
 			return_value = 1;
 		if (tmp == 2)
 		{
-			free_child(child_info, NULL);
+			free_all(all);
 			exit_error(all, NULL, 1);
 		}
 	}
