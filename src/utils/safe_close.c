@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:37:45 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 18:31:27 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:23:33 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,3 @@ void	safe_close(t_alloc *all, int fd)
 	if (close(fd) < 0)
 		exit_error(all, NULL, 1);
 }
-

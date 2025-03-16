@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:56:49 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 20:38:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:23:30 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_line(t_alloc *alloced)
 		}
 		if (alloced->cmd)
 		{
-			clear_cmd(&alloced->cmd, alloced);
+			clear_cmd(&alloced->cmd);
 			alloced->cmd = NULL;
 		}
 	}
@@ -40,7 +40,7 @@ void	free_all(t_alloc *alloced)
 		if (alloced->token)
 			clear_token(alloced->token, alloced);
 		if (alloced->cmd)
-			clear_cmd(&alloced->cmd, alloced);
+			clear_cmd(&alloced->cmd);
 		if (alloced->env)
 			clear_env(&alloced->env);
 		free(alloced);
@@ -60,4 +60,3 @@ void	exit_error(t_alloc *all, char *error_message, char perror_enable)
 	free_all(all);
 	exit(EXIT_FAILURE);
 }
-

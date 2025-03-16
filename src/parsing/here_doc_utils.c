@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:56:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 18:33:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:36:38 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	end_here_doc(int fd, t_token *token, t_alloc *all)
 	if (all->env)
 		clear_env(&all->env);
 	free(all);
-	(void)fd;
 	if (close(fd) < 0)
 		exit(1);
 	if (g_signal_received == 1)
@@ -83,6 +82,7 @@ void	here_doc_child(int fd, t_token *token, t_alloc *all)
 
 	if (all->input)
 		free(all->input);
+	all->input = NULL;
 	token_lst = *all->token;
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 20:38:53 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:20:33 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static char	**extract_arg_free_all(t_alloc *all)
 	free_all(all);
 	return (args);
 }
+
 /**
  * @brief Executes a command using execve.
  * @param child_info Structure containing command arguments and environment
@@ -66,9 +67,10 @@ static void	exec(t_alloc *all)
 	args = extract_arg_free_all(all);
 	execve(cmd_path, args, env_tab);
 	putstr_fd("minishell: ", 2);
-	perror(all->current->args[0]);
+	perror(args[0]);
 	ft_free_double_array((void **)env_tab);
 	ft_free_double_array((void **)args);
+	free(cmd_path);
 	exit(1);
 }
 
@@ -84,10 +86,10 @@ static void	dup_and_close(int fd_1, int fd_2, t_alloc *all) //secur les close
 	{
 		if (dup2(fd_1, 0) == -1)
 		{
+			perror(NULL);
 			close(fd_1);
 			close(fd_2);
 			free_all(all);
-			perror(NULL);
 			exit (1);
 		}
 		close(fd_1);
@@ -96,23 +98,24 @@ static void	dup_and_close(int fd_1, int fd_2, t_alloc *all) //secur les close
 	{
 		if (dup2(fd_2, 1) == -1)
 		{
+			perror(NULL);
 			close(fd_1);
 			close(fd_2);
 			free_all(all);
-			perror(NULL);
 			exit (1);
 		}
 		close(fd_2);
 	}
 }
 
-int	child(t_alloc *all)  // les interfile
+int	child(t_alloc *all)
 {
 	int	fd[2];
 
 	close_all_here_doc(all, all->current);
 	select_fd(&fd[0], &fd[1], all);
 	dup_and_close(fd[0], fd[1], all);
+	close_all_read_pipe(all, TRUE);
 	if (all->current->args == NULL || open_inter_file(*all->current, all))
 	{
 		free_all(all);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 17:29:48 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 20:39:46 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:17:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@
 #include "utils.h"
 #include <signal.h>
 #include <wait.h>
-
-int	close_all_read_pipe(t_alloc *all)
-{
-	t_cmd	*current;
-	int		return_value;
-
-	return (0);
-	current = all->cmd;
-	return_value = 0;
-	while (current)
-	{
-		if (current->pipe_fd[0] != -1)
-		{
-			if (close(current->pipe_fd[0]) < 0)
-				return_value = 1;
-			current->pipe_fd[0] = -1;
-		}
-		current = current->next;
-	}
-	return (return_value);
-}
 
 int	start_cmd(t_alloc *all)
 {
@@ -77,7 +56,7 @@ static int	wait_all_child(int last)
 
 void	exec_cmd(t_alloc *all)
 {
-	int last;
+	int	last;
 
 	all->current = all->cmd;
 	signal(SIGINT, SIG_IGN);
@@ -93,6 +72,6 @@ void	exec_cmd(t_alloc *all)
 	}
 	*(*all).return_value = wait_all_child(last);
 	close_all_here_doc(all, NULL);
-	close_all_read_pipe(all);
+	close_all_read_pipe(all, FALSE);
 	signal(SIGINT, handle_sigint);
 }

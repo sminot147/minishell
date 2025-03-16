@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:47:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 20:04:13 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:52:14 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	check_cmd_validity(char	*cmd_path, t_alloc *all, char **env_tab)
 		putstr_fd(all->current->args[0], 2);
 		putstr_fd(": Is a directory\n", 2);
 		ft_free_double_array((void **)env_tab);
+		free(cmd_path);
 		free_all(all);
 		exit(126);
 	}
@@ -41,6 +42,7 @@ void	check_cmd_validity(char	*cmd_path, t_alloc *all, char **env_tab)
 		putstr_fd(all->current->args[0], 2);
 		putstr_fd(": command not found\n", 2);
 		ft_free_double_array((void **)env_tab);
+		free(cmd_path);
 		free_all(all);
 		exit(127);
 	}

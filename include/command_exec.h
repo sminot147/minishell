@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:33:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 20:03:24 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:14:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int		start_child(t_alloc *all);
 /*----------------------------------------------------------------------------*/
 /*                                Cmd_utils.c                                 */
 /*----------------------------------------------------------------------------*/
-int     init_cmd(t_alloc *all, char **cmd_path, char *path);
+int		init_cmd(t_alloc *all, char **cmd_path, char *path);
 void	check_cmd_validity(char	*cmd_path, t_alloc *all, char **env_tab);
 
 /*----------------------------------------------------------------------------*/
-/*                              Child_manager.c                               */
+/*                                Fds_utils.c                                 */
 /*----------------------------------------------------------------------------*/
-int     close_all_here_doc(t_alloc *all, t_cmd *ignored_cmd);
+int		close_all_here_doc(t_alloc *all, t_cmd *ignored_cmd);
+int		close_all_read_pipe(t_alloc *all, t_bool i_self);
 
 /*----------------------------------------------------------------------------*/
 /*                              File_manager.c                                */

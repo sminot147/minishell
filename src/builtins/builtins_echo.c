@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:08:56 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:38:50 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:12:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	exec_echo(t_alloc *all)
 	i = check_flag(all, &newline);
 	while (all->current->args[i])
 	{
-		if (write(1, all->current->args[i], ft_strlen(all->current->args[i])) < 0)
+		if (write(1, all->current->args[i], \
+				ft_strlen(all->current->args[i])) < 0)
 			exit_error(all, NULL, 1);
 		if (all->current->args[i + 1])
 			if (write(1, " ", 1) < 0)

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 20:08:41 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:12:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 #include <signal.h>
 
 int	g_signal_received;
+
+static void	check_entry(int argc, char **argv)
+{
+	if (!isatty(0) || !isatty(1) || !isatty(2))
+		exit_error((t_alloc *) NULL, "dont do that again!", 0); // message d'erreur tty
+	if (argc != 1 || !argv)
+		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
+}
 
 static int	end_minishell(t_alloc *all)
 {
@@ -53,8 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	int		return_value;
 	t_alloc	*all;
 
-	if (argc != 1 || !argv)
-		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
+	check_entry(argc, argv);
 	init_all(&all, &return_value);
 	all->env = pars_env(envp, all);
 	while (1)

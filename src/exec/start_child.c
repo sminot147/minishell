@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 17:58:45 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 18:45:02 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:09:48 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "utils.h"
 #include <signal.h>
 
-static	void	exec_parent(t_alloc *all, int pipe_fd[2]) // les interfile
+static	void	exec_parent(t_alloc *all, int pipe_fd[2])
 {
-    close(pipe_fd[1]);
-    if (all->current->next != NULL)
-        all->current->next->pipe_fd[0] = pipe_fd[0];
-    else
-        close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	if (all->current->next != NULL)
+		all->current->next->pipe_fd[0] = pipe_fd[0];
+	else
+		close(pipe_fd[0]);
 }
 
 static	void	exec_child(t_alloc *all, int pipe_fd[2])

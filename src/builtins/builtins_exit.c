@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:42:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:12:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	exec_exit(t_alloc *all, t_bool in_child)
 		exit_safe(all);
 	else if (!all->current->args[1])
 		return (0);
-	if (is_num(all->current->args[1]) == 0 || all->current->args[1][0] == '\0' || \
-		ft_atoi(all->current->args[1]) == ATOI_OVERFLOW)
+	if (is_num(all->current->args[1]) == 0 || all->current->args[1][0] == '\0' \
+		|| ft_atoi(all->current->args[1]) == ATOI_OVERFLOW)
 	{
 		print_error("numeric argument required", all->current->args[1]);
 		if (all == NULL)

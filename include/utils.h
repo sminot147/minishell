@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 19:55:12 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:59:22 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	safe_close(t_alloc *all, int fd);
 /*----------------------------------------------------------------------------*/
 /*                             List_cmd.c                                     */
 /*----------------------------------------------------------------------------*/
-void	clear_cmd(t_cmd **lst_cmd, t_alloc *all);
+void	clear_cmd(t_cmd **lst_cmd);
 void	here_doc_clear_cmd(t_cmd **lst_cmd, t_alloc *all, int fd);
 t_cmd	*new_cmd(void);
 void	add_cmd(t_cmd **lst_cmd, t_cmd *new_cmd);

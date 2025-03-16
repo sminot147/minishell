@@ -7,3 +7,6 @@ echo '$USER'"$HOME_test]123'$PATH'"$PWD_$SHELL"'$VAR_name'"$HOME_test]123
 patch les deux fonction de close / ou les attribution de fd:
 	close_all_here_doc(all, NULL);
 	close_all_read_pipe(all);
+
+! 2
+: 2 (exec)

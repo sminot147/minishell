@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:07:51 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 18:34:36 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:13:21 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_out_fd
 	int		*out_fd;
 	size_t	nb;
 }	t_out_fd;
-
 
 typedef struct s_here_doc
 {

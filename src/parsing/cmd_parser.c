@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:56:01 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 15:16:56 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:00:42 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static int	make_cmd(t_token **token_lst, int *i, int error, t_alloc *all)
 		{
 			if (error == -1 && g_signal_received == 0)
 				extract_error_message((*token_lst)->token, all);
-			clear_cmd(&all->cmd, all);
+			clear_cmd(&all->cmd);
 			return (1);
 		}
 		if (all->cmd == NULL)

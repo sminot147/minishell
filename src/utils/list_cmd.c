@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:10:35 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 20:29:16 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 16:22:27 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	count_cmd(t_cmd *lst_cmd)
  * @param lst_cmd The linked list of commands to free.
  * @param all A structure containing necessary allocations.
  */
-void	clear_cmd(t_cmd **lst_cmd, t_alloc *all)
+void	clear_cmd(t_cmd **lst_cmd)
 {
 	t_cmd	*tmp;
 
@@ -50,13 +50,8 @@ void	clear_cmd(t_cmd **lst_cmd, t_alloc *all)
 		clear_file(&(*lst_cmd)->inter_file_in);
 		clear_file(&(*lst_cmd)->inter_file_out);
 		ft_free_double_array((void **)(*lst_cmd)->args);
-		if ((*lst_cmd)->child_here_doc.here_doc == TRUE && \
-			close((*lst_cmd)->child_here_doc.fd) < 0)
-		{
-			free(*lst_cmd);
-			*lst_cmd = tmp;
-			exit_error(all, NULL, 1);
-		}
+		if ((*lst_cmd)->child_here_doc.here_doc == TRUE)
+			close((*lst_cmd)->child_here_doc.fd);
 		free(*lst_cmd);
 		*lst_cmd = tmp;
 	}
@@ -108,6 +103,8 @@ t_cmd	*new_cmd(void)
 	if (cmd == NULL)
 		return (NULL);
 	cmd->next = NULL;
+	cmd->pipe_fd[1] = -1;
+	cmd->pipe_fd[0] = -1;
 	return (cmd);
 }
 

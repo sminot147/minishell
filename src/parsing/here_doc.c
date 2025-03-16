@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:07:08 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/10 15:25:23 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:48:11 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "utils.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <signal.h>
 #include <sys/wait.h>
 
 /**

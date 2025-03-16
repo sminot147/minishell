@@ -6,7 +6,7 @@
 #    By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 11:39:48 by sminot            #+#    #+#              #
-#    Updated: 2025/03/15 20:01:35 by madelvin         ###   ########.fr        #
+#    Updated: 2025/03/16 16:42:52 by madelvin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ SRC_FILE = main.c\
 
 EXEC_DIR = $(SRC_DIR)exec/
 
-EXEC = child.c\
-	child_manager.c \
+EXEC = child.c \
+	fds_utils.c \
 	cmd_utils.c \
 	exec_cmd.c \
 	file_manager.c \
