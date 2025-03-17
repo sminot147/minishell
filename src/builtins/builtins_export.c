@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 21:56:52 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:50:04 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:34:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	free_name_return_2(char *name)
 /**
  * treat one update or creation of variable
 */
-int	treat_var(t_alloc *all, char *input, t_bool in_child)
+int	treat_var(t_alloc *all, char *input)
 {
 	char	*name;
 	char	*value;
@@ -31,8 +31,6 @@ int	treat_var(t_alloc *all, char *input, t_bool in_child)
 	int		i;
 
 	i = var_len_name(input, &append);
-	if (in_child == TRUE)
-		return (0);
 	if (i == -1)
 		return (1);
 	name = ft_strndup(input, i);
@@ -58,7 +56,7 @@ int	treat_var(t_alloc *all, char *input, t_bool in_child)
  * @note set the return value on failure if one or more vraiable name isn't 
  * conform
 */
-int	exec_export(t_alloc *all, t_bool in_child)
+int	exec_export(t_alloc *all)
 {
 	int	arg_index;
 	int	return_value;
@@ -68,7 +66,7 @@ int	exec_export(t_alloc *all, t_bool in_child)
 	arg_index = 0;
 	while (all->current->args[++arg_index])
 	{
-		tmp = treat_var(all, all->current->args[arg_index], in_child);
+		tmp = treat_var(all, all->current->args[arg_index]);
 		if (tmp == 1)
 			return_value = 1;
 		if (tmp == 2)

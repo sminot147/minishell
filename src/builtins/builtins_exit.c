@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:52:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:12:01 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:37:10 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static void	exit_safe(t_alloc *all)
  * @param all Structure containing shell resources.
  * @param child_info Structure containing command arguments.
  */
-int	exec_exit(t_alloc *all, t_bool in_child)
+int	exec_exit(t_alloc *all)
 {
-	if (!all->current->args[1] && in_child == FALSE)
+	if (!all->current->args[1])
 		exit_safe(all);
 	else if (!all->current->args[1])
 		return (0);
@@ -80,21 +80,15 @@ int	exec_exit(t_alloc *all, t_bool in_child)
 		|| ft_atoi(all->current->args[1]) == ATOI_OVERFLOW)
 	{
 		print_error("numeric argument required", all->current->args[1]);
-		if (all == NULL)
-			return (2);
 		*(all)->return_value = 2;
-		if (in_child == FALSE)
-			exit_safe(all);
+		exit_safe(all);
 	}
 	if (all->current->args[2])
 	{
 		print_error("too many arguments", NULL);
 		return (1);
 	}
-	if (all == NULL)
-		return (ft_atoi(all->current->args[1]));
 	*(all)->return_value = ft_atoi(all->current->args[1]);
-	if (in_child == FALSE)
-		exit_safe(all);
+	exit_safe(all);
 	return (0);
 }

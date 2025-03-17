@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:11:24 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:33:44 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	exec_builtins_solo_child(t_alloc *all)
 	if (all->current->args == NULL)
 		return (-1);
 	if (ft_strcmp(all->current->args[0], "cd") == 0)
-		return (exec_cd(all, FALSE));
+		return (exec_cd(all));
 	if (ft_strcmp(all->current->args[0], "export") == 0 && \
 		all->current->args[1])
-		return (exec_export(all, FALSE));
+		return (exec_export(all));
 	if (ft_strcmp(all->current->args[0], "unset") == 0)
-		return (exec_unset(all, FALSE));
+		return (exec_unset(all));
 	if (ft_strcmp(all->current->args[0], "exit") == 0)
-		return (exec_exit(all, FALSE));
+		return (exec_exit(all));
 	return (-1);
 }
 
@@ -42,23 +42,23 @@ int	exec_builtins_solo(t_alloc *all)
 		return (0);
 	if (ft_strcmp(all->current->args[0], "cd") == 0)
 	{
-		*(*all).return_value = exec_cd(all, TRUE);
+		*(*all).return_value = exec_cd(all);
 		return (1);
 	}
 	if (ft_strcmp(all->current->args[0], "export") == 0 && \
 		all->current->args[1])
 	{
-		*(*all).return_value = exec_export(all, TRUE);
+		*(*all).return_value = exec_export(all);
 		return (1);
 	}
 	if (ft_strcmp(all->current->args[0], "unset") == 0)
 	{
-		*(*all).return_value = exec_unset(all, TRUE);
+		*(*all).return_value = exec_unset(all);
 		return (1);
 	}
 	if (ft_strcmp(all->current->args[0], "exit") == 0)
 	{
-		exec_exit(all, TRUE);
+		exec_exit(all);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:28:13 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 20:05:26 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:35:58 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 		assign_oldpwd = make_env_assignment("OLDPWD", current_pwd);
 		if (assign_oldpwd)
 		{
-			treat_var(all, assign_oldpwd, FALSE);
+			treat_var(all, assign_oldpwd);
 			free(assign_oldpwd);
 		}
 	}
@@ -66,7 +66,7 @@ void	swap_old_actual_pwd(char *assign_oldpwd, char *assign_pwd, \
 		free(tmp);
 		if (assign_pwd)
 		{
-			treat_var(all, assign_pwd, FALSE);
+			treat_var(all, assign_pwd);
 			free(assign_pwd);
 		}
 	}
@@ -100,7 +100,7 @@ void	update_oldpwd(t_alloc *all)
 		assign_str = make_env_assignment("OLDPWD", current_pwd);
 		if (assign_str)
 		{
-			treat_var(all, assign_str, FALSE);
+			treat_var(all, assign_str);
 			free(assign_str);
 		}
 	}
@@ -127,7 +127,7 @@ void	update_pwd(t_alloc *all)
 	free(new_pwd);
 	if (assign_str)
 	{
-		treat_var(all, assign_str, FALSE);
+		treat_var(all, assign_str);
 		free(assign_str);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:36:53 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/15 19:50:57 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:33:34 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	update_shell_lvl(t_alloc *all)
 	free(new_value);
 	if (!var)
 		exit_error(all, NULL, 1);
-	if (treat_var(all, var, FALSE) == 2)
+	if (treat_var(all, var) == 2)
 	{
 		free(var);
 		exit_error(all, NULL, 1);
