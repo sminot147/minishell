@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:50:13 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/12 14:55:33 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static t_env	*rebuild_env(t_alloc *all)
 	name = ft_strdup("SHLVL");
 	if (!name)
 		exit_error(all, NULL, 1);
-	new_env = new_var_env(name, strdup("1"));
+	new_env = new_var_env(name, ft_strdup("1"));
 	if (!new_env)
 		exit_error(all, NULL, 1);
 	add_env(&lst_env, new_env);
 	name = ft_strdup("_");
 	if (!name)
 		exit_error(all, NULL, 1);
-	new_env = new_var_env(name, strdup("./minishell"));
+	new_env = new_var_env(name, ft_strdup("./minishell"));
 	if (!new_env)
 		exit_error(all, NULL, 1);
 	add_env(&lst_env, new_env);

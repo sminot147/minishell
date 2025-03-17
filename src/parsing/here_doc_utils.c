@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:56:43 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/17 12:24:15 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:03:00 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ void	end_here_doc(int fd, t_token *token, t_alloc *all)
 	exit(0);
 }
 
+static int	check_buffer_signal(char *buffer, t_token *token)
+{
+	if (!buffer)
+		ft_printf("minishell: warning: here-document at line 10 delimited \
+					by end-of-file (wanted `%s')\n", token->token);
+	if (!buffer || g_signal_received == 1)
+		return (1);
+	return (0);
+}
+
 /**
  * @brief Handles the here-document input in the child process.
  *
@@ -87,7 +97,7 @@ void	here_doc_child(int fd, t_token *token, t_alloc *all)
 	while (1)
 	{
 		buffer = readline(">");
-		if (!buffer || g_signal_received == 1)
+		if (check_buffer_signal(buffer, token) == 1)
 			break ;
 		if (ft_strcmp(token->token, buffer) == 0)
 		{

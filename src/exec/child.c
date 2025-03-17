@@ -6,13 +6,14 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:59:00 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:20:33 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:18:20 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "command_exec.h"
 #include "utils.h" 
+#include <errno.h>
 
 static char	**extract_arg_free_all(t_alloc *all)
 {
@@ -90,7 +91,7 @@ static void	dup_and_close(int fd_1, int fd_2, t_alloc *all) //secur les close
 			close(fd_1);
 			close(fd_2);
 			free_all(all);
-			exit (1);
+			exit (errno);
 		}
 		close(fd_1);
 	}
@@ -102,7 +103,7 @@ static void	dup_and_close(int fd_1, int fd_2, t_alloc *all) //secur les close
 			close(fd_1);
 			close(fd_2);
 			free_all(all);
-			exit (1);
+			exit (errno);
 		}
 		close(fd_2);
 	}
@@ -115,7 +116,6 @@ int	child(t_alloc *all)
 	close_all_here_doc(all, all->current);
 	select_fd(&fd[0], &fd[1], all);
 	dup_and_close(fd[0], fd[1], all);
-	close_all_read_pipe(all, TRUE);
 	if (all->current->args == NULL || open_inter_file(*all->current, all))
 	{
 		free_all(all);

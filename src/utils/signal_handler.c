@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:18:37 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 18:20:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:46:57 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,19 @@ void	handle_sigint(int sig)
 	}
 }
 
+void	handle_sigpipe(int sig)
+{
+	if (sig == SIGPIPE)
+	{
+		g_signal_received = 2;
+	}
+}
+
 void	handle_sigint_here_doc(int sig)
 {
 	if (sig == SIGINT)
 	{
 		g_signal_received = 1;
-		write(STDOUT_FILENO, "\n", 1);
 		close(STDIN_FILENO);
 	}
 }

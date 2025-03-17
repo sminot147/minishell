@@ -6,13 +6,14 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:08:56 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:12:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:16:01 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_exec.h"
 #include "utils.h"
 #include <unistd.h>
+#include <signal.h>
 
 /**
  * @brief Checks for the -n flag in the echo command arguments.

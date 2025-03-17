@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:47:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 16:52:14 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:22:25 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,32 @@
  * @param child_info A structure containing information about the child
  *  process.
  */
-void	check_cmd_validity(char	*cmd_path, t_alloc *all, char **env_tab)
+void	check_cmd_validity(char *cmd_path, t_alloc *all, char **env_tab)
 {
 	struct stat	path_stat;
+	int			error_code;
+	char		*error_msg;
 
-	if (stat(cmd_path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
+	error_code = 127;
+	if (stat(cmd_path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode) && \
+				all->current->args[0][0])
 	{
-		putstr_fd("minishell: ", 2);
-		putstr_fd(all->current->args[0], 2);
-		putstr_fd(": Is a directory\n", 2);
-		ft_free_double_array((void **)env_tab);
-		free(cmd_path);
-		free_all(all);
-		exit(126);
+		error_code = 126;
+		error_msg = ": Is a directory\n";
 	}
-	if (access(cmd_path, F_OK | X_OK) < 0)
-	{
-		putstr_fd(all->current->args[0], 2);
-		putstr_fd(": command not found\n", 2);
-		ft_free_double_array((void **)env_tab);
-		free(cmd_path);
-		free_all(all);
-		exit(127);
-	}
+	else if (access(cmd_path, F_OK) < 0 || !all->current->args[0][0])
+		error_msg = ": command not found\n";
+	else if (access(cmd_path, X_OK) < 0)
+		error_msg = ": Permission denied\n";
+	else
+		return;
+	putstr_fd("minishell: ", 2);
+	putstr_fd(all->current->args[0], 2);
+	putstr_fd(error_msg, 2);
+	ft_free_double_array((void **)env_tab);
+	free(cmd_path);
+	free_all(all);
+	exit(error_code);
 }
 
 /**

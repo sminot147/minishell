@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 17:58:45 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:09:48 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:35:47 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 static	void	exec_parent(t_alloc *all, int pipe_fd[2])
 {
 	close(pipe_fd[1]);
+	if (all->current->pipe_fd[0] != -1)
+		close(all->current->pipe_fd[0]);
 	if (all->current->next != NULL)
 		all->current->next->pipe_fd[0] = pipe_fd[0];
 	else

@@ -6,13 +6,14 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 14:19:35 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/17 12:33:44 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:19:38 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "utils.h"
 #include "command_exec.h"
+#include <signal.h>
 
 int	exec_builtins_solo_child(t_alloc *all)
 {
@@ -72,6 +73,7 @@ void	exec_builtins_child(t_alloc *all)
 {
 	int	return_value;
 
+	signal(SIGPIPE, handle_sigpipe);
 	return_value = -1;
 	return_value = exec_builtins_solo_child(all);
 	if (ft_strcmp(all->current->args[0], "pwd") == 0)
@@ -83,10 +85,13 @@ void	exec_builtins_child(t_alloc *all)
 	if (ft_strcmp(all->current->args[0], "export") == 0 && \
 			!all->current->args[1])
 		return_value = put_env(all->env);
-	if (return_value != -1)
+	signal(SIGPIPE, SIG_DFL);
+	if (g_signal_received == 2 || return_value != -1)
 	{
 		free_all(all);
-		exit (return_value);
+		if (g_signal_received == 2)
+			exit(13);
+		exit(return_value);
 	}
 	return ;
 }

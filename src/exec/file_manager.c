@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:21:11 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:35:03 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	select_fd(int *fd_1, int *fd_2, t_alloc *all)
 		*fd_1 = open_input_file(all);
 	else if (all->current->child_here_doc.here_doc == TRUE)
 		*fd_1 = all->current->child_here_doc.fd;
-	else if (all->cmd == all->current && all->current->pipe_fd[0] != -1)
+	else if (all->cmd != all->current && all->current->pipe_fd[0] != -1)
 		*fd_1 = all->current->pipe_fd[0];
 	else
 		*fd_1 = 0;

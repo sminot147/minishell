@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 17:29:48 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/16 17:17:00 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:51 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ void	exec_cmd(t_alloc *all)
 	}
 	*(*all).return_value = wait_all_child(last);
 	close_all_here_doc(all, NULL);
-	close_all_read_pipe(all, FALSE);
 	signal(SIGINT, handle_sigint);
 }

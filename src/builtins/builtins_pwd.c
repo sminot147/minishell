@@ -6,11 +6,12 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:41:04 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:47:11 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:31:59 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

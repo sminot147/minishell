@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:38 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/15 19:27:30 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:08:30 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*get_cmd_path(char *cmd, char **splited_path)
 		cmd_path = join_cmd_path(splited_path, i, cmd);
 		if (!cmd_path)
 			return (NULL);
-		if (!access(cmd_path, F_OK | X_OK))
+		if (!access(cmd_path, F_OK))
 			return (cmd_path);
 		free(cmd_path);
 	}

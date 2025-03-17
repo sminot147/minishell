@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/16 15:59:22 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:23:08 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*get_promp(t_alloc *all);
 /*                         Signal_handler.c                                  */
 /*----------------------------------------------------------------------------*/
 void	handle_sigint(int sig);
+void	handle_sigpipe(int sig);
 void	handle_sigint_here_doc(int sig);
 
 /*----------------------------------------------------------------------------*/
