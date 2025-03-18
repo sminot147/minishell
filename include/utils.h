@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:58:21 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/17 14:23:08 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:29:14 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define MAX_PATH_LENGTH	30
 # define TMP_DIR			"/tmp/"
 # define PREFIX				"sh-thd-"
-# define DEBBUG				0
 
 /*----------------------------------------------------------------------------*/
 /*                            Clean_and_exit                                  */
