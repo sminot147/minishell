@@ -6,7 +6,7 @@
 /*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:01:03 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/17 13:35:03 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:26:10 by madelvin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	open_input_file(t_alloc *all)
 		perror(all->current->infile);
 		if (all->current->pipe_fd[1] != -1)
 			close(all->current->pipe_fd[1]);
+		if (all->current->pipe_fd[0] != -1)
+			close(all->current->pipe_fd[0]);
 		close_all_here_doc(all, NULL);
 		free_all(all);
 		exit(1);
@@ -62,6 +64,8 @@ static int	open_output_file(t_alloc *all, int fd_1)
 			close(fd_1);
 		if (all->current->pipe_fd[1] != -1)
 			close(all->current->pipe_fd[1]);
+		if (all->current->pipe_fd[0] != -1)
+			close(all->current->pipe_fd[0]);
 		free_all(all);
 		exit(1);
 	}
