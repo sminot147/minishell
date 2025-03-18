@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:47:57 by madelvin          #+#    #+#             */
-/*   Updated: 2025/03/17 15:22:25 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:04:46 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_cmd_validity(char *cmd_path, t_alloc *all, char **env_tab)
 	else if (access(cmd_path, X_OK) < 0)
 		error_msg = ": Permission denied\n";
 	else
-		return;
+		return ;
 	putstr_fd("minishell: ", 2);
 	putstr_fd(all->current->args[0], 2);
 	putstr_fd(error_msg, 2);

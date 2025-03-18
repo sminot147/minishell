@@ -6,19 +6,12 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:34:12 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/18 10:43:19 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:06:51 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
-
-t_bool	is_sep(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return (TRUE);
-	return (FALSE);
-}
 
 /**
  * @return Lenght to know if a sep is a really a sep or just a char
@@ -126,7 +119,7 @@ size_t	size_next_token(char *input)
 			while (input[++i] != '\'')
 				;
 		if (is_sep(input[i]))
-			return(size_next_token_with_sep(input, i, have_quote));
+			return (size_next_token_with_sep(input, i, have_quote));
 	}
 	return (i - 2 * have_quote);
 }

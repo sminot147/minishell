@@ -6,12 +6,19 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:37:47 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/18 10:44:23 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/18 11:08:01 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
+
+t_bool	is_sep(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (TRUE);
+	return (FALSE);
+}
 
 static void	calloc_value(char **str, int size, t_alloc *all)
 {

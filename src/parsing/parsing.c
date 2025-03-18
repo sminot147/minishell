@@ -6,7 +6,7 @@
 /*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:06:50 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/18 10:31:49 by sminot           ###   ########.fr       */
+/*   Updated: 2025/03/18 10:57:52 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ static int	quote_not_close(char *input)
 	return (0);
 }
 
-
-void print_token_list(t_token *head) { //a sup
-    while (head) {
-        printf("Token: [%s], Type=[%d]\n", head->token, head->tag);
-        head = head->next;
-    }
-}
-
 /**
  * Call different step of parsing
 */
@@ -58,7 +50,6 @@ void	parse_input(char *input, t_alloc *all)
 	tokenize(input, &lst_token, all);
 	if (lst_token == NULL)
 		return ;
-	print_token_list(lst_token);
 	parse_cmd(lst_token, all);
 	clear_token(&lst_token, all);
 }

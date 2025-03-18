@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madelvin <madelvin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sminot <simeon.minot@outlook.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:28:28 by sminot            #+#    #+#             */
-/*   Updated: 2025/03/16 17:12:59 by madelvin         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:03:57 by sminot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	g_signal_received;
 
 static void	check_entry(int argc, char **argv)
 {
-	if (!isatty(0) || !isatty(1) || !isatty(2))
-		exit_error((t_alloc *) NULL, "dont do that again!", 0); // message d'erreur tty
+	if (!isatty(0) || !isatty(1))
+		exit_error((t_alloc *) NULL, "Minishell mussn't be execute in pipe", 0);
 	if (argc != 1 || !argv)
 		exit_error((t_alloc *) NULL, "minishell doesn't take argument", 0);
 }
