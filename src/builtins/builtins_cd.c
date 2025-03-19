@@ -100,7 +100,7 @@ int	exec_cd(t_alloc *all)
 {
 	if (check_cd_input(all) == 1)
 		return (1);
-	if (!all->current->args[0])
+	if (!all->current->args[1])
 	{
 		update_oldpwd(all);
 		if (go_to_home(all) == 0)
